@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:bluto:repository:metadata:1.0",
+  "type": "object",
+  "required": [
+    "document_id",
+    "artifact_id",
+    "version",
+    "status",
+    "path",
+    "sha256",
+    "dependencies"
+  ],
+  "properties": {
+    "document_id": {
+      "type": "string",
+      "pattern": "^BLUTO-[A-Z0-9-]+(?:-[0-9]{3}|-0000)$"
+    },
+    "artifact_id": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "status": {
+      "enum": [
+        "Draft",
+        "Under Review",
+        "Approved",
+        "Baselined",
+        "Superseded",
+        "Retired"
+      ]
+    },
+    "path": {
+      "type": "string"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": true
+}

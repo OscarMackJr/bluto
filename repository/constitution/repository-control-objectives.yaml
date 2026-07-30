@@ -1,0 +1,13 @@
+controls:
+- id: RCO-01
+  name: Repository Integrity
+- id: RCO-02
+  name: Architectural Consistency
+- id: RCO-03
+  name: Governance Compliance
+- id: RCO-04
+  name: Complete Traceability
+- id: RCO-05
+  name: Release Reproducibility
+- id: RCO-06
+  name: Autonomous Implementability

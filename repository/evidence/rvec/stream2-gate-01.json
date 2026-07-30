@@ -1,0 +1,52 @@
+{
+  "rvec_version": "1.0.0",
+  "validation_standard_id": "BLUTO-BASE-VAL-001",
+  "quality_gate": "GATE-01",
+  "repository_version": "2.0.0",
+  "repository_baseline": "Repository Baseline B",
+  "release_id": "REL-STREAM-2-1.1.0",
+  "artifact_ids": [
+    "ART-BLUTO-DOM-AGGREGATE-001-v1.1.0",
+    "ART-BLUTO-DOM-BC-001-v1.1.0",
+    "ART-BLUTO-DOM-CANONICAL-001-v1.1.0",
+    "ART-BLUTO-DOM-CORE-001-v1.1.0",
+    "ART-BLUTO-DOM-EVENT-001-v1.1.0",
+    "ART-BLUTO-DOM-OVERVIEW-001-v1.1.0",
+    "ART-BLUTO-DOM-REVIEW-001-v1.1.0",
+    "ART-BLUTO-DOM-ENTITY-001-v1.1.0",
+    "ART-BLUTO-S02-README-001-v1.1.0",
+    "ART-BLUTO-DOM-REPOSITORY-001-v1.1.0",
+    "ART-BLUTO-DOM-STATE-001-v1.1.0",
+    "ART-BLUTO-DOM-TRACE-001-v1.1.0",
+    "ART-BLUTO-DOM-UL-001-v1.1.0",
+    "ART-BLUTO-DOM-VALUEOBJECT-001-v1.1.0"
+  ],
+  "constitutional_document_ids": [
+    "BLUTO-DOM-AGGREGATE-001",
+    "BLUTO-DOM-BC-001",
+    "BLUTO-DOM-CANONICAL-001",
+    "BLUTO-DOM-CORE-001",
+    "BLUTO-DOM-EVENT-001",
+    "BLUTO-DOM-OVERVIEW-001",
+    "BLUTO-DOM-REVIEW-001",
+    "BLUTO-DOM-ENTITY-001",
+    "BLUTO-S02-README-001",
+    "BLUTO-DOM-REPOSITORY-001",
+    "BLUTO-DOM-STATE-001",
+    "BLUTO-DOM-TRACE-001",
+    "BLUTO-DOM-UL-001",
+    "BLUTO-DOM-VALUEOBJECT-001"
+  ],
+  "tool": "bluto-repository-validator",
+  "tool_version": "1.0.0",
+  "execution_mode": "Automated",
+  "start_timestamp": "2026-07-30T00:00:00Z",
+  "end_timestamp": "2026-07-30T00:00:01Z",
+  "result": "PASS",
+  "findings": {
+    "unresolved_references": [],
+    "cycles": [],
+    "authority_violations": []
+  },
+  "evidence_digest": "afda9164868be479c405126d9654e7b5779567f3d1206e690046a2bf30c9af1f"
+}

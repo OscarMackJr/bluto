@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:bluto:repository:rvec:1.0",
+  "type": "object",
+  "required": [
+    "rvec_version",
+    "validation_standard_id",
+    "quality_gate",
+    "repository_version",
+    "artifact_ids",
+    "tool",
+    "tool_version",
+    "execution_mode",
+    "start_timestamp",
+    "end_timestamp",
+    "result",
+    "evidence_digest"
+  ],
+  "properties": {
+    "rvec_version": {
+      "type": "string"
+    },
+    "validation_standard_id": {
+      "type": "string"
+    },
+    "quality_gate": {
+      "type": "string"
+    },
+    "repository_version": {
+      "type": "string"
+    },
+    "artifact_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "tool": {
+      "type": "string"
+    },
+    "tool_version": {
+      "type": "string"
+    },
+    "execution_mode": {
+      "enum": [
+        "Manual",
+        "Automated",
+        "Hybrid"
+      ]
+    },
+    "start_timestamp": {
+      "type": "string"
+    },
+    "end_timestamp": {
+      "type": "string"
+    },
+    "result": {
+      "enum": [
+        "PASS",
+        "PASS WITH CONDITIONS",
+        "FAIL",
+        "WAIVED"
+      ]
+    },
+    "evidence_digest": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

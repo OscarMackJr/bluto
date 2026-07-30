@@ -1,0 +1,1370 @@
+{
+  "release_id": "REL-ENTERPRISE-2.0.0",
+  "version": "2.0.0",
+  "status": "Certified",
+  "created": "2026-07-30",
+  "authoritative_spec_sha256": "c1944fb7ef1bac01e6e29a5a5537dcae884b5e4b70db3aa05e3b1a74c1007468",
+  "files": [
+    {
+      "path": "00-baseline/README.md",
+      "sha256": "081455b603aa8ff58130feada939d4090a9d7bd762766a6a5b090b5cc2fd3086",
+      "bytes": 1942
+    },
+    {
+      "path": "00-baseline/audit/BASELINE-A-REPOSITORY-AUDIT.md",
+      "sha256": "f492ca3c3ab176bfabf0ac5c4ceeb0d895d0c4b553f6ec970a68877be7c311e3",
+      "bytes": 1283
+    },
+    {
+      "path": "00-baseline/audit/REPOSITORY-AUDIT-STANDARD.md",
+      "sha256": "4f21df5f6b05573ab4007ea3f05b95f8fb81ff79340cf4689727dbe92d0fb919",
+      "bytes": 1196
+    },
+    {
+      "path": "00-baseline/certification/BASELINE-A-RELEASE-CERTIFICATION.md",
+      "sha256": "b1db3c28cd70e53bb8b942b700b51ff7f573dfd854da7032f1dcc2e1cce3bc01",
+      "bytes": 1137
+    },
+    {
+      "path": "00-baseline/certification/REPOSITORY-CERTIFICATION-STANDARD.md",
+      "sha256": "8a9d317b953c9ad2e1d0e47c9e5d33ee5168c95e66f93fc3f507f8499a5969d3",
+      "bytes": 1185
+    },
+    {
+      "path": "00-baseline/governance/REPOSITORY-DEPENDENCY-MODEL.md",
+      "sha256": "f845f85539829aad22278726a3a2e4aee74445da1000560df77a79cdf509b6a7",
+      "bytes": 1339
+    },
+    {
+      "path": "00-baseline/governance/REPOSITORY-GOVERNANCE-CHARTER.md",
+      "sha256": "05512d9c36922b33f9201cc2ab3b720f31ba063b8edaf7f6cba980a84080355c",
+      "bytes": 1885
+    },
+    {
+      "path": "00-baseline/governance/REPOSITORY-GOVERNANCE-TRACEABILITY-MATRIX.md",
+      "sha256": "a33c9a906f16051c757e442673eb23f7c3812979776fd684994b28e9fc0a7846",
+      "bytes": 1345
+    },
+    {
+      "path": "00-baseline/governance/REPOSITORY-ORGANIZATION-STANDARD.md",
+      "sha256": "7da4dc551506271165edf45dd6b27ef4a95a8114867d7c3098d06d3589f5f9ce",
+      "bytes": 1349
+    },
+    {
+      "path": "00-baseline/quality-gates/REPOSITORY-QUALITY-GATE-FRAMEWORK.md",
+      "sha256": "8c9c2f978ff06385348a217f3bbeae6ce64f4dc38bad4880e2ce40d96edeeb49",
+      "bytes": 1265
+    },
+    {
+      "path": "00-baseline/release/REPOSITORY-RELEASE-STANDARD.md",
+      "sha256": "360348990ad995ffc9e3f949b23ab7448eba95086eed3f5109538876d6970fdb",
+      "bytes": 1626
+    },
+    {
+      "path": "00-baseline/reviews/BASELINE-A-CONSISTENCY-REVIEW.md",
+      "sha256": "bf58a466c851e09260288ff5287e7f3cef06d849183580dfb224f90cf300ac9c",
+      "bytes": 1173
+    },
+    {
+      "path": "00-baseline/reviews/BASELINE-A-EVIDENCE-REVIEW.md",
+      "sha256": "ee684ede8de5d35035bd22ac3e9d54ec2bd4f64b3d510930d82177ebc752c7ac",
+      "bytes": 1277
+    },
+    {
+      "path": "00-baseline/standards/CONTROLLED-DOCUMENT-STANDARD.md",
+      "sha256": "5ac4768ef6cc53e136604602f81c6d2aa4e277e133e0db61154a790ac4df8f24",
+      "bytes": 1200
+    },
+    {
+      "path": "00-baseline/standards/DOCUMENT-METADATA-STANDARD.md",
+      "sha256": "df621fd1ba5a4f4d09258766d0119ebfb2e2594bea45eb047a6d509cbd510eff",
+      "bytes": 1184
+    },
+    {
+      "path": "00-baseline/standards/IMMUTABLE-DOCUMENT-IDENTITY-STANDARD.md",
+      "sha256": "2d6799f59b2c37ef70dee3ac6f01a20f74691cc4fd789cb4c87f83c311499cb5",
+      "bytes": 1177
+    },
+    {
+      "path": "00-baseline/standards/REPOSITORY-VERSIONING-STANDARD.md",
+      "sha256": "367ac13b50944b8fa202061ae9975937991d4a0ec8f50fb20fc616ad53d29f3d",
+      "bytes": 1168
+    },
+    {
+      "path": "00-baseline/validation/AUTHORITY-VALIDATION-STANDARD.md",
+      "sha256": "844d6b3607376a2c9c1b36e8c3a7715b988a0a46a1ca48bca1279a1ea310ddb3",
+      "bytes": 1642
+    },
+    {
+      "path": "00-baseline/validation/CROSS-REFERENCE-VALIDATION-STANDARD.md",
+      "sha256": "803d4dcf2b0af8549ca28a27fcffa0d08c35c618dfb4f751279679599df4e28d",
+      "bytes": 1620
+    },
+    {
+      "path": "00-baseline/validation/DEPENDENCY-VALIDATION-STANDARD.md",
+      "sha256": "99fffab38aa113e9cebb652ad238dfd5520625fe5ff17ceb7adfc82db8f52bf5",
+      "bytes": 1633
+    },
+    {
+      "path": "00-baseline/validation/IDENTITY-VALIDATION-STANDARD.md",
+      "sha256": "11fee27df59aac656887d76110d40539aebcc2eba8a7745df3b0067b44dd693d",
+      "bytes": 1583
+    },
+    {
+      "path": "00-baseline/validation/METADATA-VALIDATION-STANDARD.md",
+      "sha256": "32ad877b96db7c70df7d91475dd4d6047c63e75c659588f8012adc1446a8833d",
+      "bytes": 1564
+    },
+    {
+      "path": "00-baseline/validation/TRACEABILITY-VALIDATION-STANDARD.md",
+      "sha256": "fd541d78da214c0fc966f5bc63afcd03aedca7231a84de1ab27805130095d60f",
+      "bytes": 1637
+    },
+    {
+      "path": "README.md",
+      "sha256": "4ae4efb4239612278b683c3d0d26a7739841e735e7da9e8563f2bdec269a8e2b",
+      "bytes": 1567
+    },
+    {
+      "path": "RELEASE-NOTES.md",
+      "sha256": "5a4c9fe677bc5421a0756eb5072559d25762002bb330aab910228f1a9c520e44",
+      "bytes": 387
+    },
+    {
+      "path": "docs/00-authoritative/BLUTO_IDENTITY_SPINE_v0.1.md",
+      "sha256": "c1944fb7ef1bac01e6e29a5a5537dcae884b5e4b70db3aa05e3b1a74c1007468",
+      "bytes": 12459
+    },
+    {
+      "path": "docs/01-foundation-governance/ARCHITECTURE-PRINCIPLES.md",
+      "sha256": "caa451d39cc885958a539d891edcd0349cc84a351a76dba31813b1f15319ad83",
+      "bytes": 1316
+    },
+    {
+      "path": "docs/01-foundation-governance/ARCHITECTURE-REVIEW-CHECKLIST.md",
+      "sha256": "29fc6a159f20289b00dbf759225f594a86a214990e6389cdf49c228f8c31fec9",
+      "bytes": 1339
+    },
+    {
+      "path": "docs/01-foundation-governance/CHANGE-CONTROL.md",
+      "sha256": "a1e8e853585a4b9a34100deffe75a925afa9a582133caad6340050b62f860f25",
+      "bytes": 1353
+    },
+    {
+      "path": "docs/01-foundation-governance/DECISION-LOG.md",
+      "sha256": "2e2111698b4b3501bdee02f6de05c2b0164ee2eb23d7a9d31b6d9817ad023dc0",
+      "bytes": 1603
+    },
+    {
+      "path": "docs/01-foundation-governance/DOCUMENT-STATUS.md",
+      "sha256": "2f58c9c2bb351c7e6cecdb8319175eabbe09f81064e6b9e6d6510a1703be2f62",
+      "bytes": 1174
+    },
+    {
+      "path": "docs/01-foundation-governance/GLOSSARY.md",
+      "sha256": "2ad9a9e6cc5195703efb1a5fd00d097326cbb52e57debeb9dc1c260d1211f08c",
+      "bytes": 1487
+    },
+    {
+      "path": "docs/01-foundation-governance/NON-GOALS.md",
+      "sha256": "e1357dbb9dbe5ac54472adfb20fe35e5ece159d1423b6915a5ef5b2e64c0f0c5",
+      "bytes": 1117
+    },
+    {
+      "path": "docs/01-foundation-governance/README.md",
+      "sha256": "1230fd2599e8b6d63489dee585366ba9ddc772de46d479c975d0b5d22c3751e3",
+      "bytes": 1371
+    },
+    {
+      "path": "docs/01-foundation-governance/SCOPE.md",
+      "sha256": "a52e11b9801e42e57bb8ba0575ae69fdfa233470141e26e483310b53363faec6",
+      "bytes": 1234
+    },
+    {
+      "path": "docs/01-foundation-governance/VISION.md",
+      "sha256": "49877964ccf6f43145de31da30c0c1ce634db42d68a8d9df465102bd2f25fd8f",
+      "bytes": 1280
+    },
+    {
+      "path": "docs/01-foundation-governance/adrs/ADR-0000-USING-ADRS.md",
+      "sha256": "baf58992ac20f49ccc7d7a195d532e074a2db10f660fa40d2e5a1d70db6ddcf4",
+      "bytes": 1397
+    },
+    {
+      "path": "docs/01-foundation-governance/adrs/ADR-INDEX.md",
+      "sha256": "c5e1516e35b718977780b7238c607c269223b82ae154604adf1789008be9f95e",
+      "bytes": 1039
+    },
+    {
+      "path": "docs/01-foundation-governance/adrs/ADR-LIFECYCLE.md",
+      "sha256": "466a4bf7101b563aaa0bd6cd3c4fcc17417beb060e702041b9696209c71857db",
+      "bytes": 1148
+    },
+    {
+      "path": "docs/01-foundation-governance/adrs/ADR-REVIEW-PROCESS.md",
+      "sha256": "b329206c2bf45ba23ca131312b80464a7b3fa3f9a290293c58865453ac46e4b2",
+      "bytes": 1137
+    },
+    {
+      "path": "docs/01-foundation-governance/adrs/ADR-TEMPLATE.md",
+      "sha256": "dbad4452c76bc73587bcdbea2e91bc5bd9daadee91da6b91e5e3737f97aa70c8",
+      "bytes": 1124
+    },
+    {
+      "path": "docs/01-foundation-governance/adrs/README.md",
+      "sha256": "39a01f7408bc1732673963ca10fc226a3167aea79a46f8adf7c5d5657999ffe8",
+      "bytes": 1125
+    },
+    {
+      "path": "docs/01-foundation-governance/governance/APPROVAL-WORKFLOW.md",
+      "sha256": "222bd302750d787b1f8bc6f3bf86bc6380920db72c8dbe053e9a47972caf44f0",
+      "bytes": 1094
+    },
+    {
+      "path": "docs/01-foundation-governance/governance/DOCUMENT-GOVERNANCE.md",
+      "sha256": "4c08ce47297a87017c1bbd3795773d163669a7e0b9a264c801ca072f42693d95",
+      "bytes": 1170
+    },
+    {
+      "path": "docs/01-foundation-governance/governance/ESCALATION-PROCESS.md",
+      "sha256": "da6751d91636980dd0c9786739efa4ee83b2e6f060023328d063d7b03b312beb",
+      "bytes": 1137
+    },
+    {
+      "path": "docs/01-foundation-governance/governance/EXCEPTION-PROCESS.md",
+      "sha256": "855b1ca9dcee94b341fd55185c5c215c34586c71c93e10399c4a100d1f580460",
+      "bytes": 1128
+    },
+    {
+      "path": "docs/01-foundation-governance/governance/GOVERNANCE-CHARTER.md",
+      "sha256": "7d534ef33786d35e7b846f97a1512e38cad62c9e21d7a59571f24b67b56522f7",
+      "bytes": 1368
+    },
+    {
+      "path": "docs/01-foundation-governance/governance/GOVERNANCE-MATRIX.md",
+      "sha256": "94208b831a05829d9b1f0b2082fc0f8b732f0c87aab2d7c76a6a1b64d1da2bfe",
+      "bytes": 1233
+    },
+    {
+      "path": "docs/01-foundation-governance/governance/README.md",
+      "sha256": "900ff6b4a8bc1a65ebd6780940e7f612a48876c61e699c3b3246256d8bf0625e",
+      "bytes": 1037
+    },
+    {
+      "path": "docs/01-foundation-governance/governance/REVIEW-POLICY.md",
+      "sha256": "6681c2eadc19d54bd9039d4a72b414db01c56cd90821fe9457790cd26117644b",
+      "bytes": 1124
+    },
+    {
+      "path": "docs/01-foundation-governance/governance/ROLES-AND-RESPONSIBILITIES.md",
+      "sha256": "8181e6bccba7b3958893b9a4604624298da58f4d960d735ec841b770b1f9e67d",
+      "bytes": 1216
+    },
+    {
+      "path": "docs/01-foundation-governance/release/RELEASE-CERTIFICATION.md",
+      "sha256": "c3326354ba3cd84fb138682c1f7e23ce8c51c75c57ac08fb0d47bdca94a53a69",
+      "bytes": 1183
+    },
+    {
+      "path": "docs/01-foundation-governance/reviews/CONSISTENCY-REVIEW.md",
+      "sha256": "7fb4e1b7cf3f171a3ebdce3547acff47afc7bd2451e588dac8811e2db2c5bbcd",
+      "bytes": 1233
+    },
+    {
+      "path": "docs/01-foundation-governance/reviews/EVIDENCE-REVIEW.md",
+      "sha256": "553061b15c86933c15b006c4920b13cad841ce7de2991885a577b5eb1d5f73b4",
+      "bytes": 1408
+    },
+    {
+      "path": "docs/02-domain-model/AGGREGATES.md",
+      "sha256": "4ed46903a28fce183736b1a7322daac81d05c669e3ce71c28809f361ba42d1bb",
+      "bytes": 1475
+    },
+    {
+      "path": "docs/02-domain-model/BOUNDED-CONTEXTS.md",
+      "sha256": "8ca3541071325d232ecb8ebda237cc2f74b00134abdfe6e9300810117831fe00",
+      "bytes": 1524
+    },
+    {
+      "path": "docs/02-domain-model/CANONICAL-DATA-DEFINITIONS.md",
+      "sha256": "1b6a928f51d6e14aa4311ef0fbe45d738a8fa72b447256956bd04f1492067e50",
+      "bytes": 1607
+    },
+    {
+      "path": "docs/02-domain-model/CORE-DOMAIN.md",
+      "sha256": "a96a59bb6174b582c232885e4b02a29c3be1e24487bfcf33a2aad49c937634bf",
+      "bytes": 1504
+    },
+    {
+      "path": "docs/02-domain-model/DOMAIN-EVENTS.md",
+      "sha256": "f3e58d88ee47f78041ad0414b16ba0a7de9d7ed130d6e431ad2363063412cbb3",
+      "bytes": 1385
+    },
+    {
+      "path": "docs/02-domain-model/DOMAIN-MODEL-OVERVIEW.md",
+      "sha256": "ac9be2a2e2fa08d385e6422339e7d4171ee63ff11fabbd0909194323e9fd0005",
+      "bytes": 30325
+    },
+    {
+      "path": "docs/02-domain-model/DOMAIN-REVIEW.md",
+      "sha256": "b3047fa10309c9e1c3b9029be610177251c14b325970550a30bebed371004506",
+      "bytes": 1809
+    },
+    {
+      "path": "docs/02-domain-model/ENTITY-CATALOGUE.md",
+      "sha256": "c7488d8096a97fe48d616dbce39bc628f3d1c46c4f0b99c47817a925107c0c18",
+      "bytes": 1528
+    },
+    {
+      "path": "docs/02-domain-model/README.md",
+      "sha256": "a2ec1ebd035dc93d6f85be76f0a1f4f034b7b7f3135dfffc5dedcf3a4d5d313d",
+      "bytes": 1044
+    },
+    {
+      "path": "docs/02-domain-model/REPOSITORY-CONTRACTS.md",
+      "sha256": "9130fa28bada85f321bb1ff3ba33f6acaea0a2ea503b37ac60c5fdbec4b4754e",
+      "bytes": 1356
+    },
+    {
+      "path": "docs/02-domain-model/STATE-MODELS.md",
+      "sha256": "0ef788251901cd77b96475e5218d2228d51e0bd880d78a3369feba3eba14dbf7",
+      "bytes": 1435
+    },
+    {
+      "path": "docs/02-domain-model/TRACEABILITY-MATRIX.md",
+      "sha256": "eca558cfebcd02a41ee1b6597535e87b131ea652db86f0899e33589c0f5604a0",
+      "bytes": 1795
+    },
+    {
+      "path": "docs/02-domain-model/UBIQUITOUS-LANGUAGE.md",
+      "sha256": "d7c10d5acb44183882adf1d58d1e6f542481b56d9367299a0d218ab5b836e542",
+      "bytes": 1405
+    },
+    {
+      "path": "docs/02-domain-model/VALUE-OBJECTS.md",
+      "sha256": "0f0c98a5aa3eb0a7495b946e3d3b14ed82a8a3cba9746ffdf5821d837439c14a",
+      "bytes": 1359
+    },
+    {
+      "path": "docs/02-domain-model/release/RELEASE-CERTIFICATION.md",
+      "sha256": "dca499a777af080a3b5a687c97121de38625efdba676ffae0aa633b66be20a44",
+      "bytes": 1172
+    },
+    {
+      "path": "docs/02-domain-model/reviews/CONSISTENCY-REVIEW.md",
+      "sha256": "9cf534dddf11b80d434c04994cc40492bbb227e442b77414b63c42c9aaad4a58",
+      "bytes": 1222
+    },
+    {
+      "path": "docs/02-domain-model/reviews/EVIDENCE-REVIEW.md",
+      "sha256": "1a2aa04a9e4dc7b6ca1395ee420b97aa13df68a35579357153c1aaf7c9de5e8d",
+      "bytes": 1397
+    },
+    {
+      "path": "docs/03-architecture/ARCHITECTURAL-CONSTRAINTS.md",
+      "sha256": "a406958e08693207a17bf6b70e515be8086e898cb6894a03344de00e57325798",
+      "bytes": 5027
+    },
+    {
+      "path": "docs/03-architecture/ARCHITECTURAL-DRIVERS.md",
+      "sha256": "5d948ec88ce861e93b6fd89a3423bfe139ea5304c20d0202539dbfb70faef727",
+      "bytes": 5256
+    },
+    {
+      "path": "docs/03-architecture/ARCHITECTURE-REVIEW.md",
+      "sha256": "13d3f7bb56b32f05f0c443e4795646884625be7762b7ba69bb72acc10f12070b",
+      "bytes": 4449
+    },
+    {
+      "path": "docs/03-architecture/ARCHITECTURE-TRACEABILITY.md",
+      "sha256": "647393c0ecf7513e93daf456d16f0e1c20177706d72f06702928305cfb3b2563",
+      "bytes": 5043
+    },
+    {
+      "path": "docs/03-architecture/ARCHITECTURE-VIEWS.md",
+      "sha256": "9e0e7bf463063ca5ce6ae65b57c36affc33552e8bda79b42b7b9466e50795611",
+      "bytes": 4505
+    },
+    {
+      "path": "docs/03-architecture/ARCHITECTURE-VISION.md",
+      "sha256": "5c36480dffa7ef6a35b7edd6b785067e4a311852ad444abbed7c0c2c55206719",
+      "bytes": 5517
+    },
+    {
+      "path": "docs/03-architecture/CROSS-CUTTING-CONCERNS.md",
+      "sha256": "7dfc8d5cae6991775beda987bad8df02d57bb9dc099ce9c2f84bed109951b0e7",
+      "bytes": 4999
+    },
+    {
+      "path": "docs/03-architecture/DATA-ARCHITECTURE.md",
+      "sha256": "c650da49da8157d58851efa81e475cd9518256a47cc92565f4dc7d19473b56ce",
+      "bytes": 5038
+    },
+    {
+      "path": "docs/03-architecture/DEPLOYMENT-ARCHITECTURE.md",
+      "sha256": "67e4b8052e86842442594b40842b7838c8ed81b4c0d7c6c022c3bd8ca439ee08",
+      "bytes": 4501
+    },
+    {
+      "path": "docs/03-architecture/INTEGRATION-ARCHITECTURE.md",
+      "sha256": "a4cf4ed5a23b976d86c2293f37c711f390dab7b5002e1e3ce83f3e98e5c1789c",
+      "bytes": 5074
+    },
+    {
+      "path": "docs/03-architecture/LOGICAL-ARCHITECTURE.md",
+      "sha256": "da8f281b41c94fc2016426ed618a1b27ed38bd8c638404b6bea2bb69984151ef",
+      "bytes": 5121
+    },
+    {
+      "path": "docs/03-architecture/PHYSICAL-ARCHITECTURE.md",
+      "sha256": "41c78e8213816151ab63c54d7d85659959387050800f8c5dc3281a13a31e7fec",
+      "bytes": 4798
+    },
+    {
+      "path": "docs/03-architecture/QUALITY-ATTRIBUTE-SCENARIOS.md",
+      "sha256": "f433113ec1f3f8b1662af949619cfd767814e49e3620f5cdd1bc87c586a71928",
+      "bytes": 5386
+    },
+    {
+      "path": "docs/03-architecture/README.md",
+      "sha256": "1298a63a189168d1eeacc7808c9a10752477faf73829a8a6fa935e8941b56f4e",
+      "bytes": 1899
+    },
+    {
+      "path": "docs/03-architecture/REPOSITORY-ARCHITECTURE-DEPENDENCY-GRAPH.md",
+      "sha256": "77a727be0a642c10126a7412c89dfd137476a7e18d4be68aed56310b98d9832f",
+      "bytes": 4255
+    },
+    {
+      "path": "docs/03-architecture/REPOSITORY-REFERENCE-ARCHITECTURE.md",
+      "sha256": "dbfc72dcffb092f512663b0b864b6083eeba21d48740e1b9c14b5bc7da463beb",
+      "bytes": 17680
+    },
+    {
+      "path": "docs/03-architecture/RUNTIME-ARCHITECTURE.md",
+      "sha256": "f448de0e7a076b25903b982f05210763d6b5f6f2bea6f7bd3d2ae3b915b2eb7f",
+      "bytes": 5481
+    },
+    {
+      "path": "docs/03-architecture/STREAM3-CONSISTENCY-REVIEW.md",
+      "sha256": "55387e20c8454a8eaee03b8190bf4de13a3b42bc336225faafbb8c70d9d89b2e",
+      "bytes": 3510
+    },
+    {
+      "path": "docs/03-architecture/STREAM3-RELEASE-CERTIFICATION.md",
+      "sha256": "c00acc4cd0734b5d5855de76fdb2647af98e1c962604677cd0ff21b8c0d1e135",
+      "bytes": 3311
+    },
+    {
+      "path": "docs/03-architecture/TECHNOLOGY-DECISIONS.md",
+      "sha256": "ee718e367c830bf0ed2e28042784a215f8ebb23f9ef4e3520e1174468dcd91c0",
+      "bytes": 4859
+    },
+    {
+      "path": "docs/03-architecture/assets/REPOSITORY-REFERENCE-ARCHITECTURE.dot",
+      "sha256": "41d09363c6ee3d4aaf0a4d4aafc19768f3c8975069beef79a9d3d187f48dcc2c",
+      "bytes": 5292
+    },
+    {
+      "path": "docs/03-architecture/assets/REPOSITORY-REFERENCE-ARCHITECTURE.png",
+      "sha256": "6b7e39a3993f534f351f98490909c462a0e09e9ffb2e0426febd10163e024198",
+      "bytes": 359791
+    },
+    {
+      "path": "docs/03-architecture/assets/REPOSITORY-REFERENCE-ARCHITECTURE.svg",
+      "sha256": "a61c19060fd77542ce1dc21dd792758972e105da2a8bd83c0c4a2c43bf3fa990",
+      "bytes": 35478
+    },
+    {
+      "path": "docs/03-architecture/release/RELEASE-CERTIFICATION.md",
+      "sha256": "b6d11cda5b17c7566e14ca6d9626a0dd7c126f9610613de989c03abbe72d6286",
+      "bytes": 1172
+    },
+    {
+      "path": "docs/03-architecture/reviews/CONSISTENCY-REVIEW.md",
+      "sha256": "46265be54f387cc3805beb9eab595f1fbc388ef5d55feb9e2e7147153cb17c06",
+      "bytes": 1222
+    },
+    {
+      "path": "docs/03-architecture/reviews/EVIDENCE-REVIEW.md",
+      "sha256": "3e499e1cdb9eaf6fd8dd7b5d6c2a1bde55f48ebc74c55d41be273f938a8c998f",
+      "bytes": 1397
+    },
+    {
+      "path": "docs/04-contracts/API-STANDARDS.md",
+      "sha256": "c4d2ae5b2464306f47dada30251357c637b8a0e621aaa4bc48b52bdf35bf008e",
+      "bytes": 3468
+    },
+    {
+      "path": "docs/04-contracts/COMMAND-QUERY-CONTRACTS.md",
+      "sha256": "c7c15f1ec06d1c57c12b5597aab3077b3b0ffc3fe0faef431a2603d8cd18aad6",
+      "bytes": 2897
+    },
+    {
+      "path": "docs/04-contracts/CONSUMER-GUIDELINES.md",
+      "sha256": "2fcb30da59f7623cea561ceb98f0d4efe8ef3ebdedcd4cabeaba42af3bf2fadb",
+      "bytes": 2603
+    },
+    {
+      "path": "docs/04-contracts/CONTRACT-ARCHITECTURE.md",
+      "sha256": "8a2230af19601f59bca06190b3718d7559d24cf46779dae616c8d22c831edc42",
+      "bytes": 3297
+    },
+    {
+      "path": "docs/04-contracts/CONTRACT-REVIEW.md",
+      "sha256": "a07270c979124e75376f92519e6507d261623fc951aa5ed71a0e8e273e295497",
+      "bytes": 2039
+    },
+    {
+      "path": "docs/04-contracts/CONTRACT-TRACEABILITY.md",
+      "sha256": "d57e7edde0097a75426176374de33b9e3e580744de9e5c3580521285d0094787",
+      "bytes": 2387
+    },
+    {
+      "path": "docs/04-contracts/ERROR-CONTRACTS.md",
+      "sha256": "5f3ba934373f6130e4ddeb6ce16d0fab25203e532bb3e593d1c9d1e913d9ac2d",
+      "bytes": 2463
+    },
+    {
+      "path": "docs/04-contracts/EVENT-CONTRACTS.md",
+      "sha256": "718a232f80e0e5269581c1c3089795933af9ea8dc9eb2c137e3860788cc86c64",
+      "bytes": 2986
+    },
+    {
+      "path": "docs/04-contracts/README.md",
+      "sha256": "8a64b029335f9a2522ebe8abb78e79b2088c26ff791524d955ddbc76c08000df",
+      "bytes": 1223
+    },
+    {
+      "path": "docs/04-contracts/SCHEMA-STANDARDS.md",
+      "sha256": "d6e46246e455cd0f9f5596ac718b40409f0b2cf9ad7020dc616e7e3295376795",
+      "bytes": 2737
+    },
+    {
+      "path": "docs/04-contracts/STREAM4-CONSISTENCY-REVIEW.md",
+      "sha256": "a1d02020fcf15aa31a049a65cdde7f9b6adf1e1a02052fa0851f30d26a36fd72",
+      "bytes": 1750
+    },
+    {
+      "path": "docs/04-contracts/STREAM4-RELEASE-CERTIFICATION.md",
+      "sha256": "47ce7387bc82b25b685107129b4b8afcd02c5da89c0ce117c811b96d4c1ea172",
+      "bytes": 1699
+    },
+    {
+      "path": "docs/04-contracts/VERSIONING-COMPATIBILITY.md",
+      "sha256": "e7483e5d66325382b3497c2ff796c5cccc7c81cf90c0d3d0f947230e29f1afd2",
+      "bytes": 2591
+    },
+    {
+      "path": "docs/04-contracts/release/RELEASE-CERTIFICATION.md",
+      "sha256": "a02f1b9cf67344da55743014d010b4c20532a38c5949bb2214d08498684e4d19",
+      "bytes": 1169
+    },
+    {
+      "path": "docs/04-contracts/reviews/CONSISTENCY-REVIEW.md",
+      "sha256": "405ebd98e70056219386a334e3a5ee0dde0f05461d7a9708f20ef3ad01cc1bfa",
+      "bytes": 1219
+    },
+    {
+      "path": "docs/04-contracts/reviews/EVIDENCE-REVIEW.md",
+      "sha256": "486c111adf2998b614aca24d1245e89c036e69f3b1acd5548698f07fa7917417",
+      "bytes": 1394
+    },
+    {
+      "path": "docs/04-contracts/schemas/bluto-v1.openapi.yaml",
+      "sha256": "071d7afffe289a1b6a52e23e52664cd4746455eba1bb1d71ec82d1b08e6fbbed",
+      "bytes": 3345
+    },
+    {
+      "path": "docs/04-contracts/schemas/merge-parties.v1.schema.json",
+      "sha256": "b40e4425e669ef5c55a5b8c1ef8d1b7cb4ac8cf1749605f327631b52144685ef",
+      "bytes": 1168
+    },
+    {
+      "path": "docs/04-contracts/schemas/source-link-established.v1.schema.json",
+      "sha256": "c819cf45550913000ef6cbdd054a3161ee9ceaaa35ff997c5dd3047525a15964",
+      "bytes": 1787
+    },
+    {
+      "path": "docs/05-security/AUDIT-COMPLIANCE.md",
+      "sha256": "e53ff866a7bab5474e56cc4a2c395c5da5bc7c2e578b675b4cc86a09fe5f1527",
+      "bytes": 2377
+    },
+    {
+      "path": "docs/05-security/AUTHENTICATION-AUTHORIZATION.md",
+      "sha256": "25dbe707062c1f0c800a73d034247171859438b25e0e93723a4b78e9b3a61ca0",
+      "bytes": 2442
+    },
+    {
+      "path": "docs/05-security/CRYPTOGRAPHY-SECRETS.md",
+      "sha256": "5bbc0390ecaadd4377e55ca5bfd382df485a16ee625ef0db579c0feb4eb88007",
+      "bytes": 2457
+    },
+    {
+      "path": "docs/05-security/DATA-CLASSIFICATION-PRIVACY.md",
+      "sha256": "3efbc5076caf9a3b3c30a1d1d1cbe66c3564580c5f9f10ae39a5cfce885f3340",
+      "bytes": 2412
+    },
+    {
+      "path": "docs/05-security/INCIDENT-RESPONSE.md",
+      "sha256": "362297e708eb397b2a23908ff22a65139c1afa850031613fd4aecef7c770f273",
+      "bytes": 2211
+    },
+    {
+      "path": "docs/05-security/README.md",
+      "sha256": "0bee095791847f0b50b68267f91ba300245862795a787e2d974eab33f48bcd1c",
+      "bytes": 1253
+    },
+    {
+      "path": "docs/05-security/SECURE-SDLC.md",
+      "sha256": "216399057e84134891e4f21e9f2630fbc37ae493802c0e23b40c476dbb25cfb4",
+      "bytes": 1957
+    },
+    {
+      "path": "docs/05-security/SECURITY-ARCHITECTURE.md",
+      "sha256": "97c6248ff18c12c117cb843f13d902628013f91b8768810d02516ff99f8852f1",
+      "bytes": 2698
+    },
+    {
+      "path": "docs/05-security/SECURITY-REVIEW.md",
+      "sha256": "7ea7e939b836f2d0963ff5519fc07761a5c938a7a9b1538cdc0b0de9bdf860af",
+      "bytes": 1694
+    },
+    {
+      "path": "docs/05-security/SECURITY-TRACEABILITY.md",
+      "sha256": "2c0d2ea93754c2d73d10bd5d5a09b418b55aa0e08988733d644879934aff785f",
+      "bytes": 2199
+    },
+    {
+      "path": "docs/05-security/STREAM5-CONSISTENCY-REVIEW.md",
+      "sha256": "2c1ebda17acf2b486a1a2c61dfd65c2f042105d8b6080b194c9b22e5b69b9ecd",
+      "bytes": 1624
+    },
+    {
+      "path": "docs/05-security/STREAM5-RELEASE-CERTIFICATION.md",
+      "sha256": "04ba11ed8d516c05fbe84d384d963fc78a464a1d3b1408d2100af7e3de998d06",
+      "bytes": 1649
+    },
+    {
+      "path": "docs/05-security/TENANT-ISOLATION.md",
+      "sha256": "65929af1c75613bf19898e0783560bd2c1fa9e350379455b96fa869f49208e8f",
+      "bytes": 2356
+    },
+    {
+      "path": "docs/05-security/THREAT-MODEL.md",
+      "sha256": "0e50ab509d997fc141f936388a6b5964233a2ee66d5ecc9f687c5c0088205054",
+      "bytes": 3066
+    },
+    {
+      "path": "docs/05-security/release/RELEASE-CERTIFICATION.md",
+      "sha256": "a06e5b7f156d631802e4ea26971c7a22afda478017d7fdf8b580b5d7e1e8c4ff",
+      "bytes": 1168
+    },
+    {
+      "path": "docs/05-security/reviews/CONSISTENCY-REVIEW.md",
+      "sha256": "32efa3553bdc94ad17651e9aca3f4b5f430ea8dee8913a7416ad6efda232cb98",
+      "bytes": 1218
+    },
+    {
+      "path": "docs/05-security/reviews/EVIDENCE-REVIEW.md",
+      "sha256": "3f0c10abc39dff453a89f0005c6d4addaadb505a312cba8034920bd45981c432",
+      "bytes": 1393
+    },
+    {
+      "path": "docs/06-engineering-standards/CODE-REVIEW-STANDARD.md",
+      "sha256": "0dc51cbe6cfa3b65f59ed7cc81f55e67622b5e5ce4650e76c73c35a5f09d3233",
+      "bytes": 1878
+    },
+    {
+      "path": "docs/06-engineering-standards/CODING-STANDARDS.md",
+      "sha256": "51bf48a218b8d15c17978c21ac95b2514d09eb8826967f590a2776b71caedab3",
+      "bytes": 2050
+    },
+    {
+      "path": "docs/06-engineering-standards/CONFIGURATION-FEATURE-FLAGS.md",
+      "sha256": "dc2d33ac6a1861d2217874031730bb4e3d2a215b4dbb345187077cb98505fcae",
+      "bytes": 1840
+    },
+    {
+      "path": "docs/06-engineering-standards/DATABASE-MIGRATION-STANDARDS.md",
+      "sha256": "e6b60ec047a5538fdaf0d85df81de552389d74c359505f652436e093dc53529a",
+      "bytes": 1937
+    },
+    {
+      "path": "docs/06-engineering-standards/DEPENDENCY-SUPPLY-CHAIN.md",
+      "sha256": "9b0cc20e730b679af48cdc0d33848b23bcf940c64138e4419bb691b6edad7dbf",
+      "bytes": 1865
+    },
+    {
+      "path": "docs/06-engineering-standards/ENGINEERING-ARCHITECTURE.md",
+      "sha256": "8252ffb3aaa210386b0b18f0102fdf0380a736c6187439a15273a792ac04c8d9",
+      "bytes": 2207
+    },
+    {
+      "path": "docs/06-engineering-standards/ENGINEERING-REVIEW.md",
+      "sha256": "3ecb72f81a84b28892c44ad8845f511c17a68f51171645577ee8a794c5881014",
+      "bytes": 1664
+    },
+    {
+      "path": "docs/06-engineering-standards/ENGINEERING-TRACEABILITY.md",
+      "sha256": "0ad03392a20f25fac42b5fb35485906a589067d1d6503f49e0c633f52b2b6124",
+      "bytes": 1751
+    },
+    {
+      "path": "docs/06-engineering-standards/ERROR-HANDLING.md",
+      "sha256": "35c3952318a02fd1889693a30b85ac50c3c43fd698fc4149a5344e662873f577",
+      "bytes": 1962
+    },
+    {
+      "path": "docs/06-engineering-standards/LOGGING-OBSERVABILITY.md",
+      "sha256": "af2b7cc1d9523b49d1d6a6e98bc4869fdc76d475f62b2f7f0f37783f31a48357",
+      "bytes": 1960
+    },
+    {
+      "path": "docs/06-engineering-standards/NAMING-DOCUMENTATION.md",
+      "sha256": "b24e1bedcc495f115baa04b2792ff4d705b8d6e82b2bc1fe8e7d118dbc9ceb83",
+      "bytes": 1928
+    },
+    {
+      "path": "docs/06-engineering-standards/README.md",
+      "sha256": "d6c31d6f1227cf1e6376a4a4e1d4b03a5fdb83710b081f8bee27741355851a09",
+      "bytes": 1340
+    },
+    {
+      "path": "docs/06-engineering-standards/REPOSITORY-STANDARDS.md",
+      "sha256": "ded9e6dec57018f44b75b9f242c3122fbc7afc813b80af8fd31adad05189d89d",
+      "bytes": 1966
+    },
+    {
+      "path": "docs/06-engineering-standards/STREAM6-CONSISTENCY-REVIEW.md",
+      "sha256": "ccd3422c9abab03547d44265336b6c9a6f5a441966174805727909ac6ede296a",
+      "bytes": 1593
+    },
+    {
+      "path": "docs/06-engineering-standards/STREAM6-RELEASE-CERTIFICATION.md",
+      "sha256": "6ac8015a0a69eeb4b30cdaabffdc8bd05676442228729ab4b81b1335a34cef78",
+      "bytes": 1593
+    },
+    {
+      "path": "docs/06-engineering-standards/release/RELEASE-CERTIFICATION.md",
+      "sha256": "b37ba0cf8cbf9ce1fe7735123d3137e58613a0648c932648bc5fd9cc7527464b",
+      "bytes": 1181
+    },
+    {
+      "path": "docs/06-engineering-standards/reviews/CONSISTENCY-REVIEW.md",
+      "sha256": "9e2ff6b65e72882b3790b7edf7c0710362ca63b09f62e66295c57f327d44ce34",
+      "bytes": 1231
+    },
+    {
+      "path": "docs/06-engineering-standards/reviews/EVIDENCE-REVIEW.md",
+      "sha256": "2c775710f9cd37f640160bd22b5a2f6ad73e3efc6491f8f116b1fb278fa4f6b8",
+      "bytes": 1406
+    },
+    {
+      "path": "docs/07-testing/ACCEPTANCE-TESTING.md",
+      "sha256": "76fb6333bc23b76db26df6d07c365603e2e479083354b85d83a8e21683ac1d5e",
+      "bytes": 1861
+    },
+    {
+      "path": "docs/07-testing/CONTRACT-TESTING.md",
+      "sha256": "a526d4e4fad269b2ea177f58c4a7ee57922519e81425a2da42a2eced7545fc5b",
+      "bytes": 1826
+    },
+    {
+      "path": "docs/07-testing/COVERAGE-QUALITY-GATES.md",
+      "sha256": "9580290d371a6443e4702b14bcf612cad37ddbde72f832a44d22a3faf8e81cf4",
+      "bytes": 2044
+    },
+    {
+      "path": "docs/07-testing/DOMAIN-UNIT-TESTING.md",
+      "sha256": "f23a6a74c14cd275df6d129553926034051ee8ad993adb8c366945d81ca83d54",
+      "bytes": 2008
+    },
+    {
+      "path": "docs/07-testing/INTEGRATION-REPOSITORY-TESTING.md",
+      "sha256": "256bde7b6838ffe3e42b11c32f95dc262b1dc63d646b7b8f6692f5ab6cae8fa2",
+      "bytes": 1951
+    },
+    {
+      "path": "docs/07-testing/PERFORMANCE-RELIABILITY-TESTING.md",
+      "sha256": "f47c025a7a3966dea473226de1952b340cefca61cd62b2f89452284d662fc2cf",
+      "bytes": 1957
+    },
+    {
+      "path": "docs/07-testing/README.md",
+      "sha256": "941f1d360390295cbccf3c4cec61b46e2d95e430f7656877beddbc2a88ca9c53",
+      "bytes": 1257
+    },
+    {
+      "path": "docs/07-testing/SECURITY-TESTING.md",
+      "sha256": "cd06f203e55af5632c4fcd0b7d1b3b1d60be36ad61ddb5df1aa5cecabd276df9",
+      "bytes": 1905
+    },
+    {
+      "path": "docs/07-testing/STREAM7-CONSISTENCY-REVIEW.md",
+      "sha256": "293080348435720d5448d9227f594095e4041088b10702e8e882a8c9cb2dde54",
+      "bytes": 1572
+    },
+    {
+      "path": "docs/07-testing/STREAM7-RELEASE-CERTIFICATION.md",
+      "sha256": "4f7aedd1456aa446ac5bc77fe75a8e627284cd4761134b572ca947f6bda5e683",
+      "bytes": 1583
+    },
+    {
+      "path": "docs/07-testing/TEST-ARCHITECTURE.md",
+      "sha256": "5c0a85ac90095e46fbd989a86d5f10cc619510caf91eeeb39016934b19ff4c15",
+      "bytes": 2521
+    },
+    {
+      "path": "docs/07-testing/TEST-REVIEW.md",
+      "sha256": "f3e883cc33c09d293c488ca85066f48689a96cd77518adb63a4324f102cf876b",
+      "bytes": 1608
+    },
+    {
+      "path": "docs/07-testing/TEST-STRATEGY.md",
+      "sha256": "0b8a3402d00b5d1c5c902091a029affeeffabc28c78d0da7fa563d00b4fea8c7",
+      "bytes": 2047
+    },
+    {
+      "path": "docs/07-testing/TEST-TRACEABILITY.md",
+      "sha256": "32addff18a7abb20d5af1161c33fb2ca596f0f3d7d9f48343f3c2518d1d84641",
+      "bytes": 2126
+    },
+    {
+      "path": "docs/07-testing/release/RELEASE-CERTIFICATION.md",
+      "sha256": "286f9413b9b488eea5332eb3082962133ace7d991ba0edbb4c841e2715390825",
+      "bytes": 1167
+    },
+    {
+      "path": "docs/07-testing/reviews/CONSISTENCY-REVIEW.md",
+      "sha256": "54748959181516393ca2b53d276fd3b92b170f15dbc01344d6d8c188974f2aa2",
+      "bytes": 1217
+    },
+    {
+      "path": "docs/07-testing/reviews/EVIDENCE-REVIEW.md",
+      "sha256": "1126e3d6f98d9009de46282138d1c7e43cbabcbea4630161b501f07d4e4340a6",
+      "bytes": 1392
+    },
+    {
+      "path": "docs/08-devops/BACKUP-DISASTER-RECOVERY.md",
+      "sha256": "a4921b9216c42b5364bf514e4596d1af48e24e2086516002292ce1bc2f73bfe1",
+      "bytes": 1891
+    },
+    {
+      "path": "docs/08-devops/BUILD-PIPELINE.md",
+      "sha256": "7d6597ad9a05fa01cbc7fb095b853e0166e31189d78ff1ac21e8354f9c51b116",
+      "bytes": 1906
+    },
+    {
+      "path": "docs/08-devops/CHANGE-RELEASE-OPERATIONS.md",
+      "sha256": "cd3aedabb49bc54808ad3f9af3696ac92ff259c9fe99d75c773932245f71d7b3",
+      "bytes": 1873
+    },
+    {
+      "path": "docs/08-devops/DEVOPS-ARCHITECTURE.md",
+      "sha256": "71053e19f19c67a6d6bbc3d6c3550334642391ba5191491e57fb116a905e7607",
+      "bytes": 1946
+    },
+    {
+      "path": "docs/08-devops/DEVOPS-TRACEABILITY.md",
+      "sha256": "c30192f0f67564d8f8bc1887754304bad952fd4a6975f4a0ae9c7414ba731f66",
+      "bytes": 1720
+    },
+    {
+      "path": "docs/08-devops/ENVIRONMENT-INFRASTRUCTURE.md",
+      "sha256": "4b1becc91438d9f5cccdf35af1bae3abf1628cec797050e263b7c6cddf53a009",
+      "bytes": 1958
+    },
+    {
+      "path": "docs/08-devops/OBSERVABILITY-MONITORING.md",
+      "sha256": "6635399039c13bf9fd087795f0136730bbd4abb9ca76aeff1d026806f3ec937e",
+      "bytes": 1991
+    },
+    {
+      "path": "docs/08-devops/OPERATIONAL-REVIEW.md",
+      "sha256": "16e38e400970a44e67d41c9ff8017fbe7c3b6360ad5f777fa4d75646352e7f8f",
+      "bytes": 1616
+    },
+    {
+      "path": "docs/08-devops/OPERATIONS-HANDBOOK.md",
+      "sha256": "728a7ae636ca5d7817508f80c76eb3ef908468322dfa61bcdd5f4e6257217d9c",
+      "bytes": 1965
+    },
+    {
+      "path": "docs/08-devops/README.md",
+      "sha256": "df3f5fa4cc5b1c1b3e4378ff94d7de1993d5f7271e436e2baa2369fbe61c2355",
+      "bytes": 1261
+    },
+    {
+      "path": "docs/08-devops/RELEASE-PIPELINE.md",
+      "sha256": "2bc874c935cb2457d7810bf9024103f71c838e8c815b89352343a16bdfaaa2b9",
+      "bytes": 2010
+    },
+    {
+      "path": "docs/08-devops/SLO-CAPACITY.md",
+      "sha256": "43818cfaf7817fa445bf97946d0b76f407bf699c851b0284d689855ef1c1b3c9",
+      "bytes": 1867
+    },
+    {
+      "path": "docs/08-devops/STREAM8-CONSISTENCY-REVIEW.md",
+      "sha256": "8c9d38e4e4e21426d1a68349a96c11f388fb6f9552979a3297a52b84883490b9",
+      "bytes": 1563
+    },
+    {
+      "path": "docs/08-devops/STREAM8-RELEASE-CERTIFICATION.md",
+      "sha256": "332a58c2af690a5cb760ac9b7feeefbb722a46f4fb05fec243a0ba71ef3e10cc",
+      "bytes": 1595
+    },
+    {
+      "path": "docs/08-devops/release/RELEASE-CERTIFICATION.md",
+      "sha256": "4614ea3a203d48c9aaae14c304227259747886020acdbb0f1458092086481ecb",
+      "bytes": 1166
+    },
+    {
+      "path": "docs/08-devops/reviews/CONSISTENCY-REVIEW.md",
+      "sha256": "8b90c69d796be637788e0567ce4ae316d6a25e21f3fb4bc9b32efe5ed8083702",
+      "bytes": 1216
+    },
+    {
+      "path": "docs/08-devops/reviews/EVIDENCE-REVIEW.md",
+      "sha256": "2e06e71583cfb3b81144cf42748142960fe634a33d936e5ee856f9adc371d457",
+      "bytes": 1391
+    },
+    {
+      "path": "docs/09-ai-factory/AGENT-ROLES-RESPONSIBILITIES.md",
+      "sha256": "d5b775814f678787ff10e45b87e7d9437603880c41b665523b33ddd878f1ee60",
+      "bytes": 2068
+    },
+    {
+      "path": "docs/09-ai-factory/AI-FACTORY-ARCHITECTURE.md",
+      "sha256": "f949cdf1c14559bb3620661178b36b945840b315674b9119fed361b1f4a24066",
+      "bytes": 2166
+    },
+    {
+      "path": "docs/09-ai-factory/AI-FACTORY-REVIEW.md",
+      "sha256": "11e9637cb2ee74c12bf02cf1679017f0427272555b58204440e9d9ec5a55c270",
+      "bytes": 1701
+    },
+    {
+      "path": "docs/09-ai-factory/AI-OPERATING-POLICY.md",
+      "sha256": "d5699b00e6e1d5425b9457b060c6c369307b8839bf2bc85e381d6f6b2a287f5a",
+      "bytes": 1852
+    },
+    {
+      "path": "docs/09-ai-factory/CODE-GENERATION-STANDARD.md",
+      "sha256": "0319d84b5ba97100a17e50ddf32608cb301b37bb7c4dbb9025583422bdd4531e",
+      "bytes": 2003
+    },
+    {
+      "path": "docs/09-ai-factory/DOCUMENTATION-ADR-GENERATION.md",
+      "sha256": "79af6689bdc77fc2a660dc4d49eca8e16b5c27eaf9035ce741da273382577c29",
+      "bytes": 1883
+    },
+    {
+      "path": "docs/09-ai-factory/GUARDRAILS-HALLUCINATION-PREVENTION.md",
+      "sha256": "70314073894a3e00d9efa8cc321380478f8e74009acd71178e22ad998a0e3d2f",
+      "bytes": 2163
+    },
+    {
+      "path": "docs/09-ai-factory/HUMAN-APPROVAL-GATES.md",
+      "sha256": "200b15f742e421aeb3cc4595a68c22216ff8f9075f90fe6db1ce4c8ca8431c47",
+      "bytes": 1910
+    },
+    {
+      "path": "docs/09-ai-factory/PROMPT-WORK-PACKAGE-STANDARD.md",
+      "sha256": "35c4fc8f90c2f59d8eb80f3603ca36fa85354ffcae91959010c67ddf364ff2bb",
+      "bytes": 1990
+    },
+    {
+      "path": "docs/09-ai-factory/PROVENANCE-TRACEABILITY.md",
+      "sha256": "7eec45a27f417ce44079cfca1354003d4611a96d33acc07487dc0f7a787cfbc7",
+      "bytes": 1903
+    },
+    {
+      "path": "docs/09-ai-factory/README.md",
+      "sha256": "c477322e7eb9493e820ec7372587d95d0e3cfa914777d5acef9bc58bce4451a4",
+      "bytes": 1356
+    },
+    {
+      "path": "docs/09-ai-factory/REPOSITORY-CONSUMPTION-RULES.md",
+      "sha256": "d7c5a3ac4d8cf41318ed20bac97ccf0ce142e6ab6e29f534b1997ea75bf3c30e",
+      "bytes": 2086
+    },
+    {
+      "path": "docs/09-ai-factory/STREAM9-CONSISTENCY-REVIEW.md",
+      "sha256": "8d2eaa442b6c20592c61bba3ade353fce8ef3cd323f266b7626a0c05cfea6010",
+      "bytes": 1619
+    },
+    {
+      "path": "docs/09-ai-factory/STREAM9-RELEASE-CERTIFICATION.md",
+      "sha256": "73a9fea8dd0967ead175ddfde8373691552755488f571663dfdbe155832e259e",
+      "bytes": 1711
+    },
+    {
+      "path": "docs/09-ai-factory/VALIDATION-PIPELINE.md",
+      "sha256": "0877c23bd88e5952bd8ebef45c75fb081c2369da8285664dd46a076bb1cb2eda",
+      "bytes": 2017
+    },
+    {
+      "path": "docs/09-ai-factory/release/RELEASE-CERTIFICATION.md",
+      "sha256": "d156a90c5013be39313c0e3e420d0a56ac0be3212395c77387306bfd20794bab",
+      "bytes": 1171
+    },
+    {
+      "path": "docs/09-ai-factory/reviews/CONSISTENCY-REVIEW.md",
+      "sha256": "e7119c233f32de6cd1c547abfe3fd4b4ef56ab62f9f1293c8772dd0f7e860898",
+      "bytes": 1221
+    },
+    {
+      "path": "docs/09-ai-factory/reviews/EVIDENCE-REVIEW.md",
+      "sha256": "7378f576834b93a05b163f58bb4fe4f3fd3b7826b02a3926c61919fda9895061",
+      "bytes": 1396
+    },
+    {
+      "path": "releases/ENTERPRISE-RELEASE-CERTIFICATION.md",
+      "sha256": "11599da9ec28e55821ca34d58e47fc65289ac1362da4929268acfd2b3077a76c",
+      "bytes": 1439
+    },
+    {
+      "path": "repository/constitution/repository-baseline.yaml",
+      "sha256": "076d5dd53652dd4d9ee7b11c35c574544393191c4205eb8cd4d638f527938fd0",
+      "bytes": 714
+    },
+    {
+      "path": "repository/constitution/repository-control-catalog.yaml",
+      "sha256": "12401203c54269d9acb8682e7a3e13fe9e1aca7e66793f60f11c9b76d7149b82",
+      "bytes": 1496
+    },
+    {
+      "path": "repository/constitution/repository-control-objectives.yaml",
+      "sha256": "c00a6f01989cce67ee19eee8dafaf0521178152120e859db4c2e5d40cba8b194",
+      "bytes": 279
+    },
+    {
+      "path": "repository/evidence/rvec/stream1-gate-01.json",
+      "sha256": "aa0b9703bb797b2d60f7e935a91ac2ff5f7cdadc73d74721217da9efd0f926c4",
+      "bytes": 2377
+    },
+    {
+      "path": "repository/evidence/rvec/stream1-gate-02.json",
+      "sha256": "c8defb91fc46a8bb17c80e93469c55751ab5a1286aae45b40a4c3a752cb9a96c",
+      "bytes": 2377
+    },
+    {
+      "path": "repository/evidence/rvec/stream1-gate-03.json",
+      "sha256": "65360e9404e9acb1ba3650ae16e950776c4b160eed27b8f708a4636dd4413d2f",
+      "bytes": 2377
+    },
+    {
+      "path": "repository/evidence/rvec/stream1-gate-04.json",
+      "sha256": "95868b1265da17729993ac600b66df3d7738bf7f55cd25eaccb95902a5222ac0",
+      "bytes": 2377
+    },
+    {
+      "path": "repository/evidence/rvec/stream1-gate-05.json",
+      "sha256": "bb2789094b17e4ff6de3761d6d80a87f85161ac34c3aac6bcc3c9dd624e328fa",
+      "bytes": 2377
+    },
+    {
+      "path": "repository/evidence/rvec/stream1-gate-06.json",
+      "sha256": "e05f8dacde1a8cfe5fd66c0d00cb54ed57e730a0129d2388eaca5b6a346ae84e",
+      "bytes": 2377
+    },
+    {
+      "path": "repository/evidence/rvec/stream2-gate-01.json",
+      "sha256": "17bb45b2cbb37bf18a7232da4d0a56666ad29a76790ccc5cd3a6c0d058b77e2a",
+      "bytes": 1638
+    },
+    {
+      "path": "repository/evidence/rvec/stream2-gate-02.json",
+      "sha256": "b13be9b95b2a5e5cca112a4e5eb175dd49c586845415730c68ecd24cf317b6f7",
+      "bytes": 1638
+    },
+    {
+      "path": "repository/evidence/rvec/stream2-gate-03.json",
+      "sha256": "49178a381f22b84bf8f1c482f70bb61b46d9b5ce7fdf46528413f43e741e6fcc",
+      "bytes": 1638
+    },
+    {
+      "path": "repository/evidence/rvec/stream2-gate-04.json",
+      "sha256": "01e5054bd90cdc675c91cd88ee153b1677f30b2e1461e18f52c378d0592dfdbf",
+      "bytes": 1638
+    },
+    {
+      "path": "repository/evidence/rvec/stream2-gate-05.json",
+      "sha256": "c306673e402b8939f0bf2dce44dc47ebbd0b08e08c5adb3e7b429c4a66ec087b",
+      "bytes": 1638
+    },
+    {
+      "path": "repository/evidence/rvec/stream2-gate-06.json",
+      "sha256": "f645b62219d39891bf333ed0381e996c3a034a78316dbea3f28f1c44260de160",
+      "bytes": 1638
+    },
+    {
+      "path": "repository/evidence/rvec/stream3-gate-01.json",
+      "sha256": "27c181b0ac057fa2db77c48a14208524dfafa63be40b851db665fb4b7692dff6",
+      "bytes": 2090
+    },
+    {
+      "path": "repository/evidence/rvec/stream3-gate-02.json",
+      "sha256": "b31e24e9e4559733f423cf2ed788e469e750ece7290824b793dc5a23bc33e484",
+      "bytes": 2090
+    },
+    {
+      "path": "repository/evidence/rvec/stream3-gate-03.json",
+      "sha256": "334c7bfd40704fd31d1f2a04f216f3d2716c3cd1a098a7830b6b38aa12a6a318",
+      "bytes": 2090
+    },
+    {
+      "path": "repository/evidence/rvec/stream3-gate-04.json",
+      "sha256": "eb12983de3459eb084e2fb858ed383cda485dc0ec805defd21da33d79226bd65",
+      "bytes": 2090
+    },
+    {
+      "path": "repository/evidence/rvec/stream3-gate-05.json",
+      "sha256": "97a73b7faaa48736aff4c06885d8f023d9b71b4e8f33ae627e8a4025b40c8351",
+      "bytes": 2090
+    },
+    {
+      "path": "repository/evidence/rvec/stream3-gate-06.json",
+      "sha256": "0fff8c6bea9a9fd2081ae2f3e67e861b6b3b0a63352d3b4411dbd61ad45aa304",
+      "bytes": 2090
+    },
+    {
+      "path": "repository/evidence/rvec/stream4-gate-01.json",
+      "sha256": "873cb0d31f5772a3a78b156309ad009a1e200618b07329b07c397eca9e95d582",
+      "bytes": 1669
+    },
+    {
+      "path": "repository/evidence/rvec/stream4-gate-02.json",
+      "sha256": "22eee62709844c6b63d69c2d5740a02708bb61df8e314a7ce0d317e13c92c229",
+      "bytes": 1669
+    },
+    {
+      "path": "repository/evidence/rvec/stream4-gate-03.json",
+      "sha256": "3c3b282cbf0b745e417dd0d9937e2b10ab1114e776c927b11183309baff1d23c",
+      "bytes": 1669
+    },
+    {
+      "path": "repository/evidence/rvec/stream4-gate-04.json",
+      "sha256": "e7fa455f689d42dc6ffd700b76dc45962eaaa1f60dcf71656234b88f48912930",
+      "bytes": 1669
+    },
+    {
+      "path": "repository/evidence/rvec/stream4-gate-05.json",
+      "sha256": "097b36c69fe6178456cbcbec4decddd97119dcd8e5dc1027987d768e3adaf50a",
+      "bytes": 1669
+    },
+    {
+      "path": "repository/evidence/rvec/stream4-gate-06.json",
+      "sha256": "3657737a5f1bd7b7935a6987ddd6bc03643e3a703719547b24fa4ff23de38b61",
+      "bytes": 1669
+    },
+    {
+      "path": "repository/evidence/rvec/stream5-gate-01.json",
+      "sha256": "489fe0dfe5fd6193bcf142333a340aa1d3c962bee8214ad3993845bc348103b0",
+      "bytes": 1606
+    },
+    {
+      "path": "repository/evidence/rvec/stream5-gate-02.json",
+      "sha256": "b091c231c533396f9625da406b9dba62a7ea37e47e41faee35380a46e4aa4143",
+      "bytes": 1606
+    },
+    {
+      "path": "repository/evidence/rvec/stream5-gate-03.json",
+      "sha256": "61f4e6bddc5c64eeaddd6c99b555d262755d5b0f3eb43286a289a5825158f244",
+      "bytes": 1606
+    },
+    {
+      "path": "repository/evidence/rvec/stream5-gate-04.json",
+      "sha256": "301435adc978d16ad2eb52c993ad23bb8023165d0204a104fa53a916d44b7be7",
+      "bytes": 1606
+    },
+    {
+      "path": "repository/evidence/rvec/stream5-gate-05.json",
+      "sha256": "499fa4db4dab490bff3f1ce7b410847bab390066de2c5076bd57828f1de2503c",
+      "bytes": 1606
+    },
+    {
+      "path": "repository/evidence/rvec/stream5-gate-06.json",
+      "sha256": "0d12d72665f66a974aca99c11ab68e4bdf518d97877813d237dea855c853b5fc",
+      "bytes": 1606
+    },
+    {
+      "path": "repository/evidence/rvec/stream6-gate-01.json",
+      "sha256": "f98c90ce24f4f0cab085aa7c9b942a0b4afa2e77bda50033f5412d6584982daf",
+      "bytes": 1669
+    },
+    {
+      "path": "repository/evidence/rvec/stream6-gate-02.json",
+      "sha256": "ba571b2ce8b6a3114786ccafb8725e0ca0ee3910e43510a34424c21eadf5edd0",
+      "bytes": 1669
+    },
+    {
+      "path": "repository/evidence/rvec/stream6-gate-03.json",
+      "sha256": "4484308a402b3af9fddd22bbb8cb42ab33fcdcdb0ae5d4deb48f0037991be386",
+      "bytes": 1669
+    },
+    {
+      "path": "repository/evidence/rvec/stream6-gate-04.json",
+      "sha256": "537552815d8efee7cb5a1d99409638053cb6e2fe33096b8ad3e75720a8edf0e5",
+      "bytes": 1669
+    },
+    {
+      "path": "repository/evidence/rvec/stream6-gate-05.json",
+      "sha256": "880976d7949162481a0a8e69e94796cef54807e5f93cd11d34c3e49cf3f69169",
+      "bytes": 1669
+    },
+    {
+      "path": "repository/evidence/rvec/stream6-gate-06.json",
+      "sha256": "466ecf62e58bff2729683ac9bb38bcbfc5fdb7e32de27241dbe9a880cd578235",
+      "bytes": 1669
+    },
+    {
+      "path": "repository/evidence/rvec/stream7-gate-01.json",
+      "sha256": "b4bec40c78bc910eece2ca2e88488a52d6951513225826f642ab178f731e8d33",
+      "bytes": 1660
+    },
+    {
+      "path": "repository/evidence/rvec/stream7-gate-02.json",
+      "sha256": "52fee525bdf9ae473cdd51c3481da888ac0c2247321f2b71cbb559dbfa4df139",
+      "bytes": 1660
+    },
+    {
+      "path": "repository/evidence/rvec/stream7-gate-03.json",
+      "sha256": "8d9f80391a9231c47f3666990cacce3eae7dfd316fb4414fad1cf8607aaf21d6",
+      "bytes": 1660
+    },
+    {
+      "path": "repository/evidence/rvec/stream7-gate-04.json",
+      "sha256": "23b355e606444019771ac97cf71b756c1d359cecc1d888b373ca97737b263067",
+      "bytes": 1660
+    },
+    {
+      "path": "repository/evidence/rvec/stream7-gate-05.json",
+      "sha256": "2260909ca74f1e3b1ba31f57fc8172d85de101e04331f7b242948d16c4cd9162",
+      "bytes": 1660
+    },
+    {
+      "path": "repository/evidence/rvec/stream7-gate-06.json",
+      "sha256": "c1fec84a6b9829bc0830d1d6aac45c30ab7eb38dacfb382f66847a943eeb3fe9",
+      "bytes": 1660
+    },
+    {
+      "path": "repository/evidence/rvec/stream8-gate-01.json",
+      "sha256": "b230cfcbe1d03abd42cd6c4d6c87d29fbcb7b09aa9de96462c3582a1aa158465",
+      "bytes": 1620
+    },
+    {
+      "path": "repository/evidence/rvec/stream8-gate-02.json",
+      "sha256": "a2a39e7983de7327834db9a8b77f25addb5e9edc5dbc2f0a9dee4c0f354218de",
+      "bytes": 1620
+    },
+    {
+      "path": "repository/evidence/rvec/stream8-gate-03.json",
+      "sha256": "01056cd6e64fd2a73de3a549245dea9cd8140b38689bd362e17093cd3138db39",
+      "bytes": 1620
+    },
+    {
+      "path": "repository/evidence/rvec/stream8-gate-04.json",
+      "sha256": "ff92aafdd4fc1e126d56e11696cc2c4d7dc06e63f3e34fcbcf87d0d39c2f5b41",
+      "bytes": 1620
+    },
+    {
+      "path": "repository/evidence/rvec/stream8-gate-05.json",
+      "sha256": "de7a767afba356bc81dcfa6a72c2d4f19d1b3823d69e263c925305cd1e27ef40",
+      "bytes": 1620
+    },
+    {
+      "path": "repository/evidence/rvec/stream8-gate-06.json",
+      "sha256": "64cce42631ad85db8caa922c2fa5b7463f291503904e22bcce1f4e5ed66428d9",
+      "bytes": 1620
+    },
+    {
+      "path": "repository/evidence/rvec/stream9-gate-01.json",
+      "sha256": "b5e4a9cf89aa6ddf68f774767ec17e26d09bd9bc5de99f4db9c229af6cde5633",
+      "bytes": 1657
+    },
+    {
+      "path": "repository/evidence/rvec/stream9-gate-02.json",
+      "sha256": "4d2ce41d034b9d1d5d618d751392b2cae5379e891293941655a4fedc1078badc",
+      "bytes": 1657
+    },
+    {
+      "path": "repository/evidence/rvec/stream9-gate-03.json",
+      "sha256": "50e9e5a4e2a9bfc43f59b8a3264555d30efe8966d401f91f1bf33b8611298bf3",
+      "bytes": 1657
+    },
+    {
+      "path": "repository/evidence/rvec/stream9-gate-04.json",
+      "sha256": "a2d1b1bc3e7950d6e043e1588cc92b1b4252de072b874bfcc481ca3998e7b529",
+      "bytes": 1657
+    },
+    {
+      "path": "repository/evidence/rvec/stream9-gate-05.json",
+      "sha256": "2f4d4a62cf7307e701a8420008cd391ab4ac30c7138143a3a5ef6b6b6027df3e",
+      "bytes": 1657
+    },
+    {
+      "path": "repository/evidence/rvec/stream9-gate-06.json",
+      "sha256": "4df9274571191d9ae8e255a287809ccda2326f38b6b1c416aca89786a6a47e09",
+      "bytes": 1657
+    },
+    {
+      "path": "repository/lir/document-index.json",
+      "sha256": "92546b9d06282fac70c62793da20ce58bb2684a7f6eeb470252a50c962a9be92",
+      "bytes": 105172
+    },
+    {
+      "path": "repository/lir/logical-identity-registry.yaml",
+      "sha256": "4bcacc1b9577b5b2f9cc152385f3d8f19a8a6e825279ce9871f1bce5afdc1e45",
+      "bytes": 82371
+    },
+    {
+      "path": "repository/metrics/repository-health.yaml",
+      "sha256": "96eaeda83bb4134179de63537209c6ade394553b33d8d0b44462cd33e2962270",
+      "bytes": 135
+    },
+    {
+      "path": "repository/releases/audits/enterprise-repository-audit.json",
+      "sha256": "091b323caec67fed920ba69248399b9f0f4278a187c104f8326e715a8c467988",
+      "bytes": 760
+    },
+    {
+      "path": "repository/rgtm/dependency-graph.json",
+      "sha256": "5e25750a5defda8494c7896bd6bdfd73a59e8e33ab351150e7b2408a98def0c4",
+      "bytes": 40293
+    },
+    {
+      "path": "repository/rgtm/repository-governance-traceability.yaml",
+      "sha256": "50726720d43cf9623483992c76c71e8009b15459f23d886472e458ae81290a71",
+      "bytes": 37060
+    },
+    {
+      "path": "repository/schemas/metadata.schema.json",
+      "sha256": "d66d822cbf6ba63b990e7ff431a76459bfd79bef8fad2d38dd9e4dce4ee8a5d3",
+      "bytes": 966
+    },
+    {
+      "path": "repository/schemas/rvec.schema.json",
+      "sha256": "5fe4445e4817a1c3132126e7fd3813ada2a738f4a4f4d3bbf3bf1e63bf207cec",
+      "bytes": 1274
+    },
+    {
+      "path": "repository/validation/execution-order.yaml",
+      "sha256": "fa365167e401f19987198575adc1183559314a529d058b4a79501cf5c9b5c6f3",
+      "bytes": 128
+    },
+    {
+      "path": "repository/validation/quality-gates.yaml",
+      "sha256": "9e845538c24c051abc44ebc065a7db87631605d2ea69d7538bdf3f51aef12627",
+      "bytes": 450
+    },
+    {
+      "path": "repository/validation/validation-standards.yaml",
+      "sha256": "41826e35e5d7f64018c360f05feb4871f34c455b4228ecffa60fbf9b8b1f42de",
+      "bytes": 190
+    }
+  ],
+  "manifest_self_digest": "87be40b2fa765d525fd0a619e196ad763ae241019fae80bfd64c99de60172e8f"
+}

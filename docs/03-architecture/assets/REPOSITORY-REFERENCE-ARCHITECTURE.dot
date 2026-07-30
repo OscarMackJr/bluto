@@ -1,0 +1,85 @@
+digraph BlutoReferenceArchitecture {
+  graph [rankdir=LR, bgcolor="white", pad="0.35", nodesep="0.45", ranksep="0.75", fontname="Arial", fontsize=11, label="BLUTO REPOSITORY REFERENCE ARCHITECTURE\nCanonical one-page architecture view", labelloc=t, labeljust=c];
+  node [shape=box, style="rounded,filled", fillcolor="white", color="#334155", fontname="Arial", fontsize=9, margin="0.12,0.08"];
+  edge [color="#64748b", fontname="Arial", fontsize=8, arrowsize=0.7];
+
+  subgraph cluster_external {
+    label="Enterprise Ecosystem";
+    color="#94a3b8"; style="rounded,dashed";
+    sources [label="Source Systems\nNexus CRM | Intrepid | Ledger"];
+    hometown [label="hometown\nGoverned semantic consumer"];
+    stewards [label="Data Stewards / Reviewers"];
+    platform [label="Platform Services\nKey vault | scheduler | observability"];
+  }
+
+  subgraph cluster_rule {
+    label="Rule Management Bounded Context"; color="#64748b"; style="rounded";
+    rule_service [label="Future Rule Management Service\n(logical service candidate)", fillcolor="#f8fafc"];
+    rule_agg [label="Rule Aggregate\nRoot: Rule Definition\nContains immutable Rule Versions"];
+    rule_repo [label="RuleRepository"];
+    rule_events [label="Events\nRuleCreated\nRuleVersionPublished\nRuleActivated\nRuleRetired", shape=note];
+    rule_service -> rule_agg [label="commands / queries"];
+    rule_agg -> rule_repo [label="persistence port"];
+    rule_agg -> rule_events [label="publishes"];
+  }
+
+  subgraph cluster_resolution {
+    label="Identity Resolution Bounded Context (Core)"; color="#0f766e"; penwidth=2; style="rounded";
+    resolution_service [label="Future Identity Resolution Service\n(batch-oriented logical service candidate)", fillcolor="#ecfeff"];
+    party_agg [label="Party Aggregate\nRoot: Party\nContains Party Source Links"];
+    party_repo [label="PartyRepository"];
+    resolution_events [label="Events\nPartyCreated\nSourceLinkEstablished\nSourceLinkSuperseded\nIdentityResolutionCompleted\nIdentityResolutionDeferred", shape=note];
+    resolution_service -> party_agg [label="resolve / create / link"];
+    party_agg -> party_repo [label="persistence port"];
+    party_agg -> resolution_events [label="publishes"];
+  }
+
+  subgraph cluster_lifecycle {
+    label="Identity Lifecycle Bounded Context (Core)"; color="#0f766e"; penwidth=2; style="rounded";
+    lifecycle_service [label="Future Identity Lifecycle Service\n(logical service candidate)", fillcolor="#ecfeff"];
+    merge_agg [label="Merge Aggregate\nRoot: Merge Record\nPreserves merge/split lineage"];
+    merge_repo [label="MergeRepository"];
+    lifecycle_events [label="Events\nPartyMerged\nPartySplit\nPartyRetired\nIdentityHistoryUpdated", shape=note];
+    lifecycle_service -> merge_agg [label="merge / split / retire"];
+    merge_agg -> merge_repo [label="persistence port"];
+    merge_agg -> lifecycle_events [label="publishes"];
+  }
+
+  subgraph cluster_stewardship {
+    label="Stewardship Bounded Context (Supporting)"; color="#64748b"; style="rounded";
+    review_service [label="Future Stewardship Service\n(queue + minimal review surface)", fillcolor="#f8fafc"];
+    review_agg [label="Review Aggregate\nRoot: Review Case\nContains Candidate Evidence + Decision"];
+    review_repo [label="ReviewRepository"];
+    review_events [label="Events\nReviewCaseOpened\nReviewAccepted\nReviewRejected\nReviewDeferred", shape=note];
+    review_service -> review_agg [label="open / decide / defer"];
+    review_agg -> review_repo [label="persistence port"];
+    review_agg -> review_events [label="publishes"];
+  }
+
+  subgraph cluster_governance {
+    label="Identity Governance Bounded Context (Supporting)"; color="#64748b"; style="rounded";
+    governance_service [label="Future Governance & Evidence Service\n(logical service candidate)", fillcolor="#f8fafc"];
+    governance_model [label="Governance Evidence Model\nAudit records | metrics | policy evidence"];
+    governance_repo [label="GovernanceRepository\n(candidate; validate in Stream 3)"];
+    governance_events [label="Events\nPolicyViolationDetected\nAuditRecordCreated\nComplianceAssessmentCompleted", shape=note];
+    governance_service -> governance_model [label="observe / attest"];
+    governance_model -> governance_repo [label="persistence port"];
+    governance_model -> governance_events [label="publishes"];
+  }
+
+  sources -> resolution_service [label="candidate keys\nread-only, batch"];
+  platform -> resolution_service [label="HMAC tokenization + scheduling"];
+  stewards -> review_service [label="review decisions"];
+  party_repo -> hometown [label="governed identity mapping\nread-only contract"];
+
+  rule_events -> resolution_service [label="active rules"];
+  resolution_events -> lifecycle_service [label="identity facts"];
+  resolution_events -> review_service [label="deferred/conflicting candidates"];
+  review_events -> resolution_service [label="accepted/rejected decisions"];
+  lifecycle_events -> governance_service [label="audit evidence"];
+  resolution_events -> governance_service [label="audit + metrics"];
+  rule_events -> governance_service [label="rule provenance"];
+  review_events -> governance_service [label="stewardship audit"];
+
+  {rank=same; rule_service; resolution_service; lifecycle_service; review_service; governance_service}
+}

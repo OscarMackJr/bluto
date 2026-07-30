@@ -1,0 +1,55 @@
+controls:
+- id: RC-META-001
+  description: mandatory metadata present
+- id: RC-META-002
+  description: semantic values valid
+- id: RC-META-003
+  description: inheritance consistent
+- id: RC-IDENT-001
+  description: document IDs unique
+- id: RC-IDENT-002
+  description: artifact IDs unique
+- id: RC-IDENT-003
+  description: release IDs unique
+- id: RC-IDENT-004
+  description: registry complete
+- id: RC-REF-001
+  description: references resolve
+- id: RC-REF-002
+  description: anchors resolve
+- id: RC-REF-003
+  description: no ambiguous or orphan references
+- id: RC-DEP-001
+  description: graph complete
+- id: RC-DEP-002
+  description: graph acyclic
+- id: RC-DEP-003
+  description: direction valid
+- id: RC-AUTH-001
+  description: authority inheritance valid
+- id: RC-AUTH-002
+  description: no inversion
+- id: RC-AUTH-003
+  description: ownership valid
+- id: RC-TRACE-001
+  description: upstream traceability complete
+- id: RC-TRACE-002
+  description: downstream traceability complete
+- id: RC-TRACE-003
+  description: no orphan controls
+- id: RC-REL-001
+  description: manifest closure
+- id: RC-REL-002
+  description: checksums valid
+- id: RC-REL-003
+  description: package reproducible
+- id: RC-EVID-001
+  description: RVEC complete
+- id: RC-EVID-002
+  description: reviews evidence-based
+- id: RC-CERT-001
+  description: gate prerequisites satisfied
+- id: RC-CERT-002
+  description: certification authority recorded
+- id: RC-AUD-001
+  description: full physical and semantic audit complete

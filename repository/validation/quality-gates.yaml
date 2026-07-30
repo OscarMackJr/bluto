@@ -1,0 +1,21 @@
+quality_gates:
+- id: GATE-01
+  name: Metadata Validation
+- id: GATE-02
+  name: Identity Validation
+- id: GATE-03
+  name: Cross-Reference Validation
+- id: GATE-04
+  name: Dependency Validation
+- id: GATE-05
+  name: Authority Validation
+- id: GATE-06
+  name: Traceability Validation
+- id: GATE-07
+  name: Release Validation
+- id: GATE-08
+  name: Evidence Validation
+- id: GATE-09
+  name: Certification Validation
+- id: GATE-10
+  name: Repository Audit

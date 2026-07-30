@@ -1,0 +1,52 @@
+{
+  "rvec_version": "1.0.0",
+  "validation_standard_id": "BLUTO-BASE-VAL-005",
+  "quality_gate": "GATE-05",
+  "repository_version": "2.0.0",
+  "repository_baseline": "Repository Baseline B",
+  "release_id": "REL-STREAM-5-1.1.0",
+  "artifact_ids": [
+    "ART-BLUTO-SEC-AUDIT-001-v1.1.0",
+    "ART-BLUTO-SEC-IAM-001-v1.1.0",
+    "ART-BLUTO-SEC-CRYPTO-001-v1.1.0",
+    "ART-BLUTO-SEC-DATA-001-v1.1.0",
+    "ART-BLUTO-SEC-IR-001-v1.1.0",
+    "ART-BLUTO-S05-DOC-972-v1.1.0",
+    "ART-BLUTO-SEC-SDLC-001-v1.1.0",
+    "ART-BLUTO-SEC-ARCH-001-v1.1.0",
+    "ART-BLUTO-SEC-REVIEW-001-v1.1.0",
+    "ART-BLUTO-SEC-TRACE-001-v1.1.0",
+    "ART-BLUTO-SEC-CONSISTENCY-001-v1.1.0",
+    "ART-BLUTO-SEC-RELEASE-001-v1.1.0",
+    "ART-BLUTO-SEC-TENANT-001-v1.1.0",
+    "ART-BLUTO-SEC-THREAT-001-v1.1.0"
+  ],
+  "constitutional_document_ids": [
+    "BLUTO-SEC-AUDIT-001",
+    "BLUTO-SEC-IAM-001",
+    "BLUTO-SEC-CRYPTO-001",
+    "BLUTO-SEC-DATA-001",
+    "BLUTO-SEC-IR-001",
+    "BLUTO-S05-DOC-972",
+    "BLUTO-SEC-SDLC-001",
+    "BLUTO-SEC-ARCH-001",
+    "BLUTO-SEC-REVIEW-001",
+    "BLUTO-SEC-TRACE-001",
+    "BLUTO-SEC-CONSISTENCY-001",
+    "BLUTO-SEC-RELEASE-001",
+    "BLUTO-SEC-TENANT-001",
+    "BLUTO-SEC-THREAT-001"
+  ],
+  "tool": "bluto-repository-validator",
+  "tool_version": "1.0.0",
+  "execution_mode": "Automated",
+  "start_timestamp": "2026-07-30T00:00:00Z",
+  "end_timestamp": "2026-07-30T00:00:01Z",
+  "result": "PASS",
+  "findings": {
+    "unresolved_references": [],
+    "cycles": [],
+    "authority_violations": []
+  },
+  "evidence_digest": "8b12e9c033b5184bc4cad4eaaf8c01766ffb612a4fae9a7442ab1973043d8cef"
+}

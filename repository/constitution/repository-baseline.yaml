@@ -1,0 +1,29 @@
+repository_version: 2.0.0
+baseline: Repository Baseline 2.0
+status: Baselined
+authority: BLUTO-BASE-GOV-001
+principles:
+- documentation-first
+- architecture-first
+- contracts-first
+- tests-first
+- code-last
+- single-source-of-truth
+- evidence-before-certification
+- controlled-change
+- complete-traceability
+- reproducible-releases
+rah:
+  '0': Architecture Specification
+  '1': Repository Constitution
+  '2': Stream 1 Foundation & Governance
+  '3': Stream 2 Domain Model
+  '4': Stream 3 Architecture
+  '5': Stream 4 Contracts
+  '6': Stream 5 Security
+  '7': Stream 6 Engineering
+  '8': Stream 7 Testing
+  '9': Stream 8 DevOps
+  '10': Stream 9 AI Factory
+  '11': Stream 10 Project Management
+  '12': Implementation

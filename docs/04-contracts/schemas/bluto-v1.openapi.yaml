@@ -1,0 +1,148 @@
+openapi: 3.1.0
+info:
+  title: Bluto Mapping and Stewardship API
+  version: 1.1.0
+paths:
+  /v1/mappings/{source_system}/{source_key}:
+    get:
+      operationId: resolveCurrentParty
+      parameters:
+      - name: source_system
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: source_key
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Current mapping
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MappingResponse'
+        '404':
+          description: No mapping
+        '403':
+          description: Forbidden
+  /v1/mappings/{source_system}/{source_key}/at/{timestamp}:
+    get:
+      operationId: resolvePartyAtTime
+      parameters:
+      - name: source_system
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: source_key
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: timestamp
+        in: path
+        required: true
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: Historical mapping
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MappingResponse'
+  /v1/review-cases/{review_case_id}/decisions:
+    post:
+      operationId: recordReviewDecision
+      parameters:
+      - name: review_case_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: Idempotency-Key
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReviewDecision'
+      responses:
+        '204':
+          description: Recorded
+        '409':
+          description: Conflict
+        '422':
+          description: Invalid transition
+components:
+  schemas:
+    MappingResponse:
+      type: object
+      additionalProperties: false
+      required:
+      - party_id
+      - source_system
+      - source_key
+      - effective_from
+      - status
+      properties:
+        party_id:
+          type: string
+          format: uuid
+        tenant_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        source_system:
+          type: string
+        source_key:
+          type: string
+        effective_from:
+          type: string
+          format: date-time
+        effective_to:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        status:
+          enum:
+          - active
+          - merged
+          - retired
+        rule_version:
+          type:
+          - string
+          - 'null'
+        provenance_reference:
+          type:
+          - string
+          - 'null'
+    ReviewDecision:
+      type: object
+      additionalProperties: false
+      required:
+      - outcome
+      - reason
+      properties:
+        outcome:
+          enum:
+          - accepted
+          - rejected
+          - deferred
+        reason:
+          type: string
+          minLength: 1
+        expected_version:
+          type: integer
+          minimum: 0

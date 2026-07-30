@@ -1,0 +1,7 @@
+status: healthy
+documents: 195
+unresolved_references: 0
+dependency_cycles: 0
+duplicate_ids: 0
+gate_coverage: 100%
+streams_certified: 9
