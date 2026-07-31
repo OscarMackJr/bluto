@@ -1,0 +1,179 @@
+name: WP-002 CI Supply Chain Evidence
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - master
+
+permissions:
+  contents: read
+
+jobs:
+  validation:
+    name: Build, Test, Audit, Evidence
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Restore
+        run: dotnet restore implementation/Bluto.Validation.sln
+
+      - name: Build
+        run: dotnet build implementation/Bluto.Validation.sln --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test implementation/Bluto.Validation.sln --configuration Release --no-build --logger "trx;LogFileName=bluto-tests.trx" --results-directory implementation/validation/test-results
+
+      - name: Format
+        run: dotnet format implementation/Bluto.Validation.sln --verify-no-changes
+
+      - name: NuGet vulnerability audit
+        run: dotnet list implementation/Bluto.Validation.sln package --vulnerable --include-transitive
+
+      - name: Run repository validator
+        run: dotnet run --project implementation/src/Bluto.Validation.Cli --configuration Release -- --root .
+
+      - name: Validate RVEC and CI evidence JSON
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m json.tool implementation/validation/report.json >/dev/null
+          for evidence in repository/evidence/rvec/*.json; do
+            python -m json.tool "$evidence" >/dev/null
+          done
+          python -m json.tool implementation/validation/ci-evidence.schema.json >/dev/null
+
+      - name: Generate CI evidence manifest
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p implementation/validation
+          cat > implementation/validation/ci-evidence-manifest.json <<EOF
+          {
+            "schema_version": "1.0.0",
+            "work_package": "WP-002",
+            "commit_sha": "${GITHUB_SHA}",
+            "workflow": "${GITHUB_WORKFLOW}",
+            "workflow_ref": "${GITHUB_WORKFLOW_REF}",
+            "run_id": "${GITHUB_RUN_ID}",
+            "run_attempt": "${GITHUB_RUN_ATTEMPT}",
+            "execution_mode": "GitHub Actions",
+            "commands": [
+              "dotnet restore implementation/Bluto.Validation.sln",
+              "dotnet build implementation/Bluto.Validation.sln --configuration Release --no-restore",
+              "dotnet test implementation/Bluto.Validation.sln --configuration Release --no-build",
+              "dotnet format implementation/Bluto.Validation.sln --verify-no-changes",
+              "dotnet list implementation/Bluto.Validation.sln package --vulnerable --include-transitive",
+              "dotnet run --project implementation/src/Bluto.Validation.Cli --configuration Release -- --root .",
+              "python -m json.tool repository/evidence/rvec/*.json"
+            ]
+          }
+          EOF
+          python -m json.tool implementation/validation/ci-evidence-manifest.json >/dev/null
+
+      - name: Upload validation evidence
+        uses: actions/upload-artifact@v6
+        with:
+          name: wp002-validation-evidence-${{ github.sha }}
+          path: |
+            implementation/validation/report.json
+            implementation/validation/ci-evidence.schema.json
+            implementation/validation/ci-evidence-manifest.json
+            implementation/validation/test-results/*.trx
+            repository/evidence/rvec/*.json
+          if-no-files-found: error
+          retention-days: 30
+
+  codeql:
+    name: CodeQL
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+      actions: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v4
+        with:
+          languages: csharp
+          config-file: ./.github/codeql/codeql-config.yml
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Build for CodeQL
+        run: dotnet build implementation/Bluto.Validation.sln --configuration Release
+
+      - name: Analyze
+        uses: github/codeql-action/analyze@v4
+
+  trivy:
+    name: Trivy FS And SBOM
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+      actions: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Run Trivy filesystem scan
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          format: 'sarif'
+          output: 'implementation/validation/trivy-results.sarif'
+          severity: 'HIGH,CRITICAL'
+          ignore-unfixed: true
+          exit-code: '0'
+
+      - name: Upload Trivy SARIF
+        uses: github/codeql-action/upload-sarif@v4
+        with:
+          sarif_file: implementation/validation/trivy-results.sarif
+
+      - name: Generate Trivy SBOM
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          format: 'cyclonedx'
+          output: 'implementation/validation/sbom.cdx.json'
+          exit-code: '0'
+
+      - name: Validate SBOM JSON
+        run: python -m json.tool implementation/validation/sbom.cdx.json >/dev/null
+
+      - name: Upload scan artifacts
+        uses: actions/upload-artifact@v6
+        with:
+          name: wp002-supply-chain-evidence-${{ github.sha }}
+          path: |
+            implementation/validation/trivy-results.sarif
+            implementation/validation/sbom.cdx.json
+          if-no-files-found: error
+          retention-days: 30

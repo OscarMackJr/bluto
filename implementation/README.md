@@ -36,3 +36,20 @@ $env:BLUTO_FLYWAY_PASSWORD = "postgres"
 ```
 
 If Flyway is not installed at `C:\tools\flyway-13.1.0\flyway.cmd`, pass `-FlywayExecutable` with the local path.
+## WP-002 CI, Supply Chain, And Evidence Automation
+
+WP-002 adds GitHub Actions checks for build, tests, formatting, NuGet vulnerability audit, repository validation, CodeQL, Trivy filesystem scanning, SBOM generation, Dependabot, and CI evidence artifact publication.
+
+Local equivalents from the repository root:
+
+```powershell
+dotnet restore implementation\Bluto.Validation.sln
+dotnet build implementation\Bluto.Validation.sln --configuration Release --no-restore
+dotnet test implementation\Bluto.Validation.sln --configuration Release
+dotnet format implementation\Bluto.Validation.sln --verify-no-changes
+dotnet list implementation\Bluto.Validation.sln package --vulnerable --include-transitive
+dotnet run --project implementation\src\Bluto.Validation.Cli --configuration Release -- --root .
+python -m json.tool implementation\validation\ci-evidence.schema.json
+```
+
+CI publishes commit/run-tied evidence artifacts named `wp002-validation-evidence-<commit-sha>` and `wp002-supply-chain-evidence-<commit-sha>`.

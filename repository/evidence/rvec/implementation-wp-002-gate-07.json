@@ -1,0 +1,35 @@
+{
+  "rvec_version": "1.0",
+  "work_package": "WP-002",
+  "quality_gate": "GATE-07",
+  "quality_gate_name": "Release Validation",
+  "validation_standard_id": "BLUTO-TEST-GATE-001",
+  "repository_version": "2.0.0",
+  "artifact_ids": [
+    "ART-BLUTO-ADR-0011-v0.1.0",
+    "ART-BLUTO-ADR-0012-v0.1.0",
+    "ART-BLUTO-ADR-0013-v0.1.0",
+    "ART-BLUTO-ENG-SUPPLY-001-v1.1.0",
+    "ART-BLUTO-SEC-SDLC-001-v1.1.0",
+    "ART-BLUTO-OPS-BUILD-001-v1.1.0",
+    "ART-BLUTO-OPS-RELEASE-001-v1.1.0",
+    "ART-BLUTO-TEST-GATE-001-v1.1.0"
+  ],
+  "tool": "GitHub Actions / Bluto.Validation.Cli",
+  "tool_version": "0.1.0",
+  "execution_mode": "Automated",
+  "start_timestamp": "1970-01-01T00:00:00Z",
+  "end_timestamp": "1970-01-01T00:00:00Z",
+  "result": "PASS",
+  "findings": [],
+  "commands": [
+    "dotnet restore implementation\\Bluto.Validation.sln (exit 0)",
+    "dotnet build implementation\\Bluto.Validation.sln --configuration Release --no-restore (exit 0)",
+    "dotnet test implementation\\Bluto.Validation.sln --configuration Release (exit 0; 63 tests)",
+    "dotnet format implementation\\Bluto.Validation.sln --verify-no-changes (exit 0)",
+    "dotnet list implementation\\Bluto.Validation.sln package --vulnerable --include-transitive (exit 0; no vulnerable packages)",
+    "dotnet run --project implementation\\src\\Bluto.Validation.Cli --configuration Release -- --root . (exit 0; GATE-01 through GATE-06 PASS)",
+    "python -m json.tool implementation\\validation\\ci-evidence.schema.json (exit 0)"
+  ],
+  "evidence_digest": "a3f99dfdd6c7ff0c83b56303bac29daaea2ddc9004076ebec052ec64179a9989"
+}
