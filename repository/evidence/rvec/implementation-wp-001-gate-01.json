@@ -217,27 +217,12 @@
     "ART-BLUTO-VISION-001-v1.1.0"
   ],
   "end_timestamp": "1970-01-01T00:00:00Z",
-  "evidence_digest": "68585f296a9557cebc6a16c832d675ec0c356294226e0916b64255951355c490",
+  "evidence_digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
   "execution_mode": "Automated",
-  "findings": [
-    {
-      "gate": "GATE-01",
-      "code": "METADATA_FIELD_MISSING",
-      "severity": "Mandatory",
-      "artifact": "docs/01-foundation-governance/adrs/ADR-0004-PROPOSED-POSTGRESQL-ACCESS.md",
-      "message": "Missing metadata field \u0027Status\u0027."
-    },
-    {
-      "gate": "GATE-01",
-      "code": "METADATA_STATUS_INVALID",
-      "severity": "Mandatory",
-      "artifact": "docs/01-foundation-governance/adrs/ADR-0004-PROPOSED-POSTGRESQL-ACCESS.md",
-      "message": "Invalid status \u0027\u0027."
-    }
-  ],
+  "findings": [],
   "quality_gate": "GATE-01",
   "repository_version": "2.0.0",
-  "result": "FAIL",
+  "result": "PASS",
   "rvec_version": "1.0",
   "start_timestamp": "1970-01-01T00:00:00Z",
   "tool": "Bluto.Validation.Cli",

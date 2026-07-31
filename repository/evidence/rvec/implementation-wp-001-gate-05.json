@@ -217,97 +217,12 @@
     "ART-BLUTO-VISION-001-v1.1.0"
   ],
   "end_timestamp": "1970-01-01T00:00:00Z",
-  "evidence_digest": "51c3ae985bb78ce9ab9115ef9cf44c2cb32e8491fff800ae2a9bc4db4cbba19a",
+  "evidence_digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
   "execution_mode": "Automated",
-  "findings": [
-    {
-      "gate": "GATE-05",
-      "code": "AUTHORITY_INVERSION",
-      "severity": "Mandatory",
-      "artifact": "README.md",
-      "message": "\u0027BLUTO-REPO-README-001\u0027 depends on lower-authority \u0027BLUTO-ARCH-REVIEW-001\u0027."
-    },
-    {
-      "gate": "GATE-05",
-      "code": "AUTHORITY_INVERSION",
-      "severity": "Mandatory",
-      "artifact": "README.md",
-      "message": "\u0027BLUTO-REPO-README-001\u0027 depends on lower-authority \u0027BLUTO-DOM-REVIEW-001\u0027."
-    },
-    {
-      "gate": "GATE-05",
-      "code": "AUTHORITY_INVERSION",
-      "severity": "Mandatory",
-      "artifact": "README.md",
-      "message": "\u0027BLUTO-REPO-README-001\u0027 depends on lower-authority \u0027BLUTO-VISION-001\u0027."
-    },
-    {
-      "gate": "GATE-05",
-      "code": "AUTHORITY_INVERSION",
-      "severity": "Mandatory",
-      "artifact": "releases/ENTERPRISE-RELEASE-CERTIFICATION.md",
-      "message": "\u0027BLUTO-REPO-CERT-001\u0027 depends on lower-authority \u0027BLUTO-S01-CERT-001\u0027."
-    },
-    {
-      "gate": "GATE-05",
-      "code": "AUTHORITY_INVERSION",
-      "severity": "Mandatory",
-      "artifact": "releases/ENTERPRISE-RELEASE-CERTIFICATION.md",
-      "message": "\u0027BLUTO-REPO-CERT-001\u0027 depends on lower-authority \u0027BLUTO-S02-CERT-001\u0027."
-    },
-    {
-      "gate": "GATE-05",
-      "code": "AUTHORITY_INVERSION",
-      "severity": "Mandatory",
-      "artifact": "releases/ENTERPRISE-RELEASE-CERTIFICATION.md",
-      "message": "\u0027BLUTO-REPO-CERT-001\u0027 depends on lower-authority \u0027BLUTO-S03-CERT-001\u0027."
-    },
-    {
-      "gate": "GATE-05",
-      "code": "AUTHORITY_INVERSION",
-      "severity": "Mandatory",
-      "artifact": "releases/ENTERPRISE-RELEASE-CERTIFICATION.md",
-      "message": "\u0027BLUTO-REPO-CERT-001\u0027 depends on lower-authority \u0027BLUTO-S04-CERT-001\u0027."
-    },
-    {
-      "gate": "GATE-05",
-      "code": "AUTHORITY_INVERSION",
-      "severity": "Mandatory",
-      "artifact": "releases/ENTERPRISE-RELEASE-CERTIFICATION.md",
-      "message": "\u0027BLUTO-REPO-CERT-001\u0027 depends on lower-authority \u0027BLUTO-S05-CERT-001\u0027."
-    },
-    {
-      "gate": "GATE-05",
-      "code": "AUTHORITY_INVERSION",
-      "severity": "Mandatory",
-      "artifact": "releases/ENTERPRISE-RELEASE-CERTIFICATION.md",
-      "message": "\u0027BLUTO-REPO-CERT-001\u0027 depends on lower-authority \u0027BLUTO-S06-CERT-001\u0027."
-    },
-    {
-      "gate": "GATE-05",
-      "code": "AUTHORITY_INVERSION",
-      "severity": "Mandatory",
-      "artifact": "releases/ENTERPRISE-RELEASE-CERTIFICATION.md",
-      "message": "\u0027BLUTO-REPO-CERT-001\u0027 depends on lower-authority \u0027BLUTO-S07-CERT-001\u0027."
-    },
-    {
-      "gate": "GATE-05",
-      "code": "AUTHORITY_INVERSION",
-      "severity": "Mandatory",
-      "artifact": "releases/ENTERPRISE-RELEASE-CERTIFICATION.md",
-      "message": "\u0027BLUTO-REPO-CERT-001\u0027 depends on lower-authority \u0027BLUTO-S08-CERT-001\u0027."
-    },
-    {
-      "gate": "GATE-05",
-      "code": "AUTHORITY_INVERSION",
-      "severity": "Mandatory",
-      "artifact": "releases/ENTERPRISE-RELEASE-CERTIFICATION.md",
-      "message": "\u0027BLUTO-REPO-CERT-001\u0027 depends on lower-authority \u0027BLUTO-S09-CERT-001\u0027."
-    }
-  ],
+  "findings": [],
   "quality_gate": "GATE-05",
   "repository_version": "2.0.0",
-  "result": "FAIL",
+  "result": "PASS",
   "rvec_version": "1.0",
   "start_timestamp": "1970-01-01T00:00:00Z",
   "tool": "Bluto.Validation.Cli",

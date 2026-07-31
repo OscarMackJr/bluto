@@ -63,6 +63,51 @@ internal sealed class RepositoryFixture : IDisposable
         return fixture;
     }
 
+    public static RepositoryFixture CreateWithAdrAndGeneratedProjectionShapes()
+    {
+        var fixture = new RepositoryFixture(Path.Combine(Path.GetTempPath(), "bluto-validator-tests", Guid.NewGuid().ToString("N")));
+
+        WriteControlledDocument(
+            fixture.Root,
+            "docs/adr.md",
+            "BLUTO-ADR-0001",
+            "ART-BLUTO-ADR-0001-v0.1.0",
+            "0.1.0",
+            "Approved",
+            "RAH-12",
+            []);
+        WriteControlledDocument(
+            fixture.Root,
+            "implementation/plan.md",
+            "BLUTO-IMPL-MASTER-PLAN-001",
+            "ART-BLUTO-IMPL-MASTER-PLAN-001-v0.1.0",
+            "0.1.0",
+            "Proposed",
+            "RAH-12",
+            ["BLUTO_IDENTITY_SPINE_v0.1", "BLUTO-ADR-0001"]);
+        WriteControlledDocument(
+            fixture.Root,
+            "releases/release.md",
+            "BLUTO-REPO-CERT-001",
+            "ART-BLUTO-REPO-CERT-001-v2.0.0",
+            "2.0.0",
+            "Baselined",
+            "RAH-1",
+            ["BLUTO-S01-CERT-001"]);
+        WriteControlledDocument(
+            fixture.Root,
+            "docs/stream-cert.md",
+            "BLUTO-S01-CERT-001",
+            "ART-BLUTO-S01-CERT-001-v1.1.0",
+            "1.1.0",
+            "Baselined",
+            "RAH-9",
+            []);
+
+        WriteRegistries(fixture.Root);
+        return fixture;
+    }
+
     public void Dispose()
     {
         Directory.Delete(Root, recursive: true);

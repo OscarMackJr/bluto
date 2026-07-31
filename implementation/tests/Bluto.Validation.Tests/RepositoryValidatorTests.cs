@@ -28,6 +28,20 @@ public sealed class RepositoryValidatorTests
     }
 
     [Fact]
+    public void Adr_ids_generated_registry_external_dependencies_and_release_composition_are_valid()
+    {
+        using var fixture = RepositoryFixture.CreateWithAdrAndGeneratedProjectionShapes();
+
+        var result = RepositoryValidator.Validate(new ValidationOptions(
+            fixture.Root,
+            fixture.EvidenceDirectory,
+            fixture.ReportPath));
+
+        Assert.Equal(0, result.ExitCode);
+        Assert.Empty(result.Findings);
+    }
+
+    [Fact]
     public void Mandatory_findings_return_non_zero_and_are_sorted_deterministically()
     {
         using var fixture = RepositoryFixture.CreateWithMissingDependency();

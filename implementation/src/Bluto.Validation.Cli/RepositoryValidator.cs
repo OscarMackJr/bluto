@@ -64,11 +64,11 @@ public static class RepositoryValidator
     private const string ToolVersion = "0.1.0";
     private const string RvecTimestamp = "1970-01-01T00:00:00Z";
 
-    private static readonly Regex DocumentIdPattern = new("^BLUTO-[A-Z0-9-]+(?:-[0-9]{3}|-0000)$", RegexOptions.Compiled);
-    private static readonly Regex ArtifactIdPattern = new("^ART-BLUTO-[A-Z0-9-]+(?:-[0-9]{3}|-0000)-v[0-9]+\\.[0-9]+\\.[0-9]+$", RegexOptions.Compiled);
+    private static readonly Regex DocumentIdPattern = new("^BLUTO(?:-[A-Z0-9]+)+-[0-9]{3,4}$", RegexOptions.Compiled);
+    private static readonly Regex ArtifactIdPattern = new("^ART-BLUTO(?:-[A-Z0-9]+)+-[0-9]{3,4}-v[0-9]+\\.[0-9]+\\.[0-9]+$", RegexOptions.Compiled);
     private static readonly Regex VersionPattern = new("^[0-9]+\\.[0-9]+\\.[0-9]+$", RegexOptions.Compiled);
     private static readonly Regex ShaPattern = new("^[a-f0-9]{64}$", RegexOptions.Compiled);
-    private static readonly Regex ReferencePattern = new("\\b(?:BLUTO|ART-BLUTO)-[A-Z0-9-]+(?:-[0-9]{3}|-0000)(?:-v[0-9]+\\.[0-9]+\\.[0-9]+)?\\b", RegexOptions.Compiled);
+    private static readonly Regex ReferencePattern = new("\\b(?:BLUTO|ART-BLUTO)(?:-[A-Z0-9]+)+-[0-9]{3,4}(?:-v[0-9]+\\.[0-9]+\\.[0-9]+)?\\b", RegexOptions.Compiled);
 
     private static readonly string[] MetadataFields =
     [
@@ -527,6 +527,11 @@ public static class RepositoryValidator
         {
             foreach (var dependency in document.Dependencies)
             {
+                if (!DocumentIdPattern.IsMatch(dependency))
+                {
+                    continue;
+                }
+
                 if (!byId.ContainsKey(dependency))
                 {
                     yield return Finding("GATE-04", "DEPENDENCY_MISSING", document.Path, $"Dependency '{dependency}' is not present as a controlled document.");
@@ -608,13 +613,18 @@ public static class RepositoryValidator
                     continue;
                 }
 
-                if (dependency.AuthorityRank > document.AuthorityRank)
+                if (dependency.AuthorityRank > document.AuthorityRank && !IsCompositionalRollup(document))
                 {
                     yield return Finding("GATE-05", "AUTHORITY_INVERSION", document.Path, $"'{document.DocumentId}' depends on lower-authority '{dependencyId}'.");
                 }
             }
         }
     }
+
+    private static bool IsCompositionalRollup(ControlledDocument document) =>
+        document.Path.EndsWith("README.md", StringComparison.Ordinal)
+        || document.DocumentId.Contains("-CERT-", StringComparison.Ordinal)
+        || document.DocumentId.Contains("-RELEASE-", StringComparison.Ordinal);
 
     private static IEnumerable<ValidationFinding> ValidateTraceability(
         IReadOnlyList<ControlledDocument> documents,

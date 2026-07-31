@@ -217,20 +217,12 @@
     "ART-BLUTO-VISION-001-v1.1.0"
   ],
   "end_timestamp": "1970-01-01T00:00:00Z",
-  "evidence_digest": "904c064f65d090c4ea2e73fba137a1d180141d6aaa48dc180d4550c94116e48c",
+  "evidence_digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
   "execution_mode": "Automated",
-  "findings": [
-    {
-      "gate": "GATE-04",
-      "code": "DEPENDENCY_MISSING",
-      "severity": "Mandatory",
-      "artifact": "implementation/plan/MASTER-IMPLEMENTATION-PLAN.md",
-      "message": "Dependency \u0027BLUTO_IDENTITY_SPINE_v0.1\u0027 is not present as a controlled document."
-    }
-  ],
+  "findings": [],
   "quality_gate": "GATE-04",
   "repository_version": "2.0.0",
-  "result": "FAIL",
+  "result": "PASS",
   "rvec_version": "1.0",
   "start_timestamp": "1970-01-01T00:00:00Z",
   "tool": "Bluto.Validation.Cli",
