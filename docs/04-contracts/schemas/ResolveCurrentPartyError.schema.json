@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:bluto:query:resolve-current-party-error:v1",
+  "title": "ResolveCurrentPartyError.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "request_id",
+    "correlation_id",
+    "tenant_id",
+    "query_type",
+    "schema_version",
+    "data_classification",
+    "error"
+  ],
+  "properties": {
+    "request_id": { "type": "string", "format": "uuid" },
+    "correlation_id": { "type": "string", "format": "uuid" },
+    "tenant_id": { "type": "string", "format": "uuid" },
+    "query_type": { "const": "ResolveCurrentParty" },
+    "schema_version": { "const": "1.0.0" },
+    "data_classification": { "const": "Restricted" },
+    "error": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "category", "message", "retryable", "support_reference"],
+      "properties": {
+        "code": {
+          "enum": [
+            "MAPPING_NOT_FOUND",
+            "SCOPE_FORBIDDEN_CONCEALED",
+            "MAPPING_PROJECTION_STALE",
+            "DEPENDENCY_UNAVAILABLE"
+          ]
+        },
+        "category": {
+          "enum": [
+            "RESOURCE_NOT_FOUND",
+            "SCOPE_FORBIDDEN",
+            "TRANSIENT_FAILURE",
+            "DEPENDENCY_UNAVAILABLE"
+          ]
+        },
+        "message": { "type": "string", "minLength": 1 },
+        "retryable": { "type": "boolean" },
+        "support_reference": { "type": "string", "minLength": 1 },
+        "field_violations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["field", "reason"],
+            "properties": {
+              "field": { "type": "string", "minLength": 1 },
+              "reason": { "type": "string", "minLength": 1 }
+            }
+          }
+        }
+      }
+    }
+  }
+}

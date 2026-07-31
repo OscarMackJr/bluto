@@ -1,0 +1,41 @@
+{
+  "rvec_version": "1.0",
+  "work_package": "WP-004",
+  "quality_gate": "GATE-01",
+  "quality_gate_name": "Metadata Validation",
+  "validation_standard_id": "BLUTO-BASE-VAL-001",
+  "repository_version": "2.0.0",
+  "artifact_ids": [
+    "ART-BLUTO-CONTRACT-API-001-v1.1.0",
+    "ART-BLUTO-CONTRACT-CQ-001-v1.1.0",
+    "ART-BLUTO-CONTRACT-ERROR-001-v1.1.0",
+    "ART-BLUTO-CONTRACT-SCHEMA-001-v1.1.0",
+    "ART-BLUTO-CONTRACT-CONSUMER-001-v1.1.0",
+    "ART-BLUTO-TEST-CONTRACT-001-v1.1.0",
+    "ART-BLUTO-SEC-DATA-001-v1.1.0"
+  ],
+  "tool": "Spectral / Ajv / JsonSchema.Net / Bluto.Validation.Cli",
+  "tool_version": "0.1.0",
+  "execution_mode": "Automated",
+  "start_timestamp": "1970-01-01T00:00:00Z",
+  "end_timestamp": "1970-01-01T00:00:00Z",
+  "result": "PASS",
+  "findings": [],
+  "commands": [
+    "dotnet test implementation\\tests\\Contracts\\Bluto.Contracts.Tests.csproj --configuration Release (exit 0; 15 tests)",
+    "npm exec --prefix implementation\\tools\\contracts -- spectral lint docs\\04-contracts\\schemas\\bluto-v1.openapi.yaml --ruleset implementation\\tools\\contracts\\.spectral.yaml (exit 0; no error-severity findings)",
+    "npm exec --prefix implementation\\tools\\contracts -- ajv validate --spec=draft2020 -c ajv-formats -s docs\\04-contracts\\schemas\\ResolveCurrentPartySuccess.schema.json -d implementation\\contracts\\examples\\resolve-current-party.success.v1.example.json (exit 0)",
+    "npm exec --prefix implementation\\tools\\contracts -- ajv validate --spec=draft2020 -c ajv-formats -s docs\\04-contracts\\schemas\\ResolveCurrentPartyError.schema.json -d implementation\\contracts\\examples\\resolve-current-party.absent.v1.example.json (exit 0)",
+    "npm exec --prefix implementation\\tools\\contracts -- ajv validate --spec=draft2020 -c ajv-formats -s docs\\04-contracts\\schemas\\ResolveCurrentPartyError.schema.json -d implementation\\contracts\\examples\\resolve-current-party.forbidden-concealed.v1.example.json (exit 0)",
+    "npm exec --prefix implementation\\tools\\contracts -- ajv validate --spec=draft2020 -c ajv-formats -s docs\\04-contracts\\schemas\\ResolveCurrentPartyError.schema.json -d implementation\\contracts\\examples\\resolve-current-party.stale.v1.example.json (exit 0)",
+    "npm exec --prefix implementation\\tools\\contracts -- ajv validate --spec=draft2020 -c ajv-formats -s docs\\04-contracts\\schemas\\ResolveCurrentPartySuccess.schema.json -d implementation\\contracts\\examples\\resolve-current-party.merged.v1.example.json (exit 0)",
+    "npm exec --prefix implementation\\tools\\contracts -- ajv validate --spec=draft2020 -c ajv-formats -s docs\\04-contracts\\schemas\\ResolveCurrentPartySuccess.schema.json -d implementation\\contracts\\examples\\resolve-current-party.retired.v1.example.json (exit 0)",
+    "dotnet test implementation\\Bluto.Validation.sln --configuration Release (exit 0; 74 tests)",
+    "dotnet build implementation\\Bluto.Validation.sln --configuration Release (exit 0)",
+    "dotnet format implementation\\Bluto.Validation.sln --verify-no-changes (exit 0)",
+    "dotnet list implementation\\Bluto.Validation.sln package --vulnerable --include-transitive (exit 0; no vulnerable packages)",
+    "npm audit --prefix implementation\\tools\\contracts --audit-level=high (exit 0; 0 vulnerabilities)",
+    "dotnet run --project implementation\\src\\Bluto.Validation.Cli --configuration Release -- --root . (exit 0; GATE-01 through GATE-06 PASS)"
+  ],
+  "evidence_digest": "206e54aa2e18c4ebc15c1c9e1dcedc38a1db0d7153e157e48bf5a2a866423771"
+}
