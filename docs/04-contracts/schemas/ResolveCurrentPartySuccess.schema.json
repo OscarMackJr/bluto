@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:bluto:query:resolve-current-party-success:v1",
+  "title": "ResolveCurrentPartySuccess.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "request_id",
+    "correlation_id",
+    "tenant_id",
+    "query_type",
+    "schema_version",
+    "data_classification",
+    "result"
+  ],
+  "properties": {
+    "request_id": { "type": "string", "format": "uuid" },
+    "correlation_id": { "type": "string", "format": "uuid" },
+    "tenant_id": { "type": "string", "format": "uuid" },
+    "query_type": { "const": "ResolveCurrentParty" },
+    "schema_version": { "const": "1.0.0" },
+    "data_classification": { "const": "Restricted" },
+    "result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "party_id",
+        "tenant_id",
+        "source_system",
+        "source_key",
+        "effective_from",
+        "effective_to",
+        "status",
+        "rule_version",
+        "provenance_reference"
+      ],
+      "properties": {
+        "party_id": { "type": "string", "format": "uuid" },
+        "tenant_id": { "type": "string", "format": "uuid" },
+        "source_system": { "type": "string", "minLength": 1 },
+        "source_key": { "type": "string", "minLength": 1 },
+        "effective_from": { "type": "string", "format": "date-time" },
+        "effective_to": { "type": ["string", "null"], "format": "date-time" },
+        "status": { "enum": ["active", "merged", "retired"] },
+        "superseded_by_party_id": { "type": ["string", "null"], "format": "uuid" },
+        "rule_version": { "type": "string", "minLength": 1 },
+        "provenance_reference": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

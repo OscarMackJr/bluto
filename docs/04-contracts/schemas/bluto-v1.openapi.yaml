@@ -1,7 +1,18 @@
-openapi: 3.1.0
+openapi: 3.0.3
 info:
   title: Bluto Mapping and Stewardship API
   version: 1.1.0
+  description: Tenant-scoped Bluto identity mapping query contracts.
+  contact:
+    name: Bluto Architecture
+servers:
+  - url: https://api.bluto.example/v1
+    description: Contract placeholder endpoint; deployment is outside WP-004.
+tags:
+  - name: Mappings
+    description: Tenant-scoped mapping query contracts.
+  - name: Stewardship
+    description: Stewardship command contracts.
 components:
   securitySchemes:
     bearerAuth:
@@ -16,20 +27,40 @@ components:
       schema:
         type: string
         format: uuid
+    RequestId:
+      name: x-request-id
+      in: header
+      required: true
+      schema:
+        type: string
+        format: uuid
+    TenantScope:
+      name: x-tenant-scope
+      in: header
+      required: true
+      schema:
+        type: string
+        format: uuid
   schemas:
+    MappingStatus:
+      type: string
+      enum:
+        - active
+        - merged
+        - retired
     MappingResponse:
       type: object
       additionalProperties: false
       required:
-      - party_id
-      - tenant_id
-      - source_system
-      - source_key
-      - effective_from
-      - effective_to
-      - status
-      - rule_version
-      - provenance_reference
+        - party_id
+        - tenant_id
+        - source_system
+        - source_key
+        - effective_from
+        - effective_to
+        - status
+        - rule_version
+        - provenance_reference
       properties:
         party_id:
           type: string
@@ -39,52 +70,172 @@ components:
           format: uuid
         source_system:
           type: string
+          minLength: 1
         source_key:
           type: string
+          minLength: 1
         effective_from:
           type: string
           format: date-time
         effective_to:
-          type:
-          - string
-          - 'null'
+          type: string
+          nullable: true
           format: date-time
         status:
-          enum:
-          - active
-          - merged
-          - retired
+          $ref: '#/components/schemas/MappingStatus'
+        superseded_by_party_id:
+          type: string
+          nullable: true
+          format: uuid
         rule_version:
           type: string
+          minLength: 1
         provenance_reference:
           type: string
+          minLength: 1
+    ResolveCurrentPartySuccess:
+      type: object
+      additionalProperties: false
+      required:
+        - request_id
+        - correlation_id
+        - tenant_id
+        - query_type
+        - schema_version
+        - data_classification
+        - result
+      properties:
+        request_id:
+          type: string
+          format: uuid
+        correlation_id:
+          type: string
+          format: uuid
+        tenant_id:
+          type: string
+          format: uuid
+        query_type:
+          type: string
+          enum:
+            - ResolveCurrentParty
+        schema_version:
+          type: string
+          enum:
+            - '1.0.0'
+        data_classification:
+          type: string
+          enum:
+            - Restricted
+        result:
+          $ref: '#/components/schemas/MappingResponse'
+    ResolveCurrentPartyError:
+      type: object
+      additionalProperties: false
+      required:
+        - request_id
+        - correlation_id
+        - tenant_id
+        - query_type
+        - schema_version
+        - data_classification
+        - error
+      properties:
+        request_id:
+          type: string
+          format: uuid
+        correlation_id:
+          type: string
+          format: uuid
+        tenant_id:
+          type: string
+          format: uuid
+        query_type:
+          type: string
+          enum:
+            - ResolveCurrentParty
+        schema_version:
+          type: string
+          enum:
+            - '1.0.0'
+        data_classification:
+          type: string
+          enum:
+            - Restricted
+        error:
+          $ref: '#/components/schemas/MappingError'
     MappingError:
       type: object
       additionalProperties: false
       required:
-      - code
-      - message
-      - correlation_id
+        - code
+        - category
+        - message
+        - retryable
+        - support_reference
       properties:
         code:
           type: string
+          enum:
+            - MAPPING_NOT_FOUND
+            - SCOPE_FORBIDDEN_CONCEALED
+            - MAPPING_PROJECTION_STALE
+            - DEPENDENCY_UNAVAILABLE
+            - REQUEST_INVALID
+            - IDENTITY_CONFLICT
+            - STATE_TRANSITION_INVALID
+            - LOAD_BUDGET_EXCEEDED
+            - AUTHENTICATION_REQUIRED
+        category:
+          type: string
+          enum:
+            - REQUEST_INVALID
+            - AUTHENTICATION_REQUIRED
+            - SCOPE_FORBIDDEN
+            - RESOURCE_NOT_FOUND
+            - IDENTITY_CONFLICT
+            - STATE_TRANSITION_INVALID
+            - TRANSIENT_FAILURE
+            - LOAD_BUDGET_EXCEEDED
+            - DEPENDENCY_UNAVAILABLE
         message:
           type: string
+          minLength: 1
+        retryable:
+          type: boolean
+        support_reference:
+          type: string
+          minLength: 1
         correlation_id:
           type: string
           format: uuid
+        field_violations:
+          type: array
+          items:
+            type: object
+            additionalProperties: false
+            required:
+              - field
+              - reason
+            properties:
+              field:
+                type: string
+                minLength: 1
+              reason:
+                type: string
+                minLength: 1
     ReviewDecision:
       type: object
       additionalProperties: false
       required:
-      - outcome
-      - reason
+        - outcome
+        - reason
       properties:
         outcome:
+          type: string
           enum:
-          - accepted
-          - rejected
-          - deferred
+            - accepted
+            - rejected
+            - deferred
         reason:
           type: string
           minLength: 1
@@ -94,129 +245,158 @@ components:
 paths:
   /v1/mappings/{source_system}/{source_key}:
     get:
+      tags:
+        - Mappings
       operationId: resolveCurrentParty
+      description: Resolve the current Party for one tenant-scoped source identity without query-time matching.
+      x-bluto-data-classification: Restricted
+      x-tenant-scope: required
+      x-concealed-existence: true
+      x-query-type: ResolveCurrentParty
       security:
-      - bearerAuth: []
+        - bearerAuth: []
       parameters:
-      - $ref: '#/components/parameters/CorrelationId'
-      - name: source_system
-        in: path
-        required: true
-        schema:
-          type: string
-      - name: source_key
-        in: path
-        required: true
-        schema:
-          type: string
+        - $ref: '#/components/parameters/CorrelationId'
+        - $ref: '#/components/parameters/RequestId'
+        - $ref: '#/components/parameters/TenantScope'
+        - name: source_system
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+        - name: source_key
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
       responses:
         '200':
-          description: Current mapping
+          description: Current mapping, Merged identity, or Retired identity.
           headers:
             x-correlation-id:
+              schema:
+                type: string
+                format: uuid
+            x-request-id:
               schema:
                 type: string
                 format: uuid
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MappingResponse'
+                $ref: '#/components/schemas/ResolveCurrentPartySuccess'
+              examples:
+                active:
+                  summary: Active current mapping
+                  externalValue: ../../../implementation/contracts/examples/resolve-current-party.success.v1.example.json
         '400':
           description: Invalid request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MappingError'
+                $ref: '#/components/schemas/ResolveCurrentPartyError'
         '401':
           description: Authentication required
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MappingError'
+                $ref: '#/components/schemas/ResolveCurrentPartyError'
         '403':
-          description: Forbidden tenant scope
+          description: Forbidden tenant scope; existence is concealed from unauthorized scopes.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MappingError'
+                $ref: '#/components/schemas/ResolveCurrentPartyError'
         '404':
-          description: No mapping or concealed unauthorized mapping
+          description: No active mapping or concealed unauthorized mapping
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MappingError'
+                $ref: '#/components/schemas/ResolveCurrentPartyError'
         '409':
           description: Mapping conflict
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MappingError'
+                $ref: '#/components/schemas/ResolveCurrentPartyError'
         '422':
           description: Invalid semantic state
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MappingError'
+                $ref: '#/components/schemas/ResolveCurrentPartyError'
         '429':
           description: Rate limit exceeded
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MappingError'
+                $ref: '#/components/schemas/ResolveCurrentPartyError'
         '503':
-          description: Mapping dependency degraded
+          description: Stale mapping projection or dependency unavailable
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MappingError'
+                $ref: '#/components/schemas/ResolveCurrentPartyError'
   /v1/mappings/{source_system}/{source_key}/at/{timestamp}:
     get:
+      tags:
+        - Mappings
       operationId: resolvePartyAtTime
+      description: Placeholder historical mapping query contract.
       security:
-      - bearerAuth: []
+        - bearerAuth: []
       parameters:
-      - $ref: '#/components/parameters/CorrelationId'
-      - name: source_system
-        in: path
-        required: true
-        schema:
-          type: string
-      - name: source_key
-        in: path
-        required: true
-        schema:
-          type: string
-      - name: timestamp
-        in: path
-        required: true
-        schema:
-          type: string
-          format: date-time
+        - $ref: '#/components/parameters/CorrelationId'
+        - $ref: '#/components/parameters/RequestId'
+        - $ref: '#/components/parameters/TenantScope'
+        - name: source_system
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: source_key
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: timestamp
+          in: path
+          required: true
+          schema:
+            type: string
+            format: date-time
       responses:
         '200':
           description: Historical mapping
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MappingResponse'
+                $ref: '#/components/schemas/ResolveCurrentPartySuccess'
   /v1/review-cases/{review_case_id}/decisions:
     post:
+      tags:
+        - Stewardship
       operationId: recordReviewDecision
+      description: Placeholder review decision command contract.
       security:
-      - bearerAuth: []
+        - bearerAuth: []
       parameters:
-      - $ref: '#/components/parameters/CorrelationId'
-      - name: review_case_id
-        in: path
-        required: true
-        schema:
-          type: string
-          format: uuid
-      - name: Idempotency-Key
-        in: header
-        required: true
-        schema:
-          type: string
+        - $ref: '#/components/parameters/CorrelationId'
+        - $ref: '#/components/parameters/RequestId'
+        - $ref: '#/components/parameters/TenantScope'
+        - name: review_case_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: Idempotency-Key
+          in: header
+          required: true
+          schema:
+            type: string
       requestBody:
         required: true
         content:

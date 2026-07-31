@@ -1,0 +1,20 @@
+{
+  "request_id": "11111111-1111-4111-8111-111111111115",
+  "correlation_id": "22222222-2222-4222-8222-222222222226",
+  "tenant_id": "33333333-3333-4333-8333-333333333333",
+  "query_type": "ResolveCurrentParty",
+  "schema_version": "1.0.0",
+  "data_classification": "Restricted",
+  "result": {
+    "party_id": "55555555-5555-4555-8555-555555555555",
+    "tenant_id": "33333333-3333-4333-8333-333333333333",
+    "source_system": "crm",
+    "source_key": "crm-customer-000123",
+    "effective_from": "2026-07-31T20:00:00Z",
+    "effective_to": null,
+    "status": "merged",
+    "superseded_by_party_id": "44444444-4444-4444-8444-444444444444",
+    "rule_version": "ruleset-2026-07-31.1",
+    "provenance_reference": "prov-20260731-merged"
+  }
+}
