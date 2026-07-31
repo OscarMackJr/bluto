@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:bluto:event:source-link-established:v1",
-  "title": "SourceLinkEstablished.v1",
+  "$id": "urn:bluto:event:party-created:v1",
+  "title": "PartyCreated.v1",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -24,7 +24,7 @@
   ],
   "properties": {
     "event_id": { "type": "string", "format": "uuid" },
-    "event_type": { "const": "SourceLinkEstablished" },
+    "event_type": { "const": "PartyCreated" },
     "event_version": { "const": "1.0.0" },
     "occurred_at": { "type": "string", "format": "date-time" },
     "published_at": { "type": "string", "format": "date-time" },
@@ -36,19 +36,14 @@
     "tenant_id": { "type": "string", "format": "uuid" },
     "producer": { "type": "string", "minLength": 1 },
     "producer_version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
-    "payload_schema": { "const": "urn:bluto:event:source-link-established:v1" },
+    "payload_schema": { "const": "urn:bluto:event:party-created:v1" },
     "data_classification": { "const": "Restricted" },
     "payload": {
       "type": "object",
       "additionalProperties": false,
       "required": [
         "party_id",
-        "link_id",
-        "source_system",
-        "source_key",
-        "effective_from",
-        "effective_to",
-        "link_status",
+        "party_status",
         "asserted_at",
         "asserted_by",
         "correlation_id",
@@ -56,12 +51,7 @@
       ],
       "properties": {
         "party_id": { "type": "string", "format": "uuid" },
-        "link_id": { "type": "string", "format": "uuid" },
-        "source_system": { "type": "string", "minLength": 1 },
-        "source_key": { "type": "string", "minLength": 1 },
-        "effective_from": { "type": "string", "format": "date-time" },
-        "effective_to": { "type": ["string", "null"], "format": "date-time" },
-        "link_status": { "const": "active" },
+        "party_status": { "const": "active" },
         "asserted_at": { "type": "string", "format": "date-time" },
         "asserted_by": { "type": "string", "minLength": 1 },
         "correlation_id": { "type": "string", "format": "uuid" },
@@ -74,6 +64,8 @@
             "ruleset_version",
             "match_method",
             "confidence",
+            "source_system",
+            "source_key",
             "source_version",
             "evidence_reference"
           ],
@@ -83,6 +75,8 @@
             "ruleset_version": { "type": "string", "minLength": 1 },
             "match_method": { "const": "deterministic_exact_token" },
             "confidence": { "type": "string", "pattern": "^1(?:\\.0+)?$" },
+            "source_system": { "type": "string", "minLength": 1 },
+            "source_key": { "type": "string", "minLength": 1 },
             "source_version": { "type": "string", "minLength": 1 },
             "evidence_reference": { "type": "string", "minLength": 1 }
           }

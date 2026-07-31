@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:bluto:outbox:fact:v1",
+  "title": "OutboxFact.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "outbox_fact_id",
+    "event_id",
+    "tenant_id",
+    "aggregate_type",
+    "aggregate_id",
+    "aggregate_version",
+    "event_type",
+    "event_version",
+    "payload_schema",
+    "payload",
+    "occurred_at",
+    "correlation_id",
+    "causation_id",
+    "idempotency_key",
+    "publish_state",
+    "broker_transport",
+    "attempt_count"
+  ],
+  "properties": {
+    "outbox_fact_id": { "type": "string", "format": "uuid" },
+    "event_id": { "type": "string", "format": "uuid" },
+    "tenant_id": { "type": "string", "format": "uuid" },
+    "aggregate_type": { "const": "Party" },
+    "aggregate_id": { "type": "string", "format": "uuid" },
+    "aggregate_version": { "type": "integer", "minimum": 1 },
+    "event_type": { "enum": ["PartyCreated", "SourceLinkEstablished"] },
+    "event_version": { "const": "1.0.0" },
+    "payload_schema": { "type": "string", "minLength": 1 },
+    "payload": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["event_id", "tenant_id", "event_type", "event_version", "payload"],
+      "properties": {
+        "event_id": { "type": "string", "format": "uuid" },
+        "tenant_id": { "type": "string", "format": "uuid" },
+        "event_type": { "enum": ["PartyCreated", "SourceLinkEstablished"] },
+        "event_version": { "const": "1.0.0" },
+        "payload": { "type": "object" }
+      }
+    },
+    "occurred_at": { "type": "string", "format": "date-time" },
+    "correlation_id": { "type": "string", "format": "uuid" },
+    "causation_id": { "type": ["string", "null"], "format": "uuid" },
+    "idempotency_key": { "type": "string", "minLength": 1 },
+    "publish_state": { "enum": ["pending", "published", "failed", "dead_lettered"] },
+    "broker_transport": { "enum": ["none", "azure_service_bus"] },
+    "attempt_count": { "type": "integer", "minimum": 0 },
+    "next_attempt_at": { "type": ["string", "null"], "format": "date-time" },
+    "last_error_code": { "type": ["string", "null"], "minLength": 1 }
+  }
+}
+

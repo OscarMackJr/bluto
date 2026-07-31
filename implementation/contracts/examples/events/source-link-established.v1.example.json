@@ -1,0 +1,38 @@
+{
+  "event_id": "55555555-5555-4555-8555-555555555555",
+  "event_type": "SourceLinkEstablished",
+  "event_version": "1.0.0",
+  "occurred_at": "2026-07-31T20:00:00Z",
+  "published_at": "2026-07-31T20:00:01Z",
+  "aggregate_type": "Party",
+  "aggregate_id": "44444444-4444-4444-8444-444444444444",
+  "aggregate_version": 2,
+  "correlation_id": "22222222-2222-4222-8222-222222222222",
+  "causation_id": "11111111-1111-4111-8111-111111111111",
+  "tenant_id": "33333333-3333-4333-8333-333333333333",
+  "producer": "Bluto.IdentityResolution",
+  "producer_version": "1.0.0",
+  "payload_schema": "urn:bluto:event:source-link-established:v1",
+  "data_classification": "Restricted",
+  "payload": {
+    "party_id": "44444444-4444-4444-8444-444444444444",
+    "link_id": "66666666-6666-4666-8666-666666666666",
+    "source_system": "crm",
+    "source_key": "crm-customer-000123",
+    "effective_from": "2026-07-31T20:00:00Z",
+    "effective_to": null,
+    "link_status": "active",
+    "asserted_at": "2026-07-31T20:00:00Z",
+    "asserted_by": "worker:identity-resolution",
+    "correlation_id": "22222222-2222-4222-8222-222222222222",
+    "provenance": {
+      "match_rule_id": "rule-exact-token",
+      "rule_version_id": "rule-version-2026-07-31.1",
+      "ruleset_version": "ruleset-2026-07-31.1",
+      "match_method": "deterministic_exact_token",
+      "confidence": "1.0",
+      "source_version": "crm-page-20260731-001",
+      "evidence_reference": "evidence://resolution/20260731/000123"
+    }
+  }
+}
