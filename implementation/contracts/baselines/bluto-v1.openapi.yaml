@@ -1,0 +1,232 @@
+openapi: 3.1.0
+info:
+  title: Bluto Mapping and Stewardship API
+  version: 1.1.0
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  parameters:
+    CorrelationId:
+      name: x-correlation-id
+      in: header
+      required: true
+      schema:
+        type: string
+        format: uuid
+  schemas:
+    MappingResponse:
+      type: object
+      additionalProperties: false
+      required:
+      - party_id
+      - tenant_id
+      - source_system
+      - source_key
+      - effective_from
+      - effective_to
+      - status
+      - rule_version
+      - provenance_reference
+      properties:
+        party_id:
+          type: string
+          format: uuid
+        tenant_id:
+          type: string
+          format: uuid
+        source_system:
+          type: string
+        source_key:
+          type: string
+        effective_from:
+          type: string
+          format: date-time
+        effective_to:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        status:
+          enum:
+          - active
+          - merged
+          - retired
+        rule_version:
+          type: string
+        provenance_reference:
+          type: string
+    MappingError:
+      type: object
+      additionalProperties: false
+      required:
+      - code
+      - message
+      - correlation_id
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        correlation_id:
+          type: string
+          format: uuid
+    ReviewDecision:
+      type: object
+      additionalProperties: false
+      required:
+      - outcome
+      - reason
+      properties:
+        outcome:
+          enum:
+          - accepted
+          - rejected
+          - deferred
+        reason:
+          type: string
+          minLength: 1
+        expected_version:
+          type: integer
+          minimum: 0
+paths:
+  /v1/mappings/{source_system}/{source_key}:
+    get:
+      operationId: resolveCurrentParty
+      security:
+      - bearerAuth: []
+      parameters:
+      - $ref: '#/components/parameters/CorrelationId'
+      - name: source_system
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: source_key
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Current mapping
+          headers:
+            x-correlation-id:
+              schema:
+                type: string
+                format: uuid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MappingResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MappingError'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MappingError'
+        '403':
+          description: Forbidden tenant scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MappingError'
+        '404':
+          description: No mapping or concealed unauthorized mapping
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MappingError'
+        '409':
+          description: Mapping conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MappingError'
+        '422':
+          description: Invalid semantic state
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MappingError'
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MappingError'
+        '503':
+          description: Mapping dependency degraded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MappingError'
+  /v1/mappings/{source_system}/{source_key}/at/{timestamp}:
+    get:
+      operationId: resolvePartyAtTime
+      security:
+      - bearerAuth: []
+      parameters:
+      - $ref: '#/components/parameters/CorrelationId'
+      - name: source_system
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: source_key
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: timestamp
+        in: path
+        required: true
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: Historical mapping
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MappingResponse'
+  /v1/review-cases/{review_case_id}/decisions:
+    post:
+      operationId: recordReviewDecision
+      security:
+      - bearerAuth: []
+      parameters:
+      - $ref: '#/components/parameters/CorrelationId'
+      - name: review_case_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: Idempotency-Key
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReviewDecision'
+      responses:
+        '204':
+          description: Recorded
+        '409':
+          description: Conflict
+        '422':
+          description: Invalid transition

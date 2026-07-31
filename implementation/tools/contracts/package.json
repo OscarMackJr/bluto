@@ -1,0 +1,20 @@
+{
+  "name": "bluto-contract-tooling",
+  "version": "0.1.0",
+  "private": true,
+  "description": "WP-003 contract lint, schema validation, and compatibility harness tooling.",
+  "license": "UNLICENSED",
+  "bin": {
+    "ajv": "./bin/ajv-validate.mjs"
+  },
+  "scripts": {
+    "lint:openapi": "spectral lint ../../../docs/04-contracts/schemas/bluto-v1.openapi.yaml --ruleset .spectral.yaml",
+    "validate:source-link": "node ./bin/ajv-validate.mjs validate --spec=draft2020 -c ajv-formats -s ../../contracts/schemas/source-link-established.v1.schema.json -d ../../contracts/examples/source-link-established.v1.example.json",
+    "validate:party-created": "node ./bin/ajv-validate.mjs validate --spec=draft2020 -c ajv-formats -s ../../contracts/schemas/party-created.v1.schema.json -d ../../contracts/examples/party-created.v1.example.json"
+  },
+  "devDependencies": {
+    "@stoplight/spectral-cli": "^6.15.0",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1"
+  }
+}
