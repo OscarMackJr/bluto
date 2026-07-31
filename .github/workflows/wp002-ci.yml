@@ -102,7 +102,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      security-events: write
       actions: read
     steps:
       - name: Checkout
@@ -126,13 +125,23 @@ jobs:
 
       - name: Analyze
         uses: github/codeql-action/analyze@v4
+        with:
+          upload: false
+          output: implementation/validation/codeql-results
+
+      - name: Upload CodeQL evidence
+        uses: actions/upload-artifact@v6
+        with:
+          name: wp002-codeql-evidence-${{ github.sha }}
+          path: implementation/validation/codeql-results
+          if-no-files-found: error
+          retention-days: 30
 
   trivy:
     name: Trivy FS And SBOM
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      security-events: write
       actions: read
     steps:
       - name: Checkout
@@ -151,11 +160,6 @@ jobs:
           ignore-unfixed: true
           exit-code: '0'
 
-      - name: Upload Trivy SARIF
-        uses: github/codeql-action/upload-sarif@v4
-        with:
-          sarif_file: implementation/validation/trivy-results.sarif
-
       - name: Generate Trivy SBOM
         uses: aquasecurity/trivy-action@v0.36.0
         with:
@@ -165,8 +169,10 @@ jobs:
           output: 'implementation/validation/sbom.cdx.json'
           exit-code: '0'
 
-      - name: Validate SBOM JSON
-        run: python -m json.tool implementation/validation/sbom.cdx.json >/dev/null
+      - name: Validate scan artifact JSON
+        run: |
+          python -m json.tool implementation/validation/trivy-results.sarif >/dev/null
+          python -m json.tool implementation/validation/sbom.cdx.json >/dev/null
 
       - name: Upload scan artifacts
         uses: actions/upload-artifact@v6

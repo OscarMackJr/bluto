@@ -9,11 +9,14 @@ public sealed class CiConfigurationTests
     {
         var root = FindRepositoryRoot();
         var workflow = File.ReadAllText(Path.Combine(root, ".github", "workflows", "wp002-ci.yml"));
+        var gitAttributes = File.ReadAllText(Path.Combine(root, ".gitattributes"));
 
         Assert.Contains("permissions:", workflow, StringComparison.Ordinal);
         Assert.Contains("contents: read", workflow, StringComparison.Ordinal);
-        Assert.Contains("security-events: write", workflow, StringComparison.Ordinal);
+        Assert.Contains("actions: read", workflow, StringComparison.Ordinal);
         Assert.DoesNotContain("id-token: write", workflow, StringComparison.Ordinal);
+        Assert.DoesNotContain("security-events: write", workflow, StringComparison.Ordinal);
+        Assert.Contains("*.cs text eol=crlf", gitAttributes, StringComparison.Ordinal);
 
         Assert.Contains("dotnet build implementation/Bluto.Validation.sln --configuration Release --no-restore", workflow, StringComparison.Ordinal);
         Assert.Contains("dotnet test implementation/Bluto.Validation.sln --configuration Release --no-build", workflow, StringComparison.Ordinal);
@@ -25,6 +28,8 @@ public sealed class CiConfigurationTests
         Assert.Contains("github/codeql-action/init@v4", workflow, StringComparison.Ordinal);
         Assert.Contains("github/codeql-action/analyze@v4", workflow, StringComparison.Ordinal);
         Assert.Contains("config-file: ./.github/codeql/codeql-config.yml", workflow, StringComparison.Ordinal);
+        Assert.Contains("upload: false", workflow, StringComparison.Ordinal);
+        Assert.Contains("implementation/validation/codeql-results", workflow, StringComparison.Ordinal);
 
         Assert.Contains("aquasecurity/trivy-action@v0.36.0", workflow, StringComparison.Ordinal);
         Assert.Contains("format: 'sarif'", workflow, StringComparison.Ordinal);

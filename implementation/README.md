@@ -52,4 +52,4 @@ dotnet run --project implementation\src\Bluto.Validation.Cli --configuration Rel
 python -m json.tool implementation\validation\ci-evidence.schema.json
 ```
 
-CI publishes commit/run-tied evidence artifacts named `wp002-validation-evidence-<commit-sha>` and `wp002-supply-chain-evidence-<commit-sha>`.
+CI publishes commit/run-tied evidence artifacts named `wp002-validation-evidence-<commit-sha>`, `wp002-codeql-evidence-<commit-sha>`, and `wp002-supply-chain-evidence-<commit-sha>`. CodeQL and Trivy SARIF are retained as workflow artifacts so the CI gate does not require repository-level code scanning to be enabled.
