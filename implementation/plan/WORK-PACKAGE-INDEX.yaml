@@ -1,0 +1,974 @@
+document:
+  id: BLUTO-IMPL-WORK-PACKAGE-INDEX-001
+  artifact_id: ART-BLUTO-IMPL-WORK-PACKAGE-INDEX-001-v0.1.0
+  version: 0.1.0
+  status: Proposed
+  owner: Enterprise Architecture
+  authority_level: RAH-12
+  classification: Internal
+  depends_on:
+    - BLUTO-IMPL-MASTER-PLAN-001
+    - BLUTO-IMPL-TECH-SUMMARY-001
+sequence_policy:
+  order:
+    - documentation-first
+    - architecture-first
+    - contracts-first
+    - tests-first
+    - code-last
+  preserved_decisions:
+    - modular-monolith-first
+    - separate-api-worker-stewardship-entry-points
+    - managed-postgresql
+    - transactional-outbox
+    - http-json-interactive-apis
+    - deterministic-scheduled-batch-resolution
+    - tenant-isolation
+    - key-vault-backed-hmac-sha-256
+    - no-raw-strong-identifiers-at-rest
+    - no-probabilistic-matching-in-v1
+quality_gates:
+  GATE-01: Metadata Validation
+  GATE-02: Identity Validation
+  GATE-03: Cross-Reference Validation
+  GATE-04: Dependency Validation
+  GATE-05: Authority Validation
+  GATE-06: Traceability Validation
+  GATE-07: Release Validation
+  GATE-08: Evidence Validation
+  GATE-09: Certification Validation
+  GATE-10: Repository Audit
+work_packages:
+  - id: WP-001
+    title: Repository Tooling And Validation Baseline
+    phase: repository-tooling
+    depends_on: []
+    objective: Establish implementation repository skeleton, tool manifests, validation scripts, and quality-gate commands without implementing Bluto behavior.
+    governing_document_ids:
+      - BLUTO-IMPL-TECH-SUMMARY-001
+      - BLUTO-ADR-0001
+      - BLUTO-ADR-0008
+      - BLUTO-ADR-0010
+      - BLUTO-ADR-0011
+      - BLUTO-ENG-REPO-001
+      - BLUTO-ENG-CODE-001
+      - BLUTO-ENG-SUPPLY-001
+      - BLUTO-AI-VALIDATE-001
+    allowed_files:
+      - implementation/README.md
+      - implementation/src/**
+      - implementation/tests/**
+      - implementation/tools/**
+      - implementation/validation/**
+      - global.json
+      - Directory.Build.props
+      - Directory.Packages.props
+      - .editorconfig
+      - .gitignore
+      - .config/dotnet-tools.json
+      - repository/evidence/rvec/**
+    prohibited_changes:
+      - api-endpoints
+      - domain-behavior
+      - database-migrations
+      - cloud-resources
+      - production-secrets
+    contract_artifacts_required_first:
+      - implementation-layout-note
+      - package-inventory
+    tests_required_before_production_code:
+      - empty-solution-smoke-test
+      - static-analysis-verification
+      - package-restore-audit
+    security_controls:
+      - central-package-management
+      - dependency-audit
+      - no-secrets-in-samples
+    tenant_isolation_obligations:
+      - create-tenant-isolation-checklist-placeholders
+    observability_requirements:
+      - define-otel-package-placeholders
+    acceptance_criteria:
+      - clean-solution-skeleton
+      - no-production-behavior
+      - local-toolchain-commands-run
+    validation_commands:
+      - git status --short
+      - dotnet --version
+      - dotnet restore
+      - dotnet build
+      - dotnet test
+      - dotnet format --verify-no-changes
+      - dotnet list package --vulnerable --include-transitive
+    gates:
+      - GATE-01
+      - GATE-02
+      - GATE-03
+      - GATE-04
+      - GATE-05
+      - GATE-06
+    expected_rvec:
+      - implementation-wp-001-gate-01.json
+      - implementation-wp-001-gate-02.json
+      - implementation-wp-001-gate-03.json
+      - implementation-wp-001-gate-04.json
+      - implementation-wp-001-gate-05.json
+      - implementation-wp-001-gate-06.json
+    rollback_strategy: Revert scaffolding commit; no data, contracts, or deployed resources exist.
+  - id: WP-002
+    title: CI, Supply Chain, And Evidence Automation
+    phase: repository-tooling
+    depends_on:
+      - WP-001
+    objective: Add CI workflows and evidence automation for build, test, formatting, dependency audit, CodeQL, Trivy, SBOM, and RVEC collection.
+    governing_document_ids:
+      - BLUTO-ADR-0011
+      - BLUTO-ADR-0012
+      - BLUTO-ADR-0013
+      - BLUTO-ENG-SUPPLY-001
+      - BLUTO-SEC-SDLC-001
+      - BLUTO-OPS-BUILD-001
+      - BLUTO-OPS-RELEASE-001
+      - BLUTO-TEST-GATE-001
+    allowed_files:
+      - .github/workflows/**
+      - .github/dependabot.yml
+      - .github/codeql/**
+      - implementation/tools/**
+      - implementation/validation/**
+      - repository/evidence/rvec/**
+      - README.md
+    prohibited_changes:
+      - application-behavior
+      - migrations
+      - contract-semantics
+      - cloud-deployment
+      - production-credentials
+    contract_artifacts_required_first:
+      - ci-evidence-schema-or-rvec-mapping-note
+    tests_required_before_production_code:
+      - workflow-dry-run-or-local-equivalent
+      - evidence-generation-tests
+      - scanner-configuration-validation
+    security_controls:
+      - pinned-actions
+      - least-privilege-github-token
+      - dependabot
+      - codeql
+      - trivy
+    tenant_isolation_obligations:
+      - reserve-ci-gate-for-tenant-isolation-tests
+    observability_requirements:
+      - publish-test-scan-evidence-artifacts-by-commit-and-work-package
+    acceptance_criteria:
+      - pr-checks-for-build-test-format-audit-sast-sbom-rvec
+    validation_commands:
+      - gh workflow list
+      - dotnet build
+      - dotnet test
+      - dotnet format --verify-no-changes
+      - dotnet list package --vulnerable --include-transitive
+      - trivy fs .
+    gates:
+      - GATE-01
+      - GATE-02
+      - GATE-03
+      - GATE-04
+      - GATE-05
+      - GATE-06
+      - GATE-07
+      - GATE-08
+    expected_rvec:
+      - implementation-wp-002-gate-01.json
+      - implementation-wp-002-gate-02.json
+      - implementation-wp-002-gate-03.json
+      - implementation-wp-002-gate-04.json
+      - implementation-wp-002-gate-05.json
+      - implementation-wp-002-gate-06.json
+      - implementation-wp-002-gate-07.json
+      - implementation-wp-002-gate-08.json
+    rollback_strategy: Disable or revert workflow and scanner configuration.
+  - id: WP-003
+    title: Contract Tooling And Compatibility Harness
+    phase: contracts
+    depends_on:
+      - WP-001
+      - WP-002
+    objective: Establish OpenAPI, JSON Schema, Spectral, Ajv, and compatibility-check commands before adding or changing contracts.
+    governing_document_ids:
+      - BLUTO-ADR-0006
+      - BLUTO-ADR-0007
+      - BLUTO-CONTRACT-ARCH-001
+      - BLUTO-CONTRACT-API-001
+      - BLUTO-CONTRACT-SCHEMA-001
+      - BLUTO-CONTRACT-COMPAT-001
+      - BLUTO-TEST-CONTRACT-001
+    allowed_files:
+      - implementation/contracts/**
+      - implementation/tests/Contracts/**
+      - implementation/tools/**
+      - docs/04-contracts/schemas/**
+      - repository/evidence/rvec/**
+    prohibited_changes:
+      - new-endpoint-semantics
+      - schema-field-additions-or-removals
+      - production-code
+      - authoritative-generated-clients
+    contract_artifacts_required_first:
+      - contract-validation-readme
+      - schema-lint-rules
+      - openapi-lint-rules
+      - compatibility-baseline-procedure
+    tests_required_before_production_code:
+      - existing-openapi-validation-tests
+      - existing-json-schema-validation-tests
+      - malformed-example-negative-tests
+      - self-compatibility-test
+    security_controls:
+      - fail-on-raw-identifier-fields
+      - fail-on-exposed-hmac-token-fields
+      - fail-on-missing-auth-metadata
+    tenant_isolation_obligations:
+      - require-tenant-scope-contract-metadata
+    observability_requirements:
+      - require-safe-correlation-identifiers-in-examples
+    acceptance_criteria:
+      - deterministic-contract-validation-commands
+      - existing-schemas-pass-or-findings-recorded
+    validation_commands:
+      - npm exec spectral lint docs/04-contracts/schemas/bluto-v1.openapi.yaml
+      - npm exec ajv validate -s docs/04-contracts/schemas/source-link-established.v1.schema.json
+      - dotnet test --filter Contract
+    gates:
+      - GATE-01
+      - GATE-02
+      - GATE-03
+      - GATE-04
+      - GATE-05
+      - GATE-06
+    expected_rvec:
+      - implementation-wp-003-gate-01.json
+      - implementation-wp-003-gate-02.json
+      - implementation-wp-003-gate-03.json
+      - implementation-wp-003-gate-04.json
+      - implementation-wp-003-gate-05.json
+      - implementation-wp-003-gate-06.json
+    rollback_strategy: Revert contract tooling files; existing controlled contracts remain unchanged.
+  - id: WP-004
+    title: Minimal Mapping Query Contract Completion
+    phase: contracts
+    depends_on:
+      - WP-003
+    objective: Complete v1 contract artifacts for the first current-mapping query vertical slice.
+    governing_document_ids:
+      - BLUTO-CONTRACT-API-001
+      - BLUTO-CONTRACT-CQ-001
+      - BLUTO-CONTRACT-ERROR-001
+      - BLUTO-CONTRACT-SCHEMA-001
+      - BLUTO-CONTRACT-CONSUMER-001
+      - BLUTO-TEST-CONTRACT-001
+      - BLUTO-SEC-DATA-001
+    allowed_files:
+      - docs/04-contracts/schemas/bluto-v1.openapi.yaml
+      - docs/04-contracts/schemas/**/*.schema.json
+      - implementation/contracts/examples/**
+      - implementation/tests/Contracts/**
+      - repository/evidence/rvec/**
+    prohibited_changes:
+      - production-endpoint-implementation
+      - raw-source-identifiers-in-examples
+      - hmac-token-exposure
+      - consumer-write-capability
+      - query-time-matching
+    contract_artifacts_required_first:
+      - resolve-current-party-openapi
+      - success-absent-forbidden-stale-merged-retired-examples
+      - error-schema-examples
+    tests_required_before_production_code:
+      - openapi-lint
+      - json-schema-validation
+      - failing-provider-contract-tests
+      - raw-identifier-leak-tests
+    security_controls:
+      - auth-metadata
+      - concealed-existence-semantics
+      - no-source-owned-business-attributes
+    tenant_isolation_obligations:
+      - express-tenant-scoped-authorization-outcomes
+      - prevent-cross-tenant-enumeration
+    observability_requirements:
+      - safe-correlation-and-request-ids-in-examples
+    acceptance_criteria:
+      - contract-artifacts-ready-for-failing-provider-suite
+    validation_commands:
+      - npm exec spectral lint docs/04-contracts/schemas/bluto-v1.openapi.yaml
+      - npm exec ajv validate -s <schema> -d <example>
+      - dotnet test --filter Contract
+    gates:
+      - GATE-01
+      - GATE-02
+      - GATE-03
+      - GATE-04
+      - GATE-05
+      - GATE-06
+      - GATE-07
+      - GATE-08
+    expected_rvec:
+      - implementation-wp-004-gate-01.json
+      - implementation-wp-004-gate-02.json
+      - implementation-wp-004-gate-03.json
+      - implementation-wp-004-gate-04.json
+      - implementation-wp-004-gate-05.json
+      - implementation-wp-004-gate-06.json
+      - implementation-wp-004-gate-07.json
+      - implementation-wp-004-gate-08.json
+    rollback_strategy: Revert contract and example changes.
+  - id: WP-005
+    title: Minimal Event And Outbox Contract Completion
+    phase: contracts
+    depends_on:
+      - WP-003
+    objective: Complete PartyCreated and SourceLinkEstablished event and outbox publication contract artifacts.
+    governing_document_ids:
+      - BLUTO-ADR-0017
+      - BLUTO-ARCH-RUNTIME-001
+      - BLUTO-ARCH-INTEGRATION-001
+      - BLUTO-CONTRACT-EVENT-001
+      - BLUTO-CONTRACT-SCHEMA-001
+      - BLUTO-TEST-CONTRACT-001
+      - BLUTO-SEC-THREAT-001
+    allowed_files:
+      - docs/04-contracts/schemas/**/*.schema.json
+      - implementation/contracts/examples/events/**
+      - implementation/tests/Contracts/**
+      - implementation/tests/Outbox/**
+      - repository/evidence/rvec/**
+    prohibited_changes:
+      - broker-provisioning
+      - production-outbox-code
+      - raw-identifiers-in-event-payloads
+      - event-schema-coupling-to-service-bus
+      - mandatory-external-broker
+    contract_artifacts_required_first:
+      - party-created-v1-schema
+      - source-link-established-v1-examples
+      - event-envelope-constraints
+      - outbox-delivery-state-contract-note
+    tests_required_before_production_code:
+      - event-schema-validation
+      - event-version-compatibility-checks
+      - raw-identifier-and-hmac-leakage-negative-tests
+    security_controls:
+      - event-payload-allowlist
+      - idempotent-event-ids
+      - sensitive-token-ban
+    tenant_isolation_obligations:
+      - scoped-non-enumerative-tenant-metadata
+    observability_requirements:
+      - trace-correlation-causation-batch-outbox-lag-fields
+    acceptance_criteria:
+      - event-contracts-ready-for-failing-outbox-tests
+    validation_commands:
+      - npm exec ajv validate -s <event-schema> -d <event-example>
+      - dotnet test --filter Contract
+      - dotnet test --filter Outbox
+    gates:
+      - GATE-01
+      - GATE-02
+      - GATE-03
+      - GATE-04
+      - GATE-05
+      - GATE-06
+      - GATE-07
+      - GATE-08
+    expected_rvec:
+      - implementation-wp-005-gate-01.json
+      - implementation-wp-005-gate-02.json
+      - implementation-wp-005-gate-03.json
+      - implementation-wp-005-gate-04.json
+      - implementation-wp-005-gate-05.json
+      - implementation-wp-005-gate-06.json
+      - implementation-wp-005-gate-07.json
+      - implementation-wp-005-gate-08.json
+    rollback_strategy: Revert event schemas and examples.
+  - id: WP-006
+    title: Minimal Identity-Resolution Test Specification
+    phase: tests
+    depends_on:
+      - WP-004
+      - WP-005
+    objective: Define and add failing tests for the first identity-resolution vertical slice before production code exists.
+    governing_document_ids:
+      - BLUTO_IDENTITY_SPINE_v0.1
+      - BLUTO-DOM-OVERVIEW-001
+      - BLUTO-DOM-AGGREGATE-001
+      - BLUTO-DOM-VALUEOBJECT-001
+      - BLUTO-DOM-STATE-001
+      - BLUTO-TEST-DOMAIN-001
+      - BLUTO-TEST-ACCEPT-001
+      - BLUTO-ADR-0008
+      - BLUTO-ADR-0009
+    allowed_files:
+      - implementation/tests/Domain/**
+      - implementation/tests/Application/**
+      - implementation/tests/Acceptance/**
+      - implementation/testdata/**
+      - implementation/plan/**
+      - repository/evidence/rvec/**
+    prohibited_changes:
+      - production-code
+      - database-migrations
+      - api-endpoints
+      - generated-production-types
+      - probabilistic-matching-fixtures
+    contract_artifacts_required_first:
+      - WP-004-contracts
+      - WP-005-contracts
+    tests_required_before_production_code:
+      - party-id-non-reuse-tests
+      - one-active-source-link-tests
+      - effective-dating-tests
+      - deterministic-token-match-tests
+      - ambiguous-conflicting-deferral-tests
+      - tenant-isolation-negative-tests
+      - raw-identifier-rejection-tests
+      - outbox-emission-expectation-tests
+      - fscheck-temporal-idempotency-properties
+    security_controls:
+      - synthetic-identifiers-only
+      - invalid-raw-input-fixtures-only
+    tenant_isolation_obligations:
+      - tenant-a-cannot-resolve-or-infer-tenant-b
+      - missing-tenant-scope-fails-closed
+    observability_requirements:
+      - expected-correlation-batch-rule-outcome-metadata
+    acceptance_criteria:
+      - tests-fail-for-missing-production-behavior
+      - tests-trace-to-requirements-contracts-threats
+    validation_commands:
+      - dotnet test --filter Domain
+      - dotnet test --filter Application
+      - dotnet test --filter Acceptance
+      - dotnet test --filter Property
+    gates:
+      - GATE-01
+      - GATE-02
+      - GATE-03
+      - GATE-04
+      - GATE-05
+      - GATE-06
+      - GATE-07
+      - GATE-08
+    expected_rvec:
+      - implementation-wp-006-gate-01.json
+      - implementation-wp-006-gate-02.json
+      - implementation-wp-006-gate-03.json
+      - implementation-wp-006-gate-04.json
+      - implementation-wp-006-gate-05.json
+      - implementation-wp-006-gate-06.json
+      - implementation-wp-006-gate-07.json
+      - implementation-wp-006-gate-08.json
+    rollback_strategy: Revert test artifacts.
+  - id: WP-007
+    title: Domain Model Minimal Vertical Slice
+    phase: minimal-identity-resolution
+    depends_on:
+      - WP-006
+    objective: Implement only the domain model needed for deterministic Party and active Source Link creation from an authorized exact HMAC token candidate.
+    governing_document_ids:
+      - BLUTO_IDENTITY_SPINE_v0.1
+      - BLUTO-DOM-AGGREGATE-001
+      - BLUTO-DOM-VALUEOBJECT-001
+      - BLUTO-DOM-EVENT-001
+      - BLUTO-DOM-STATE-001
+      - BLUTO-ARCH-REF-001
+      - BLUTO-ADR-0001
+      - BLUTO-ADR-0009
+    allowed_files:
+      - implementation/src/Bluto.Domain/**
+      - implementation/src/Bluto.Application/**
+      - implementation/tests/Domain/**
+      - implementation/tests/Application/**
+      - repository/evidence/rvec/**
+    prohibited_changes:
+      - persistence-implementation
+      - http-endpoints
+      - worker-scheduling
+      - key-vault-client
+      - real-hmac-key-material
+      - merge-split-retirement-implementation
+      - stewardship-workflow
+    contract_artifacts_required_first:
+      - WP-004-contracts
+      - WP-005-contracts
+    tests_required_before_production_code:
+      - WP-006-failing-tests
+      - any-new-edge-tests-before-behavior
+    security_controls:
+      - tokenized-identifiers-only
+      - provenance-required
+      - raw-identifier-types-rejected-or-absent
+    tenant_isolation_obligations:
+      - tenant-scope-required-for-link-creation-and-lookup
+      - missing-or-mismatched-scope-fails-closed
+    observability_requirements:
+      - domain-events-or-result-metadata-no-direct-logging
+    acceptance_criteria:
+      - domain-application-tests-pass
+      - no-forbidden-behavior
+      - no-public-api-or-database-code
+    validation_commands:
+      - dotnet test --filter Domain
+      - dotnet test --filter Application
+      - dotnet test --filter Property
+      - dotnet build
+      - dotnet format --verify-no-changes
+    gates:
+      - GATE-01
+      - GATE-02
+      - GATE-03
+      - GATE-04
+      - GATE-05
+      - GATE-06
+      - GATE-07
+      - GATE-08
+    expected_rvec:
+      - implementation-wp-007-gate-01.json
+      - implementation-wp-007-gate-02.json
+      - implementation-wp-007-gate-03.json
+      - implementation-wp-007-gate-04.json
+      - implementation-wp-007-gate-05.json
+      - implementation-wp-007-gate-06.json
+      - implementation-wp-007-gate-07.json
+      - implementation-wp-007-gate-08.json
+    rollback_strategy: Revert domain/application slice commit.
+  - id: WP-008
+    title: PostgreSQL Persistence And Migration Minimal Slice
+    phase: minimal-identity-resolution
+    depends_on:
+      - WP-007
+    objective: Add Flyway migrations and repository implementation for minimal Party, Source Link, and transactional outbox persistence.
+    governing_document_ids:
+      - BLUTO-ADR-0004
+      - BLUTO-ADR-0005
+      - BLUTO-ADR-0017
+      - BLUTO-ARCH-DATA-001
+      - BLUTO-ARCH-PHYSICAL-001
+      - BLUTO-ARCH-RUNTIME-001
+      - BLUTO-ENG-DATA-001
+      - BLUTO-TEST-INTEGRATION-001
+      - BLUTO-SEC-TENANT-001
+    allowed_files:
+      - implementation/db/migrations/**
+      - implementation/src/Bluto.Infrastructure.Postgres/**
+      - implementation/tests/Integration/**
+      - implementation/tests/Migrations/**
+      - implementation/tools/flyway/**
+      - repository/evidence/rvec/**
+    prohibited_changes:
+      - api-endpoints
+      - worker-scheduling
+      - direct-cross-context-writes
+      - orm-introduction
+      - raw-strong-identifier-columns
+      - external-broker-code
+    contract_artifacts_required_first:
+      - WP-005-event-contracts
+      - WP-007-repository-ports
+    tests_required_before_production_code:
+      - migration-tests
+      - postgres-constraint-tests
+      - tenant-partition-key-tests
+      - effective-interval-tests
+      - one-active-link-tests
+      - outbox-atomicity-tests
+      - no-raw-identifier-column-tests
+    security_controls:
+      - least-privilege-roles
+      - parameterized-sql
+      - no-secrets-in-migrations
+    tenant_isolation_obligations:
+      - tenant-scope-in-keys-and-constraints
+      - repository-queries-require-tenant-scope
+    observability_requirements:
+      - safe-repository-activity-names
+      - query-outcome-counters
+      - outbox-lag-dimensions
+    acceptance_criteria:
+      - migrations-apply-and-validate
+      - repository-integration-tests-pass
+      - outbox-atomicity-proven
+    validation_commands:
+      - flyway validate
+      - flyway migrate
+      - dotnet test --filter Integration
+      - dotnet test --filter Migration
+      - dotnet build
+    gates:
+      - GATE-01
+      - GATE-02
+      - GATE-03
+      - GATE-04
+      - GATE-05
+      - GATE-06
+      - GATE-07
+      - GATE-08
+    expected_rvec:
+      - implementation-wp-008-gate-01.json
+      - implementation-wp-008-gate-02.json
+      - implementation-wp-008-gate-03.json
+      - implementation-wp-008-gate-04.json
+      - implementation-wp-008-gate-05.json
+      - implementation-wp-008-gate-06.json
+      - implementation-wp-008-gate-07.json
+      - implementation-wp-008-gate-08.json
+    rollback_strategy: Before production data, revert migrations and recreate test databases; after promotion, use approved forward-recovery migrations.
+  - id: WP-009
+    title: Current Mapping API Minimal Slice
+    phase: minimal-identity-resolution
+    depends_on:
+      - WP-004
+      - WP-008
+    objective: Implement ResolveCurrentParty HTTP/JSON endpoint over the minimal repository slice.
+    governing_document_ids:
+      - BLUTO-ADR-0002
+      - BLUTO-ADR-0003
+      - BLUTO-ADR-0006
+      - BLUTO-CONTRACT-API-001
+      - BLUTO-CONTRACT-CQ-001
+      - BLUTO-CONTRACT-ERROR-001
+      - BLUTO-SEC-IAM-001
+      - BLUTO-SEC-TENANT-001
+      - BLUTO-OPS-OBS-001
+    allowed_files:
+      - implementation/src/Bluto.Api/**
+      - implementation/src/Bluto.Application/**
+      - implementation/tests/Contracts/**
+      - implementation/tests/Api/**
+      - implementation/tests/Security/**
+      - implementation/tests/Integration/**
+      - repository/evidence/rvec/**
+    prohibited_changes:
+      - write-endpoints
+      - review-endpoints
+      - point-in-time-endpoint
+      - query-time-matching
+      - raw-source-identifier-persistence-or-logging
+      - unauthenticated-local-bypass
+    contract_artifacts_required_first:
+      - WP-004-openapi-and-examples
+    tests_required_before_production_code:
+      - provider-contract-tests
+      - authorization-tests
+      - cross-tenant-forbidden-concealed-tests
+      - absent-mapping-tests
+      - degraded-dependency-tests
+      - correlation-header-tests
+      - raw-input-logging-guard-tests
+    security_controls:
+      - authentication-middleware
+      - authorization-policy-abstraction
+      - concealed-existence
+      - input-validation
+      - structured-error-contract
+    tenant_isolation_obligations:
+      - tenant-claim-required-before-repository-access
+      - cross-tenant-enumeration-forbidden
+    observability_requirements:
+      - otel-request-and-repository-spans
+      - status-outcome-latency-metrics
+      - safe-correlation-logs
+    acceptance_criteria:
+      - api-contract-tests-pass
+      - security-negatives-pass
+      - governed-current-mapping-only
+    validation_commands:
+      - dotnet test --filter Contract
+      - dotnet test --filter Api
+      - dotnet test --filter Security
+      - dotnet test --filter Integration
+      - dotnet build
+      - dotnet format --verify-no-changes
+    gates:
+      - GATE-01
+      - GATE-02
+      - GATE-03
+      - GATE-04
+      - GATE-05
+      - GATE-06
+      - GATE-07
+      - GATE-08
+      - GATE-09
+    expected_rvec:
+      - implementation-wp-009-gate-01.json
+      - implementation-wp-009-gate-02.json
+      - implementation-wp-009-gate-03.json
+      - implementation-wp-009-gate-04.json
+      - implementation-wp-009-gate-05.json
+      - implementation-wp-009-gate-06.json
+      - implementation-wp-009-gate-07.json
+      - implementation-wp-009-gate-08.json
+      - implementation-wp-009-gate-09.json
+    rollback_strategy: Revert API slice or route traffic back to previous image.
+  - id: WP-010
+    title: Scheduled Resolution Worker Minimal Slice
+    phase: minimal-identity-resolution
+    depends_on:
+      - WP-008
+    objective: Implement deterministic scheduled worker processing of synthetic candidate batches into Party/Source Link state and outbox facts.
+    governing_document_ids:
+      - BLUTO-ADR-0002
+      - BLUTO-ADR-0016
+      - BLUTO-ADR-0017
+      - BLUTO-ARCH-RUNTIME-001
+      - BLUTO-ARCH-INTEGRATION-001
+      - BLUTO-SEC-CRYPTO-001
+      - BLUTO-TEST-PERF-001
+      - BLUTO-OPS-RUNBOOK-001
+    allowed_files:
+      - implementation/src/Bluto.Worker/**
+      - implementation/src/Bluto.Application/**
+      - implementation/tests/Worker/**
+      - implementation/tests/Integration/**
+      - implementation/tests/Security/**
+      - implementation/testdata/**
+      - repository/evidence/rvec/**
+    prohibited_changes:
+      - live-source-adapters
+      - mandatory-external-broker
+      - streaming-resolution
+      - probabilistic-matching
+      - raw-strong-identifier-storage
+      - stewardship-case-implementation
+    contract_artifacts_required_first:
+      - candidate-input-test-fixture-contract
+      - WP-005-event-schemas
+      - WP-006-domain-application-tests
+    tests_required_before_production_code:
+      - deterministic-ordering-tests
+      - idempotent-rerun-tests
+      - ambiguous-conflicting-deferral-tests
+      - tenant-scope-failure-tests
+      - outbox-atomicity-tests
+      - duplicate-page-handling-tests
+      - safe-logging-tests
+      - batch-metrics-tests
+    security_controls:
+      - synthetic-hmac-token-inputs-only
+      - key-vault-port-only
+      - no-secrets-in-worker-config
+      - source-spoofing-checks-at-adapter-boundary
+    tenant_isolation_obligations:
+      - batch-partitioning-requires-tenant-scope
+      - cross-tenant-candidate-collisions-fail-closed-or-defer
+    observability_requirements:
+      - batch-run-spans
+      - safe-outcome-counters
+      - outbox-lag
+      - retry-and-failed-partition-counters
+    acceptance_criteria:
+      - deterministic-synthetic-batch-processing
+      - api-can-read-resulting-mappings
+      - outbox-valid-facts
+      - ambiguous-conflicting-cases-do-not-create-active-links
+    validation_commands:
+      - dotnet test --filter Worker
+      - dotnet test --filter Integration
+      - dotnet test --filter Security
+      - dotnet test --filter Contract
+      - dotnet build
+    gates:
+      - GATE-01
+      - GATE-02
+      - GATE-03
+      - GATE-04
+      - GATE-05
+      - GATE-06
+      - GATE-07
+      - GATE-08
+      - GATE-09
+    expected_rvec:
+      - implementation-wp-010-gate-01.json
+      - implementation-wp-010-gate-02.json
+      - implementation-wp-010-gate-03.json
+      - implementation-wp-010-gate-04.json
+      - implementation-wp-010-gate-05.json
+      - implementation-wp-010-gate-06.json
+      - implementation-wp-010-gate-07.json
+      - implementation-wp-010-gate-08.json
+      - implementation-wp-010-gate-09.json
+    rollback_strategy: Disable worker schedule and roll back worker image; preserve database history.
+  - id: WP-011
+    title: Outbox Publisher And Optional Service Bus Adapter
+    phase: integration
+    depends_on:
+      - WP-005
+      - WP-010
+    objective: Add an outbox publisher and optional Azure Service Bus adapter when external push delivery is approved for v1.
+    governing_document_ids:
+      - BLUTO-ADR-0017
+      - BLUTO-CONTRACT-EVENT-001
+      - BLUTO-ARCH-INTEGRATION-001
+      - BLUTO-OPS-OBS-001
+      - BLUTO-SEC-THREAT-001
+      - BLUTO-TEST-INTEGRATION-001
+    allowed_files:
+      - implementation/src/Bluto.Worker/**
+      - implementation/src/Bluto.Infrastructure.Messaging/**
+      - implementation/tests/Outbox/**
+      - implementation/tests/Integration/**
+      - implementation/tests/Contract/**
+      - implementation/infra/**
+      - repository/evidence/rvec/**
+    prohibited_changes:
+      - event-schema-changes
+      - mandatory-external-broker
+      - exactly-once-delivery-claims
+      - sensitive-payload-data
+      - direct-event-publication-outside-outbox
+    contract_artifacts_required_first:
+      - WP-005-event-schemas-and-examples
+      - optional-service-bus-adapter-decision-flag
+    tests_required_before_production_code:
+      - publisher-idempotency-tests
+      - duplicate-delivery-tests
+      - schema-validation-before-publish
+      - retry-dead-letter-tests
+      - outbox-lag-metrics-tests
+    security_controls:
+      - scoped-workload-identity-for-broker
+      - encrypted-transport
+      - payload-allowlist
+      - dead-letter-audit
+    tenant_isolation_obligations:
+      - event-routing-must-not-leak-tenant-information
+    observability_requirements:
+      - outbox-lag
+      - publish-attempts
+      - duplicate-suppressions
+      - dead-letter-counts
+      - publish-latency
+    acceptance_criteria:
+      - publisher-drains-test-events
+      - duplicate-handling-proven
+      - broker-disabled-path-passes
+    validation_commands:
+      - dotnet test --filter Outbox
+      - dotnet test --filter Integration
+      - dotnet test --filter Contract
+      - trivy fs .
+    gates:
+      - GATE-01
+      - GATE-02
+      - GATE-03
+      - GATE-04
+      - GATE-05
+      - GATE-06
+      - GATE-07
+      - GATE-08
+      - GATE-09
+    expected_rvec:
+      - implementation-wp-011-gate-01.json
+      - implementation-wp-011-gate-02.json
+      - implementation-wp-011-gate-03.json
+      - implementation-wp-011-gate-04.json
+      - implementation-wp-011-gate-05.json
+      - implementation-wp-011-gate-06.json
+      - implementation-wp-011-gate-07.json
+      - implementation-wp-011-gate-08.json
+      - implementation-wp-011-gate-09.json
+    rollback_strategy: Disable publisher or broker adapter; retain outbox records for replay.
+  - id: WP-012
+    title: Deployment, Runtime Configuration, And Operational Smoke
+    phase: nonproduction-deployment
+    depends_on:
+      - WP-009
+      - WP-010
+      - WP-011
+    objective: Package and deploy the minimal API and worker slice to nonproduction Azure infrastructure with Terraform, containers, managed PostgreSQL, Key Vault, and OpenTelemetry.
+    governing_document_ids:
+      - BLUTO-ADR-0012
+      - BLUTO-ADR-0014
+      - BLUTO-ADR-0015
+      - BLUTO-ADR-0016
+      - BLUTO-OPS-INFRA-001
+      - BLUTO-OPS-RELEASE-001
+      - BLUTO-OPS-OBS-001
+      - BLUTO-OPS-DR-001
+      - BLUTO-SEC-IAM-001
+      - BLUTO-SEC-CRYPTO-001
+    allowed_files:
+      - .github/workflows/**
+      - implementation/infra/**
+      - implementation/deploy/**
+      - implementation/src/**
+      - implementation/tests/Smoke/**
+      - implementation/runbooks/**
+      - repository/evidence/rvec/**
+    prohibited_changes:
+      - production-environment-rollout
+      - hard-coded-secrets
+      - public-database-endpoints
+      - manual-portal-only-resources
+      - disabling-auth-or-tenant-controls-for-smoke-tests
+    contract_artifacts_required_first:
+      - operational-health-contract
+      - configuration-contract
+      - runbooks-for-migration-api-outbox-keyvault-failures
+    tests_required_before_production_code:
+      - terraform-validation
+      - configuration-validation-tests
+      - container-build-tests
+      - health-smoke-tests
+      - mapping-read-smoke-tests
+      - worker-dry-run-smoke-tests
+      - telemetry-export-tests
+      - key-vault-failure-tests
+    security_controls:
+      - managed-workload-identity
+      - key-vault-backed-secrets
+      - private-endpoints-where-available
+      - scoped-database-roles
+      - no-shared-human-credentials
+      - image-scanning
+    tenant_isolation_obligations:
+      - two-tenant-seed-data
+      - cross-tenant-negative-smoke-checks
+    observability_requirements:
+      - traces-metrics-logs-visible
+      - api-latency-batch-outbox-error-dashboard-or-query-links
+    acceptance_criteria:
+      - nonproduction-deployment-from-immutable-images
+      - smoke-tests-pass
+      - telemetry-visible
+      - rollback-exercised
+    validation_commands:
+      - terraform fmt -check
+      - terraform validate
+      - dotnet publish
+      - dotnet test --filter Smoke
+      - trivy image <image>
+      - gh run watch
+    gates:
+      - GATE-01
+      - GATE-02
+      - GATE-03
+      - GATE-04
+      - GATE-05
+      - GATE-06
+      - GATE-07
+      - GATE-08
+      - GATE-09
+      - GATE-10
+    expected_rvec:
+      - implementation-wp-012-gate-01.json
+      - implementation-wp-012-gate-02.json
+      - implementation-wp-012-gate-03.json
+      - implementation-wp-012-gate-04.json
+      - implementation-wp-012-gate-05.json
+      - implementation-wp-012-gate-06.json
+      - implementation-wp-012-gate-07.json
+      - implementation-wp-012-gate-08.json
+      - implementation-wp-012-gate-09.json
+      - implementation-wp-012-gate-10.json
+    rollback_strategy: Roll back container app revisions, disable worker schedule, restore prior Terraform state through reviewed plan, and use approved database forward recovery.

@@ -1,0 +1,25 @@
+name: WP-001 Repository Validation
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Test validation tooling
+        run: dotnet test implementation/Bluto.Validation.sln --configuration Release
+
+      - name: Run repository validator
+        run: dotnet run --project implementation/src/Bluto.Validation.Cli --configuration Release -- --root .

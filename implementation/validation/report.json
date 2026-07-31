@@ -1,0 +1,532 @@
+{
+  "exit_code": 1,
+  "gates": [
+    {
+      "gate": "GATE-01",
+      "name": "Metadata Validation",
+      "result": "Fail",
+      "finding_count": 2,
+      "evidence_path": "repository/evidence/rvec/implementation-wp-001-gate-01.json"
+    },
+    {
+      "gate": "GATE-02",
+      "name": "Identity Validation",
+      "result": "Fail",
+      "finding_count": 54,
+      "evidence_path": "repository/evidence/rvec/implementation-wp-001-gate-02.json"
+    },
+    {
+      "gate": "GATE-03",
+      "name": "Cross-Reference Validation",
+      "result": "Pass",
+      "finding_count": 0,
+      "evidence_path": "repository/evidence/rvec/implementation-wp-001-gate-03.json"
+    },
+    {
+      "gate": "GATE-04",
+      "name": "Dependency Validation",
+      "result": "Fail",
+      "finding_count": 1,
+      "evidence_path": "repository/evidence/rvec/implementation-wp-001-gate-04.json"
+    },
+    {
+      "gate": "GATE-05",
+      "name": "Authority Validation",
+      "result": "Fail",
+      "finding_count": 12,
+      "evidence_path": "repository/evidence/rvec/implementation-wp-001-gate-05.json"
+    },
+    {
+      "gate": "GATE-06",
+      "name": "Traceability Validation",
+      "result": "Pass",
+      "finding_count": 0,
+      "evidence_path": "repository/evidence/rvec/implementation-wp-001-gate-06.json"
+    }
+  ],
+  "findings": [
+    {
+      "gate": "GATE-01",
+      "code": "METADATA_FIELD_MISSING",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0004-PROPOSED-POSTGRESQL-ACCESS.md",
+      "message": "Missing metadata field \u0027Status\u0027."
+    },
+    {
+      "gate": "GATE-01",
+      "code": "METADATA_STATUS_INVALID",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0004-PROPOSED-POSTGRESQL-ACCESS.md",
+      "message": "Invalid status \u0027\u0027."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "ARTIFACT_ID_INVALID",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0001-PROPOSED-LANGUAGE-RUNTIME.md",
+      "message": "Invalid Artifact ID \u0027ART-BLUTO-ADR-0001-v0.1.0\u0027."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "ARTIFACT_ID_INVALID",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0002-PROPOSED-APPLICATION-FRAMEWORK.md",
+      "message": "Invalid Artifact ID \u0027ART-BLUTO-ADR-0002-v0.1.0\u0027."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "ARTIFACT_ID_INVALID",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0003-PROPOSED-DEPENDENCY-INJECTION.md",
+      "message": "Invalid Artifact ID \u0027ART-BLUTO-ADR-0003-v0.1.0\u0027."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "ARTIFACT_ID_INVALID",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0004-PROPOSED-POSTGRESQL-ACCESS.md",
+      "message": "Invalid Artifact ID \u0027ART-BLUTO-ADR-0004-v0.1.0\u0027."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "ARTIFACT_ID_INVALID",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0005-PROPOSED-SCHEMA-MIGRATIONS.md",
+      "message": "Invalid Artifact ID \u0027ART-BLUTO-ADR-0005-v0.1.0\u0027."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "ARTIFACT_ID_INVALID",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0006-PROPOSED-API-OPENAPI-TOOLING.md",
+      "message": "Invalid Artifact ID \u0027ART-BLUTO-ADR-0006-v0.1.0\u0027."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "ARTIFACT_ID_INVALID",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0007-PROPOSED-JSON-SCHEMA-TOOLING.md",
+      "message": "Invalid Artifact ID \u0027ART-BLUTO-ADR-0007-v0.1.0\u0027."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "ARTIFACT_ID_INVALID",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0008-PROPOSED-TEST-FRAMEWORK.md",
+      "message": "Invalid Artifact ID \u0027ART-BLUTO-ADR-0008-v0.1.0\u0027."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "ARTIFACT_ID_INVALID",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0009-PROPOSED-PROPERTY-BASED-TESTING.md",
+      "message": "Invalid Artifact ID \u0027ART-BLUTO-ADR-0009-v0.1.0\u0027."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "ARTIFACT_ID_INVALID",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0010-PROPOSED-STATIC-ANALYSIS-FORMATTING.md",
+      "message": "Invalid Artifact ID \u0027ART-BLUTO-ADR-0010-v0.1.0\u0027."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "ARTIFACT_ID_INVALID",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0011-PROPOSED-DEPENDENCY-VULNERABILITY-SCANNING.md",
+      "message": "Invalid Artifact ID \u0027ART-BLUTO-ADR-0011-v0.1.0\u0027."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "ARTIFACT_ID_INVALID",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0012-PROPOSED-CONTAINER-BUILD.md",
+      "message": "Invalid Artifact ID \u0027ART-BLUTO-ADR-0012-v0.1.0\u0027."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "ARTIFACT_ID_INVALID",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0013-PROPOSED-CI-PLATFORM.md",
+      "message": "Invalid Artifact ID \u0027ART-BLUTO-ADR-0013-v0.1.0\u0027."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "ARTIFACT_ID_INVALID",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0014-PROPOSED-INFRASTRUCTURE-AS-CODE.md",
+      "message": "Invalid Artifact ID \u0027ART-BLUTO-ADR-0014-v0.1.0\u0027."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "ARTIFACT_ID_INVALID",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0015-PROPOSED-CLOUD-DEPLOYMENT-TARGET.md",
+      "message": "Invalid Artifact ID \u0027ART-BLUTO-ADR-0015-v0.1.0\u0027."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "ARTIFACT_ID_INVALID",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0016-PROPOSED-OPENTELEMETRY.md",
+      "message": "Invalid Artifact ID \u0027ART-BLUTO-ADR-0016-v0.1.0\u0027."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "ARTIFACT_ID_INVALID",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0017-PROPOSED-EVENT-TRANSPORT.md",
+      "message": "Invalid Artifact ID \u0027ART-BLUTO-ADR-0017-v0.1.0\u0027."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "DOCUMENT_ID_INVALID",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0001-PROPOSED-LANGUAGE-RUNTIME.md",
+      "message": "Invalid Document ID \u0027BLUTO-ADR-0001\u0027."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "DOCUMENT_ID_INVALID",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0002-PROPOSED-APPLICATION-FRAMEWORK.md",
+      "message": "Invalid Document ID \u0027BLUTO-ADR-0002\u0027."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "DOCUMENT_ID_INVALID",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0003-PROPOSED-DEPENDENCY-INJECTION.md",
+      "message": "Invalid Document ID \u0027BLUTO-ADR-0003\u0027."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "DOCUMENT_ID_INVALID",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0004-PROPOSED-POSTGRESQL-ACCESS.md",
+      "message": "Invalid Document ID \u0027BLUTO-ADR-0004\u0027."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "DOCUMENT_ID_INVALID",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0005-PROPOSED-SCHEMA-MIGRATIONS.md",
+      "message": "Invalid Document ID \u0027BLUTO-ADR-0005\u0027."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "DOCUMENT_ID_INVALID",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0006-PROPOSED-API-OPENAPI-TOOLING.md",
+      "message": "Invalid Document ID \u0027BLUTO-ADR-0006\u0027."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "DOCUMENT_ID_INVALID",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0007-PROPOSED-JSON-SCHEMA-TOOLING.md",
+      "message": "Invalid Document ID \u0027BLUTO-ADR-0007\u0027."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "DOCUMENT_ID_INVALID",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0008-PROPOSED-TEST-FRAMEWORK.md",
+      "message": "Invalid Document ID \u0027BLUTO-ADR-0008\u0027."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "DOCUMENT_ID_INVALID",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0009-PROPOSED-PROPERTY-BASED-TESTING.md",
+      "message": "Invalid Document ID \u0027BLUTO-ADR-0009\u0027."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "DOCUMENT_ID_INVALID",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0010-PROPOSED-STATIC-ANALYSIS-FORMATTING.md",
+      "message": "Invalid Document ID \u0027BLUTO-ADR-0010\u0027."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "DOCUMENT_ID_INVALID",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0011-PROPOSED-DEPENDENCY-VULNERABILITY-SCANNING.md",
+      "message": "Invalid Document ID \u0027BLUTO-ADR-0011\u0027."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "DOCUMENT_ID_INVALID",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0012-PROPOSED-CONTAINER-BUILD.md",
+      "message": "Invalid Document ID \u0027BLUTO-ADR-0012\u0027."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "DOCUMENT_ID_INVALID",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0013-PROPOSED-CI-PLATFORM.md",
+      "message": "Invalid Document ID \u0027BLUTO-ADR-0013\u0027."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "DOCUMENT_ID_INVALID",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0014-PROPOSED-INFRASTRUCTURE-AS-CODE.md",
+      "message": "Invalid Document ID \u0027BLUTO-ADR-0014\u0027."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "DOCUMENT_ID_INVALID",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0015-PROPOSED-CLOUD-DEPLOYMENT-TARGET.md",
+      "message": "Invalid Document ID \u0027BLUTO-ADR-0015\u0027."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "DOCUMENT_ID_INVALID",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0016-PROPOSED-OPENTELEMETRY.md",
+      "message": "Invalid Document ID \u0027BLUTO-ADR-0016\u0027."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "DOCUMENT_ID_INVALID",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0017-PROPOSED-EVENT-TRANSPORT.md",
+      "message": "Invalid Document ID \u0027BLUTO-ADR-0017\u0027."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "DOCUMENT_ID_NOT_REGISTERED",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0001-PROPOSED-LANGUAGE-RUNTIME.md",
+      "message": "Document ID \u0027BLUTO-ADR-0001\u0027 is not registered."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "DOCUMENT_ID_NOT_REGISTERED",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0002-PROPOSED-APPLICATION-FRAMEWORK.md",
+      "message": "Document ID \u0027BLUTO-ADR-0002\u0027 is not registered."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "DOCUMENT_ID_NOT_REGISTERED",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0003-PROPOSED-DEPENDENCY-INJECTION.md",
+      "message": "Document ID \u0027BLUTO-ADR-0003\u0027 is not registered."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "DOCUMENT_ID_NOT_REGISTERED",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0004-PROPOSED-POSTGRESQL-ACCESS.md",
+      "message": "Document ID \u0027BLUTO-ADR-0004\u0027 is not registered."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "DOCUMENT_ID_NOT_REGISTERED",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0005-PROPOSED-SCHEMA-MIGRATIONS.md",
+      "message": "Document ID \u0027BLUTO-ADR-0005\u0027 is not registered."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "DOCUMENT_ID_NOT_REGISTERED",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0006-PROPOSED-API-OPENAPI-TOOLING.md",
+      "message": "Document ID \u0027BLUTO-ADR-0006\u0027 is not registered."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "DOCUMENT_ID_NOT_REGISTERED",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0007-PROPOSED-JSON-SCHEMA-TOOLING.md",
+      "message": "Document ID \u0027BLUTO-ADR-0007\u0027 is not registered."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "DOCUMENT_ID_NOT_REGISTERED",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0008-PROPOSED-TEST-FRAMEWORK.md",
+      "message": "Document ID \u0027BLUTO-ADR-0008\u0027 is not registered."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "DOCUMENT_ID_NOT_REGISTERED",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0009-PROPOSED-PROPERTY-BASED-TESTING.md",
+      "message": "Document ID \u0027BLUTO-ADR-0009\u0027 is not registered."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "DOCUMENT_ID_NOT_REGISTERED",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0010-PROPOSED-STATIC-ANALYSIS-FORMATTING.md",
+      "message": "Document ID \u0027BLUTO-ADR-0010\u0027 is not registered."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "DOCUMENT_ID_NOT_REGISTERED",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0011-PROPOSED-DEPENDENCY-VULNERABILITY-SCANNING.md",
+      "message": "Document ID \u0027BLUTO-ADR-0011\u0027 is not registered."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "DOCUMENT_ID_NOT_REGISTERED",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0012-PROPOSED-CONTAINER-BUILD.md",
+      "message": "Document ID \u0027BLUTO-ADR-0012\u0027 is not registered."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "DOCUMENT_ID_NOT_REGISTERED",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0013-PROPOSED-CI-PLATFORM.md",
+      "message": "Document ID \u0027BLUTO-ADR-0013\u0027 is not registered."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "DOCUMENT_ID_NOT_REGISTERED",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0014-PROPOSED-INFRASTRUCTURE-AS-CODE.md",
+      "message": "Document ID \u0027BLUTO-ADR-0014\u0027 is not registered."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "DOCUMENT_ID_NOT_REGISTERED",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0015-PROPOSED-CLOUD-DEPLOYMENT-TARGET.md",
+      "message": "Document ID \u0027BLUTO-ADR-0015\u0027 is not registered."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "DOCUMENT_ID_NOT_REGISTERED",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0016-PROPOSED-OPENTELEMETRY.md",
+      "message": "Document ID \u0027BLUTO-ADR-0016\u0027 is not registered."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "DOCUMENT_ID_NOT_REGISTERED",
+      "severity": "Mandatory",
+      "artifact": "docs/01-foundation-governance/adrs/ADR-0017-PROPOSED-EVENT-TRANSPORT.md",
+      "message": "Document ID \u0027BLUTO-ADR-0017\u0027 is not registered."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "DOCUMENT_ID_NOT_REGISTERED",
+      "severity": "Mandatory",
+      "artifact": "implementation/decisions/TECHNOLOGY-SELECTION-SUMMARY.md",
+      "message": "Document ID \u0027BLUTO-IMPL-TECH-SUMMARY-001\u0027 is not registered."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "DOCUMENT_ID_NOT_REGISTERED",
+      "severity": "Mandatory",
+      "artifact": "implementation/plan/MASTER-IMPLEMENTATION-PLAN.md",
+      "message": "Document ID \u0027BLUTO-IMPL-MASTER-PLAN-001\u0027 is not registered."
+    },
+    {
+      "gate": "GATE-02",
+      "code": "DOCUMENT_ID_NOT_REGISTERED",
+      "severity": "Mandatory",
+      "artifact": "releases/ENTERPRISE-RELEASE-CERTIFICATION.md",
+      "message": "Document ID \u0027BLUTO-REPO-CERT-001\u0027 is not registered."
+    },
+    {
+      "gate": "GATE-04",
+      "code": "DEPENDENCY_MISSING",
+      "severity": "Mandatory",
+      "artifact": "implementation/plan/MASTER-IMPLEMENTATION-PLAN.md",
+      "message": "Dependency \u0027BLUTO_IDENTITY_SPINE_v0.1\u0027 is not present as a controlled document."
+    },
+    {
+      "gate": "GATE-05",
+      "code": "AUTHORITY_INVERSION",
+      "severity": "Mandatory",
+      "artifact": "README.md",
+      "message": "\u0027BLUTO-REPO-README-001\u0027 depends on lower-authority \u0027BLUTO-ARCH-REVIEW-001\u0027."
+    },
+    {
+      "gate": "GATE-05",
+      "code": "AUTHORITY_INVERSION",
+      "severity": "Mandatory",
+      "artifact": "README.md",
+      "message": "\u0027BLUTO-REPO-README-001\u0027 depends on lower-authority \u0027BLUTO-DOM-REVIEW-001\u0027."
+    },
+    {
+      "gate": "GATE-05",
+      "code": "AUTHORITY_INVERSION",
+      "severity": "Mandatory",
+      "artifact": "README.md",
+      "message": "\u0027BLUTO-REPO-README-001\u0027 depends on lower-authority \u0027BLUTO-VISION-001\u0027."
+    },
+    {
+      "gate": "GATE-05",
+      "code": "AUTHORITY_INVERSION",
+      "severity": "Mandatory",
+      "artifact": "releases/ENTERPRISE-RELEASE-CERTIFICATION.md",
+      "message": "\u0027BLUTO-REPO-CERT-001\u0027 depends on lower-authority \u0027BLUTO-S01-CERT-001\u0027."
+    },
+    {
+      "gate": "GATE-05",
+      "code": "AUTHORITY_INVERSION",
+      "severity": "Mandatory",
+      "artifact": "releases/ENTERPRISE-RELEASE-CERTIFICATION.md",
+      "message": "\u0027BLUTO-REPO-CERT-001\u0027 depends on lower-authority \u0027BLUTO-S02-CERT-001\u0027."
+    },
+    {
+      "gate": "GATE-05",
+      "code": "AUTHORITY_INVERSION",
+      "severity": "Mandatory",
+      "artifact": "releases/ENTERPRISE-RELEASE-CERTIFICATION.md",
+      "message": "\u0027BLUTO-REPO-CERT-001\u0027 depends on lower-authority \u0027BLUTO-S03-CERT-001\u0027."
+    },
+    {
+      "gate": "GATE-05",
+      "code": "AUTHORITY_INVERSION",
+      "severity": "Mandatory",
+      "artifact": "releases/ENTERPRISE-RELEASE-CERTIFICATION.md",
+      "message": "\u0027BLUTO-REPO-CERT-001\u0027 depends on lower-authority \u0027BLUTO-S04-CERT-001\u0027."
+    },
+    {
+      "gate": "GATE-05",
+      "code": "AUTHORITY_INVERSION",
+      "severity": "Mandatory",
+      "artifact": "releases/ENTERPRISE-RELEASE-CERTIFICATION.md",
+      "message": "\u0027BLUTO-REPO-CERT-001\u0027 depends on lower-authority \u0027BLUTO-S05-CERT-001\u0027."
+    },
+    {
+      "gate": "GATE-05",
+      "code": "AUTHORITY_INVERSION",
+      "severity": "Mandatory",
+      "artifact": "releases/ENTERPRISE-RELEASE-CERTIFICATION.md",
+      "message": "\u0027BLUTO-REPO-CERT-001\u0027 depends on lower-authority \u0027BLUTO-S06-CERT-001\u0027."
+    },
+    {
+      "gate": "GATE-05",
+      "code": "AUTHORITY_INVERSION",
+      "severity": "Mandatory",
+      "artifact": "releases/ENTERPRISE-RELEASE-CERTIFICATION.md",
+      "message": "\u0027BLUTO-REPO-CERT-001\u0027 depends on lower-authority \u0027BLUTO-S07-CERT-001\u0027."
+    },
+    {
+      "gate": "GATE-05",
+      "code": "AUTHORITY_INVERSION",
+      "severity": "Mandatory",
+      "artifact": "releases/ENTERPRISE-RELEASE-CERTIFICATION.md",
+      "message": "\u0027BLUTO-REPO-CERT-001\u0027 depends on lower-authority \u0027BLUTO-S08-CERT-001\u0027."
+    },
+    {
+      "gate": "GATE-05",
+      "code": "AUTHORITY_INVERSION",
+      "severity": "Mandatory",
+      "artifact": "releases/ENTERPRISE-RELEASE-CERTIFICATION.md",
+      "message": "\u0027BLUTO-REPO-CERT-001\u0027 depends on lower-authority \u0027BLUTO-S09-CERT-001\u0027."
+    }
+  ]
+}
