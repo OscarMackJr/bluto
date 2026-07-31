@@ -19,12 +19,12 @@ jobs:
       actions: read
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           persist-credentials: false
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v5
+        uses: actions/setup-dotnet@v6
         with:
           dotnet-version: 10.0.x
 
@@ -85,7 +85,7 @@ jobs:
           python -m json.tool implementation/validation/ci-evidence-manifest.json >/dev/null
 
       - name: Upload validation evidence
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: wp002-validation-evidence-${{ github.sha }}
           path: |
@@ -105,18 +105,18 @@ jobs:
       actions: read
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           persist-credentials: false
 
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v4
+        uses: github/codeql-action/init@v4.37.3
         with:
           languages: csharp
           config-file: ./.github/codeql/codeql-config.yml
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v5
+        uses: actions/setup-dotnet@v6
         with:
           dotnet-version: 10.0.x
 
@@ -124,13 +124,13 @@ jobs:
         run: dotnet build implementation/Bluto.Validation.sln --configuration Release
 
       - name: Analyze
-        uses: github/codeql-action/analyze@v4
+        uses: github/codeql-action/analyze@v4.37.3
         with:
           upload: false
           output: implementation/validation/codeql-results
 
       - name: Upload CodeQL evidence
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: wp002-codeql-evidence-${{ github.sha }}
           path: implementation/validation/codeql-results
@@ -145,7 +145,7 @@ jobs:
       actions: read
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           persist-credentials: false
 
@@ -175,7 +175,7 @@ jobs:
           python -m json.tool implementation/validation/sbom.cdx.json >/dev/null
 
       - name: Upload scan artifacts
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: wp002-supply-chain-evidence-${{ github.sha }}
           path: |
