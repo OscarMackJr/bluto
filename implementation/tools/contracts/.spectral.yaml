@@ -1,0 +1,44 @@
+extends:
+  - spectral:oas
+
+rules:
+  bluto-no-raw-strong-identifiers:
+    description: BLUTO-CONTRACT-SCHEMA-001 prohibits raw strong identifiers and HMAC tokens in external contracts.
+    message: External contracts must not expose raw strong identifiers or HMAC token fields.
+    severity: error
+    given: "$..*~"
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: "(raw_identifier|rawStrongIdentifier|hmac_token|hmacToken|identity_token|identityToken|ssn|tax_id|taxId)"
+
+  bluto-require-correlation-parameter:
+    description: BLUTO-CONTRACT-API-001 requires correlation metadata on interactive API operations.
+    message: Interactive operations must declare operation parameters, including x-correlation-id.
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: parameters
+      function: truthy
+
+  bluto-require-operation-security:
+    description: BLUTO-CONTRACT-API-001 and BLUTO-CONTRACT-ARCH-001 require documented authorization metadata.
+    message: Interactive operations must declare security requirements.
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: security
+      function: truthy
+
+  bluto-require-tenant-scope:
+    description: BLUTO-CONTRACT-ARCH-001 requires explicit tenant scope on externally visible mapping results.
+    message: MappingResponse must require tenant_id.
+    severity: error
+    given: "$.components.schemas.MappingResponse.required"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: array
+          contains:
+            const: tenant_id

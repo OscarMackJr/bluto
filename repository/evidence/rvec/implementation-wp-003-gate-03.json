@@ -1,0 +1,49 @@
+{
+  "rvec_version": "1.0",
+  "work_package": "WP-003",
+  "quality_gate": "GATE-03",
+  "quality_gate_name": "Cross-Reference Validation",
+  "validation_standard_id": "BLUTO-BASE-VAL-003",
+  "repository_version": "2.0.0",
+  "artifact_ids": [
+    "ART-BLUTO-ADR-0006-v0.1.0",
+    "ART-BLUTO-ADR-0007-v0.1.0",
+    "ART-BLUTO-CONTRACT-ARCH-001-v1.1.0",
+    "ART-BLUTO-CONTRACT-API-001-v1.1.0",
+    "ART-BLUTO-CONTRACT-SCHEMA-001-v1.1.0",
+    "ART-BLUTO-CONTRACT-COMPAT-001-v1.1.0",
+    "ART-BLUTO-TEST-CONTRACT-001-v1.1.0"
+  ],
+  "tool": "Spectral / Ajv / JsonSchema.Net / Bluto.Validation.Cli",
+  "tool_version": "0.1.0",
+  "execution_mode": "Automated",
+  "start_timestamp": "1970-01-01T00:00:00Z",
+  "end_timestamp": "1970-01-01T00:00:00Z",
+  "result": "PASS",
+  "findings": [
+    {
+      "severity": "warning",
+      "code": "SPECTRAL-OAS3-API-SERVERS",
+      "message": "Existing OpenAPI projection has no servers array; recorded by WP-003 harness without changing contract semantics."
+    },
+    {
+      "severity": "warning",
+      "code": "SPECTRAL-INFO-METADATA",
+      "message": "Existing OpenAPI projection lacks info contact and description; recorded by WP-003 harness without changing contract semantics."
+    },
+    {
+      "severity": "warning",
+      "code": "SPECTRAL-OPERATION-METADATA",
+      "message": "Existing OpenAPI operations lack tags and descriptions; recorded by WP-003 harness without changing contract semantics."
+    }
+  ],
+  "commands": [
+    "npm install --prefix implementation\\tools\\contracts (exit 0; audit 0 vulnerabilities)",
+    "npm exec --prefix implementation\\tools\\contracts -- spectral lint docs/04-contracts/schemas/bluto-v1.openapi.yaml --ruleset implementation/tools/contracts/.spectral.yaml (exit 0; 0 errors, 9 warnings recorded)",
+    "npm exec --prefix implementation\\tools\\contracts -- ajv validate --spec=draft2020 -c ajv-formats -s implementation/contracts/schemas/source-link-established.v1.schema.json -d implementation/contracts/examples/source-link-established.v1.example.json (exit 0)",
+    "npm exec --prefix implementation\\tools\\contracts -- ajv validate --spec=draft2020 -c ajv-formats -s implementation/contracts/schemas/party-created.v1.schema.json -d implementation/contracts/examples/party-created.v1.example.json (exit 0)",
+    "dotnet test implementation\\tests\\Contracts\\Bluto.Contracts.Tests.csproj --configuration Release (exit 0; 7 tests)",
+    "dotnet run --project implementation\\src\\Bluto.Validation.Cli --configuration Release -- --root . (exit 0; GATE-01 through GATE-06 PASS)"
+  ],
+  "evidence_digest": "2016b5beeffd4255b448ceb0af1088c9be7c2962701109d78707b06d10bfb0b7"
+}
