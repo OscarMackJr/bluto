@@ -1,0 +1,36 @@
+{
+  "rvec_version": "1.0",
+  "validation_standard_id": "BLUTO-BASE-VAL-001",
+  "quality_gate": "GATE-02",
+  "repository_version": "2.0.0",
+  "artifact_ids": [
+    "implementation/testdata/candidate-batch.v1.schema.json",
+    "implementation/testdata/synthetic-candidate-batch.valid.json",
+    "implementation/src/Bluto.Worker/Resolution/ScheduledResolutionWorker.cs",
+    "implementation/src/Bluto.Application/Identity/InMemoryCurrentMappingRepository.cs",
+    "implementation/tests/Worker/ScheduledResolutionWorkerTests.cs"
+  ],
+  "tool": "Codex implementation verification",
+  "tool_version": "implementation-wp-010-1.0",
+  "execution_mode": "Automated",
+  "start_timestamp": "1970-01-01T00:00:00Z",
+  "end_timestamp": "1970-01-01T00:00:00Z",
+  "result": "PASS WITH CONDITIONS",
+  "commands": [
+    "dotnet test implementation\\tests\\Worker\\Bluto.Worker.Tests.csproj (initial red: missing Bluto.Worker and worker types)",
+    "dotnet test implementation\\tests\\Worker\\Bluto.Worker.Tests.csproj (11 passed)",
+    "dotnet test implementation\\Bluto.Validation.sln --filter Category=Worker (11 passed)",
+    "dotnet test implementation\\Bluto.Validation.sln --filter Category=Integration (13 passed)",
+    "dotnet test implementation\\Bluto.Validation.sln --filter Category=Security (17 passed)",
+    "dotnet test implementation\\Bluto.Validation.sln --filter Category=Contract (8 passed)",
+    "dotnet test implementation\\Bluto.Validation.sln (49 passed)",
+    "dotnet build implementation\\Bluto.Validation.sln --configuration Release (0 warnings, 0 errors)",
+    "dotnet format implementation\\Bluto.Validation.sln --verify-no-changes (exit 0)",
+    "dotnet run --project implementation\\src\\Bluto.Validation.Cli\\Bluto.Validation.Cli.csproj -- --repository-root . --evidence-output repository\\evidence\\rvec (exit 1: pre-existing governance findings)"
+  ],
+  "findings": [
+    "Repository validation reports pre-existing mandatory governance findings in controlled documents; no baselined documents were modified or auto-fixed.",
+    "Worker is an in-process deterministic orchestration slice over synthetic fixtures only; no live scheduler, source adapter, Key Vault integration, external broker, or database runtime was introduced."
+  ],
+  "evidence_digest": "6a6c86d09bed5e5162181463824a87cab0cdbe9c08534ab25217360866712f2a"
+}

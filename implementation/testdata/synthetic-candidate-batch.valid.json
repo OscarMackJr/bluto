@@ -1,0 +1,20 @@
+{
+  "batch_id": "batch-2026-07-30-001",
+  "tenant_id": "10000000-0000-0000-0000-000000000001",
+  "source_system": "nexus",
+  "correlation_id": "dddddddd-dddd-dddd-dddd-dddddddddddd",
+  "ruleset_version": "ruleset-1.0.0",
+  "candidates": [
+    {
+      "source_key": "SRC-001",
+      "synthetic_identity_token": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "effective_from": "2026-07-30T12:00:00Z",
+      "source_version": "source-page-v1",
+      "match_rule_id": "rule-exact-token",
+      "rule_version_id": "rule-version-2026-07-30",
+      "outcome": "deterministic_no_match",
+      "idempotency_key": "tenant-a|nexus|SRC-001|v1|rule-version-2026-07-30|create_party_with_initial_link"
+    }
+  ]
+}
+

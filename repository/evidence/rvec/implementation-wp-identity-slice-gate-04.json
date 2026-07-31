@@ -1,0 +1,32 @@
+{
+  "rvec_version": "1.0",
+  "validation_standard_id": "BLUTO-BASE-VAL-004",
+  "quality_gate": "GATE-04",
+  "repository_version": "2.0.0",
+  "artifact_ids": [
+    "implementation/contracts/schemas/party-created.v1.schema.json",
+    "implementation/contracts/schemas/source-link-established.v1.schema.json",
+    "implementation/src/Bluto.Domain/Identity/IdentityModel.cs",
+    "implementation/src/Bluto.Application/Identity/IdentityResolutionService.cs",
+    "implementation/tests/Bluto.Identity.Tests/IdentityResolutionSliceTests.cs",
+    "implementation/tests/Bluto.Identity.Tests/ContractSchemaTests.cs"
+  ],
+  "tool": "Codex implementation verification",
+  "tool_version": "identity-slice-1.0",
+  "execution_mode": "Automated",
+  "start_timestamp": "1970-01-01T00:00:00Z",
+  "end_timestamp": "1970-01-01T00:00:00Z",
+  "result": "PASS WITH CONDITIONS",
+  "commands": [
+    "dotnet test implementation\\tests\\Bluto.Identity.Tests\\Bluto.Identity.Tests.csproj (initial red: missing production projects/API)",
+    "dotnet test implementation\\tests\\Bluto.Identity.Tests\\Bluto.Identity.Tests.csproj (14 passed)",
+    "dotnet test implementation\\Bluto.Validation.sln (20 passed)",
+    "dotnet build implementation\\Bluto.Validation.sln --configuration Release (0 warnings, 0 errors)",
+    "dotnet format implementation\\Bluto.Validation.sln --verify-no-changes (exit 0)",
+    "dotnet run --project implementation\\src\\Bluto.Validation.Cli -- --root . --evidence-dir repository\\evidence\\rvec --report implementation\\validation\\report.json (exit 1: pre-existing governance findings)"
+  ],
+  "findings": [
+    "Repository validation reports pre-existing mandatory governance findings in implementation ADR metadata/identity and release authority; no baselined documents were modified or auto-fixed in this slice."
+  ],
+  "evidence_digest": "691ea409f728b212c21f8a90337f93ee2f22a599be46503777a390df851ea8be"
+}

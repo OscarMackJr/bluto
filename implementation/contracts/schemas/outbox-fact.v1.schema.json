@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bluto.example/contracts/outbox-fact.v1.schema.json",
+  "title": "OutboxFact.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "tenant_id",
+    "outbox_fact_id",
+    "aggregate_type",
+    "aggregate_id",
+    "event_type",
+    "event_version",
+    "payload",
+    "occurred_at",
+    "correlation_id",
+    "idempotency_key"
+  ],
+  "properties": {
+    "tenant_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "outbox_fact_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "aggregate_type": {
+      "type": "string",
+      "const": "Party"
+    },
+    "aggregate_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "PartyCreated",
+        "SourceLinkEstablished"
+      ]
+    },
+    "event_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "payload": {
+      "type": "object"
+    },
+    "occurred_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "correlation_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "causation_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uuid"
+    },
+    "idempotency_key": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}
+
