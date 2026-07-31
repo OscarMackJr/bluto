@@ -1,0 +1,30 @@
+{
+  "event_id": "11111111-1111-1111-1111-111111111111",
+  "event_type": "PartyCreated",
+  "event_version": "1.0.0",
+  "occurred_at": "2026-07-30T12:00:00Z",
+  "published_at": "2026-07-30T12:00:00Z",
+  "aggregate_id": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+  "aggregate_version": 2,
+  "correlation_id": "cccccccc-cccc-cccc-cccc-cccccccccccc",
+  "causation_id": null,
+  "tenant_id": "10000000-0000-0000-0000-000000000001",
+  "producer": "Bluto.IdentityResolution",
+  "data_classification": "Restricted",
+  "payload": {
+    "party_id": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "party_status": "active",
+    "asserted_at": "2026-07-30T12:00:00Z",
+    "asserted_by": "worker:identity-resolution",
+    "correlation_id": "cccccccc-cccc-cccc-cccc-cccccccccccc",
+    "provenance": {
+      "match_rule_id": "rule-exact-token",
+      "rule_version_id": "rule-version-2026-07-30",
+      "ruleset_version": "ruleset-1.0.0",
+      "match_method": "deterministic_exact_token",
+      "confidence": "1.0",
+      "source_version": "source-page-v1",
+      "evidence_reference": "evidence://synthetic/batch-2026-07-30-001/SRC-001"
+    }
+  }
+}

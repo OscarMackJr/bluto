@@ -1,0 +1,55 @@
+# Bluto Repository Validation Tooling
+
+WP-001 implements local validation for repository governance gates `GATE-01` through `GATE-06`.
+
+## Local Execution
+
+From the repository root:
+
+```powershell
+dotnet test implementation\Bluto.Validation.sln
+dotnet run --project implementation\src\Bluto.Validation.Cli -- --root .
+```
+
+The validator writes:
+
+- `implementation/validation/report.json`
+- `repository/evidence/rvec/implementation-wp-001-gate-01.json`
+- `repository/evidence/rvec/implementation-wp-001-gate-02.json`
+- `repository/evidence/rvec/implementation-wp-001-gate-03.json`
+- `repository/evidence/rvec/implementation-wp-001-gate-04.json`
+- `repository/evidence/rvec/implementation-wp-001-gate-05.json`
+- `repository/evidence/rvec/implementation-wp-001-gate-06.json`
+
+A mandatory finding exits with status code `1`. Clean validation exits with status code `0`.
+
+## Flyway Migrations
+
+Flyway is configured through `implementation/tools/flyway/flyway.local.conf`. The file stores migration locations and schema settings only; set connection details in environment variables or pass them to the wrapper.
+
+```powershell
+$env:BLUTO_FLYWAY_URL = "jdbc:postgresql://localhost:15432/bluto"
+$env:BLUTO_FLYWAY_USER = "postgres"
+$env:BLUTO_FLYWAY_PASSWORD = "postgres"
+.\scripts\windows\Invoke-BlutoFlyway.ps1 -Command validate
+.\scripts\windows\Invoke-BlutoFlyway.ps1 -Command migrate
+```
+
+If Flyway is not installed at `C:\tools\flyway-13.1.0\flyway.cmd`, pass `-FlywayExecutable` with the local path.
+## WP-002 CI, Supply Chain, And Evidence Automation
+
+WP-002 adds GitHub Actions checks for build, tests, formatting, NuGet vulnerability audit, repository validation, CodeQL, Trivy filesystem scanning, SBOM generation, Dependabot, and CI evidence artifact publication.
+
+Local equivalents from the repository root:
+
+```powershell
+dotnet restore implementation\Bluto.Validation.sln
+dotnet build implementation\Bluto.Validation.sln --configuration Release --no-restore
+dotnet test implementation\Bluto.Validation.sln --configuration Release
+dotnet format implementation\Bluto.Validation.sln --verify-no-changes
+dotnet list implementation\Bluto.Validation.sln package --vulnerable --include-transitive
+dotnet run --project implementation\src\Bluto.Validation.Cli --configuration Release -- --root .
+python -m json.tool implementation\validation\ci-evidence.schema.json
+```
+
+CI publishes commit/run-tied evidence artifacts named `wp002-validation-evidence-<commit-sha>`, `wp002-codeql-evidence-<commit-sha>`, and `wp002-supply-chain-evidence-<commit-sha>`. CodeQL and Trivy SARIF are retained as workflow artifacts so the CI gate does not require repository-level code scanning to be enabled.

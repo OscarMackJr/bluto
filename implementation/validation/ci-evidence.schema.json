@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bluto.local/schemas/ci-evidence.schema.json",
+  "title": "Bluto CI Evidence Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "work_package",
+    "commit_sha",
+    "workflow",
+    "workflow_ref",
+    "run_id",
+    "run_attempt",
+    "execution_mode",
+    "commands"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0.0" },
+    "work_package": { "const": "WP-002" },
+    "commit_sha": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+    "workflow": { "type": "string", "minLength": 1 },
+    "workflow_ref": { "type": "string", "minLength": 1 },
+    "run_id": { "type": "string", "pattern": "^[0-9]+$" },
+    "run_attempt": { "type": "string", "pattern": "^[0-9]+$" },
+    "execution_mode": { "const": "GitHub Actions" },
+    "commands": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    }
+  }
+}

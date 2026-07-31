@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bluto.example/testdata/candidate-batch.v1.schema.json",
+  "title": "SyntheticCandidateBatch.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "batch_id",
+    "tenant_id",
+    "source_system",
+    "correlation_id",
+    "ruleset_version",
+    "candidates"
+  ],
+  "properties": {
+    "batch_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "tenant_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "source_system": {
+      "type": "string",
+      "minLength": 1
+    },
+    "correlation_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "ruleset_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "candidates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "source_key",
+          "synthetic_identity_token",
+          "effective_from",
+          "source_version",
+          "match_rule_id",
+          "rule_version_id",
+          "outcome",
+          "idempotency_key"
+        ],
+        "properties": {
+          "source_key": {
+            "type": "string",
+            "minLength": 1
+          },
+          "synthetic_identity_token": {
+            "type": "string",
+            "pattern": "^sha256:[a-f0-9]{64}$"
+          },
+          "effective_from": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "source_version": {
+            "type": "string",
+            "minLength": 1
+          },
+          "match_rule_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "rule_version_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "outcome": {
+            "type": "string",
+            "enum": [
+              "deterministic_no_match",
+              "ambiguous",
+              "conflicting"
+            ]
+          },
+          "idempotency_key": {
+            "type": "string",
+            "pattern": "^.+\\|create_party_with_initial_link$"
+          }
+        }
+      }
+    }
+  }
+}
+

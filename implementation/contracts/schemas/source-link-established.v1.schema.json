@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:bluto:event:source-link-established:v1",
+  "title": "SourceLinkEstablished.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "event_id",
+    "event_type",
+    "event_version",
+    "occurred_at",
+    "published_at",
+    "aggregate_id",
+    "aggregate_version",
+    "correlation_id",
+    "tenant_id",
+    "producer",
+    "data_classification",
+    "payload"
+  ],
+  "properties": {
+    "event_id": { "type": "string", "format": "uuid" },
+    "event_type": { "const": "SourceLinkEstablished" },
+    "event_version": { "const": "1.0.0" },
+    "occurred_at": { "type": "string", "format": "date-time" },
+    "published_at": { "type": "string", "format": "date-time" },
+    "aggregate_id": { "type": "string", "format": "uuid" },
+    "aggregate_version": { "type": "integer", "minimum": 1 },
+    "correlation_id": { "type": "string", "format": "uuid" },
+    "causation_id": { "type": ["string", "null"], "format": "uuid" },
+    "tenant_id": { "type": "string", "format": "uuid" },
+    "producer": { "type": "string", "minLength": 1 },
+    "data_classification": { "const": "Restricted" },
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "party_id",
+        "link_id",
+        "source_system",
+        "source_key",
+        "effective_from",
+        "effective_to",
+        "link_status",
+        "asserted_at",
+        "asserted_by",
+        "correlation_id",
+        "provenance"
+      ],
+      "properties": {
+        "party_id": { "type": "string", "format": "uuid" },
+        "link_id": { "type": "string", "format": "uuid" },
+        "source_system": { "type": "string", "minLength": 1 },
+        "source_key": { "type": "string", "minLength": 1 },
+        "effective_from": { "type": "string", "format": "date-time" },
+        "effective_to": { "type": ["string", "null"], "format": "date-time" },
+        "link_status": { "const": "active" },
+        "asserted_at": { "type": "string", "format": "date-time" },
+        "asserted_by": { "type": "string", "minLength": 1 },
+        "correlation_id": { "type": "string", "format": "uuid" },
+        "provenance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "match_rule_id",
+            "rule_version_id",
+            "ruleset_version",
+            "match_method",
+            "confidence",
+            "source_version",
+            "evidence_reference"
+          ],
+          "properties": {
+            "match_rule_id": { "type": "string", "minLength": 1 },
+            "rule_version_id": { "type": "string", "minLength": 1 },
+            "ruleset_version": { "type": "string", "minLength": 1 },
+            "match_method": { "const": "deterministic_exact_token" },
+            "confidence": { "type": "string", "pattern": "^1(?:\\.0+)?$" },
+            "source_version": { "type": "string", "minLength": 1 },
+            "evidence_reference": { "type": "string", "minLength": 1 }
+          }
+        }
+      }
+    }
+  }
+}

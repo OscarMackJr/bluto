@@ -1,0 +1,12 @@
+name: bluto-codeql
+
+queries:
+  - uses: security-and-quality
+
+paths:
+  - implementation/src
+  - implementation/tests
+
+paths-ignore:
+  - "**/bin/**"
+  - "**/obj/**"

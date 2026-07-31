@@ -1,25 +1,980 @@
 {
-  "BLUTO-BASE-GOV-001": {
-    "document_id": "BLUTO-BASE-GOV-001",
-    "artifact_id": "ART-BLUTO-BASE-GOV-001-v2.0.0",
-    "version": "2.0.0",
+  "BLUTO-ADR-0000": {
+    "document_id": "BLUTO-ADR-0000",
+    "artifact_id": "ART-BLUTO-ADR-0000-v1.1.0",
+    "version": "1.1.0",
     "status": "Baselined",
-    "path": "00-baseline/README.md",
-    "sha256": "081455b603aa8ff58130feada939d4090a9d7bd762766a6a5b090b5cc2fd3086",
-    "dependencies": []
-  },
-  "BLUTO-BASE-AUD-002": {
-    "document_id": "BLUTO-BASE-AUD-002",
-    "artifact_id": "ART-BLUTO-BASE-AUD-002-v2.0.0",
-    "version": "2.0.0",
-    "status": "Baselined",
-    "path": "00-baseline/audit/BASELINE-A-REPOSITORY-AUDIT.md",
-    "sha256": "f492ca3c3ab176bfabf0ac5c4ceeb0d895d0c4b553f6ec970a68877be7c311e3",
+    "path": "docs/01-foundation-governance/adrs/ADR-0000-USING-ADRS.md",
+    "sha256": "baf58992ac20f49ccc7d7a195d532e074a2db10f660fa40d2e5a1d70db6ddcf4",
     "dependencies": [
-      "BLUTO-BASE-AUD-001",
-      "BLUTO-BASE-REV-001",
-      "BLUTO-BASE-REV-002",
-      "BLUTO-BASE-CERT-002"
+      "BLUTO-ADR-README-001",
+      "BLUTO-ARCH-PRINCIPLES-001"
+    ]
+  },
+  "BLUTO-ADR-0001": {
+    "document_id": "BLUTO-ADR-0001",
+    "artifact_id": "ART-BLUTO-ADR-0001-v0.1.0",
+    "version": "0.1.0",
+    "status": "Approved",
+    "path": "docs/01-foundation-governance/adrs/ADR-0001-PROPOSED-LANGUAGE-RUNTIME.md",
+    "sha256": "1e5e94ac7a95974defd972122e067282222a920a4a2b3ee7c01326e9b7ff9254",
+    "dependencies": [
+      "BLUTO-ADR-0000",
+      "BLUTO-ARCH-TECH-001",
+      "BLUTO-ENG-CODE-001"
+    ]
+  },
+  "BLUTO-ADR-0002": {
+    "document_id": "BLUTO-ADR-0002",
+    "artifact_id": "ART-BLUTO-ADR-0002-v0.1.0",
+    "version": "0.1.0",
+    "status": "Approved",
+    "path": "docs/01-foundation-governance/adrs/ADR-0002-PROPOSED-APPLICATION-FRAMEWORK.md",
+    "sha256": "e272ffbac677ae59683ce01fb54078efee8d04f26797e335af8ca851863bbc85",
+    "dependencies": [
+      "BLUTO-ADR-0001",
+      "BLUTO-ARCH-TECH-001",
+      "BLUTO-CONTRACT-API-001"
+    ]
+  },
+  "BLUTO-ADR-0003": {
+    "document_id": "BLUTO-ADR-0003",
+    "artifact_id": "ART-BLUTO-ADR-0003-v0.1.0",
+    "version": "0.1.0",
+    "status": "Approved",
+    "path": "docs/01-foundation-governance/adrs/ADR-0003-PROPOSED-DEPENDENCY-INJECTION.md",
+    "sha256": "1aeff37166793807000e22ff6b42d72ff94db616ea86a65be5d10738accf74a0",
+    "dependencies": [
+      "BLUTO-ADR-0001",
+      "BLUTO-ADR-0002",
+      "BLUTO-ENG-ARCH-001"
+    ]
+  },
+  "BLUTO-ADR-0004": {
+    "document_id": "BLUTO-ADR-0004",
+    "artifact_id": "ART-BLUTO-ADR-0004-v0.1.0",
+    "version": "0.1.0",
+    "status": "Approved",
+    "path": "docs/01-foundation-governance/adrs/ADR-0004-PROPOSED-POSTGRESQL-ACCESS.md",
+    "sha256": "822c5992ed611880250925d4cf558ef89ce43796989d7a36c3b9c20af03442fb",
+    "dependencies": [
+      "BLUTO-ADR-0001",
+      "BLUTO-ARCH-DATA-001",
+      "BLUTO-ARCH-TECH-001"
+    ]
+  },
+  "BLUTO-ADR-0005": {
+    "document_id": "BLUTO-ADR-0005",
+    "artifact_id": "ART-BLUTO-ADR-0005-v0.1.0",
+    "version": "0.1.0",
+    "status": "Approved",
+    "path": "docs/01-foundation-governance/adrs/ADR-0005-PROPOSED-SCHEMA-MIGRATIONS.md",
+    "sha256": "f35db431f3c72ef925d3594af9127796b8353327bbae5cdc57a7da3657177326",
+    "dependencies": [
+      "BLUTO-ADR-0004",
+      "BLUTO-ARCH-DATA-001",
+      "BLUTO-ENG-DATA-001"
+    ]
+  },
+  "BLUTO-ADR-0006": {
+    "document_id": "BLUTO-ADR-0006",
+    "artifact_id": "ART-BLUTO-ADR-0006-v0.1.0",
+    "version": "0.1.0",
+    "status": "Approved",
+    "path": "docs/01-foundation-governance/adrs/ADR-0006-PROPOSED-API-OPENAPI-TOOLING.md",
+    "sha256": "d9f72e3f15b49bd65b48880c1bc462ee294f316666986bf008f89f7d7e6f13d1",
+    "dependencies": [
+      "BLUTO-ADR-0002",
+      "BLUTO-CONTRACT-API-001",
+      "BLUTO-CONTRACT-COMPAT-001"
+    ]
+  },
+  "BLUTO-ADR-0007": {
+    "document_id": "BLUTO-ADR-0007",
+    "artifact_id": "ART-BLUTO-ADR-0007-v0.1.0",
+    "version": "0.1.0",
+    "status": "Approved",
+    "path": "docs/01-foundation-governance/adrs/ADR-0007-PROPOSED-JSON-SCHEMA-TOOLING.md",
+    "sha256": "5f2c11e2a41b8aa8a73c9a71ee667c5ee2d61468d7a1ace82fb3904efd382988",
+    "dependencies": [
+      "BLUTO-CONTRACT-SCHEMA-001",
+      "BLUTO-TEST-CONTRACT-001"
+    ]
+  },
+  "BLUTO-ADR-0008": {
+    "document_id": "BLUTO-ADR-0008",
+    "artifact_id": "ART-BLUTO-ADR-0008-v0.1.0",
+    "version": "0.1.0",
+    "status": "Approved",
+    "path": "docs/01-foundation-governance/adrs/ADR-0008-PROPOSED-TEST-FRAMEWORK.md",
+    "sha256": "4f61217daeb65c1510b4e94e713fe5953fe88a25c3f54b1e7d769dc757a034ce",
+    "dependencies": [
+      "BLUTO-ADR-0001",
+      "BLUTO-TEST-DOMAIN-001",
+      "BLUTO-TEST-STRATEGY-001"
+    ]
+  },
+  "BLUTO-ADR-0009": {
+    "document_id": "BLUTO-ADR-0009",
+    "artifact_id": "ART-BLUTO-ADR-0009-v0.1.0",
+    "version": "0.1.0",
+    "status": "Approved",
+    "path": "docs/01-foundation-governance/adrs/ADR-0009-PROPOSED-PROPERTY-BASED-TESTING.md",
+    "sha256": "782607ee09fea260eff25889c1cf83c6cc507e2783349098c9aa37403ba6a96b",
+    "dependencies": [
+      "BLUTO-ADR-0008",
+      "BLUTO-TEST-DOMAIN-001"
+    ]
+  },
+  "BLUTO-ADR-0010": {
+    "document_id": "BLUTO-ADR-0010",
+    "artifact_id": "ART-BLUTO-ADR-0010-v0.1.0",
+    "version": "0.1.0",
+    "status": "Approved",
+    "path": "docs/01-foundation-governance/adrs/ADR-0010-PROPOSED-STATIC-ANALYSIS-FORMATTING.md",
+    "sha256": "3e8048e0ec850eb909074189f9eb64a33999f36499ec90cce08a574be3070170",
+    "dependencies": [
+      "BLUTO-ADR-0001",
+      "BLUTO-ENG-CODE-001",
+      "BLUTO-SEC-SDLC-001"
+    ]
+  },
+  "BLUTO-ADR-0011": {
+    "document_id": "BLUTO-ADR-0011",
+    "artifact_id": "ART-BLUTO-ADR-0011-v0.1.0",
+    "version": "0.1.0",
+    "status": "Approved",
+    "path": "docs/01-foundation-governance/adrs/ADR-0011-PROPOSED-DEPENDENCY-VULNERABILITY-SCANNING.md",
+    "sha256": "ccc6afa67d8f507b4cb4aa3348d3c2c581e37b4c237a2b391d2357320ace3f49",
+    "dependencies": [
+      "BLUTO-ENG-SUPPLY-001",
+      "BLUTO-OPS-BUILD-001",
+      "BLUTO-SEC-SDLC-001"
+    ]
+  },
+  "BLUTO-ADR-0012": {
+    "document_id": "BLUTO-ADR-0012",
+    "artifact_id": "ART-BLUTO-ADR-0012-v0.1.0",
+    "version": "0.1.0",
+    "status": "Approved",
+    "path": "docs/01-foundation-governance/adrs/ADR-0012-PROPOSED-CONTAINER-BUILD.md",
+    "sha256": "de8bbece7dcdfb4c26b4505ee710a9737d862172a6f31ffe88182c9c147bc9c6",
+    "dependencies": [
+      "BLUTO-ADR-0001",
+      "BLUTO-ENG-SUPPLY-001",
+      "BLUTO-OPS-BUILD-001"
+    ]
+  },
+  "BLUTO-ADR-0013": {
+    "document_id": "BLUTO-ADR-0013",
+    "artifact_id": "ART-BLUTO-ADR-0013-v0.1.0",
+    "version": "0.1.0",
+    "status": "Approved",
+    "path": "docs/01-foundation-governance/adrs/ADR-0013-PROPOSED-CI-PLATFORM.md",
+    "sha256": "735395a2ab121f962bc6c5e8e4232245b5862bd8d979adf675fbf95b72197c5a",
+    "dependencies": [
+      "BLUTO-ENG-SUPPLY-001",
+      "BLUTO-OPS-BUILD-001",
+      "BLUTO-OPS-RELEASE-001"
+    ]
+  },
+  "BLUTO-ADR-0014": {
+    "document_id": "BLUTO-ADR-0014",
+    "artifact_id": "ART-BLUTO-ADR-0014-v0.1.0",
+    "version": "0.1.0",
+    "status": "Approved",
+    "path": "docs/01-foundation-governance/adrs/ADR-0014-PROPOSED-INFRASTRUCTURE-AS-CODE.md",
+    "sha256": "306e78dcff69cd870c91beecda50e06b19b128d147e87caa55bb05fe713ed8d3",
+    "dependencies": [
+      "BLUTO-ARCH-TECH-001",
+      "BLUTO-OPS-INFRA-001"
+    ]
+  },
+  "BLUTO-ADR-0015": {
+    "document_id": "BLUTO-ADR-0015",
+    "artifact_id": "ART-BLUTO-ADR-0015-v0.1.0",
+    "version": "0.1.0",
+    "status": "Approved",
+    "path": "docs/01-foundation-governance/adrs/ADR-0015-PROPOSED-CLOUD-DEPLOYMENT-TARGET.md",
+    "sha256": "4b38fa6ecf00ce9fe50d8b31439801e55a8834c01e3037fbecf1d1c3aeed40e3",
+    "dependencies": [
+      "BLUTO-ARCH-DEPLOY-001",
+      "BLUTO-ARCH-PHYSICAL-001",
+      "BLUTO-ARCH-TECH-001"
+    ]
+  },
+  "BLUTO-ADR-0016": {
+    "document_id": "BLUTO-ADR-0016",
+    "artifact_id": "ART-BLUTO-ADR-0016-v0.1.0",
+    "version": "0.1.0",
+    "status": "Approved",
+    "path": "docs/01-foundation-governance/adrs/ADR-0016-PROPOSED-OPENTELEMETRY.md",
+    "sha256": "d393cdd44fab64146c94cd78ca26e2ab8a354955046eabbb16c597ada90159a6",
+    "dependencies": [
+      "BLUTO-ADR-0001",
+      "BLUTO-ARCH-TECH-001",
+      "BLUTO-ENG-OBS-001"
+    ]
+  },
+  "BLUTO-ADR-0017": {
+    "document_id": "BLUTO-ADR-0017",
+    "artifact_id": "ART-BLUTO-ADR-0017-v0.1.0",
+    "version": "0.1.0",
+    "status": "Approved",
+    "path": "docs/01-foundation-governance/adrs/ADR-0017-PROPOSED-EVENT-TRANSPORT.md",
+    "sha256": "def746396840257fa890176934630d0edcf6c8312208a67868c9ad19283a541e",
+    "dependencies": [
+      "BLUTO-ADR-0004",
+      "BLUTO-ARCH-TECH-001",
+      "BLUTO-CONTRACT-EVENT-001"
+    ]
+  },
+  "BLUTO-ADR-INDEX-001": {
+    "document_id": "BLUTO-ADR-INDEX-001",
+    "artifact_id": "ART-BLUTO-ADR-INDEX-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/01-foundation-governance/adrs/ADR-INDEX.md",
+    "sha256": "c5e1516e35b718977780b7238c607c269223b82ae154604adf1789008be9f95e",
+    "dependencies": [
+      "BLUTO-ADR-0000"
+    ]
+  },
+  "BLUTO-ADR-LIFECYCLE-001": {
+    "document_id": "BLUTO-ADR-LIFECYCLE-001",
+    "artifact_id": "ART-BLUTO-ADR-LIFECYCLE-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/01-foundation-governance/adrs/ADR-LIFECYCLE.md",
+    "sha256": "466a4bf7101b563aaa0bd6cd3c4fcc17417beb060e702041b9696209c71857db",
+    "dependencies": [
+      "BLUTO-ADR-0000",
+      "BLUTO-ADR-TEMPLATE-001"
+    ]
+  },
+  "BLUTO-ADR-README-001": {
+    "document_id": "BLUTO-ADR-README-001",
+    "artifact_id": "ART-BLUTO-ADR-README-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/01-foundation-governance/adrs/README.md",
+    "sha256": "39a01f7408bc1732673963ca10fc226a3167aea79a46f8adf7c5d5657999ffe8",
+    "dependencies": [
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-GLOSSARY-001"
+    ]
+  },
+  "BLUTO-ADR-REVIEW-001": {
+    "document_id": "BLUTO-ADR-REVIEW-001",
+    "artifact_id": "ART-BLUTO-ADR-REVIEW-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/01-foundation-governance/adrs/ADR-REVIEW-PROCESS.md",
+    "sha256": "b329206c2bf45ba23ca131312b80464a7b3fa3f9a290293c58865453ac46e4b2",
+    "dependencies": [
+      "BLUTO-ADR-LIFECYCLE-001",
+      "BLUTO-BASE-GOV-002"
+    ]
+  },
+  "BLUTO-ADR-TEMPLATE-001": {
+    "document_id": "BLUTO-ADR-TEMPLATE-001",
+    "artifact_id": "ART-BLUTO-ADR-TEMPLATE-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/01-foundation-governance/adrs/ADR-TEMPLATE.md",
+    "sha256": "dbad4452c76bc73587bcdbea2e91bc5bd9daadee91da6b91e5e3737f97aa70c8",
+    "dependencies": [
+      "BLUTO-ADR-0000"
+    ]
+  },
+  "BLUTO-AI-ARCH-001": {
+    "document_id": "BLUTO-AI-ARCH-001",
+    "artifact_id": "ART-BLUTO-AI-ARCH-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/09-ai-factory/AI-FACTORY-ARCHITECTURE.md",
+    "sha256": "f949cdf1c14559bb3620661178b36b945840b315674b9119fed361b1f4a24066",
+    "dependencies": [
+      "BLUTO-ARCH-DEPENDENCY-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-AI-CODE-001": {
+    "document_id": "BLUTO-AI-CODE-001",
+    "artifact_id": "ART-BLUTO-AI-CODE-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/09-ai-factory/CODE-GENERATION-STANDARD.md",
+    "sha256": "0319d84b5ba97100a17e50ddf32608cb301b37bb7c4dbb9025583422bdd4531e",
+    "dependencies": [
+      "BLUTO-AI-PROMPT-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-AI-CONSISTENCY-001": {
+    "document_id": "BLUTO-AI-CONSISTENCY-001",
+    "artifact_id": "ART-BLUTO-AI-CONSISTENCY-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/09-ai-factory/STREAM9-CONSISTENCY-REVIEW.md",
+    "sha256": "8d2eaa442b6c20592c61bba3ade353fce8ef3cd323f266b7626a0c05cfea6010",
+    "dependencies": [
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-AI-CONTEXT-001": {
+    "document_id": "BLUTO-AI-CONTEXT-001",
+    "artifact_id": "ART-BLUTO-AI-CONTEXT-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/09-ai-factory/REPOSITORY-CONSUMPTION-RULES.md",
+    "sha256": "d7c5a3ac4d8cf41318ed20bac97ccf0ce142e6ab6e29f534b1997ea75bf3c30e",
+    "dependencies": [
+      "BLUTO-ARCH-DEPENDENCY-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-AI-DOC-001": {
+    "document_id": "BLUTO-AI-DOC-001",
+    "artifact_id": "ART-BLUTO-AI-DOC-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/09-ai-factory/DOCUMENTATION-ADR-GENERATION.md",
+    "sha256": "79af6689bdc77fc2a660dc4d49eca8e16b5c27eaf9035ce741da273382577c29",
+    "dependencies": [
+      "BLUTO-ADR-0000",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOCSTATUS-001",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-AI-GUARD-001": {
+    "document_id": "BLUTO-AI-GUARD-001",
+    "artifact_id": "ART-BLUTO-AI-GUARD-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/09-ai-factory/GUARDRAILS-HALLUCINATION-PREVENTION.md",
+    "sha256": "70314073894a3e00d9efa8cc321380478f8e74009acd71178e22ad998a0e3d2f",
+    "dependencies": [
+      "BLUTO-AI-CONTEXT-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001",
+      "BLUTO-SEC-ARCH-001"
+    ]
+  },
+  "BLUTO-AI-HUMAN-001": {
+    "document_id": "BLUTO-AI-HUMAN-001",
+    "artifact_id": "ART-BLUTO-AI-HUMAN-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/09-ai-factory/HUMAN-APPROVAL-GATES.md",
+    "sha256": "200b15f742e421aeb3cc4595a68c22216ff8f9075f90fe6db1ce4c8ca8431c47",
+    "dependencies": [
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001",
+      "BLUTO-SEC-SDLC-001"
+    ]
+  },
+  "BLUTO-AI-POLICY-001": {
+    "document_id": "BLUTO-AI-POLICY-001",
+    "artifact_id": "ART-BLUTO-AI-POLICY-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/09-ai-factory/AI-OPERATING-POLICY.md",
+    "sha256": "d5699b00e6e1d5425b9457b060c6c369307b8839bf2bc85e381d6f6b2a287f5a",
+    "dependencies": [
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-AI-PROMPT-001": {
+    "document_id": "BLUTO-AI-PROMPT-001",
+    "artifact_id": "ART-BLUTO-AI-PROMPT-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/09-ai-factory/PROMPT-WORK-PACKAGE-STANDARD.md",
+    "sha256": "35c4fc8f90c2f59d8eb80f3603ca36fa85354ffcae91959010c67ddf364ff2bb",
+    "dependencies": [
+      "BLUTO-AI-CONTEXT-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001",
+      "BLUTO-ENG-TRACE-001"
+    ]
+  },
+  "BLUTO-AI-RELEASE-001": {
+    "document_id": "BLUTO-AI-RELEASE-001",
+    "artifact_id": "ART-BLUTO-AI-RELEASE-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/09-ai-factory/STREAM9-RELEASE-CERTIFICATION.md",
+    "sha256": "73a9fea8dd0967ead175ddfde8373691552755488f571663dfdbe155832e259e",
+    "dependencies": [
+      "BLUTO-AI-CONSISTENCY-001",
+      "BLUTO-AI-REVIEW-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-AI-REVIEW-001": {
+    "document_id": "BLUTO-AI-REVIEW-001",
+    "artifact_id": "ART-BLUTO-AI-REVIEW-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/09-ai-factory/AI-FACTORY-REVIEW.md",
+    "sha256": "11e9637cb2ee74c12bf02cf1679017f0427272555b58204440e9d9ec5a55c270",
+    "dependencies": [
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-AI-ROLE-001": {
+    "document_id": "BLUTO-AI-ROLE-001",
+    "artifact_id": "ART-BLUTO-AI-ROLE-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/09-ai-factory/AGENT-ROLES-RESPONSIBILITIES.md",
+    "sha256": "d5b775814f678787ff10e45b87e7d9437603880c41b665523b33ddd878f1ee60",
+    "dependencies": [
+      "BLUTO-AI-ARCH-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-AI-TRACE-001": {
+    "document_id": "BLUTO-AI-TRACE-001",
+    "artifact_id": "ART-BLUTO-AI-TRACE-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/09-ai-factory/PROVENANCE-TRACEABILITY.md",
+    "sha256": "7eec45a27f417ce44079cfca1354003d4611a96d33acc07487dc0f7a787cfbc7",
+    "dependencies": [
+      "BLUTO-ARCH-TRACE-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001",
+      "BLUTO-OPS-TRACE-001"
+    ]
+  },
+  "BLUTO-AI-VALIDATE-001": {
+    "document_id": "BLUTO-AI-VALIDATE-001",
+    "artifact_id": "ART-BLUTO-AI-VALIDATE-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/09-ai-factory/VALIDATION-PIPELINE.md",
+    "sha256": "0877c23bd88e5952bd8ebef45c75fb081c2369da8285664dd46a076bb1cb2eda",
+    "dependencies": [
+      "BLUTO-AI-CODE-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001",
+      "BLUTO-OPS-BUILD-001",
+      "BLUTO-TEST-GATE-001"
+    ]
+  },
+  "BLUTO-ARCH-CONSISTENCY-001": {
+    "document_id": "BLUTO-ARCH-CONSISTENCY-001",
+    "artifact_id": "ART-BLUTO-ARCH-CONSISTENCY-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/03-architecture/STREAM3-CONSISTENCY-REVIEW.md",
+    "sha256": "55387e20c8454a8eaee03b8190bf4de13a3b42bc336225faafbb8c70d9d89b2e",
+    "dependencies": [
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-ARCH-CONSTRAINT-001": {
+    "document_id": "BLUTO-ARCH-CONSTRAINT-001",
+    "artifact_id": "ART-BLUTO-ARCH-CONSTRAINT-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/03-architecture/ARCHITECTURAL-CONSTRAINTS.md",
+    "sha256": "a406958e08693207a17bf6b70e515be8086e898cb6894a03344de00e57325798",
+    "dependencies": [
+      "BLUTO-ARCH-DRIVER-001",
+      "BLUTO-ARCH-REF-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-AGGREGATE-001",
+      "BLUTO-DOM-CANONICAL-001",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-ARCH-CROSSCUT-001": {
+    "document_id": "BLUTO-ARCH-CROSSCUT-001",
+    "artifact_id": "ART-BLUTO-ARCH-CROSSCUT-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/03-architecture/CROSS-CUTTING-CONCERNS.md",
+    "sha256": "7dfc8d5cae6991775beda987bad8df02d57bb9dc099ce9c2f84bed109951b0e7",
+    "dependencies": [
+      "BLUTO-ARCH-DATA-001",
+      "BLUTO-ARCH-INTEGRATION-001",
+      "BLUTO-ARCH-LOGICAL-001",
+      "BLUTO-ARCH-RUNTIME-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-ARCH-DATA-001": {
+    "document_id": "BLUTO-ARCH-DATA-001",
+    "artifact_id": "ART-BLUTO-ARCH-DATA-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/03-architecture/DATA-ARCHITECTURE.md",
+    "sha256": "c650da49da8157d58851efa81e475cd9518256a47cc92565f4dc7d19473b56ce",
+    "dependencies": [
+      "BLUTO-ARCH-RUNTIME-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-CANONICAL-001",
+      "BLUTO-DOM-REPOSITORY-001",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-ARCH-DEPENDENCY-001": {
+    "document_id": "BLUTO-ARCH-DEPENDENCY-001",
+    "artifact_id": "ART-BLUTO-ARCH-DEPENDENCY-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/03-architecture/REPOSITORY-ARCHITECTURE-DEPENDENCY-GRAPH.md",
+    "sha256": "77a727be0a642c10126a7412c89dfd137476a7e18d4be68aed56310b98d9832f",
+    "dependencies": [
+      "BLUTO-ARCH-PRINCIPLES-001",
+      "BLUTO-ARCH-REVIEW-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001",
+      "BLUTO-VISION-001"
+    ]
+  },
+  "BLUTO-ARCH-DEPLOY-001": {
+    "document_id": "BLUTO-ARCH-DEPLOY-001",
+    "artifact_id": "ART-BLUTO-ARCH-DEPLOY-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/03-architecture/DEPLOYMENT-ARCHITECTURE.md",
+    "sha256": "67e4b8052e86842442594b40842b7838c8ed81b4c0d7c6c022c3bd8ca439ee08",
+    "dependencies": [
+      "BLUTO-ARCH-DATA-001",
+      "BLUTO-ARCH-PHYSICAL-001",
+      "BLUTO-ARCH-QAS-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-ARCH-DRIVER-001": {
+    "document_id": "BLUTO-ARCH-DRIVER-001",
+    "artifact_id": "ART-BLUTO-ARCH-DRIVER-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/03-architecture/ARCHITECTURAL-DRIVERS.md",
+    "sha256": "5d948ec88ce861e93b6fd89a3423bfe139ea5304c20d0202539dbfb70faef727",
+    "dependencies": [
+      "BLUTO-ARCH-REF-001",
+      "BLUTO-ARCH-VISION-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001",
+      "BLUTO-DOM-TRACE-001"
+    ]
+  },
+  "BLUTO-ARCH-INTEGRATION-001": {
+    "document_id": "BLUTO-ARCH-INTEGRATION-001",
+    "artifact_id": "ART-BLUTO-ARCH-INTEGRATION-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/03-architecture/INTEGRATION-ARCHITECTURE.md",
+    "sha256": "a4cf4ed5a23b976d86c2293f37c711f390dab7b5002e1e3ce83f3e98e5c1789c",
+    "dependencies": [
+      "BLUTO-ARCH-PHYSICAL-001",
+      "BLUTO-ARCH-RUNTIME-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-CANONICAL-001",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-ARCH-LOGICAL-001": {
+    "document_id": "BLUTO-ARCH-LOGICAL-001",
+    "artifact_id": "ART-BLUTO-ARCH-LOGICAL-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/03-architecture/LOGICAL-ARCHITECTURE.md",
+    "sha256": "da8f281b41c94fc2016426ed618a1b27ed38bd8c638404b6bea2bb69984151ef",
+    "dependencies": [
+      "BLUTO-ARCH-QAS-001",
+      "BLUTO-ARCH-REF-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-AGGREGATE-001",
+      "BLUTO-DOM-BC-001",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-ARCH-PHYSICAL-001": {
+    "document_id": "BLUTO-ARCH-PHYSICAL-001",
+    "artifact_id": "ART-BLUTO-ARCH-PHYSICAL-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/03-architecture/PHYSICAL-ARCHITECTURE.md",
+    "sha256": "41c78e8213816151ab63c54d7d85659959387050800f8c5dc3281a13a31e7fec",
+    "dependencies": [
+      "BLUTO-ARCH-CONSTRAINT-001",
+      "BLUTO-ARCH-LOGICAL-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REPOSITORY-001",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-ARCH-PRINCIPLES-001": {
+    "document_id": "BLUTO-ARCH-PRINCIPLES-001",
+    "artifact_id": "ART-BLUTO-ARCH-PRINCIPLES-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/01-foundation-governance/ARCHITECTURE-PRINCIPLES.md",
+    "sha256": "caa451d39cc885958a539d891edcd0349cc84a351a76dba31813b1f15319ad83",
+    "dependencies": [
+      "BLUTO-VISION-001"
+    ]
+  },
+  "BLUTO-ARCH-QAS-001": {
+    "document_id": "BLUTO-ARCH-QAS-001",
+    "artifact_id": "ART-BLUTO-ARCH-QAS-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/03-architecture/QUALITY-ATTRIBUTE-SCENARIOS.md",
+    "sha256": "f433113ec1f3f8b1662af949619cfd767814e49e3620f5cdd1bc87c586a71928",
+    "dependencies": [
+      "BLUTO-ARCH-CONSTRAINT-001",
+      "BLUTO-ARCH-DRIVER-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001",
+      "BLUTO-DOM-TRACE-001"
+    ]
+  },
+  "BLUTO-ARCH-REF-001": {
+    "document_id": "BLUTO-ARCH-REF-001",
+    "artifact_id": "ART-BLUTO-ARCH-REF-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/03-architecture/REPOSITORY-REFERENCE-ARCHITECTURE.md",
+    "sha256": "dbfc72dcffb092f512663b0b864b6083eeba21d48740e1b9c14b5bc7da463beb",
+    "dependencies": [
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-AGGREGATE-001",
+      "BLUTO-DOM-BC-001",
+      "BLUTO-DOM-CANONICAL-001",
+      "BLUTO-DOM-CORE-001",
+      "BLUTO-DOM-ENTITY-001",
+      "BLUTO-DOM-EVENT-001",
+      "BLUTO-DOM-OVERVIEW-001",
+      "BLUTO-DOM-REPOSITORY-001",
+      "BLUTO-DOM-REVIEW-001",
+      "BLUTO-DOM-STATE-001",
+      "BLUTO-DOM-TRACE-001",
+      "BLUTO-DOM-UL-001",
+      "BLUTO-DOM-VALUEOBJECT-001"
+    ]
+  },
+  "BLUTO-ARCH-RELEASE-001": {
+    "document_id": "BLUTO-ARCH-RELEASE-001",
+    "artifact_id": "ART-BLUTO-ARCH-RELEASE-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/03-architecture/STREAM3-RELEASE-CERTIFICATION.md",
+    "sha256": "c00acc4cd0734b5d5855de76fdb2647af98e1c962604677cd0ff21b8c0d1e135",
+    "dependencies": [
+      "BLUTO-ARCH-CONSISTENCY-001",
+      "BLUTO-ARCH-DEPENDENCY-001",
+      "BLUTO-ARCH-REVIEW-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-ARCH-REVIEW-001": {
+    "document_id": "BLUTO-ARCH-REVIEW-001",
+    "artifact_id": "ART-BLUTO-ARCH-REVIEW-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/03-architecture/ARCHITECTURE-REVIEW.md",
+    "sha256": "13d3f7bb56b32f05f0c443e4795646884625be7762b7ba69bb72acc10f12070b",
+    "dependencies": [
+      "BLUTO-ARCH-CONSTRAINT-001",
+      "BLUTO-ARCH-QAS-001",
+      "BLUTO-ARCH-TRACE-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-ARCH-RUNTIME-001": {
+    "document_id": "BLUTO-ARCH-RUNTIME-001",
+    "artifact_id": "ART-BLUTO-ARCH-RUNTIME-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/03-architecture/RUNTIME-ARCHITECTURE.md",
+    "sha256": "f448de0e7a076b25903b982f05210763d6b5f6f2bea6f7bd3d2ae3b915b2eb7f",
+    "dependencies": [
+      "BLUTO-ARCH-LOGICAL-001",
+      "BLUTO-ARCH-PHYSICAL-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-EVENT-001",
+      "BLUTO-DOM-REVIEW-001",
+      "BLUTO-DOM-STATE-001"
+    ]
+  },
+  "BLUTO-ARCH-TECH-001": {
+    "document_id": "BLUTO-ARCH-TECH-001",
+    "artifact_id": "ART-BLUTO-ARCH-TECH-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/03-architecture/TECHNOLOGY-DECISIONS.md",
+    "sha256": "ee718e367c830bf0ed2e28042784a215f8ebb23f9ef4e3520e1174468dcd91c0",
+    "dependencies": [
+      "BLUTO-ARCH-CONSTRAINT-001",
+      "BLUTO-ARCH-DEPLOY-001",
+      "BLUTO-ARCH-DRIVER-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-ARCH-TRACE-001": {
+    "document_id": "BLUTO-ARCH-TRACE-001",
+    "artifact_id": "ART-BLUTO-ARCH-TRACE-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/03-architecture/ARCHITECTURE-TRACEABILITY.md",
+    "sha256": "647393c0ecf7513e93daf456d16f0e1c20177706d72f06702928305cfb3b2563",
+    "dependencies": [
+      "BLUTO-ARCH-CROSSCUT-001",
+      "BLUTO-ARCH-VIEWS-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-ARCH-VIEWS-001": {
+    "document_id": "BLUTO-ARCH-VIEWS-001",
+    "artifact_id": "ART-BLUTO-ARCH-VIEWS-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/03-architecture/ARCHITECTURE-VIEWS.md",
+    "sha256": "9e0e7bf463063ca5ce6ae65b57c36affc33552e8bda79b42b7b9466e50795611",
+    "dependencies": [
+      "BLUTO-ARCH-DEPLOY-001",
+      "BLUTO-ARCH-LOGICAL-001",
+      "BLUTO-ARCH-PHYSICAL-001",
+      "BLUTO-ARCH-REF-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-ARCH-VISION-001": {
+    "document_id": "BLUTO-ARCH-VISION-001",
+    "artifact_id": "ART-BLUTO-ARCH-VISION-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/03-architecture/ARCHITECTURE-VISION.md",
+    "sha256": "5c36480dffa7ef6a35b7edd6b785067e4a311852ad444abbed7c0c2c55206719",
+    "dependencies": [
+      "BLUTO-ARCH-PRINCIPLES-001",
+      "BLUTO-ARCH-REF-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001",
+      "BLUTO-VISION-001"
     ]
   },
   "BLUTO-BASE-AUD-001": {
@@ -33,17 +988,18 @@
       "BLUTO-BASE-CERT-001"
     ]
   },
-  "BLUTO-BASE-CERT-002": {
-    "document_id": "BLUTO-BASE-CERT-002",
-    "artifact_id": "ART-BLUTO-BASE-CERT-002-v2.0.0",
+  "BLUTO-BASE-AUD-002": {
+    "document_id": "BLUTO-BASE-AUD-002",
+    "artifact_id": "ART-BLUTO-BASE-AUD-002-v2.0.0",
     "version": "2.0.0",
     "status": "Baselined",
-    "path": "00-baseline/certification/BASELINE-A-RELEASE-CERTIFICATION.md",
-    "sha256": "b1db3c28cd70e53bb8b942b700b51ff7f573dfd854da7032f1dcc2e1cce3bc01",
+    "path": "00-baseline/audit/BASELINE-A-REPOSITORY-AUDIT.md",
+    "sha256": "f492ca3c3ab176bfabf0ac5c4ceeb0d895d0c4b553f6ec970a68877be7c311e3",
     "dependencies": [
+      "BLUTO-BASE-AUD-001",
+      "BLUTO-BASE-CERT-002",
       "BLUTO-BASE-REV-001",
-      "BLUTO-BASE-REV-002",
-      "BLUTO-BASE-CERT-001"
+      "BLUTO-BASE-REV-002"
     ]
   },
   "BLUTO-BASE-CERT-001": {
@@ -57,18 +1013,27 @@
       "BLUTO-BASE-REL-001"
     ]
   },
-  "BLUTO-BASE-GOV-004": {
-    "document_id": "BLUTO-BASE-GOV-004",
-    "artifact_id": "ART-BLUTO-BASE-GOV-004-v2.0.0",
+  "BLUTO-BASE-CERT-002": {
+    "document_id": "BLUTO-BASE-CERT-002",
+    "artifact_id": "ART-BLUTO-BASE-CERT-002-v2.0.0",
     "version": "2.0.0",
     "status": "Baselined",
-    "path": "00-baseline/governance/REPOSITORY-DEPENDENCY-MODEL.md",
-    "sha256": "f845f85539829aad22278726a3a2e4aee74445da1000560df77a79cdf509b6a7",
+    "path": "00-baseline/certification/BASELINE-A-RELEASE-CERTIFICATION.md",
+    "sha256": "b1db3c28cd70e53bb8b942b700b51ff7f573dfd854da7032f1dcc2e1cce3bc01",
     "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-003"
+      "BLUTO-BASE-CERT-001",
+      "BLUTO-BASE-REV-001",
+      "BLUTO-BASE-REV-002"
     ]
+  },
+  "BLUTO-BASE-GOV-001": {
+    "document_id": "BLUTO-BASE-GOV-001",
+    "artifact_id": "ART-BLUTO-BASE-GOV-001-v2.0.0",
+    "version": "2.0.0",
+    "status": "Baselined",
+    "path": "00-baseline/README.md",
+    "sha256": "081455b603aa8ff58130feada939d4090a9d7bd762766a6a5b090b5cc2fd3086",
+    "dependencies": []
   },
   "BLUTO-BASE-GOV-002": {
     "document_id": "BLUTO-BASE-GOV-002",
@@ -81,22 +1046,6 @@
       "BLUTO-BASE-GOV-001"
     ]
   },
-  "BLUTO-BASE-RGTM-001": {
-    "document_id": "BLUTO-BASE-RGTM-001",
-    "artifact_id": "ART-BLUTO-BASE-RGTM-001-v2.0.0",
-    "version": "2.0.0",
-    "status": "Baselined",
-    "path": "00-baseline/governance/REPOSITORY-GOVERNANCE-TRACEABILITY-MATRIX.md",
-    "sha256": "a33c9a906f16051c757e442673eb23f7c3812979776fd684994b28e9fc0a7846",
-    "dependencies": [
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004"
-    ]
-  },
   "BLUTO-BASE-GOV-003": {
     "document_id": "BLUTO-BASE-GOV-003",
     "artifact_id": "ART-BLUTO-BASE-GOV-003-v2.0.0",
@@ -107,6 +1056,19 @@
     "dependencies": [
       "BLUTO-BASE-GOV-001",
       "BLUTO-BASE-GOV-002"
+    ]
+  },
+  "BLUTO-BASE-GOV-004": {
+    "document_id": "BLUTO-BASE-GOV-004",
+    "artifact_id": "ART-BLUTO-BASE-GOV-004-v2.0.0",
+    "version": "2.0.0",
+    "status": "Baselined",
+    "path": "00-baseline/governance/REPOSITORY-DEPENDENCY-MODEL.md",
+    "sha256": "f845f85539829aad22278726a3a2e4aee74445da1000560df77a79cdf509b6a7",
+    "dependencies": [
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-003"
     ]
   },
   "BLUTO-BASE-QG-001": {
@@ -128,15 +1090,26 @@
     "path": "00-baseline/release/REPOSITORY-RELEASE-STANDARD.md",
     "sha256": "360348990ad995ffc9e3f949b23ab7448eba95086eed3f5109538876d6970fdb",
     "dependencies": [
+      "BLUTO-BASE-QG-001",
       "BLUTO-BASE-STD-003",
       "BLUTO-BASE-STD-004",
-      "BLUTO-BASE-QG-001",
       "BLUTO-BASE-VAL-001",
       "BLUTO-BASE-VAL-002",
       "BLUTO-BASE-VAL-003",
       "BLUTO-BASE-VAL-004",
       "BLUTO-BASE-VAL-005",
       "BLUTO-BASE-VAL-006"
+    ]
+  },
+  "BLUTO-BASE-REV-001": {
+    "document_id": "BLUTO-BASE-REV-001",
+    "artifact_id": "ART-BLUTO-BASE-REV-001-v2.0.0",
+    "version": "2.0.0",
+    "status": "Baselined",
+    "path": "00-baseline/reviews/BASELINE-A-EVIDENCE-REVIEW.md",
+    "sha256": "ee684ede8de5d35035bd22ac3e9d54ec2bd4f64b3d510930d82177ebc752c7ac",
+    "dependencies": [
+      "BLUTO-BASE-AUD-001"
     ]
   },
   "BLUTO-BASE-REV-002": {
@@ -150,15 +1123,20 @@
       "BLUTO-BASE-REV-001"
     ]
   },
-  "BLUTO-BASE-REV-001": {
-    "document_id": "BLUTO-BASE-REV-001",
-    "artifact_id": "ART-BLUTO-BASE-REV-001-v2.0.0",
+  "BLUTO-BASE-RGTM-001": {
+    "document_id": "BLUTO-BASE-RGTM-001",
+    "artifact_id": "ART-BLUTO-BASE-RGTM-001-v2.0.0",
     "version": "2.0.0",
     "status": "Baselined",
-    "path": "00-baseline/reviews/BASELINE-A-EVIDENCE-REVIEW.md",
-    "sha256": "ee684ede8de5d35035bd22ac3e9d54ec2bd4f64b3d510930d82177ebc752c7ac",
+    "path": "00-baseline/governance/REPOSITORY-GOVERNANCE-TRACEABILITY-MATRIX.md",
+    "sha256": "a33c9a906f16051c757e442673eb23f7c3812979776fd684994b28e9fc0a7846",
     "dependencies": [
-      "BLUTO-BASE-AUD-001"
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004"
     ]
   },
   "BLUTO-BASE-STD-001": {
@@ -211,19 +1189,27 @@
       "BLUTO-BASE-STD-003"
     ]
   },
-  "BLUTO-BASE-VAL-005": {
-    "document_id": "BLUTO-BASE-VAL-005",
-    "artifact_id": "ART-BLUTO-BASE-VAL-005-v2.0.0",
+  "BLUTO-BASE-VAL-001": {
+    "document_id": "BLUTO-BASE-VAL-001",
+    "artifact_id": "ART-BLUTO-BASE-VAL-001-v2.0.0",
     "version": "2.0.0",
     "status": "Baselined",
-    "path": "00-baseline/validation/AUTHORITY-VALIDATION-STANDARD.md",
-    "sha256": "844d6b3607376a2c9c1b36e8c3a7715b988a0a46a1ca48bca1279a1ea310ddb3",
+    "path": "00-baseline/validation/METADATA-VALIDATION-STANDARD.md",
+    "sha256": "32ad877b96db7c70df7d91475dd4d6047c63e75c659588f8012adc1446a8833d",
+    "dependencies": [
+      "BLUTO-BASE-QG-001"
+    ]
+  },
+  "BLUTO-BASE-VAL-002": {
+    "document_id": "BLUTO-BASE-VAL-002",
+    "artifact_id": "ART-BLUTO-BASE-VAL-002-v2.0.0",
+    "version": "2.0.0",
+    "status": "Baselined",
+    "path": "00-baseline/validation/IDENTITY-VALIDATION-STANDARD.md",
+    "sha256": "11fee27df59aac656887d76110d40539aebcc2eba8a7745df3b0067b44dd693d",
     "dependencies": [
       "BLUTO-BASE-QG-001",
-      "BLUTO-BASE-VAL-001",
-      "BLUTO-BASE-VAL-002",
-      "BLUTO-BASE-VAL-003",
-      "BLUTO-BASE-VAL-004"
+      "BLUTO-BASE-VAL-001"
     ]
   },
   "BLUTO-BASE-VAL-003": {
@@ -253,27 +1239,19 @@
       "BLUTO-BASE-VAL-003"
     ]
   },
-  "BLUTO-BASE-VAL-002": {
-    "document_id": "BLUTO-BASE-VAL-002",
-    "artifact_id": "ART-BLUTO-BASE-VAL-002-v2.0.0",
+  "BLUTO-BASE-VAL-005": {
+    "document_id": "BLUTO-BASE-VAL-005",
+    "artifact_id": "ART-BLUTO-BASE-VAL-005-v2.0.0",
     "version": "2.0.0",
     "status": "Baselined",
-    "path": "00-baseline/validation/IDENTITY-VALIDATION-STANDARD.md",
-    "sha256": "11fee27df59aac656887d76110d40539aebcc2eba8a7745df3b0067b44dd693d",
+    "path": "00-baseline/validation/AUTHORITY-VALIDATION-STANDARD.md",
+    "sha256": "844d6b3607376a2c9c1b36e8c3a7715b988a0a46a1ca48bca1279a1ea310ddb3",
     "dependencies": [
       "BLUTO-BASE-QG-001",
-      "BLUTO-BASE-VAL-001"
-    ]
-  },
-  "BLUTO-BASE-VAL-001": {
-    "document_id": "BLUTO-BASE-VAL-001",
-    "artifact_id": "ART-BLUTO-BASE-VAL-001-v2.0.0",
-    "version": "2.0.0",
-    "status": "Baselined",
-    "path": "00-baseline/validation/METADATA-VALIDATION-STANDARD.md",
-    "sha256": "32ad877b96db7c70df7d91475dd4d6047c63e75c659588f8012adc1446a8833d",
-    "dependencies": [
-      "BLUTO-BASE-QG-001"
+      "BLUTO-BASE-VAL-001",
+      "BLUTO-BASE-VAL-002",
+      "BLUTO-BASE-VAL-003",
+      "BLUTO-BASE-VAL-004"
     ]
   },
   "BLUTO-BASE-VAL-006": {
@@ -292,45 +1270,6 @@
       "BLUTO-BASE-VAL-005"
     ]
   },
-  "BLUTO-REPO-README-001": {
-    "document_id": "BLUTO-REPO-README-001",
-    "artifact_id": "ART-BLUTO-REPO-README-001-v2.0.0",
-    "version": "2.0.0",
-    "status": "Baselined",
-    "path": "README.md",
-    "sha256": "4ae4efb4239612278b683c3d0d26a7739841e735e7da9e8563f2bdec269a8e2b",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-VISION-001",
-      "BLUTO-DOM-REVIEW-001",
-      "BLUTO-ARCH-REVIEW-001"
-    ]
-  },
-  "BLUTO-ARCH-PRINCIPLES-001": {
-    "document_id": "BLUTO-ARCH-PRINCIPLES-001",
-    "artifact_id": "ART-BLUTO-ARCH-PRINCIPLES-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/01-foundation-governance/ARCHITECTURE-PRINCIPLES.md",
-    "sha256": "caa451d39cc885958a539d891edcd0349cc84a351a76dba31813b1f15319ad83",
-    "dependencies": [
-      "BLUTO-VISION-001"
-    ]
-  },
-  "BLUTO-GOV-ARCHREVIEW-001": {
-    "document_id": "BLUTO-GOV-ARCHREVIEW-001",
-    "artifact_id": "ART-BLUTO-GOV-ARCHREVIEW-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/01-foundation-governance/ARCHITECTURE-REVIEW-CHECKLIST.md",
-    "sha256": "29fc6a159f20289b00dbf759225f594a86a214990e6389cdf49c228f8c31fec9",
-    "dependencies": [
-      "BLUTO-GOV-REVIEW-001",
-      "BLUTO-ARCH-PRINCIPLES-001",
-      "BLUTO-SCOPE-001",
-      "BLUTO-NONGOALS-001"
-    ]
-  },
   "BLUTO-CHANGE-001": {
     "document_id": "BLUTO-CHANGE-001",
     "artifact_id": "ART-BLUTO-CHANGE-001-v1.1.0",
@@ -339,21 +1278,245 @@
     "path": "docs/01-foundation-governance/CHANGE-CONTROL.md",
     "sha256": "a1e8e853585a4b9a34100deffe75a925afa9a582133caad6340050b62f860f25",
     "dependencies": [
-      "BLUTO-GOV-APPROVAL-001",
+      "BLUTO-ADR-0000",
       "BLUTO-BASE-STD-004",
-      "BLUTO-ADR-0000"
+      "BLUTO-GOV-APPROVAL-001"
     ]
   },
-  "BLUTO-GOV-DECISION-001": {
-    "document_id": "BLUTO-GOV-DECISION-001",
-    "artifact_id": "ART-BLUTO-GOV-DECISION-001-v1.1.0",
+  "BLUTO-CONTRACT-API-001": {
+    "document_id": "BLUTO-CONTRACT-API-001",
+    "artifact_id": "ART-BLUTO-CONTRACT-API-001-v1.1.0",
     "version": "1.1.0",
     "status": "Baselined",
-    "path": "docs/01-foundation-governance/DECISION-LOG.md",
-    "sha256": "2e2111698b4b3501bdee02f6de05c2b0164ee2eb23d7a9d31b6d9817ad023dc0",
+    "path": "docs/04-contracts/API-STANDARDS.md",
+    "sha256": "c4d2ae5b2464306f47dada30251357c637b8a0e621aaa4bc48b52bdf35bf008e",
     "dependencies": [
-      "BLUTO-ADR-INDEX-001",
-      "BLUTO-GOVERNANCE-CHARTER-001"
+      "BLUTO-ARCH-CROSSCUT-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-CONTRACT-ARCH-001",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-CONTRACT-ARCH-001": {
+    "document_id": "BLUTO-CONTRACT-ARCH-001",
+    "artifact_id": "ART-BLUTO-CONTRACT-ARCH-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/04-contracts/CONTRACT-ARCHITECTURE.md",
+    "sha256": "8a2230af19601f59bca06190b3718d7559d24cf46779dae616c8d22c831edc42",
+    "dependencies": [
+      "BLUTO-ARCH-REVIEW-001",
+      "BLUTO-ARCH-TRACE-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-CONTRACT-COMPAT-001": {
+    "document_id": "BLUTO-CONTRACT-COMPAT-001",
+    "artifact_id": "ART-BLUTO-CONTRACT-COMPAT-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/04-contracts/VERSIONING-COMPATIBILITY.md",
+    "sha256": "e7483e5d66325382b3497c2ff796c5cccc7c81cf90c0d3d0f947230e29f1afd2",
+    "dependencies": [
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-CHANGE-001",
+      "BLUTO-CONTRACT-SCHEMA-001",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-CONTRACT-CONSISTENCY-001": {
+    "document_id": "BLUTO-CONTRACT-CONSISTENCY-001",
+    "artifact_id": "ART-BLUTO-CONTRACT-CONSISTENCY-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/04-contracts/STREAM4-CONSISTENCY-REVIEW.md",
+    "sha256": "a1d02020fcf15aa31a049a65cdde7f9b6adf1e1a02052fa0851f30d26a36fd72",
+    "dependencies": [
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-CONTRACT-CONSUMER-001": {
+    "document_id": "BLUTO-CONTRACT-CONSUMER-001",
+    "artifact_id": "ART-BLUTO-CONTRACT-CONSUMER-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/04-contracts/CONSUMER-GUIDELINES.md",
+    "sha256": "2fcb30da59f7623cea561ceb98f0d4efe8ef3ebdedcd4cabeaba42af3bf2fadb",
+    "dependencies": [
+      "BLUTO-ARCH-INTEGRATION-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-CONTRACT-COMPAT-001",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-CONTRACT-CQ-001": {
+    "document_id": "BLUTO-CONTRACT-CQ-001",
+    "artifact_id": "ART-BLUTO-CONTRACT-CQ-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/04-contracts/COMMAND-QUERY-CONTRACTS.md",
+    "sha256": "c7c15f1ec06d1c57c12b5597aab3077b3b0ffc3fe0faef431a2603d8cd18aad6",
+    "dependencies": [
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-CONTRACT-API-001",
+      "BLUTO-DOM-REVIEW-001",
+      "BLUTO-DOM-STATE-001"
+    ]
+  },
+  "BLUTO-CONTRACT-ERROR-001": {
+    "document_id": "BLUTO-CONTRACT-ERROR-001",
+    "artifact_id": "ART-BLUTO-CONTRACT-ERROR-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/04-contracts/ERROR-CONTRACTS.md",
+    "sha256": "5f3ba934373f6130e4ddeb6ce16d0fab25203e532bb3e593d1c9d1e913d9ac2d",
+    "dependencies": [
+      "BLUTO-ARCH-CROSSCUT-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-CONTRACT-API-001",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-CONTRACT-EVENT-001": {
+    "document_id": "BLUTO-CONTRACT-EVENT-001",
+    "artifact_id": "ART-BLUTO-CONTRACT-EVENT-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/04-contracts/EVENT-CONTRACTS.md",
+    "sha256": "718a232f80e0e5269581c1c3089795933af9ea8dc9eb2c137e3860788cc86c64",
+    "dependencies": [
+      "BLUTO-ARCH-INTEGRATION-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-EVENT-001",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-CONTRACT-RELEASE-001": {
+    "document_id": "BLUTO-CONTRACT-RELEASE-001",
+    "artifact_id": "ART-BLUTO-CONTRACT-RELEASE-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/04-contracts/STREAM4-RELEASE-CERTIFICATION.md",
+    "sha256": "47ce7387bc82b25b685107129b4b8afcd02c5da89c0ce117c811b96d4c1ea172",
+    "dependencies": [
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-CONTRACT-CONSISTENCY-001",
+      "BLUTO-CONTRACT-REVIEW-001",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-CONTRACT-REVIEW-001": {
+    "document_id": "BLUTO-CONTRACT-REVIEW-001",
+    "artifact_id": "ART-BLUTO-CONTRACT-REVIEW-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/04-contracts/CONTRACT-REVIEW.md",
+    "sha256": "a07270c979124e75376f92519e6507d261623fc951aa5ed71a0e8e273e295497",
+    "dependencies": [
+      "BLUTO-ARCH-REVIEW-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-CONTRACT-SCHEMA-001": {
+    "document_id": "BLUTO-CONTRACT-SCHEMA-001",
+    "artifact_id": "ART-BLUTO-CONTRACT-SCHEMA-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/04-contracts/SCHEMA-STANDARDS.md",
+    "sha256": "d6e46246e455cd0f9f5596ac718b40409f0b2cf9ad7020dc616e7e3295376795",
+    "dependencies": [
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-CONTRACT-EVENT-001",
+      "BLUTO-DOM-CANONICAL-001",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-CONTRACT-TRACE-001": {
+    "document_id": "BLUTO-CONTRACT-TRACE-001",
+    "artifact_id": "ART-BLUTO-CONTRACT-TRACE-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/04-contracts/CONTRACT-TRACEABILITY.md",
+    "sha256": "d57e7edde0097a75426176374de33b9e3e580744de9e5c3580521285d0094787",
+    "dependencies": [
+      "BLUTO-ARCH-TRACE-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001"
     ]
   },
   "BLUTO-DOCSTATUS-001": {
@@ -364,292 +1527,9 @@
     "path": "docs/01-foundation-governance/DOCUMENT-STATUS.md",
     "sha256": "2f58c9c2bb351c7e6cecdb8319175eabbe09f81064e6b9e6d6510a1703be2f62",
     "dependencies": [
-      "BLUTO-GOV-DOCS-001",
+      "BLUTO-BASE-STD-001",
       "BLUTO-CHANGE-001",
-      "BLUTO-BASE-STD-001"
-    ]
-  },
-  "BLUTO-GLOSSARY-001": {
-    "document_id": "BLUTO-GLOSSARY-001",
-    "artifact_id": "ART-BLUTO-GLOSSARY-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/01-foundation-governance/GLOSSARY.md",
-    "sha256": "2ad9a9e6cc5195703efb1a5fd00d097326cbb52e57debeb9dc1c260d1211f08c",
-    "dependencies": [
-      "BLUTO-SCOPE-001",
-      "BLUTO-NONGOALS-001",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-003"
-    ]
-  },
-  "BLUTO-NONGOALS-001": {
-    "document_id": "BLUTO-NONGOALS-001",
-    "artifact_id": "ART-BLUTO-NONGOALS-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/01-foundation-governance/NON-GOALS.md",
-    "sha256": "e1357dbb9dbe5ac54472adfb20fe35e5ece159d1423b6915a5ef5b2e64c0f0c5",
-    "dependencies": [
-      "BLUTO-SCOPE-001"
-    ]
-  },
-  "BLUTO-S01-README-001": {
-    "document_id": "BLUTO-S01-README-001",
-    "artifact_id": "ART-BLUTO-S01-README-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/01-foundation-governance/README.md",
-    "sha256": "1230fd2599e8b6d63489dee585366ba9ddc772de46d479c975d0b5d22c3751e3",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-003",
-      "BLUTO-BASE-GOV-004"
-    ]
-  },
-  "BLUTO-SCOPE-001": {
-    "document_id": "BLUTO-SCOPE-001",
-    "artifact_id": "ART-BLUTO-SCOPE-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/01-foundation-governance/SCOPE.md",
-    "sha256": "a52e11b9801e42e57bb8ba0575ae69fdfa233470141e26e483310b53363faec6",
-    "dependencies": [
-      "BLUTO-VISION-001",
-      "BLUTO-ARCH-PRINCIPLES-001"
-    ]
-  },
-  "BLUTO-VISION-001": {
-    "document_id": "BLUTO-VISION-001",
-    "artifact_id": "ART-BLUTO-VISION-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/01-foundation-governance/VISION.md",
-    "sha256": "49877964ccf6f43145de31da30c0c1ce634db42d68a8d9df465102bd2f25fd8f",
-    "dependencies": [
-      "BLUTO-S01-README-001"
-    ]
-  },
-  "BLUTO-ADR-0000": {
-    "document_id": "BLUTO-ADR-0000",
-    "artifact_id": "ART-BLUTO-ADR-0000-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/01-foundation-governance/adrs/ADR-0000-USING-ADRS.md",
-    "sha256": "baf58992ac20f49ccc7d7a195d532e074a2db10f660fa40d2e5a1d70db6ddcf4",
-    "dependencies": [
-      "BLUTO-ADR-README-001",
-      "BLUTO-ARCH-PRINCIPLES-001"
-    ]
-  },
-  "BLUTO-ADR-INDEX-001": {
-    "document_id": "BLUTO-ADR-INDEX-001",
-    "artifact_id": "ART-BLUTO-ADR-INDEX-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/01-foundation-governance/adrs/ADR-INDEX.md",
-    "sha256": "c5e1516e35b718977780b7238c607c269223b82ae154604adf1789008be9f95e",
-    "dependencies": [
-      "BLUTO-ADR-0000"
-    ]
-  },
-  "BLUTO-ADR-LIFECYCLE-001": {
-    "document_id": "BLUTO-ADR-LIFECYCLE-001",
-    "artifact_id": "ART-BLUTO-ADR-LIFECYCLE-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/01-foundation-governance/adrs/ADR-LIFECYCLE.md",
-    "sha256": "466a4bf7101b563aaa0bd6cd3c4fcc17417beb060e702041b9696209c71857db",
-    "dependencies": [
-      "BLUTO-ADR-0000",
-      "BLUTO-ADR-TEMPLATE-001"
-    ]
-  },
-  "BLUTO-ADR-REVIEW-001": {
-    "document_id": "BLUTO-ADR-REVIEW-001",
-    "artifact_id": "ART-BLUTO-ADR-REVIEW-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/01-foundation-governance/adrs/ADR-REVIEW-PROCESS.md",
-    "sha256": "b329206c2bf45ba23ca131312b80464a7b3fa3f9a290293c58865453ac46e4b2",
-    "dependencies": [
-      "BLUTO-ADR-LIFECYCLE-001",
-      "BLUTO-BASE-GOV-002"
-    ]
-  },
-  "BLUTO-ADR-TEMPLATE-001": {
-    "document_id": "BLUTO-ADR-TEMPLATE-001",
-    "artifact_id": "ART-BLUTO-ADR-TEMPLATE-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/01-foundation-governance/adrs/ADR-TEMPLATE.md",
-    "sha256": "dbad4452c76bc73587bcdbea2e91bc5bd9daadee91da6b91e5e3737f97aa70c8",
-    "dependencies": [
-      "BLUTO-ADR-0000"
-    ]
-  },
-  "BLUTO-ADR-README-001": {
-    "document_id": "BLUTO-ADR-README-001",
-    "artifact_id": "ART-BLUTO-ADR-README-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/01-foundation-governance/adrs/README.md",
-    "sha256": "39a01f7408bc1732673963ca10fc226a3167aea79a46f8adf7c5d5657999ffe8",
-    "dependencies": [
-      "BLUTO-GLOSSARY-001",
-      "BLUTO-BASE-GOV-002"
-    ]
-  },
-  "BLUTO-GOV-APPROVAL-001": {
-    "document_id": "BLUTO-GOV-APPROVAL-001",
-    "artifact_id": "ART-BLUTO-GOV-APPROVAL-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/01-foundation-governance/governance/APPROVAL-WORKFLOW.md",
-    "sha256": "222bd302750d787b1f8bc6f3bf86bc6380920db72c8dbe053e9a47972caf44f0",
-    "dependencies": [
-      "BLUTO-GOV-DOCS-001",
-      "BLUTO-BASE-CERT-001"
-    ]
-  },
-  "BLUTO-GOV-DOCS-001": {
-    "document_id": "BLUTO-GOV-DOCS-001",
-    "artifact_id": "ART-BLUTO-GOV-DOCS-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/01-foundation-governance/governance/DOCUMENT-GOVERNANCE.md",
-    "sha256": "4c08ce47297a87017c1bbd3795773d163669a7e0b9a264c801ca072f42693d95",
-    "dependencies": [
-      "BLUTO-GOVERNANCE-CHARTER-001",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004"
-    ]
-  },
-  "BLUTO-GOV-ESCALATION-001": {
-    "document_id": "BLUTO-GOV-ESCALATION-001",
-    "artifact_id": "ART-BLUTO-GOV-ESCALATION-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/01-foundation-governance/governance/ESCALATION-PROCESS.md",
-    "sha256": "da6751d91636980dd0c9786739efa4ee83b2e6f060023328d063d7b03b312beb",
-    "dependencies": [
-      "BLUTO-GOVERNANCE-CHARTER-001",
-      "BLUTO-GOV-EXCEPTION-001"
-    ]
-  },
-  "BLUTO-GOV-EXCEPTION-001": {
-    "document_id": "BLUTO-GOV-EXCEPTION-001",
-    "artifact_id": "ART-BLUTO-GOV-EXCEPTION-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/01-foundation-governance/governance/EXCEPTION-PROCESS.md",
-    "sha256": "855b1ca9dcee94b341fd55185c5c215c34586c71c93e10399c4a100d1f580460",
-    "dependencies": [
-      "BLUTO-GOV-REVIEW-001",
-      "BLUTO-BASE-GOV-002"
-    ]
-  },
-  "BLUTO-GOVERNANCE-CHARTER-001": {
-    "document_id": "BLUTO-GOVERNANCE-CHARTER-001",
-    "artifact_id": "ART-BLUTO-GOVERNANCE-CHARTER-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/01-foundation-governance/governance/GOVERNANCE-CHARTER.md",
-    "sha256": "7d534ef33786d35e7b846f97a1512e38cad62c9e21d7a59571f24b67b56522f7",
-    "dependencies": [
-      "BLUTO-GOV-README-001",
-      "BLUTO-BASE-GOV-002"
-    ]
-  },
-  "BLUTO-GOV-MATRIX-001": {
-    "document_id": "BLUTO-GOV-MATRIX-001",
-    "artifact_id": "ART-BLUTO-GOV-MATRIX-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/01-foundation-governance/governance/GOVERNANCE-MATRIX.md",
-    "sha256": "94208b831a05829d9b1f0b2082fc0f8b732f0c87aab2d7c76a6a1b64d1da2bfe",
-    "dependencies": [
-      "BLUTO-GOV-ROLES-001",
-      "BLUTO-GOV-APPROVAL-001"
-    ]
-  },
-  "BLUTO-GOV-README-001": {
-    "document_id": "BLUTO-GOV-README-001",
-    "artifact_id": "ART-BLUTO-GOV-README-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/01-foundation-governance/governance/README.md",
-    "sha256": "900ff6b4a8bc1a65ebd6780940e7f612a48876c61e699c3b3246256d8bf0625e",
-    "dependencies": [
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-ADR-0000"
-    ]
-  },
-  "BLUTO-GOV-REVIEW-001": {
-    "document_id": "BLUTO-GOV-REVIEW-001",
-    "artifact_id": "ART-BLUTO-GOV-REVIEW-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/01-foundation-governance/governance/REVIEW-POLICY.md",
-    "sha256": "6681c2eadc19d54bd9039d4a72b414db01c56cd90821fe9457790cd26117644b",
-    "dependencies": [
-      "BLUTO-GOV-APPROVAL-001",
-      "BLUTO-BASE-QG-001"
-    ]
-  },
-  "BLUTO-GOV-ROLES-001": {
-    "document_id": "BLUTO-GOV-ROLES-001",
-    "artifact_id": "ART-BLUTO-GOV-ROLES-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/01-foundation-governance/governance/ROLES-AND-RESPONSIBILITIES.md",
-    "sha256": "8181e6bccba7b3958893b9a4604624298da58f4d960d735ec841b770b1f9e67d",
-    "dependencies": [
-      "BLUTO-GOVERNANCE-CHARTER-001"
-    ]
-  },
-  "BLUTO-S01-CERT-001": {
-    "document_id": "BLUTO-S01-CERT-001",
-    "artifact_id": "ART-BLUTO-S01-CERT-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/01-foundation-governance/release/RELEASE-CERTIFICATION.md",
-    "sha256": "c3326354ba3cd84fb138682c1f7e23ce8c51c75c57ac08fb0d47bdca94a53a69",
-    "dependencies": [
-      "BLUTO-S01-REV-001",
-      "BLUTO-S01-REV-002",
-      "BLUTO-BASE-CERT-001"
-    ]
-  },
-  "BLUTO-S01-REV-002": {
-    "document_id": "BLUTO-S01-REV-002",
-    "artifact_id": "ART-BLUTO-S01-REV-002-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/01-foundation-governance/reviews/CONSISTENCY-REVIEW.md",
-    "sha256": "7fb4e1b7cf3f171a3ebdce3547acff47afc7bd2451e588dac8811e2db2c5bbcd",
-    "dependencies": [
-      "BLUTO-S01-REV-001"
-    ]
-  },
-  "BLUTO-S01-REV-001": {
-    "document_id": "BLUTO-S01-REV-001",
-    "artifact_id": "ART-BLUTO-S01-REV-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/01-foundation-governance/reviews/EVIDENCE-REVIEW.md",
-    "sha256": "553061b15c86933c15b006c4920b13cad841ce7de2991885a577b5eb1d5f73b4",
-    "dependencies": [
-      "BLUTO-BASE-QG-001",
-      "BLUTO-BASE-VAL-001",
-      "BLUTO-BASE-VAL-002",
-      "BLUTO-BASE-VAL-003",
-      "BLUTO-BASE-VAL-004",
-      "BLUTO-BASE-VAL-005",
-      "BLUTO-BASE-VAL-006"
+      "BLUTO-GOV-DOCS-001"
     ]
   },
   "BLUTO-DOM-AGGREGATE-001": {
@@ -683,10 +1563,10 @@
     "path": "docs/02-domain-model/CANONICAL-DATA-DEFINITIONS.md",
     "sha256": "1b6a928f51d6e14aa4311ef0fbe45d738a8fa72b447256956bd04f1492067e50",
     "dependencies": [
-      "BLUTO-DOM-UL-001",
       "BLUTO-DOM-ENTITY-001",
-      "BLUTO-DOM-VALUEOBJECT-001",
-      "BLUTO-DOM-STATE-001"
+      "BLUTO-DOM-STATE-001",
+      "BLUTO-DOM-UL-001",
+      "BLUTO-DOM-VALUEOBJECT-001"
     ]
   },
   "BLUTO-DOM-CORE-001": {
@@ -698,6 +1578,18 @@
     "sha256": "a96a59bb6174b582c232885e4b02a29c3be1e24487bfcf33a2aad49c937634bf",
     "dependencies": [
       "BLUTO-DOM-OVERVIEW-001"
+    ]
+  },
+  "BLUTO-DOM-ENTITY-001": {
+    "document_id": "BLUTO-DOM-ENTITY-001",
+    "artifact_id": "ART-BLUTO-DOM-ENTITY-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/02-domain-model/ENTITY-CATALOGUE.md",
+    "sha256": "c7488d8096a97fe48d616dbce39bc628f3d1c46c4f0b99c47817a925107c0c18",
+    "dependencies": [
+      "BLUTO-DOM-BC-001",
+      "BLUTO-DOM-UL-001"
     ]
   },
   "BLUTO-DOM-EVENT-001": {
@@ -719,49 +1611,12 @@
     "path": "docs/02-domain-model/DOMAIN-MODEL-OVERVIEW.md",
     "sha256": "ac9be2a2e2fa08d385e6422339e7d4171ee63ff11fabbd0909194323e9fd0005",
     "dependencies": [
-      "BLUTO-S02-README-001",
-      "BLUTO-VISION-001",
       "BLUTO-ARCH-PRINCIPLES-001",
-      "BLUTO-SCOPE-001",
-      "BLUTO-NONGOALS-001",
-      "BLUTO-GLOSSARY-001"
-    ]
-  },
-  "BLUTO-DOM-REVIEW-001": {
-    "document_id": "BLUTO-DOM-REVIEW-001",
-    "artifact_id": "ART-BLUTO-DOM-REVIEW-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/02-domain-model/DOMAIN-REVIEW.md",
-    "sha256": "b3047fa10309c9e1c3b9029be610177251c14b325970550a30bebed371004506",
-    "dependencies": [
-      "BLUTO-DOM-TRACE-001",
-      "BLUTO-GOV-ARCHREVIEW-001"
-    ]
-  },
-  "BLUTO-DOM-ENTITY-001": {
-    "document_id": "BLUTO-DOM-ENTITY-001",
-    "artifact_id": "ART-BLUTO-DOM-ENTITY-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/02-domain-model/ENTITY-CATALOGUE.md",
-    "sha256": "c7488d8096a97fe48d616dbce39bc628f3d1c46c4f0b99c47817a925107c0c18",
-    "dependencies": [
-      "BLUTO-DOM-UL-001",
-      "BLUTO-DOM-BC-001"
-    ]
-  },
-  "BLUTO-S02-README-001": {
-    "document_id": "BLUTO-S02-README-001",
-    "artifact_id": "ART-BLUTO-S02-README-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/02-domain-model/README.md",
-    "sha256": "a2ec1ebd035dc93d6f85be76f0a1f4f034b7b7f3135dfffc5dedcf3a4d5d313d",
-    "dependencies": [
-      "BLUTO-S01-README-001",
       "BLUTO-GLOSSARY-001",
-      "BLUTO-ARCH-PRINCIPLES-001"
+      "BLUTO-NONGOALS-001",
+      "BLUTO-S02-README-001",
+      "BLUTO-SCOPE-001",
+      "BLUTO-VISION-001"
     ]
   },
   "BLUTO-DOM-REPOSITORY-001": {
@@ -774,6 +1629,18 @@
     "dependencies": [
       "BLUTO-DOM-AGGREGATE-001",
       "BLUTO-DOM-EVENT-001"
+    ]
+  },
+  "BLUTO-DOM-REVIEW-001": {
+    "document_id": "BLUTO-DOM-REVIEW-001",
+    "artifact_id": "ART-BLUTO-DOM-REVIEW-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/02-domain-model/DOMAIN-REVIEW.md",
+    "sha256": "b3047fa10309c9e1c3b9029be610177251c14b325970550a30bebed371004506",
+    "dependencies": [
+      "BLUTO-DOM-TRACE-001",
+      "BLUTO-GOV-ARCHREVIEW-001"
     ]
   },
   "BLUTO-DOM-STATE-001": {
@@ -825,1222 +1692,6 @@
       "BLUTO-DOM-ENTITY-001"
     ]
   },
-  "BLUTO-S02-CERT-001": {
-    "document_id": "BLUTO-S02-CERT-001",
-    "artifact_id": "ART-BLUTO-S02-CERT-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/02-domain-model/release/RELEASE-CERTIFICATION.md",
-    "sha256": "dca499a777af080a3b5a687c97121de38625efdba676ffae0aa633b66be20a44",
-    "dependencies": [
-      "BLUTO-S02-REV-001",
-      "BLUTO-S02-REV-002",
-      "BLUTO-BASE-CERT-001"
-    ]
-  },
-  "BLUTO-S02-REV-002": {
-    "document_id": "BLUTO-S02-REV-002",
-    "artifact_id": "ART-BLUTO-S02-REV-002-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/02-domain-model/reviews/CONSISTENCY-REVIEW.md",
-    "sha256": "9cf534dddf11b80d434c04994cc40492bbb227e442b77414b63c42c9aaad4a58",
-    "dependencies": [
-      "BLUTO-S02-REV-001"
-    ]
-  },
-  "BLUTO-S02-REV-001": {
-    "document_id": "BLUTO-S02-REV-001",
-    "artifact_id": "ART-BLUTO-S02-REV-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/02-domain-model/reviews/EVIDENCE-REVIEW.md",
-    "sha256": "1a2aa04a9e4dc7b6ca1395ee420b97aa13df68a35579357153c1aaf7c9de5e8d",
-    "dependencies": [
-      "BLUTO-BASE-QG-001",
-      "BLUTO-BASE-VAL-001",
-      "BLUTO-BASE-VAL-002",
-      "BLUTO-BASE-VAL-003",
-      "BLUTO-BASE-VAL-004",
-      "BLUTO-BASE-VAL-005",
-      "BLUTO-BASE-VAL-006"
-    ]
-  },
-  "BLUTO-ARCH-CONSTRAINT-001": {
-    "document_id": "BLUTO-ARCH-CONSTRAINT-001",
-    "artifact_id": "ART-BLUTO-ARCH-CONSTRAINT-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/03-architecture/ARCHITECTURAL-CONSTRAINTS.md",
-    "sha256": "a406958e08693207a17bf6b70e515be8086e898cb6894a03344de00e57325798",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-ARCH-DRIVER-001",
-      "BLUTO-ARCH-REF-001",
-      "BLUTO-DOM-AGGREGATE-001",
-      "BLUTO-DOM-CANONICAL-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-ARCH-DRIVER-001": {
-    "document_id": "BLUTO-ARCH-DRIVER-001",
-    "artifact_id": "ART-BLUTO-ARCH-DRIVER-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/03-architecture/ARCHITECTURAL-DRIVERS.md",
-    "sha256": "5d948ec88ce861e93b6fd89a3423bfe139ea5304c20d0202539dbfb70faef727",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-ARCH-VISION-001",
-      "BLUTO-ARCH-REF-001",
-      "BLUTO-DOM-TRACE-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-ARCH-REVIEW-001": {
-    "document_id": "BLUTO-ARCH-REVIEW-001",
-    "artifact_id": "ART-BLUTO-ARCH-REVIEW-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/03-architecture/ARCHITECTURE-REVIEW.md",
-    "sha256": "13d3f7bb56b32f05f0c443e4795646884625be7762b7ba69bb72acc10f12070b",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-ARCH-TRACE-001",
-      "BLUTO-ARCH-QAS-001",
-      "BLUTO-ARCH-CONSTRAINT-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-ARCH-TRACE-001": {
-    "document_id": "BLUTO-ARCH-TRACE-001",
-    "artifact_id": "ART-BLUTO-ARCH-TRACE-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/03-architecture/ARCHITECTURE-TRACEABILITY.md",
-    "sha256": "647393c0ecf7513e93daf456d16f0e1c20177706d72f06702928305cfb3b2563",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-ARCH-VIEWS-001",
-      "BLUTO-ARCH-CROSSCUT-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-ARCH-VIEWS-001": {
-    "document_id": "BLUTO-ARCH-VIEWS-001",
-    "artifact_id": "ART-BLUTO-ARCH-VIEWS-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/03-architecture/ARCHITECTURE-VIEWS.md",
-    "sha256": "9e0e7bf463063ca5ce6ae65b57c36affc33552e8bda79b42b7b9466e50795611",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-ARCH-REF-001",
-      "BLUTO-ARCH-LOGICAL-001",
-      "BLUTO-ARCH-PHYSICAL-001",
-      "BLUTO-ARCH-DEPLOY-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-ARCH-VISION-001": {
-    "document_id": "BLUTO-ARCH-VISION-001",
-    "artifact_id": "ART-BLUTO-ARCH-VISION-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/03-architecture/ARCHITECTURE-VISION.md",
-    "sha256": "5c36480dffa7ef6a35b7edd6b785067e4a311852ad444abbed7c0c2c55206719",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-ARCH-REF-001",
-      "BLUTO-DOM-REVIEW-001",
-      "BLUTO-VISION-001",
-      "BLUTO-ARCH-PRINCIPLES-001"
-    ]
-  },
-  "BLUTO-ARCH-CROSSCUT-001": {
-    "document_id": "BLUTO-ARCH-CROSSCUT-001",
-    "artifact_id": "ART-BLUTO-ARCH-CROSSCUT-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/03-architecture/CROSS-CUTTING-CONCERNS.md",
-    "sha256": "7dfc8d5cae6991775beda987bad8df02d57bb9dc099ce9c2f84bed109951b0e7",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-ARCH-LOGICAL-001",
-      "BLUTO-ARCH-RUNTIME-001",
-      "BLUTO-ARCH-INTEGRATION-001",
-      "BLUTO-ARCH-DATA-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-ARCH-DATA-001": {
-    "document_id": "BLUTO-ARCH-DATA-001",
-    "artifact_id": "ART-BLUTO-ARCH-DATA-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/03-architecture/DATA-ARCHITECTURE.md",
-    "sha256": "c650da49da8157d58851efa81e475cd9518256a47cc92565f4dc7d19473b56ce",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-ARCH-RUNTIME-001",
-      "BLUTO-DOM-CANONICAL-001",
-      "BLUTO-DOM-REPOSITORY-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-ARCH-DEPLOY-001": {
-    "document_id": "BLUTO-ARCH-DEPLOY-001",
-    "artifact_id": "ART-BLUTO-ARCH-DEPLOY-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/03-architecture/DEPLOYMENT-ARCHITECTURE.md",
-    "sha256": "67e4b8052e86842442594b40842b7838c8ed81b4c0d7c6c022c3bd8ca439ee08",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-ARCH-PHYSICAL-001",
-      "BLUTO-ARCH-DATA-001",
-      "BLUTO-ARCH-QAS-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-ARCH-INTEGRATION-001": {
-    "document_id": "BLUTO-ARCH-INTEGRATION-001",
-    "artifact_id": "ART-BLUTO-ARCH-INTEGRATION-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/03-architecture/INTEGRATION-ARCHITECTURE.md",
-    "sha256": "a4cf4ed5a23b976d86c2293f37c711f390dab7b5002e1e3ce83f3e98e5c1789c",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-ARCH-RUNTIME-001",
-      "BLUTO-ARCH-PHYSICAL-001",
-      "BLUTO-DOM-CANONICAL-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-ARCH-LOGICAL-001": {
-    "document_id": "BLUTO-ARCH-LOGICAL-001",
-    "artifact_id": "ART-BLUTO-ARCH-LOGICAL-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/03-architecture/LOGICAL-ARCHITECTURE.md",
-    "sha256": "da8f281b41c94fc2016426ed618a1b27ed38bd8c638404b6bea2bb69984151ef",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-ARCH-REF-001",
-      "BLUTO-ARCH-QAS-001",
-      "BLUTO-DOM-BC-001",
-      "BLUTO-DOM-AGGREGATE-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-ARCH-PHYSICAL-001": {
-    "document_id": "BLUTO-ARCH-PHYSICAL-001",
-    "artifact_id": "ART-BLUTO-ARCH-PHYSICAL-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/03-architecture/PHYSICAL-ARCHITECTURE.md",
-    "sha256": "41c78e8213816151ab63c54d7d85659959387050800f8c5dc3281a13a31e7fec",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-ARCH-LOGICAL-001",
-      "BLUTO-ARCH-CONSTRAINT-001",
-      "BLUTO-DOM-REPOSITORY-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-ARCH-QAS-001": {
-    "document_id": "BLUTO-ARCH-QAS-001",
-    "artifact_id": "ART-BLUTO-ARCH-QAS-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/03-architecture/QUALITY-ATTRIBUTE-SCENARIOS.md",
-    "sha256": "f433113ec1f3f8b1662af949619cfd767814e49e3620f5cdd1bc87c586a71928",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-ARCH-DRIVER-001",
-      "BLUTO-ARCH-CONSTRAINT-001",
-      "BLUTO-DOM-TRACE-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-S03-DOC-972": {
-    "document_id": "BLUTO-S03-DOC-972",
-    "artifact_id": "ART-BLUTO-S03-DOC-972-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/03-architecture/README.md",
-    "sha256": "1298a63a189168d1eeacc7808c9a10752477faf73829a8a6fa935e8941b56f4e",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-ARCH-DEPENDENCY-001": {
-    "document_id": "BLUTO-ARCH-DEPENDENCY-001",
-    "artifact_id": "ART-BLUTO-ARCH-DEPENDENCY-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/03-architecture/REPOSITORY-ARCHITECTURE-DEPENDENCY-GRAPH.md",
-    "sha256": "77a727be0a642c10126a7412c89dfd137476a7e18d4be68aed56310b98d9832f",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-VISION-001",
-      "BLUTO-ARCH-PRINCIPLES-001",
-      "BLUTO-DOM-REVIEW-001",
-      "BLUTO-ARCH-REVIEW-001"
-    ]
-  },
-  "BLUTO-ARCH-REF-001": {
-    "document_id": "BLUTO-ARCH-REF-001",
-    "artifact_id": "ART-BLUTO-ARCH-REF-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/03-architecture/REPOSITORY-REFERENCE-ARCHITECTURE.md",
-    "sha256": "dbfc72dcffb092f512663b0b864b6083eeba21d48740e1b9c14b5bc7da463beb",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-DOM-OVERVIEW-001",
-      "BLUTO-DOM-CORE-001",
-      "BLUTO-DOM-BC-001",
-      "BLUTO-DOM-UL-001",
-      "BLUTO-DOM-ENTITY-001",
-      "BLUTO-DOM-VALUEOBJECT-001",
-      "BLUTO-DOM-AGGREGATE-001",
-      "BLUTO-DOM-EVENT-001",
-      "BLUTO-DOM-REPOSITORY-001",
-      "BLUTO-DOM-STATE-001",
-      "BLUTO-DOM-CANONICAL-001",
-      "BLUTO-DOM-TRACE-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-ARCH-RUNTIME-001": {
-    "document_id": "BLUTO-ARCH-RUNTIME-001",
-    "artifact_id": "ART-BLUTO-ARCH-RUNTIME-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/03-architecture/RUNTIME-ARCHITECTURE.md",
-    "sha256": "f448de0e7a076b25903b982f05210763d6b5f6f2bea6f7bd3d2ae3b915b2eb7f",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-ARCH-LOGICAL-001",
-      "BLUTO-ARCH-PHYSICAL-001",
-      "BLUTO-DOM-STATE-001",
-      "BLUTO-DOM-EVENT-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-ARCH-CONSISTENCY-001": {
-    "document_id": "BLUTO-ARCH-CONSISTENCY-001",
-    "artifact_id": "ART-BLUTO-ARCH-CONSISTENCY-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/03-architecture/STREAM3-CONSISTENCY-REVIEW.md",
-    "sha256": "55387e20c8454a8eaee03b8190bf4de13a3b42bc336225faafbb8c70d9d89b2e",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-ARCH-RELEASE-001": {
-    "document_id": "BLUTO-ARCH-RELEASE-001",
-    "artifact_id": "ART-BLUTO-ARCH-RELEASE-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/03-architecture/STREAM3-RELEASE-CERTIFICATION.md",
-    "sha256": "c00acc4cd0734b5d5855de76fdb2647af98e1c962604677cd0ff21b8c0d1e135",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-ARCH-REVIEW-001",
-      "BLUTO-ARCH-CONSISTENCY-001",
-      "BLUTO-ARCH-DEPENDENCY-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-ARCH-TECH-001": {
-    "document_id": "BLUTO-ARCH-TECH-001",
-    "artifact_id": "ART-BLUTO-ARCH-TECH-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/03-architecture/TECHNOLOGY-DECISIONS.md",
-    "sha256": "ee718e367c830bf0ed2e28042784a215f8ebb23f9ef4e3520e1174468dcd91c0",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-ARCH-DRIVER-001",
-      "BLUTO-ARCH-CONSTRAINT-001",
-      "BLUTO-ARCH-DEPLOY-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-S03-CERT-001": {
-    "document_id": "BLUTO-S03-CERT-001",
-    "artifact_id": "ART-BLUTO-S03-CERT-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/03-architecture/release/RELEASE-CERTIFICATION.md",
-    "sha256": "b6d11cda5b17c7566e14ca6d9626a0dd7c126f9610613de989c03abbe72d6286",
-    "dependencies": [
-      "BLUTO-S03-REV-001",
-      "BLUTO-S03-REV-002",
-      "BLUTO-BASE-CERT-001"
-    ]
-  },
-  "BLUTO-S03-REV-002": {
-    "document_id": "BLUTO-S03-REV-002",
-    "artifact_id": "ART-BLUTO-S03-REV-002-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/03-architecture/reviews/CONSISTENCY-REVIEW.md",
-    "sha256": "46265be54f387cc3805beb9eab595f1fbc388ef5d55feb9e2e7147153cb17c06",
-    "dependencies": [
-      "BLUTO-S03-REV-001"
-    ]
-  },
-  "BLUTO-S03-REV-001": {
-    "document_id": "BLUTO-S03-REV-001",
-    "artifact_id": "ART-BLUTO-S03-REV-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/03-architecture/reviews/EVIDENCE-REVIEW.md",
-    "sha256": "3e499e1cdb9eaf6fd8dd7b5d6c2a1bde55f48ebc74c55d41be273f938a8c998f",
-    "dependencies": [
-      "BLUTO-BASE-QG-001",
-      "BLUTO-BASE-VAL-001",
-      "BLUTO-BASE-VAL-002",
-      "BLUTO-BASE-VAL-003",
-      "BLUTO-BASE-VAL-004",
-      "BLUTO-BASE-VAL-005",
-      "BLUTO-BASE-VAL-006"
-    ]
-  },
-  "BLUTO-CONTRACT-API-001": {
-    "document_id": "BLUTO-CONTRACT-API-001",
-    "artifact_id": "ART-BLUTO-CONTRACT-API-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/04-contracts/API-STANDARDS.md",
-    "sha256": "c4d2ae5b2464306f47dada30251357c637b8a0e621aaa4bc48b52bdf35bf008e",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-CONTRACT-ARCH-001",
-      "BLUTO-ARCH-CROSSCUT-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-CONTRACT-CQ-001": {
-    "document_id": "BLUTO-CONTRACT-CQ-001",
-    "artifact_id": "ART-BLUTO-CONTRACT-CQ-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/04-contracts/COMMAND-QUERY-CONTRACTS.md",
-    "sha256": "c7c15f1ec06d1c57c12b5597aab3077b3b0ffc3fe0faef431a2603d8cd18aad6",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-CONTRACT-API-001",
-      "BLUTO-DOM-STATE-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-CONTRACT-CONSUMER-001": {
-    "document_id": "BLUTO-CONTRACT-CONSUMER-001",
-    "artifact_id": "ART-BLUTO-CONTRACT-CONSUMER-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/04-contracts/CONSUMER-GUIDELINES.md",
-    "sha256": "2fcb30da59f7623cea561ceb98f0d4efe8ef3ebdedcd4cabeaba42af3bf2fadb",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-CONTRACT-COMPAT-001",
-      "BLUTO-ARCH-INTEGRATION-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-CONTRACT-ARCH-001": {
-    "document_id": "BLUTO-CONTRACT-ARCH-001",
-    "artifact_id": "ART-BLUTO-CONTRACT-ARCH-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/04-contracts/CONTRACT-ARCHITECTURE.md",
-    "sha256": "8a2230af19601f59bca06190b3718d7559d24cf46779dae616c8d22c831edc42",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-ARCH-REVIEW-001",
-      "BLUTO-ARCH-TRACE-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-CONTRACT-REVIEW-001": {
-    "document_id": "BLUTO-CONTRACT-REVIEW-001",
-    "artifact_id": "ART-BLUTO-CONTRACT-REVIEW-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/04-contracts/CONTRACT-REVIEW.md",
-    "sha256": "a07270c979124e75376f92519e6507d261623fc951aa5ed71a0e8e273e295497",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-ARCH-REVIEW-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-CONTRACT-TRACE-001": {
-    "document_id": "BLUTO-CONTRACT-TRACE-001",
-    "artifact_id": "ART-BLUTO-CONTRACT-TRACE-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/04-contracts/CONTRACT-TRACEABILITY.md",
-    "sha256": "d57e7edde0097a75426176374de33b9e3e580744de9e5c3580521285d0094787",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-ARCH-TRACE-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-CONTRACT-ERROR-001": {
-    "document_id": "BLUTO-CONTRACT-ERROR-001",
-    "artifact_id": "ART-BLUTO-CONTRACT-ERROR-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/04-contracts/ERROR-CONTRACTS.md",
-    "sha256": "5f3ba934373f6130e4ddeb6ce16d0fab25203e532bb3e593d1c9d1e913d9ac2d",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-ARCH-CROSSCUT-001",
-      "BLUTO-CONTRACT-API-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-CONTRACT-EVENT-001": {
-    "document_id": "BLUTO-CONTRACT-EVENT-001",
-    "artifact_id": "ART-BLUTO-CONTRACT-EVENT-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/04-contracts/EVENT-CONTRACTS.md",
-    "sha256": "718a232f80e0e5269581c1c3089795933af9ea8dc9eb2c137e3860788cc86c64",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-DOM-EVENT-001",
-      "BLUTO-ARCH-INTEGRATION-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-S04-DOC-972": {
-    "document_id": "BLUTO-S04-DOC-972",
-    "artifact_id": "ART-BLUTO-S04-DOC-972-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/04-contracts/README.md",
-    "sha256": "8a64b029335f9a2522ebe8abb78e79b2088c26ff791524d955ddbc76c08000df",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-CONTRACT-SCHEMA-001": {
-    "document_id": "BLUTO-CONTRACT-SCHEMA-001",
-    "artifact_id": "ART-BLUTO-CONTRACT-SCHEMA-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/04-contracts/SCHEMA-STANDARDS.md",
-    "sha256": "d6e46246e455cd0f9f5596ac718b40409f0b2cf9ad7020dc616e7e3295376795",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-DOM-CANONICAL-001",
-      "BLUTO-CONTRACT-EVENT-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-CONTRACT-CONSISTENCY-001": {
-    "document_id": "BLUTO-CONTRACT-CONSISTENCY-001",
-    "artifact_id": "ART-BLUTO-CONTRACT-CONSISTENCY-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/04-contracts/STREAM4-CONSISTENCY-REVIEW.md",
-    "sha256": "a1d02020fcf15aa31a049a65cdde7f9b6adf1e1a02052fa0851f30d26a36fd72",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-CONTRACT-RELEASE-001": {
-    "document_id": "BLUTO-CONTRACT-RELEASE-001",
-    "artifact_id": "ART-BLUTO-CONTRACT-RELEASE-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/04-contracts/STREAM4-RELEASE-CERTIFICATION.md",
-    "sha256": "47ce7387bc82b25b685107129b4b8afcd02c5da89c0ce117c811b96d4c1ea172",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-CONTRACT-REVIEW-001",
-      "BLUTO-CONTRACT-CONSISTENCY-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-CONTRACT-COMPAT-001": {
-    "document_id": "BLUTO-CONTRACT-COMPAT-001",
-    "artifact_id": "ART-BLUTO-CONTRACT-COMPAT-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/04-contracts/VERSIONING-COMPATIBILITY.md",
-    "sha256": "e7483e5d66325382b3497c2ff796c5cccc7c81cf90c0d3d0f947230e29f1afd2",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-CHANGE-001",
-      "BLUTO-CONTRACT-SCHEMA-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-S04-CERT-001": {
-    "document_id": "BLUTO-S04-CERT-001",
-    "artifact_id": "ART-BLUTO-S04-CERT-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/04-contracts/release/RELEASE-CERTIFICATION.md",
-    "sha256": "a02f1b9cf67344da55743014d010b4c20532a38c5949bb2214d08498684e4d19",
-    "dependencies": [
-      "BLUTO-S04-REV-001",
-      "BLUTO-S04-REV-002",
-      "BLUTO-BASE-CERT-001"
-    ]
-  },
-  "BLUTO-S04-REV-002": {
-    "document_id": "BLUTO-S04-REV-002",
-    "artifact_id": "ART-BLUTO-S04-REV-002-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/04-contracts/reviews/CONSISTENCY-REVIEW.md",
-    "sha256": "405ebd98e70056219386a334e3a5ee0dde0f05461d7a9708f20ef3ad01cc1bfa",
-    "dependencies": [
-      "BLUTO-S04-REV-001"
-    ]
-  },
-  "BLUTO-S04-REV-001": {
-    "document_id": "BLUTO-S04-REV-001",
-    "artifact_id": "ART-BLUTO-S04-REV-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/04-contracts/reviews/EVIDENCE-REVIEW.md",
-    "sha256": "486c111adf2998b614aca24d1245e89c036e69f3b1acd5548698f07fa7917417",
-    "dependencies": [
-      "BLUTO-BASE-QG-001",
-      "BLUTO-BASE-VAL-001",
-      "BLUTO-BASE-VAL-002",
-      "BLUTO-BASE-VAL-003",
-      "BLUTO-BASE-VAL-004",
-      "BLUTO-BASE-VAL-005",
-      "BLUTO-BASE-VAL-006"
-    ]
-  },
-  "BLUTO-SEC-AUDIT-001": {
-    "document_id": "BLUTO-SEC-AUDIT-001",
-    "artifact_id": "ART-BLUTO-SEC-AUDIT-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/05-security/AUDIT-COMPLIANCE.md",
-    "sha256": "e53ff866a7bab5474e56cc4a2c395c5da5bc7c2e578b675b4cc86a09fe5f1527",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-SEC-THREAT-001",
-      "BLUTO-ARCH-CROSSCUT-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-SEC-IAM-001": {
-    "document_id": "BLUTO-SEC-IAM-001",
-    "artifact_id": "ART-BLUTO-SEC-IAM-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/05-security/AUTHENTICATION-AUTHORIZATION.md",
-    "sha256": "25dbe707062c1f0c800a73d034247171859438b25e0e93723a4b78e9b3a61ca0",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-SEC-ARCH-001",
-      "BLUTO-CONTRACT-API-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-SEC-CRYPTO-001": {
-    "document_id": "BLUTO-SEC-CRYPTO-001",
-    "artifact_id": "ART-BLUTO-SEC-CRYPTO-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/05-security/CRYPTOGRAPHY-SECRETS.md",
-    "sha256": "5bbc0390ecaadd4377e55ca5bfd382df485a16ee625ef0db579c0feb4eb88007",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-SEC-ARCH-001",
-      "BLUTO-ARCH-TECH-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-SEC-DATA-001": {
-    "document_id": "BLUTO-SEC-DATA-001",
-    "artifact_id": "ART-BLUTO-SEC-DATA-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/05-security/DATA-CLASSIFICATION-PRIVACY.md",
-    "sha256": "3efbc5076caf9a3b3c30a1d1d1cbe66c3564580c5f9f10ae39a5cfce885f3340",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-DOM-CANONICAL-001",
-      "BLUTO-CONTRACT-SCHEMA-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-SEC-IR-001": {
-    "document_id": "BLUTO-SEC-IR-001",
-    "artifact_id": "ART-BLUTO-SEC-IR-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/05-security/INCIDENT-RESPONSE.md",
-    "sha256": "362297e708eb397b2a23908ff22a65139c1afa850031613fd4aecef7c770f273",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-SEC-AUDIT-001",
-      "BLUTO-ARCH-DEPLOY-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-S05-DOC-972": {
-    "document_id": "BLUTO-S05-DOC-972",
-    "artifact_id": "ART-BLUTO-S05-DOC-972-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/05-security/README.md",
-    "sha256": "0bee095791847f0b50b68267f91ba300245862795a787e2d974eab33f48bcd1c",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-SEC-SDLC-001": {
-    "document_id": "BLUTO-SEC-SDLC-001",
-    "artifact_id": "ART-BLUTO-SEC-SDLC-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/05-security/SECURE-SDLC.md",
-    "sha256": "216399057e84134891e4f21e9f2630fbc37ae493802c0e23b40c476dbb25cfb4",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-SEC-THREAT-001",
-      "BLUTO-CONTRACT-COMPAT-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-SEC-ARCH-001": {
-    "document_id": "BLUTO-SEC-ARCH-001",
-    "artifact_id": "ART-BLUTO-SEC-ARCH-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/05-security/SECURITY-ARCHITECTURE.md",
-    "sha256": "97c6248ff18c12c117cb843f13d902628013f91b8768810d02516ff99f8852f1",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-ARCH-DEPLOY-001",
-      "BLUTO-CONTRACT-ARCH-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-SEC-REVIEW-001": {
-    "document_id": "BLUTO-SEC-REVIEW-001",
-    "artifact_id": "ART-BLUTO-SEC-REVIEW-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/05-security/SECURITY-REVIEW.md",
-    "sha256": "7ea7e939b836f2d0963ff5519fc07761a5c938a7a9b1538cdc0b0de9bdf860af",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-SEC-TRACE-001": {
-    "document_id": "BLUTO-SEC-TRACE-001",
-    "artifact_id": "ART-BLUTO-SEC-TRACE-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/05-security/SECURITY-TRACEABILITY.md",
-    "sha256": "2c0d2ea93754c2d73d10bd5d5a09b418b55aa0e08988733d644879934aff785f",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-ARCH-TRACE-001",
-      "BLUTO-CONTRACT-TRACE-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-SEC-CONSISTENCY-001": {
-    "document_id": "BLUTO-SEC-CONSISTENCY-001",
-    "artifact_id": "ART-BLUTO-SEC-CONSISTENCY-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/05-security/STREAM5-CONSISTENCY-REVIEW.md",
-    "sha256": "2c1ebda17acf2b486a1a2c61dfd65c2f042105d8b6080b194c9b22e5b69b9ecd",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-SEC-RELEASE-001": {
-    "document_id": "BLUTO-SEC-RELEASE-001",
-    "artifact_id": "ART-BLUTO-SEC-RELEASE-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/05-security/STREAM5-RELEASE-CERTIFICATION.md",
-    "sha256": "04ba11ed8d516c05fbe84d384d963fc78a464a1d3b1408d2100af7e3de998d06",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-SEC-REVIEW-001",
-      "BLUTO-SEC-CONSISTENCY-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-SEC-TENANT-001": {
-    "document_id": "BLUTO-SEC-TENANT-001",
-    "artifact_id": "ART-BLUTO-SEC-TENANT-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/05-security/TENANT-ISOLATION.md",
-    "sha256": "65929af1c75613bf19898e0783560bd2c1fa9e350379455b96fa869f49208e8f",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-SEC-IAM-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-SEC-THREAT-001": {
-    "document_id": "BLUTO-SEC-THREAT-001",
-    "artifact_id": "ART-BLUTO-SEC-THREAT-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/05-security/THREAT-MODEL.md",
-    "sha256": "0e50ab509d997fc141f936388a6b5964233a2ee66d5ecc9f687c5c0088205054",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-SEC-ARCH-001",
-      "BLUTO-ARCH-VIEWS-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-S05-CERT-001": {
-    "document_id": "BLUTO-S05-CERT-001",
-    "artifact_id": "ART-BLUTO-S05-CERT-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/05-security/release/RELEASE-CERTIFICATION.md",
-    "sha256": "a06e5b7f156d631802e4ea26971c7a22afda478017d7fdf8b580b5d7e1e8c4ff",
-    "dependencies": [
-      "BLUTO-S05-REV-001",
-      "BLUTO-S05-REV-002",
-      "BLUTO-BASE-CERT-001"
-    ]
-  },
-  "BLUTO-S05-REV-002": {
-    "document_id": "BLUTO-S05-REV-002",
-    "artifact_id": "ART-BLUTO-S05-REV-002-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/05-security/reviews/CONSISTENCY-REVIEW.md",
-    "sha256": "32efa3553bdc94ad17651e9aca3f4b5f430ea8dee8913a7416ad6efda232cb98",
-    "dependencies": [
-      "BLUTO-S05-REV-001"
-    ]
-  },
-  "BLUTO-S05-REV-001": {
-    "document_id": "BLUTO-S05-REV-001",
-    "artifact_id": "ART-BLUTO-S05-REV-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/05-security/reviews/EVIDENCE-REVIEW.md",
-    "sha256": "3f0c10abc39dff453a89f0005c6d4addaadb505a312cba8034920bd45981c432",
-    "dependencies": [
-      "BLUTO-BASE-QG-001",
-      "BLUTO-BASE-VAL-001",
-      "BLUTO-BASE-VAL-002",
-      "BLUTO-BASE-VAL-003",
-      "BLUTO-BASE-VAL-004",
-      "BLUTO-BASE-VAL-005",
-      "BLUTO-BASE-VAL-006"
-    ]
-  },
-  "BLUTO-ENG-REVIEW-001": {
-    "document_id": "BLUTO-ENG-REVIEW-001",
-    "artifact_id": "ART-BLUTO-ENG-REVIEW-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/06-engineering-standards/CODE-REVIEW-STANDARD.md",
-    "sha256": "0dc51cbe6cfa3b65f59ed7cc81f55e67622b5e5ce4650e76c73c35a5f09d3233",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-ARCH-REVIEW-001",
-      "BLUTO-SEC-SDLC-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-ENG-CODE-001": {
-    "document_id": "BLUTO-ENG-CODE-001",
-    "artifact_id": "ART-BLUTO-ENG-CODE-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/06-engineering-standards/CODING-STANDARDS.md",
-    "sha256": "51bf48a218b8d15c17978c21ac95b2514d09eb8826967f590a2776b71caedab3",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-ENG-ARCH-001",
-      "BLUTO-DOM-UL-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-ENG-CONFIG-001": {
-    "document_id": "BLUTO-ENG-CONFIG-001",
-    "artifact_id": "ART-BLUTO-ENG-CONFIG-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/06-engineering-standards/CONFIGURATION-FEATURE-FLAGS.md",
-    "sha256": "dc2d33ac6a1861d2217874031730bb4e3d2a215b4dbb345187077cb98505fcae",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-ARCH-CROSSCUT-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-ENG-DATA-001": {
-    "document_id": "BLUTO-ENG-DATA-001",
-    "artifact_id": "ART-BLUTO-ENG-DATA-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/06-engineering-standards/DATABASE-MIGRATION-STANDARDS.md",
-    "sha256": "e6b60ec047a5538fdaf0d85df81de552389d74c359505f652436e093dc53529a",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-ARCH-DATA-001",
-      "BLUTO-SEC-ARCH-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-ENG-SUPPLY-001": {
-    "document_id": "BLUTO-ENG-SUPPLY-001",
-    "artifact_id": "ART-BLUTO-ENG-SUPPLY-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/06-engineering-standards/DEPENDENCY-SUPPLY-CHAIN.md",
-    "sha256": "9b0cc20e730b679af48cdc0d33848b23bcf940c64138e4419bb691b6edad7dbf",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-SEC-SDLC-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
   "BLUTO-ENG-ARCH-001": {
     "document_id": "BLUTO-ENG-ARCH-001",
     "artifact_id": "ART-BLUTO-ENG-ARCH-001-v1.1.0",
@@ -2077,13 +1728,13 @@
       "BLUTO-DOM-REVIEW-001"
     ]
   },
-  "BLUTO-ENG-TRACE-001": {
-    "document_id": "BLUTO-ENG-TRACE-001",
-    "artifact_id": "ART-BLUTO-ENG-TRACE-001-v1.1.0",
+  "BLUTO-ENG-CODE-001": {
+    "document_id": "BLUTO-ENG-CODE-001",
+    "artifact_id": "ART-BLUTO-ENG-CODE-001-v1.1.0",
     "version": "1.1.0",
     "status": "Baselined",
-    "path": "docs/06-engineering-standards/ENGINEERING-TRACEABILITY.md",
-    "sha256": "0ad03392a20f25fac42b5fb35485906a589067d1d6503f49e0c633f52b2b6124",
+    "path": "docs/06-engineering-standards/CODING-STANDARDS.md",
+    "sha256": "51bf48a218b8d15c17978c21ac95b2514d09eb8826967f590a2776b71caedab3",
     "dependencies": [
       "BLUTO-BASE-GOV-001",
       "BLUTO-BASE-GOV-002",
@@ -2092,79 +1743,20 @@
       "BLUTO-BASE-STD-002",
       "BLUTO-BASE-STD-003",
       "BLUTO-BASE-STD-004",
-      "BLUTO-ARCH-TRACE-001",
-      "BLUTO-SEC-TRACE-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-ENG-ERROR-001": {
-    "document_id": "BLUTO-ENG-ERROR-001",
-    "artifact_id": "ART-BLUTO-ENG-ERROR-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/06-engineering-standards/ERROR-HANDLING.md",
-    "sha256": "35c3952318a02fd1889693a30b85ac50c3c43fd698fc4149a5344e662873f577",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-CONTRACT-ERROR-001",
-      "BLUTO-ARCH-RUNTIME-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-ENG-OBS-001": {
-    "document_id": "BLUTO-ENG-OBS-001",
-    "artifact_id": "ART-BLUTO-ENG-OBS-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/06-engineering-standards/LOGGING-OBSERVABILITY.md",
-    "sha256": "af2b7cc1d9523b49d1d6a6e98bc4869fdc76d475f62b2f7f0f37783f31a48357",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-ARCH-CROSSCUT-001",
-      "BLUTO-SEC-DATA-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-ENG-NAME-001": {
-    "document_id": "BLUTO-ENG-NAME-001",
-    "artifact_id": "ART-BLUTO-ENG-NAME-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/06-engineering-standards/NAMING-DOCUMENTATION.md",
-    "sha256": "b24e1bedcc495f115baa04b2792ff4d705b8d6e82b2bc1fe8e7d118dbc9ceb83",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001",
       "BLUTO-DOM-UL-001",
-      "BLUTO-CONTRACT-SCHEMA-001",
-      "BLUTO-DOM-REVIEW-001"
+      "BLUTO-ENG-ARCH-001"
     ]
   },
-  "BLUTO-S06-DOC-972": {
-    "document_id": "BLUTO-S06-DOC-972",
-    "artifact_id": "ART-BLUTO-S06-DOC-972-v1.1.0",
+  "BLUTO-ENG-CONFIG-001": {
+    "document_id": "BLUTO-ENG-CONFIG-001",
+    "artifact_id": "ART-BLUTO-ENG-CONFIG-001-v1.1.0",
     "version": "1.1.0",
     "status": "Baselined",
-    "path": "docs/06-engineering-standards/README.md",
-    "sha256": "d6c31d6f1227cf1e6376a4a4e1d4b03a5fdb83710b081f8bee27741355851a09",
+    "path": "docs/06-engineering-standards/CONFIGURATION-FEATURE-FLAGS.md",
+    "sha256": "dc2d33ac6a1861d2217874031730bb4e3d2a215b4dbb345187077cb98505fcae",
     "dependencies": [
+      "BLUTO-ARCH-CROSSCUT-001",
       "BLUTO-BASE-GOV-001",
       "BLUTO-BASE-GOV-002",
       "BLUTO-BASE-GOV-004",
@@ -2172,26 +1764,6 @@
       "BLUTO-BASE-STD-002",
       "BLUTO-BASE-STD-003",
       "BLUTO-BASE-STD-004",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-ENG-REPO-001": {
-    "document_id": "BLUTO-ENG-REPO-001",
-    "artifact_id": "ART-BLUTO-ENG-REPO-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/06-engineering-standards/REPOSITORY-STANDARDS.md",
-    "sha256": "ded9e6dec57018f44b75b9f242c3122fbc7afc813b80af8fd31adad05189d89d",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-ENG-ARCH-001",
-      "BLUTO-DOCSTATUS-001",
       "BLUTO-DOM-REVIEW-001"
     ]
   },
@@ -2213,6 +1785,86 @@
       "BLUTO-DOM-REVIEW-001"
     ]
   },
+  "BLUTO-ENG-DATA-001": {
+    "document_id": "BLUTO-ENG-DATA-001",
+    "artifact_id": "ART-BLUTO-ENG-DATA-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/06-engineering-standards/DATABASE-MIGRATION-STANDARDS.md",
+    "sha256": "e6b60ec047a5538fdaf0d85df81de552389d74c359505f652436e093dc53529a",
+    "dependencies": [
+      "BLUTO-ARCH-DATA-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001",
+      "BLUTO-SEC-ARCH-001"
+    ]
+  },
+  "BLUTO-ENG-ERROR-001": {
+    "document_id": "BLUTO-ENG-ERROR-001",
+    "artifact_id": "ART-BLUTO-ENG-ERROR-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/06-engineering-standards/ERROR-HANDLING.md",
+    "sha256": "35c3952318a02fd1889693a30b85ac50c3c43fd698fc4149a5344e662873f577",
+    "dependencies": [
+      "BLUTO-ARCH-RUNTIME-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-CONTRACT-ERROR-001",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-ENG-NAME-001": {
+    "document_id": "BLUTO-ENG-NAME-001",
+    "artifact_id": "ART-BLUTO-ENG-NAME-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/06-engineering-standards/NAMING-DOCUMENTATION.md",
+    "sha256": "b24e1bedcc495f115baa04b2792ff4d705b8d6e82b2bc1fe8e7d118dbc9ceb83",
+    "dependencies": [
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-CONTRACT-SCHEMA-001",
+      "BLUTO-DOM-REVIEW-001",
+      "BLUTO-DOM-UL-001"
+    ]
+  },
+  "BLUTO-ENG-OBS-001": {
+    "document_id": "BLUTO-ENG-OBS-001",
+    "artifact_id": "ART-BLUTO-ENG-OBS-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/06-engineering-standards/LOGGING-OBSERVABILITY.md",
+    "sha256": "af2b7cc1d9523b49d1d6a6e98bc4869fdc76d475f62b2f7f0f37783f31a48357",
+    "dependencies": [
+      "BLUTO-ARCH-CROSSCUT-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001",
+      "BLUTO-SEC-DATA-001"
+    ]
+  },
   "BLUTO-ENG-RELEASE-001": {
     "document_id": "BLUTO-ENG-RELEASE-001",
     "artifact_id": "ART-BLUTO-ENG-RELEASE-001-v1.1.0",
@@ -2228,59 +1880,18 @@
       "BLUTO-BASE-STD-002",
       "BLUTO-BASE-STD-003",
       "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001",
       "BLUTO-ENG-CERT-001",
-      "BLUTO-ENG-CONSISTENCY-001",
-      "BLUTO-DOM-REVIEW-001"
+      "BLUTO-ENG-CONSISTENCY-001"
     ]
   },
-  "BLUTO-S06-CERT-001": {
-    "document_id": "BLUTO-S06-CERT-001",
-    "artifact_id": "ART-BLUTO-S06-CERT-001-v1.1.0",
+  "BLUTO-ENG-REPO-001": {
+    "document_id": "BLUTO-ENG-REPO-001",
+    "artifact_id": "ART-BLUTO-ENG-REPO-001-v1.1.0",
     "version": "1.1.0",
     "status": "Baselined",
-    "path": "docs/06-engineering-standards/release/RELEASE-CERTIFICATION.md",
-    "sha256": "b37ba0cf8cbf9ce1fe7735123d3137e58613a0648c932648bc5fd9cc7527464b",
-    "dependencies": [
-      "BLUTO-S06-REV-001",
-      "BLUTO-S06-REV-002",
-      "BLUTO-BASE-CERT-001"
-    ]
-  },
-  "BLUTO-S06-REV-002": {
-    "document_id": "BLUTO-S06-REV-002",
-    "artifact_id": "ART-BLUTO-S06-REV-002-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/06-engineering-standards/reviews/CONSISTENCY-REVIEW.md",
-    "sha256": "9e2ff6b65e72882b3790b7edf7c0710362ca63b09f62e66295c57f327d44ce34",
-    "dependencies": [
-      "BLUTO-S06-REV-001"
-    ]
-  },
-  "BLUTO-S06-REV-001": {
-    "document_id": "BLUTO-S06-REV-001",
-    "artifact_id": "ART-BLUTO-S06-REV-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/06-engineering-standards/reviews/EVIDENCE-REVIEW.md",
-    "sha256": "2c775710f9cd37f640160bd22b5a2f6ad73e3efc6491f8f116b1fb278fa4f6b8",
-    "dependencies": [
-      "BLUTO-BASE-QG-001",
-      "BLUTO-BASE-VAL-001",
-      "BLUTO-BASE-VAL-002",
-      "BLUTO-BASE-VAL-003",
-      "BLUTO-BASE-VAL-004",
-      "BLUTO-BASE-VAL-005",
-      "BLUTO-BASE-VAL-006"
-    ]
-  },
-  "BLUTO-TEST-ACCEPT-001": {
-    "document_id": "BLUTO-TEST-ACCEPT-001",
-    "artifact_id": "ART-BLUTO-TEST-ACCEPT-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/07-testing/ACCEPTANCE-TESTING.md",
-    "sha256": "76fb6333bc23b76db26df6d07c365603e2e479083354b85d83a8e21683ac1d5e",
+    "path": "docs/06-engineering-standards/REPOSITORY-STANDARDS.md",
+    "sha256": "ded9e6dec57018f44b75b9f242c3122fbc7afc813b80af8fd31adad05189d89d",
     "dependencies": [
       "BLUTO-BASE-GOV-001",
       "BLUTO-BASE-GOV-002",
@@ -2289,17 +1900,38 @@
       "BLUTO-BASE-STD-002",
       "BLUTO-BASE-STD-003",
       "BLUTO-BASE-STD-004",
-      "BLUTO-CONTRACT-CONSUMER-001",
-      "BLUTO-DOM-REVIEW-001"
+      "BLUTO-DOCSTATUS-001",
+      "BLUTO-DOM-REVIEW-001",
+      "BLUTO-ENG-ARCH-001"
     ]
   },
-  "BLUTO-TEST-CONTRACT-001": {
-    "document_id": "BLUTO-TEST-CONTRACT-001",
-    "artifact_id": "ART-BLUTO-TEST-CONTRACT-001-v1.1.0",
+  "BLUTO-ENG-REVIEW-001": {
+    "document_id": "BLUTO-ENG-REVIEW-001",
+    "artifact_id": "ART-BLUTO-ENG-REVIEW-001-v1.1.0",
     "version": "1.1.0",
     "status": "Baselined",
-    "path": "docs/07-testing/CONTRACT-TESTING.md",
-    "sha256": "a526d4e4fad269b2ea177f58c4a7ee57922519e81425a2da42a2eced7545fc5b",
+    "path": "docs/06-engineering-standards/CODE-REVIEW-STANDARD.md",
+    "sha256": "0dc51cbe6cfa3b65f59ed7cc81f55e67622b5e5ce4650e76c73c35a5f09d3233",
+    "dependencies": [
+      "BLUTO-ARCH-REVIEW-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001",
+      "BLUTO-SEC-SDLC-001"
+    ]
+  },
+  "BLUTO-ENG-SUPPLY-001": {
+    "document_id": "BLUTO-ENG-SUPPLY-001",
+    "artifact_id": "ART-BLUTO-ENG-SUPPLY-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/06-engineering-standards/DEPENDENCY-SUPPLY-CHAIN.md",
+    "sha256": "9b0cc20e730b679af48cdc0d33848b23bcf940c64138e4419bb691b6edad7dbf",
     "dependencies": [
       "BLUTO-BASE-GOV-001",
       "BLUTO-BASE-GOV-002",
@@ -2308,290 +1940,19 @@
       "BLUTO-BASE-STD-002",
       "BLUTO-BASE-STD-003",
       "BLUTO-BASE-STD-004",
-      "BLUTO-DOM-REVIEW-001"
+      "BLUTO-DOM-REVIEW-001",
+      "BLUTO-SEC-SDLC-001"
     ]
   },
-  "BLUTO-TEST-GATE-001": {
-    "document_id": "BLUTO-TEST-GATE-001",
-    "artifact_id": "ART-BLUTO-TEST-GATE-001-v1.1.0",
+  "BLUTO-ENG-TRACE-001": {
+    "document_id": "BLUTO-ENG-TRACE-001",
+    "artifact_id": "ART-BLUTO-ENG-TRACE-001-v1.1.0",
     "version": "1.1.0",
     "status": "Baselined",
-    "path": "docs/07-testing/COVERAGE-QUALITY-GATES.md",
-    "sha256": "9580290d371a6443e4702b14bcf612cad37ddbde72f832a44d22a3faf8e81cf4",
+    "path": "docs/06-engineering-standards/ENGINEERING-TRACEABILITY.md",
+    "sha256": "0ad03392a20f25fac42b5fb35485906a589067d1d6503f49e0c633f52b2b6124",
     "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-TEST-STRATEGY-001",
-      "BLUTO-SEC-SDLC-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-TEST-DOMAIN-001": {
-    "document_id": "BLUTO-TEST-DOMAIN-001",
-    "artifact_id": "ART-BLUTO-TEST-DOMAIN-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/07-testing/DOMAIN-UNIT-TESTING.md",
-    "sha256": "f23a6a74c14cd275df6d129553926034051ee8ad993adb8c366945d81ca83d54",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-DOM-AGGREGATE-001",
-      "BLUTO-DOM-STATE-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-TEST-INTEGRATION-001": {
-    "document_id": "BLUTO-TEST-INTEGRATION-001",
-    "artifact_id": "ART-BLUTO-TEST-INTEGRATION-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/07-testing/INTEGRATION-REPOSITORY-TESTING.md",
-    "sha256": "256bde7b6838ffe3e42b11c32f95dc262b1dc63d646b7b8f6692f5ab6cae8fa2",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-DOM-REPOSITORY-001",
-      "BLUTO-ARCH-DATA-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-TEST-PERF-001": {
-    "document_id": "BLUTO-TEST-PERF-001",
-    "artifact_id": "ART-BLUTO-TEST-PERF-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/07-testing/PERFORMANCE-RELIABILITY-TESTING.md",
-    "sha256": "f47c025a7a3966dea473226de1952b340cefca61cd62b2f89452284d662fc2cf",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-ARCH-QAS-001",
-      "BLUTO-ARCH-RUNTIME-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-S07-DOC-972": {
-    "document_id": "BLUTO-S07-DOC-972",
-    "artifact_id": "ART-BLUTO-S07-DOC-972-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/07-testing/README.md",
-    "sha256": "941f1d360390295cbccf3c4cec61b46e2d95e430f7656877beddbc2a88ca9c53",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-TEST-SEC-001": {
-    "document_id": "BLUTO-TEST-SEC-001",
-    "artifact_id": "ART-BLUTO-TEST-SEC-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/07-testing/SECURITY-TESTING.md",
-    "sha256": "cd06f203e55af5632c4fcd0b7d1b3b1d60be36ad61ddb5df1aa5cecabd276df9",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-TEST-CONSISTENCY-001": {
-    "document_id": "BLUTO-TEST-CONSISTENCY-001",
-    "artifact_id": "ART-BLUTO-TEST-CONSISTENCY-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/07-testing/STREAM7-CONSISTENCY-REVIEW.md",
-    "sha256": "293080348435720d5448d9227f594095e4041088b10702e8e882a8c9cb2dde54",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-TEST-RELEASE-001": {
-    "document_id": "BLUTO-TEST-RELEASE-001",
-    "artifact_id": "ART-BLUTO-TEST-RELEASE-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/07-testing/STREAM7-RELEASE-CERTIFICATION.md",
-    "sha256": "4f7aedd1456aa446ac5bc77fe75a8e627284cd4761134b572ca947f6bda5e683",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-TEST-REVIEW-001",
-      "BLUTO-TEST-CONSISTENCY-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-TEST-ARCH-001": {
-    "document_id": "BLUTO-TEST-ARCH-001",
-    "artifact_id": "ART-BLUTO-TEST-ARCH-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/07-testing/TEST-ARCHITECTURE.md",
-    "sha256": "5c0a85ac90095e46fbd989a86d5f10cc619510caf91eeeb39016934b19ff4c15",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-ARCH-QAS-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-TEST-REVIEW-001": {
-    "document_id": "BLUTO-TEST-REVIEW-001",
-    "artifact_id": "ART-BLUTO-TEST-REVIEW-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/07-testing/TEST-REVIEW.md",
-    "sha256": "f3e883cc33c09d293c488ca85066f48689a96cd77518adb63a4324f102cf876b",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-TEST-STRATEGY-001": {
-    "document_id": "BLUTO-TEST-STRATEGY-001",
-    "artifact_id": "ART-BLUTO-TEST-STRATEGY-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/07-testing/TEST-STRATEGY.md",
-    "sha256": "0b8a3402d00b5d1c5c902091a029affeeffabc28c78d0da7fa563d00b4fea8c7",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-TEST-ARCH-001",
-      "BLUTO-DOM-TRACE-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-TEST-TRACE-001": {
-    "document_id": "BLUTO-TEST-TRACE-001",
-    "artifact_id": "ART-BLUTO-TEST-TRACE-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/07-testing/TEST-TRACEABILITY.md",
-    "sha256": "32addff18a7abb20d5af1161c33fb2ca596f0f3d7d9f48343f3c2518d1d84641",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
       "BLUTO-ARCH-TRACE-001",
-      "BLUTO-SEC-TRACE-001",
-      "BLUTO-ENG-TRACE-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-S07-CERT-001": {
-    "document_id": "BLUTO-S07-CERT-001",
-    "artifact_id": "ART-BLUTO-S07-CERT-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/07-testing/release/RELEASE-CERTIFICATION.md",
-    "sha256": "286f9413b9b488eea5332eb3082962133ace7d991ba0edbb4c841e2715390825",
-    "dependencies": [
-      "BLUTO-S07-REV-001",
-      "BLUTO-S07-REV-002",
-      "BLUTO-BASE-CERT-001"
-    ]
-  },
-  "BLUTO-S07-REV-002": {
-    "document_id": "BLUTO-S07-REV-002",
-    "artifact_id": "ART-BLUTO-S07-REV-002-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/07-testing/reviews/CONSISTENCY-REVIEW.md",
-    "sha256": "54748959181516393ca2b53d276fd3b92b170f15dbc01344d6d8c188974f2aa2",
-    "dependencies": [
-      "BLUTO-S07-REV-001"
-    ]
-  },
-  "BLUTO-S07-REV-001": {
-    "document_id": "BLUTO-S07-REV-001",
-    "artifact_id": "ART-BLUTO-S07-REV-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/07-testing/reviews/EVIDENCE-REVIEW.md",
-    "sha256": "1126e3d6f98d9009de46282138d1c7e43cbabcbea4630161b501f07d4e4340a6",
-    "dependencies": [
-      "BLUTO-BASE-QG-001",
-      "BLUTO-BASE-VAL-001",
-      "BLUTO-BASE-VAL-002",
-      "BLUTO-BASE-VAL-003",
-      "BLUTO-BASE-VAL-004",
-      "BLUTO-BASE-VAL-005",
-      "BLUTO-BASE-VAL-006"
-    ]
-  },
-  "BLUTO-OPS-DR-001": {
-    "document_id": "BLUTO-OPS-DR-001",
-    "artifact_id": "ART-BLUTO-OPS-DR-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/08-devops/BACKUP-DISASTER-RECOVERY.md",
-    "sha256": "a4921b9216c42b5364bf514e4596d1af48e24e2086516002292ce1bc2f73bfe1",
-    "dependencies": [
       "BLUTO-BASE-GOV-001",
       "BLUTO-BASE-GOV-002",
       "BLUTO-BASE-GOV-004",
@@ -2599,8 +1960,243 @@
       "BLUTO-BASE-STD-002",
       "BLUTO-BASE-STD-003",
       "BLUTO-BASE-STD-004",
-      "BLUTO-ARCH-DATA-001",
-      "BLUTO-ARCH-QAS-001",
+      "BLUTO-DOM-REVIEW-001",
+      "BLUTO-SEC-TRACE-001"
+    ]
+  },
+  "BLUTO-GLOSSARY-001": {
+    "document_id": "BLUTO-GLOSSARY-001",
+    "artifact_id": "ART-BLUTO-GLOSSARY-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/01-foundation-governance/GLOSSARY.md",
+    "sha256": "2ad9a9e6cc5195703efb1a5fd00d097326cbb52e57debeb9dc1c260d1211f08c",
+    "dependencies": [
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-NONGOALS-001",
+      "BLUTO-SCOPE-001"
+    ]
+  },
+  "BLUTO-GOV-APPROVAL-001": {
+    "document_id": "BLUTO-GOV-APPROVAL-001",
+    "artifact_id": "ART-BLUTO-GOV-APPROVAL-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/01-foundation-governance/governance/APPROVAL-WORKFLOW.md",
+    "sha256": "222bd302750d787b1f8bc6f3bf86bc6380920db72c8dbe053e9a47972caf44f0",
+    "dependencies": [
+      "BLUTO-BASE-CERT-001",
+      "BLUTO-GOV-DOCS-001"
+    ]
+  },
+  "BLUTO-GOV-ARCHREVIEW-001": {
+    "document_id": "BLUTO-GOV-ARCHREVIEW-001",
+    "artifact_id": "ART-BLUTO-GOV-ARCHREVIEW-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/01-foundation-governance/ARCHITECTURE-REVIEW-CHECKLIST.md",
+    "sha256": "29fc6a159f20289b00dbf759225f594a86a214990e6389cdf49c228f8c31fec9",
+    "dependencies": [
+      "BLUTO-ARCH-PRINCIPLES-001",
+      "BLUTO-GOV-REVIEW-001",
+      "BLUTO-NONGOALS-001",
+      "BLUTO-SCOPE-001"
+    ]
+  },
+  "BLUTO-GOV-DECISION-001": {
+    "document_id": "BLUTO-GOV-DECISION-001",
+    "artifact_id": "ART-BLUTO-GOV-DECISION-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/01-foundation-governance/DECISION-LOG.md",
+    "sha256": "2e2111698b4b3501bdee02f6de05c2b0164ee2eb23d7a9d31b6d9817ad023dc0",
+    "dependencies": [
+      "BLUTO-ADR-INDEX-001",
+      "BLUTO-GOVERNANCE-CHARTER-001"
+    ]
+  },
+  "BLUTO-GOV-DOCS-001": {
+    "document_id": "BLUTO-GOV-DOCS-001",
+    "artifact_id": "ART-BLUTO-GOV-DOCS-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/01-foundation-governance/governance/DOCUMENT-GOVERNANCE.md",
+    "sha256": "4c08ce47297a87017c1bbd3795773d163669a7e0b9a264c801ca072f42693d95",
+    "dependencies": [
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-GOVERNANCE-CHARTER-001"
+    ]
+  },
+  "BLUTO-GOV-ESCALATION-001": {
+    "document_id": "BLUTO-GOV-ESCALATION-001",
+    "artifact_id": "ART-BLUTO-GOV-ESCALATION-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/01-foundation-governance/governance/ESCALATION-PROCESS.md",
+    "sha256": "da6751d91636980dd0c9786739efa4ee83b2e6f060023328d063d7b03b312beb",
+    "dependencies": [
+      "BLUTO-GOV-EXCEPTION-001",
+      "BLUTO-GOVERNANCE-CHARTER-001"
+    ]
+  },
+  "BLUTO-GOV-EXCEPTION-001": {
+    "document_id": "BLUTO-GOV-EXCEPTION-001",
+    "artifact_id": "ART-BLUTO-GOV-EXCEPTION-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/01-foundation-governance/governance/EXCEPTION-PROCESS.md",
+    "sha256": "855b1ca9dcee94b341fd55185c5c215c34586c71c93e10399c4a100d1f580460",
+    "dependencies": [
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-GOV-REVIEW-001"
+    ]
+  },
+  "BLUTO-GOV-MATRIX-001": {
+    "document_id": "BLUTO-GOV-MATRIX-001",
+    "artifact_id": "ART-BLUTO-GOV-MATRIX-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/01-foundation-governance/governance/GOVERNANCE-MATRIX.md",
+    "sha256": "94208b831a05829d9b1f0b2082fc0f8b732f0c87aab2d7c76a6a1b64d1da2bfe",
+    "dependencies": [
+      "BLUTO-GOV-APPROVAL-001",
+      "BLUTO-GOV-ROLES-001"
+    ]
+  },
+  "BLUTO-GOV-README-001": {
+    "document_id": "BLUTO-GOV-README-001",
+    "artifact_id": "ART-BLUTO-GOV-README-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/01-foundation-governance/governance/README.md",
+    "sha256": "900ff6b4a8bc1a65ebd6780940e7f612a48876c61e699c3b3246256d8bf0625e",
+    "dependencies": [
+      "BLUTO-ADR-0000",
+      "BLUTO-BASE-GOV-002"
+    ]
+  },
+  "BLUTO-GOV-REVIEW-001": {
+    "document_id": "BLUTO-GOV-REVIEW-001",
+    "artifact_id": "ART-BLUTO-GOV-REVIEW-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/01-foundation-governance/governance/REVIEW-POLICY.md",
+    "sha256": "6681c2eadc19d54bd9039d4a72b414db01c56cd90821fe9457790cd26117644b",
+    "dependencies": [
+      "BLUTO-BASE-QG-001",
+      "BLUTO-GOV-APPROVAL-001"
+    ]
+  },
+  "BLUTO-GOV-ROLES-001": {
+    "document_id": "BLUTO-GOV-ROLES-001",
+    "artifact_id": "ART-BLUTO-GOV-ROLES-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/01-foundation-governance/governance/ROLES-AND-RESPONSIBILITIES.md",
+    "sha256": "8181e6bccba7b3958893b9a4604624298da58f4d960d735ec841b770b1f9e67d",
+    "dependencies": [
+      "BLUTO-GOVERNANCE-CHARTER-001"
+    ]
+  },
+  "BLUTO-GOVERNANCE-CHARTER-001": {
+    "document_id": "BLUTO-GOVERNANCE-CHARTER-001",
+    "artifact_id": "ART-BLUTO-GOVERNANCE-CHARTER-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/01-foundation-governance/governance/GOVERNANCE-CHARTER.md",
+    "sha256": "7d534ef33786d35e7b846f97a1512e38cad62c9e21d7a59571f24b67b56522f7",
+    "dependencies": [
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-GOV-README-001"
+    ]
+  },
+  "BLUTO-IMPL-MASTER-PLAN-001": {
+    "document_id": "BLUTO-IMPL-MASTER-PLAN-001",
+    "artifact_id": "ART-BLUTO-IMPL-MASTER-PLAN-001-v0.1.0",
+    "version": "0.1.0",
+    "status": "Proposed",
+    "path": "implementation/plan/MASTER-IMPLEMENTATION-PLAN.md",
+    "sha256": "37d9c369fef7ad7cd7b4b0a700c1f58e134ee6f7e9edbe082402cb272cf03083",
+    "dependencies": [
+      "BLUTO_IDENTITY_SPINE_v0.1",
+      "BLUTO-ADR-0001",
+      "BLUTO-ADR-0002",
+      "BLUTO-ADR-0003",
+      "BLUTO-ADR-0004",
+      "BLUTO-ADR-0005",
+      "BLUTO-ADR-0006",
+      "BLUTO-ADR-0007",
+      "BLUTO-ADR-0008",
+      "BLUTO-ADR-0009",
+      "BLUTO-ADR-0010",
+      "BLUTO-ADR-0011",
+      "BLUTO-ADR-0012",
+      "BLUTO-ADR-0013",
+      "BLUTO-ADR-0014",
+      "BLUTO-ADR-0015",
+      "BLUTO-ADR-0016",
+      "BLUTO-ADR-0017",
+      "BLUTO-IMPL-TECH-SUMMARY-001"
+    ]
+  },
+  "BLUTO-IMPL-TECH-SUMMARY-001": {
+    "document_id": "BLUTO-IMPL-TECH-SUMMARY-001",
+    "artifact_id": "ART-BLUTO-IMPL-TECH-SUMMARY-001-v0.1.0",
+    "version": "0.1.0",
+    "status": "Proposed",
+    "path": "implementation/decisions/TECHNOLOGY-SELECTION-SUMMARY.md",
+    "sha256": "86c2fa7688f2ccacaae4f6a691892bddc59ada0052107e3a18991a934b19b4d8",
+    "dependencies": [
+      "BLUTO-ADR-0001",
+      "BLUTO-ADR-0002",
+      "BLUTO-ADR-0003",
+      "BLUTO-ADR-0004",
+      "BLUTO-ADR-0005",
+      "BLUTO-ADR-0006",
+      "BLUTO-ADR-0007",
+      "BLUTO-ADR-0008",
+      "BLUTO-ADR-0009",
+      "BLUTO-ADR-0010",
+      "BLUTO-ADR-0011",
+      "BLUTO-ADR-0012",
+      "BLUTO-ADR-0013",
+      "BLUTO-ADR-0014",
+      "BLUTO-ADR-0015",
+      "BLUTO-ADR-0016",
+      "BLUTO-ADR-0017"
+    ]
+  },
+  "BLUTO-NONGOALS-001": {
+    "document_id": "BLUTO-NONGOALS-001",
+    "artifact_id": "ART-BLUTO-NONGOALS-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/01-foundation-governance/NON-GOALS.md",
+    "sha256": "e1357dbb9dbe5ac54472adfb20fe35e5ece159d1423b6915a5ef5b2e64c0f0c5",
+    "dependencies": [
+      "BLUTO-SCOPE-001"
+    ]
+  },
+  "BLUTO-OPS-ARCH-001": {
+    "document_id": "BLUTO-OPS-ARCH-001",
+    "artifact_id": "ART-BLUTO-OPS-ARCH-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/08-devops/DEVOPS-ARCHITECTURE.md",
+    "sha256": "71053e19f19c67a6d6bbc3d6c3550334642391ba5191491e57fb116a905e7607",
+    "dependencies": [
+      "BLUTO-ARCH-DEPLOY-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
       "BLUTO-DOM-REVIEW-001"
     ]
   },
@@ -2619,9 +2215,9 @@
       "BLUTO-BASE-STD-002",
       "BLUTO-BASE-STD-003",
       "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001",
       "BLUTO-ENG-SUPPLY-001",
-      "BLUTO-TEST-GATE-001",
-      "BLUTO-DOM-REVIEW-001"
+      "BLUTO-TEST-GATE-001"
     ]
   },
   "BLUTO-OPS-CHANGE-001": {
@@ -2640,17 +2236,17 @@
       "BLUTO-BASE-STD-003",
       "BLUTO-BASE-STD-004",
       "BLUTO-CHANGE-001",
-      "BLUTO-OPS-RELEASE-001",
-      "BLUTO-DOM-REVIEW-001"
+      "BLUTO-DOM-REVIEW-001",
+      "BLUTO-OPS-RELEASE-001"
     ]
   },
-  "BLUTO-OPS-ARCH-001": {
-    "document_id": "BLUTO-OPS-ARCH-001",
-    "artifact_id": "ART-BLUTO-OPS-ARCH-001-v1.1.0",
+  "BLUTO-OPS-CONSISTENCY-001": {
+    "document_id": "BLUTO-OPS-CONSISTENCY-001",
+    "artifact_id": "ART-BLUTO-OPS-CONSISTENCY-001-v1.1.0",
     "version": "1.1.0",
     "status": "Baselined",
-    "path": "docs/08-devops/DEVOPS-ARCHITECTURE.md",
-    "sha256": "71053e19f19c67a6d6bbc3d6c3550334642391ba5191491e57fb116a905e7607",
+    "path": "docs/08-devops/STREAM8-CONSISTENCY-REVIEW.md",
+    "sha256": "8c9d38e4e4e21426d1a68349a96c11f388fb6f9552979a3297a52b84883490b9",
     "dependencies": [
       "BLUTO-BASE-GOV-001",
       "BLUTO-BASE-GOV-002",
@@ -2659,18 +2255,19 @@
       "BLUTO-BASE-STD-002",
       "BLUTO-BASE-STD-003",
       "BLUTO-BASE-STD-004",
-      "BLUTO-ARCH-DEPLOY-001",
       "BLUTO-DOM-REVIEW-001"
     ]
   },
-  "BLUTO-OPS-TRACE-001": {
-    "document_id": "BLUTO-OPS-TRACE-001",
-    "artifact_id": "ART-BLUTO-OPS-TRACE-001-v1.1.0",
+  "BLUTO-OPS-DR-001": {
+    "document_id": "BLUTO-OPS-DR-001",
+    "artifact_id": "ART-BLUTO-OPS-DR-001-v1.1.0",
     "version": "1.1.0",
     "status": "Baselined",
-    "path": "docs/08-devops/DEVOPS-TRACEABILITY.md",
-    "sha256": "c30192f0f67564d8f8bc1887754304bad952fd4a6975f4a0ae9c7414ba731f66",
+    "path": "docs/08-devops/BACKUP-DISASTER-RECOVERY.md",
+    "sha256": "a4921b9216c42b5364bf514e4596d1af48e24e2086516002292ce1bc2f73bfe1",
     "dependencies": [
+      "BLUTO-ARCH-DATA-001",
+      "BLUTO-ARCH-QAS-001",
       "BLUTO-BASE-GOV-001",
       "BLUTO-BASE-GOV-002",
       "BLUTO-BASE-GOV-004",
@@ -2678,8 +2275,6 @@
       "BLUTO-BASE-STD-002",
       "BLUTO-BASE-STD-003",
       "BLUTO-BASE-STD-004",
-      "BLUTO-ARCH-TRACE-001",
-      "BLUTO-TEST-TRACE-001",
       "BLUTO-DOM-REVIEW-001"
     ]
   },
@@ -2691,6 +2286,8 @@
     "path": "docs/08-devops/ENVIRONMENT-INFRASTRUCTURE.md",
     "sha256": "4b1becc91438d9f5cccdf35af1bae3abf1628cec797050e263b7c6cddf53a009",
     "dependencies": [
+      "BLUTO-ARCH-DEPLOY-001",
+      "BLUTO-ARCH-PHYSICAL-001",
       "BLUTO-BASE-GOV-001",
       "BLUTO-BASE-GOV-002",
       "BLUTO-BASE-GOV-004",
@@ -2698,10 +2295,8 @@
       "BLUTO-BASE-STD-002",
       "BLUTO-BASE-STD-003",
       "BLUTO-BASE-STD-004",
-      "BLUTO-ARCH-PHYSICAL-001",
-      "BLUTO-ARCH-DEPLOY-001",
-      "BLUTO-SEC-ARCH-001",
-      "BLUTO-DOM-REVIEW-001"
+      "BLUTO-DOM-REVIEW-001",
+      "BLUTO-SEC-ARCH-001"
     ]
   },
   "BLUTO-OPS-OBS-001": {
@@ -2712,6 +2307,7 @@
     "path": "docs/08-devops/OBSERVABILITY-MONITORING.md",
     "sha256": "6635399039c13bf9fd087795f0136730bbd4abb9ca76aeff1d026806f3ec937e",
     "dependencies": [
+      "BLUTO-ARCH-QAS-001",
       "BLUTO-BASE-GOV-001",
       "BLUTO-BASE-GOV-002",
       "BLUTO-BASE-GOV-004",
@@ -2719,9 +2315,48 @@
       "BLUTO-BASE-STD-002",
       "BLUTO-BASE-STD-003",
       "BLUTO-BASE-STD-004",
-      "BLUTO-ENG-OBS-001",
-      "BLUTO-ARCH-QAS-001",
+      "BLUTO-DOM-REVIEW-001",
+      "BLUTO-ENG-OBS-001"
+    ]
+  },
+  "BLUTO-OPS-RELEASE-001": {
+    "document_id": "BLUTO-OPS-RELEASE-001",
+    "artifact_id": "ART-BLUTO-OPS-RELEASE-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/08-devops/RELEASE-PIPELINE.md",
+    "sha256": "2bc874c935cb2457d7810bf9024103f71c838e8c815b89352343a16bdfaaa2b9",
+    "dependencies": [
+      "BLUTO-ARCH-DEPLOY-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-CONTRACT-COMPAT-001",
       "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-OPS-RELEASE-CERT-001": {
+    "document_id": "BLUTO-OPS-RELEASE-CERT-001",
+    "artifact_id": "ART-BLUTO-OPS-RELEASE-CERT-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/08-devops/STREAM8-RELEASE-CERTIFICATION.md",
+    "sha256": "332a58c2af690a5cb760ac9b7feeefbb722a46f4fb05fec243a0ba71ef3e10cc",
+    "dependencies": [
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001",
+      "BLUTO-OPS-CONSISTENCY-001",
+      "BLUTO-OPS-REVIEW-001"
     ]
   },
   "BLUTO-OPS-REVIEW-001": {
@@ -2757,9 +2392,500 @@
       "BLUTO-BASE-STD-002",
       "BLUTO-BASE-STD-003",
       "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001",
       "BLUTO-OPS-OBS-001",
-      "BLUTO-SEC-IR-001",
+      "BLUTO-SEC-IR-001"
+    ]
+  },
+  "BLUTO-OPS-SLO-001": {
+    "document_id": "BLUTO-OPS-SLO-001",
+    "artifact_id": "ART-BLUTO-OPS-SLO-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/08-devops/SLO-CAPACITY.md",
+    "sha256": "43818cfaf7817fa445bf97946d0b76f407bf699c851b0284d689855ef1c1b3c9",
+    "dependencies": [
+      "BLUTO-ARCH-QAS-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001",
+      "BLUTO-OPS-OBS-001"
+    ]
+  },
+  "BLUTO-OPS-TRACE-001": {
+    "document_id": "BLUTO-OPS-TRACE-001",
+    "artifact_id": "ART-BLUTO-OPS-TRACE-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/08-devops/DEVOPS-TRACEABILITY.md",
+    "sha256": "c30192f0f67564d8f8bc1887754304bad952fd4a6975f4a0ae9c7414ba731f66",
+    "dependencies": [
+      "BLUTO-ARCH-TRACE-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001",
+      "BLUTO-TEST-TRACE-001"
+    ]
+  },
+  "BLUTO-REPO-CERT-001": {
+    "document_id": "BLUTO-REPO-CERT-001",
+    "artifact_id": "ART-BLUTO-REPO-CERT-001-v2.0.0",
+    "version": "2.0.0",
+    "status": "Baselined",
+    "path": "releases/ENTERPRISE-RELEASE-CERTIFICATION.md",
+    "sha256": "11599da9ec28e55821ca34d58e47fc65289ac1362da4929268acfd2b3077a76c",
+    "dependencies": [
+      "BLUTO-BASE-CERT-002",
+      "BLUTO-S01-CERT-001",
+      "BLUTO-S02-CERT-001",
+      "BLUTO-S03-CERT-001",
+      "BLUTO-S04-CERT-001",
+      "BLUTO-S05-CERT-001",
+      "BLUTO-S06-CERT-001",
+      "BLUTO-S07-CERT-001",
+      "BLUTO-S08-CERT-001",
+      "BLUTO-S09-CERT-001"
+    ]
+  },
+  "BLUTO-REPO-README-001": {
+    "document_id": "BLUTO-REPO-README-001",
+    "artifact_id": "ART-BLUTO-REPO-README-001-v2.0.0",
+    "version": "2.0.0",
+    "status": "Baselined",
+    "path": "README.md",
+    "sha256": "4ae4efb4239612278b683c3d0d26a7739841e735e7da9e8563f2bdec269a8e2b",
+    "dependencies": [
+      "BLUTO-ARCH-REVIEW-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-DOM-REVIEW-001",
+      "BLUTO-VISION-001"
+    ]
+  },
+  "BLUTO-S01-CERT-001": {
+    "document_id": "BLUTO-S01-CERT-001",
+    "artifact_id": "ART-BLUTO-S01-CERT-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/01-foundation-governance/release/RELEASE-CERTIFICATION.md",
+    "sha256": "c3326354ba3cd84fb138682c1f7e23ce8c51c75c57ac08fb0d47bdca94a53a69",
+    "dependencies": [
+      "BLUTO-BASE-CERT-001",
+      "BLUTO-S01-REV-001",
+      "BLUTO-S01-REV-002"
+    ]
+  },
+  "BLUTO-S01-README-001": {
+    "document_id": "BLUTO-S01-README-001",
+    "artifact_id": "ART-BLUTO-S01-README-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/01-foundation-governance/README.md",
+    "sha256": "1230fd2599e8b6d63489dee585366ba9ddc772de46d479c975d0b5d22c3751e3",
+    "dependencies": [
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-003",
+      "BLUTO-BASE-GOV-004"
+    ]
+  },
+  "BLUTO-S01-REV-001": {
+    "document_id": "BLUTO-S01-REV-001",
+    "artifact_id": "ART-BLUTO-S01-REV-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/01-foundation-governance/reviews/EVIDENCE-REVIEW.md",
+    "sha256": "553061b15c86933c15b006c4920b13cad841ce7de2991885a577b5eb1d5f73b4",
+    "dependencies": [
+      "BLUTO-BASE-QG-001",
+      "BLUTO-BASE-VAL-001",
+      "BLUTO-BASE-VAL-002",
+      "BLUTO-BASE-VAL-003",
+      "BLUTO-BASE-VAL-004",
+      "BLUTO-BASE-VAL-005",
+      "BLUTO-BASE-VAL-006"
+    ]
+  },
+  "BLUTO-S01-REV-002": {
+    "document_id": "BLUTO-S01-REV-002",
+    "artifact_id": "ART-BLUTO-S01-REV-002-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/01-foundation-governance/reviews/CONSISTENCY-REVIEW.md",
+    "sha256": "7fb4e1b7cf3f171a3ebdce3547acff47afc7bd2451e588dac8811e2db2c5bbcd",
+    "dependencies": [
+      "BLUTO-S01-REV-001"
+    ]
+  },
+  "BLUTO-S02-CERT-001": {
+    "document_id": "BLUTO-S02-CERT-001",
+    "artifact_id": "ART-BLUTO-S02-CERT-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/02-domain-model/release/RELEASE-CERTIFICATION.md",
+    "sha256": "dca499a777af080a3b5a687c97121de38625efdba676ffae0aa633b66be20a44",
+    "dependencies": [
+      "BLUTO-BASE-CERT-001",
+      "BLUTO-S02-REV-001",
+      "BLUTO-S02-REV-002"
+    ]
+  },
+  "BLUTO-S02-README-001": {
+    "document_id": "BLUTO-S02-README-001",
+    "artifact_id": "ART-BLUTO-S02-README-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/02-domain-model/README.md",
+    "sha256": "a2ec1ebd035dc93d6f85be76f0a1f4f034b7b7f3135dfffc5dedcf3a4d5d313d",
+    "dependencies": [
+      "BLUTO-ARCH-PRINCIPLES-001",
+      "BLUTO-GLOSSARY-001",
+      "BLUTO-S01-README-001"
+    ]
+  },
+  "BLUTO-S02-REV-001": {
+    "document_id": "BLUTO-S02-REV-001",
+    "artifact_id": "ART-BLUTO-S02-REV-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/02-domain-model/reviews/EVIDENCE-REVIEW.md",
+    "sha256": "1a2aa04a9e4dc7b6ca1395ee420b97aa13df68a35579357153c1aaf7c9de5e8d",
+    "dependencies": [
+      "BLUTO-BASE-QG-001",
+      "BLUTO-BASE-VAL-001",
+      "BLUTO-BASE-VAL-002",
+      "BLUTO-BASE-VAL-003",
+      "BLUTO-BASE-VAL-004",
+      "BLUTO-BASE-VAL-005",
+      "BLUTO-BASE-VAL-006"
+    ]
+  },
+  "BLUTO-S02-REV-002": {
+    "document_id": "BLUTO-S02-REV-002",
+    "artifact_id": "ART-BLUTO-S02-REV-002-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/02-domain-model/reviews/CONSISTENCY-REVIEW.md",
+    "sha256": "9cf534dddf11b80d434c04994cc40492bbb227e442b77414b63c42c9aaad4a58",
+    "dependencies": [
+      "BLUTO-S02-REV-001"
+    ]
+  },
+  "BLUTO-S03-CERT-001": {
+    "document_id": "BLUTO-S03-CERT-001",
+    "artifact_id": "ART-BLUTO-S03-CERT-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/03-architecture/release/RELEASE-CERTIFICATION.md",
+    "sha256": "b6d11cda5b17c7566e14ca6d9626a0dd7c126f9610613de989c03abbe72d6286",
+    "dependencies": [
+      "BLUTO-BASE-CERT-001",
+      "BLUTO-S03-REV-001",
+      "BLUTO-S03-REV-002"
+    ]
+  },
+  "BLUTO-S03-DOC-972": {
+    "document_id": "BLUTO-S03-DOC-972",
+    "artifact_id": "ART-BLUTO-S03-DOC-972-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/03-architecture/README.md",
+    "sha256": "1298a63a189168d1eeacc7808c9a10752477faf73829a8a6fa935e8941b56f4e",
+    "dependencies": [
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
       "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-S03-REV-001": {
+    "document_id": "BLUTO-S03-REV-001",
+    "artifact_id": "ART-BLUTO-S03-REV-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/03-architecture/reviews/EVIDENCE-REVIEW.md",
+    "sha256": "3e499e1cdb9eaf6fd8dd7b5d6c2a1bde55f48ebc74c55d41be273f938a8c998f",
+    "dependencies": [
+      "BLUTO-BASE-QG-001",
+      "BLUTO-BASE-VAL-001",
+      "BLUTO-BASE-VAL-002",
+      "BLUTO-BASE-VAL-003",
+      "BLUTO-BASE-VAL-004",
+      "BLUTO-BASE-VAL-005",
+      "BLUTO-BASE-VAL-006"
+    ]
+  },
+  "BLUTO-S03-REV-002": {
+    "document_id": "BLUTO-S03-REV-002",
+    "artifact_id": "ART-BLUTO-S03-REV-002-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/03-architecture/reviews/CONSISTENCY-REVIEW.md",
+    "sha256": "46265be54f387cc3805beb9eab595f1fbc388ef5d55feb9e2e7147153cb17c06",
+    "dependencies": [
+      "BLUTO-S03-REV-001"
+    ]
+  },
+  "BLUTO-S04-CERT-001": {
+    "document_id": "BLUTO-S04-CERT-001",
+    "artifact_id": "ART-BLUTO-S04-CERT-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/04-contracts/release/RELEASE-CERTIFICATION.md",
+    "sha256": "a02f1b9cf67344da55743014d010b4c20532a38c5949bb2214d08498684e4d19",
+    "dependencies": [
+      "BLUTO-BASE-CERT-001",
+      "BLUTO-S04-REV-001",
+      "BLUTO-S04-REV-002"
+    ]
+  },
+  "BLUTO-S04-DOC-972": {
+    "document_id": "BLUTO-S04-DOC-972",
+    "artifact_id": "ART-BLUTO-S04-DOC-972-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/04-contracts/README.md",
+    "sha256": "8a64b029335f9a2522ebe8abb78e79b2088c26ff791524d955ddbc76c08000df",
+    "dependencies": [
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-S04-REV-001": {
+    "document_id": "BLUTO-S04-REV-001",
+    "artifact_id": "ART-BLUTO-S04-REV-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/04-contracts/reviews/EVIDENCE-REVIEW.md",
+    "sha256": "486c111adf2998b614aca24d1245e89c036e69f3b1acd5548698f07fa7917417",
+    "dependencies": [
+      "BLUTO-BASE-QG-001",
+      "BLUTO-BASE-VAL-001",
+      "BLUTO-BASE-VAL-002",
+      "BLUTO-BASE-VAL-003",
+      "BLUTO-BASE-VAL-004",
+      "BLUTO-BASE-VAL-005",
+      "BLUTO-BASE-VAL-006"
+    ]
+  },
+  "BLUTO-S04-REV-002": {
+    "document_id": "BLUTO-S04-REV-002",
+    "artifact_id": "ART-BLUTO-S04-REV-002-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/04-contracts/reviews/CONSISTENCY-REVIEW.md",
+    "sha256": "405ebd98e70056219386a334e3a5ee0dde0f05461d7a9708f20ef3ad01cc1bfa",
+    "dependencies": [
+      "BLUTO-S04-REV-001"
+    ]
+  },
+  "BLUTO-S05-CERT-001": {
+    "document_id": "BLUTO-S05-CERT-001",
+    "artifact_id": "ART-BLUTO-S05-CERT-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/05-security/release/RELEASE-CERTIFICATION.md",
+    "sha256": "a06e5b7f156d631802e4ea26971c7a22afda478017d7fdf8b580b5d7e1e8c4ff",
+    "dependencies": [
+      "BLUTO-BASE-CERT-001",
+      "BLUTO-S05-REV-001",
+      "BLUTO-S05-REV-002"
+    ]
+  },
+  "BLUTO-S05-DOC-972": {
+    "document_id": "BLUTO-S05-DOC-972",
+    "artifact_id": "ART-BLUTO-S05-DOC-972-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/05-security/README.md",
+    "sha256": "0bee095791847f0b50b68267f91ba300245862795a787e2d974eab33f48bcd1c",
+    "dependencies": [
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-S05-REV-001": {
+    "document_id": "BLUTO-S05-REV-001",
+    "artifact_id": "ART-BLUTO-S05-REV-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/05-security/reviews/EVIDENCE-REVIEW.md",
+    "sha256": "3f0c10abc39dff453a89f0005c6d4addaadb505a312cba8034920bd45981c432",
+    "dependencies": [
+      "BLUTO-BASE-QG-001",
+      "BLUTO-BASE-VAL-001",
+      "BLUTO-BASE-VAL-002",
+      "BLUTO-BASE-VAL-003",
+      "BLUTO-BASE-VAL-004",
+      "BLUTO-BASE-VAL-005",
+      "BLUTO-BASE-VAL-006"
+    ]
+  },
+  "BLUTO-S05-REV-002": {
+    "document_id": "BLUTO-S05-REV-002",
+    "artifact_id": "ART-BLUTO-S05-REV-002-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/05-security/reviews/CONSISTENCY-REVIEW.md",
+    "sha256": "32efa3553bdc94ad17651e9aca3f4b5f430ea8dee8913a7416ad6efda232cb98",
+    "dependencies": [
+      "BLUTO-S05-REV-001"
+    ]
+  },
+  "BLUTO-S06-CERT-001": {
+    "document_id": "BLUTO-S06-CERT-001",
+    "artifact_id": "ART-BLUTO-S06-CERT-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/06-engineering-standards/release/RELEASE-CERTIFICATION.md",
+    "sha256": "b37ba0cf8cbf9ce1fe7735123d3137e58613a0648c932648bc5fd9cc7527464b",
+    "dependencies": [
+      "BLUTO-BASE-CERT-001",
+      "BLUTO-S06-REV-001",
+      "BLUTO-S06-REV-002"
+    ]
+  },
+  "BLUTO-S06-DOC-972": {
+    "document_id": "BLUTO-S06-DOC-972",
+    "artifact_id": "ART-BLUTO-S06-DOC-972-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/06-engineering-standards/README.md",
+    "sha256": "d6c31d6f1227cf1e6376a4a4e1d4b03a5fdb83710b081f8bee27741355851a09",
+    "dependencies": [
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-S06-REV-001": {
+    "document_id": "BLUTO-S06-REV-001",
+    "artifact_id": "ART-BLUTO-S06-REV-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/06-engineering-standards/reviews/EVIDENCE-REVIEW.md",
+    "sha256": "2c775710f9cd37f640160bd22b5a2f6ad73e3efc6491f8f116b1fb278fa4f6b8",
+    "dependencies": [
+      "BLUTO-BASE-QG-001",
+      "BLUTO-BASE-VAL-001",
+      "BLUTO-BASE-VAL-002",
+      "BLUTO-BASE-VAL-003",
+      "BLUTO-BASE-VAL-004",
+      "BLUTO-BASE-VAL-005",
+      "BLUTO-BASE-VAL-006"
+    ]
+  },
+  "BLUTO-S06-REV-002": {
+    "document_id": "BLUTO-S06-REV-002",
+    "artifact_id": "ART-BLUTO-S06-REV-002-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/06-engineering-standards/reviews/CONSISTENCY-REVIEW.md",
+    "sha256": "9e2ff6b65e72882b3790b7edf7c0710362ca63b09f62e66295c57f327d44ce34",
+    "dependencies": [
+      "BLUTO-S06-REV-001"
+    ]
+  },
+  "BLUTO-S07-CERT-001": {
+    "document_id": "BLUTO-S07-CERT-001",
+    "artifact_id": "ART-BLUTO-S07-CERT-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/07-testing/release/RELEASE-CERTIFICATION.md",
+    "sha256": "286f9413b9b488eea5332eb3082962133ace7d991ba0edbb4c841e2715390825",
+    "dependencies": [
+      "BLUTO-BASE-CERT-001",
+      "BLUTO-S07-REV-001",
+      "BLUTO-S07-REV-002"
+    ]
+  },
+  "BLUTO-S07-DOC-972": {
+    "document_id": "BLUTO-S07-DOC-972",
+    "artifact_id": "ART-BLUTO-S07-DOC-972-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/07-testing/README.md",
+    "sha256": "941f1d360390295cbccf3c4cec61b46e2d95e430f7656877beddbc2a88ca9c53",
+    "dependencies": [
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-S07-REV-001": {
+    "document_id": "BLUTO-S07-REV-001",
+    "artifact_id": "ART-BLUTO-S07-REV-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/07-testing/reviews/EVIDENCE-REVIEW.md",
+    "sha256": "1126e3d6f98d9009de46282138d1c7e43cbabcbea4630161b501f07d4e4340a6",
+    "dependencies": [
+      "BLUTO-BASE-QG-001",
+      "BLUTO-BASE-VAL-001",
+      "BLUTO-BASE-VAL-002",
+      "BLUTO-BASE-VAL-003",
+      "BLUTO-BASE-VAL-004",
+      "BLUTO-BASE-VAL-005",
+      "BLUTO-BASE-VAL-006"
+    ]
+  },
+  "BLUTO-S07-REV-002": {
+    "document_id": "BLUTO-S07-REV-002",
+    "artifact_id": "ART-BLUTO-S07-REV-002-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/07-testing/reviews/CONSISTENCY-REVIEW.md",
+    "sha256": "54748959181516393ca2b53d276fd3b92b170f15dbc01344d6d8c188974f2aa2",
+    "dependencies": [
+      "BLUTO-S07-REV-001"
+    ]
+  },
+  "BLUTO-S08-CERT-001": {
+    "document_id": "BLUTO-S08-CERT-001",
+    "artifact_id": "ART-BLUTO-S08-CERT-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/08-devops/release/RELEASE-CERTIFICATION.md",
+    "sha256": "4614ea3a203d48c9aaae14c304227259747886020acdbb0f1458092086481ecb",
+    "dependencies": [
+      "BLUTO-BASE-CERT-001",
+      "BLUTO-S08-REV-001",
+      "BLUTO-S08-REV-002"
     ]
   },
   "BLUTO-S08-DOC-972": {
@@ -2780,108 +2906,6 @@
       "BLUTO-DOM-REVIEW-001"
     ]
   },
-  "BLUTO-OPS-RELEASE-001": {
-    "document_id": "BLUTO-OPS-RELEASE-001",
-    "artifact_id": "ART-BLUTO-OPS-RELEASE-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/08-devops/RELEASE-PIPELINE.md",
-    "sha256": "2bc874c935cb2457d7810bf9024103f71c838e8c815b89352343a16bdfaaa2b9",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-ARCH-DEPLOY-001",
-      "BLUTO-CONTRACT-COMPAT-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-OPS-SLO-001": {
-    "document_id": "BLUTO-OPS-SLO-001",
-    "artifact_id": "ART-BLUTO-OPS-SLO-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/08-devops/SLO-CAPACITY.md",
-    "sha256": "43818cfaf7817fa445bf97946d0b76f407bf699c851b0284d689855ef1c1b3c9",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-ARCH-QAS-001",
-      "BLUTO-OPS-OBS-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-OPS-CONSISTENCY-001": {
-    "document_id": "BLUTO-OPS-CONSISTENCY-001",
-    "artifact_id": "ART-BLUTO-OPS-CONSISTENCY-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/08-devops/STREAM8-CONSISTENCY-REVIEW.md",
-    "sha256": "8c9d38e4e4e21426d1a68349a96c11f388fb6f9552979a3297a52b84883490b9",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-OPS-RELEASE-CERT-001": {
-    "document_id": "BLUTO-OPS-RELEASE-CERT-001",
-    "artifact_id": "ART-BLUTO-OPS-RELEASE-CERT-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/08-devops/STREAM8-RELEASE-CERTIFICATION.md",
-    "sha256": "332a58c2af690a5cb760ac9b7feeefbb722a46f4fb05fec243a0ba71ef3e10cc",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-OPS-REVIEW-001",
-      "BLUTO-OPS-CONSISTENCY-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-S08-CERT-001": {
-    "document_id": "BLUTO-S08-CERT-001",
-    "artifact_id": "ART-BLUTO-S08-CERT-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/08-devops/release/RELEASE-CERTIFICATION.md",
-    "sha256": "4614ea3a203d48c9aaae14c304227259747886020acdbb0f1458092086481ecb",
-    "dependencies": [
-      "BLUTO-S08-REV-001",
-      "BLUTO-S08-REV-002",
-      "BLUTO-BASE-CERT-001"
-    ]
-  },
-  "BLUTO-S08-REV-002": {
-    "document_id": "BLUTO-S08-REV-002",
-    "artifact_id": "ART-BLUTO-S08-REV-002-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/08-devops/reviews/CONSISTENCY-REVIEW.md",
-    "sha256": "8b90c69d796be637788e0567ce4ae316d6a25e21f3fb4bc9b32efe5ed8083702",
-    "dependencies": [
-      "BLUTO-S08-REV-001"
-    ]
-  },
   "BLUTO-S08-REV-001": {
     "document_id": "BLUTO-S08-REV-001",
     "artifact_id": "ART-BLUTO-S08-REV-001-v1.1.0",
@@ -2899,196 +2923,28 @@
       "BLUTO-BASE-VAL-006"
     ]
   },
-  "BLUTO-AI-ROLE-001": {
-    "document_id": "BLUTO-AI-ROLE-001",
-    "artifact_id": "ART-BLUTO-AI-ROLE-001-v1.1.0",
+  "BLUTO-S08-REV-002": {
+    "document_id": "BLUTO-S08-REV-002",
+    "artifact_id": "ART-BLUTO-S08-REV-002-v1.1.0",
     "version": "1.1.0",
     "status": "Baselined",
-    "path": "docs/09-ai-factory/AGENT-ROLES-RESPONSIBILITIES.md",
-    "sha256": "d5b775814f678787ff10e45b87e7d9437603880c41b665523b33ddd878f1ee60",
+    "path": "docs/08-devops/reviews/CONSISTENCY-REVIEW.md",
+    "sha256": "8b90c69d796be637788e0567ce4ae316d6a25e21f3fb4bc9b32efe5ed8083702",
     "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-AI-ARCH-001",
-      "BLUTO-DOM-REVIEW-001"
+      "BLUTO-S08-REV-001"
     ]
   },
-  "BLUTO-AI-ARCH-001": {
-    "document_id": "BLUTO-AI-ARCH-001",
-    "artifact_id": "ART-BLUTO-AI-ARCH-001-v1.1.0",
+  "BLUTO-S09-CERT-001": {
+    "document_id": "BLUTO-S09-CERT-001",
+    "artifact_id": "ART-BLUTO-S09-CERT-001-v1.1.0",
     "version": "1.1.0",
     "status": "Baselined",
-    "path": "docs/09-ai-factory/AI-FACTORY-ARCHITECTURE.md",
-    "sha256": "f949cdf1c14559bb3620661178b36b945840b315674b9119fed361b1f4a24066",
+    "path": "docs/09-ai-factory/release/RELEASE-CERTIFICATION.md",
+    "sha256": "d156a90c5013be39313c0e3e420d0a56ac0be3212395c77387306bfd20794bab",
     "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-ARCH-DEPENDENCY-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-AI-REVIEW-001": {
-    "document_id": "BLUTO-AI-REVIEW-001",
-    "artifact_id": "ART-BLUTO-AI-REVIEW-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/09-ai-factory/AI-FACTORY-REVIEW.md",
-    "sha256": "11e9637cb2ee74c12bf02cf1679017f0427272555b58204440e9d9ec5a55c270",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-AI-POLICY-001": {
-    "document_id": "BLUTO-AI-POLICY-001",
-    "artifact_id": "ART-BLUTO-AI-POLICY-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/09-ai-factory/AI-OPERATING-POLICY.md",
-    "sha256": "d5699b00e6e1d5425b9457b060c6c369307b8839bf2bc85e381d6f6b2a287f5a",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-AI-CODE-001": {
-    "document_id": "BLUTO-AI-CODE-001",
-    "artifact_id": "ART-BLUTO-AI-CODE-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/09-ai-factory/CODE-GENERATION-STANDARD.md",
-    "sha256": "0319d84b5ba97100a17e50ddf32608cb301b37bb7c4dbb9025583422bdd4531e",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-AI-PROMPT-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-AI-DOC-001": {
-    "document_id": "BLUTO-AI-DOC-001",
-    "artifact_id": "ART-BLUTO-AI-DOC-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/09-ai-factory/DOCUMENTATION-ADR-GENERATION.md",
-    "sha256": "79af6689bdc77fc2a660dc4d49eca8e16b5c27eaf9035ce741da273382577c29",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-ADR-0000",
-      "BLUTO-DOCSTATUS-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-AI-GUARD-001": {
-    "document_id": "BLUTO-AI-GUARD-001",
-    "artifact_id": "ART-BLUTO-AI-GUARD-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/09-ai-factory/GUARDRAILS-HALLUCINATION-PREVENTION.md",
-    "sha256": "70314073894a3e00d9efa8cc321380478f8e74009acd71178e22ad998a0e3d2f",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-AI-CONTEXT-001",
-      "BLUTO-SEC-ARCH-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-AI-HUMAN-001": {
-    "document_id": "BLUTO-AI-HUMAN-001",
-    "artifact_id": "ART-BLUTO-AI-HUMAN-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/09-ai-factory/HUMAN-APPROVAL-GATES.md",
-    "sha256": "200b15f742e421aeb3cc4595a68c22216ff8f9075f90fe6db1ce4c8ca8431c47",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-SEC-SDLC-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-AI-PROMPT-001": {
-    "document_id": "BLUTO-AI-PROMPT-001",
-    "artifact_id": "ART-BLUTO-AI-PROMPT-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/09-ai-factory/PROMPT-WORK-PACKAGE-STANDARD.md",
-    "sha256": "35c4fc8f90c2f59d8eb80f3603ca36fa85354ffcae91959010c67ddf364ff2bb",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-AI-CONTEXT-001",
-      "BLUTO-ENG-TRACE-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-AI-TRACE-001": {
-    "document_id": "BLUTO-AI-TRACE-001",
-    "artifact_id": "ART-BLUTO-AI-TRACE-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/09-ai-factory/PROVENANCE-TRACEABILITY.md",
-    "sha256": "7eec45a27f417ce44079cfca1354003d4611a96d33acc07487dc0f7a787cfbc7",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-ARCH-TRACE-001",
-      "BLUTO-OPS-TRACE-001",
-      "BLUTO-DOM-REVIEW-001"
+      "BLUTO-BASE-CERT-001",
+      "BLUTO-S09-REV-001",
+      "BLUTO-S09-REV-002"
     ]
   },
   "BLUTO-S09-DOC-972": {
@@ -3109,108 +2965,6 @@
       "BLUTO-DOM-REVIEW-001"
     ]
   },
-  "BLUTO-AI-CONTEXT-001": {
-    "document_id": "BLUTO-AI-CONTEXT-001",
-    "artifact_id": "ART-BLUTO-AI-CONTEXT-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/09-ai-factory/REPOSITORY-CONSUMPTION-RULES.md",
-    "sha256": "d7c5a3ac4d8cf41318ed20bac97ccf0ce142e6ab6e29f534b1997ea75bf3c30e",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-ARCH-DEPENDENCY-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-AI-CONSISTENCY-001": {
-    "document_id": "BLUTO-AI-CONSISTENCY-001",
-    "artifact_id": "ART-BLUTO-AI-CONSISTENCY-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/09-ai-factory/STREAM9-CONSISTENCY-REVIEW.md",
-    "sha256": "8d2eaa442b6c20592c61bba3ade353fce8ef3cd323f266b7626a0c05cfea6010",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-AI-RELEASE-001": {
-    "document_id": "BLUTO-AI-RELEASE-001",
-    "artifact_id": "ART-BLUTO-AI-RELEASE-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/09-ai-factory/STREAM9-RELEASE-CERTIFICATION.md",
-    "sha256": "73a9fea8dd0967ead175ddfde8373691552755488f571663dfdbe155832e259e",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-AI-REVIEW-001",
-      "BLUTO-AI-CONSISTENCY-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-AI-VALIDATE-001": {
-    "document_id": "BLUTO-AI-VALIDATE-001",
-    "artifact_id": "ART-BLUTO-AI-VALIDATE-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/09-ai-factory/VALIDATION-PIPELINE.md",
-    "sha256": "0877c23bd88e5952bd8ebef45c75fb081c2369da8285664dd46a076bb1cb2eda",
-    "dependencies": [
-      "BLUTO-BASE-GOV-001",
-      "BLUTO-BASE-GOV-002",
-      "BLUTO-BASE-GOV-004",
-      "BLUTO-BASE-STD-001",
-      "BLUTO-BASE-STD-002",
-      "BLUTO-BASE-STD-003",
-      "BLUTO-BASE-STD-004",
-      "BLUTO-AI-CODE-001",
-      "BLUTO-TEST-GATE-001",
-      "BLUTO-OPS-BUILD-001",
-      "BLUTO-DOM-REVIEW-001"
-    ]
-  },
-  "BLUTO-S09-CERT-001": {
-    "document_id": "BLUTO-S09-CERT-001",
-    "artifact_id": "ART-BLUTO-S09-CERT-001-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/09-ai-factory/release/RELEASE-CERTIFICATION.md",
-    "sha256": "d156a90c5013be39313c0e3e420d0a56ac0be3212395c77387306bfd20794bab",
-    "dependencies": [
-      "BLUTO-S09-REV-001",
-      "BLUTO-S09-REV-002",
-      "BLUTO-BASE-CERT-001"
-    ]
-  },
-  "BLUTO-S09-REV-002": {
-    "document_id": "BLUTO-S09-REV-002",
-    "artifact_id": "ART-BLUTO-S09-REV-002-v1.1.0",
-    "version": "1.1.0",
-    "status": "Baselined",
-    "path": "docs/09-ai-factory/reviews/CONSISTENCY-REVIEW.md",
-    "sha256": "e7119c233f32de6cd1c547abfe3fd4b4ef56ab62f9f1293c8772dd0f7e860898",
-    "dependencies": [
-      "BLUTO-S09-REV-001"
-    ]
-  },
   "BLUTO-S09-REV-001": {
     "document_id": "BLUTO-S09-REV-001",
     "artifact_id": "ART-BLUTO-S09-REV-001-v1.1.0",
@@ -3226,6 +2980,546 @@
       "BLUTO-BASE-VAL-004",
       "BLUTO-BASE-VAL-005",
       "BLUTO-BASE-VAL-006"
+    ]
+  },
+  "BLUTO-S09-REV-002": {
+    "document_id": "BLUTO-S09-REV-002",
+    "artifact_id": "ART-BLUTO-S09-REV-002-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/09-ai-factory/reviews/CONSISTENCY-REVIEW.md",
+    "sha256": "e7119c233f32de6cd1c547abfe3fd4b4ef56ab62f9f1293c8772dd0f7e860898",
+    "dependencies": [
+      "BLUTO-S09-REV-001"
+    ]
+  },
+  "BLUTO-SCOPE-001": {
+    "document_id": "BLUTO-SCOPE-001",
+    "artifact_id": "ART-BLUTO-SCOPE-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/01-foundation-governance/SCOPE.md",
+    "sha256": "a52e11b9801e42e57bb8ba0575ae69fdfa233470141e26e483310b53363faec6",
+    "dependencies": [
+      "BLUTO-ARCH-PRINCIPLES-001",
+      "BLUTO-VISION-001"
+    ]
+  },
+  "BLUTO-SEC-ARCH-001": {
+    "document_id": "BLUTO-SEC-ARCH-001",
+    "artifact_id": "ART-BLUTO-SEC-ARCH-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/05-security/SECURITY-ARCHITECTURE.md",
+    "sha256": "97c6248ff18c12c117cb843f13d902628013f91b8768810d02516ff99f8852f1",
+    "dependencies": [
+      "BLUTO-ARCH-DEPLOY-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-CONTRACT-ARCH-001",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-SEC-AUDIT-001": {
+    "document_id": "BLUTO-SEC-AUDIT-001",
+    "artifact_id": "ART-BLUTO-SEC-AUDIT-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/05-security/AUDIT-COMPLIANCE.md",
+    "sha256": "e53ff866a7bab5474e56cc4a2c395c5da5bc7c2e578b675b4cc86a09fe5f1527",
+    "dependencies": [
+      "BLUTO-ARCH-CROSSCUT-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001",
+      "BLUTO-SEC-THREAT-001"
+    ]
+  },
+  "BLUTO-SEC-CONSISTENCY-001": {
+    "document_id": "BLUTO-SEC-CONSISTENCY-001",
+    "artifact_id": "ART-BLUTO-SEC-CONSISTENCY-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/05-security/STREAM5-CONSISTENCY-REVIEW.md",
+    "sha256": "2c1ebda17acf2b486a1a2c61dfd65c2f042105d8b6080b194c9b22e5b69b9ecd",
+    "dependencies": [
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-SEC-CRYPTO-001": {
+    "document_id": "BLUTO-SEC-CRYPTO-001",
+    "artifact_id": "ART-BLUTO-SEC-CRYPTO-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/05-security/CRYPTOGRAPHY-SECRETS.md",
+    "sha256": "5bbc0390ecaadd4377e55ca5bfd382df485a16ee625ef0db579c0feb4eb88007",
+    "dependencies": [
+      "BLUTO-ARCH-TECH-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001",
+      "BLUTO-SEC-ARCH-001"
+    ]
+  },
+  "BLUTO-SEC-DATA-001": {
+    "document_id": "BLUTO-SEC-DATA-001",
+    "artifact_id": "ART-BLUTO-SEC-DATA-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/05-security/DATA-CLASSIFICATION-PRIVACY.md",
+    "sha256": "3efbc5076caf9a3b3c30a1d1d1cbe66c3564580c5f9f10ae39a5cfce885f3340",
+    "dependencies": [
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-CONTRACT-SCHEMA-001",
+      "BLUTO-DOM-CANONICAL-001",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-SEC-IAM-001": {
+    "document_id": "BLUTO-SEC-IAM-001",
+    "artifact_id": "ART-BLUTO-SEC-IAM-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/05-security/AUTHENTICATION-AUTHORIZATION.md",
+    "sha256": "25dbe707062c1f0c800a73d034247171859438b25e0e93723a4b78e9b3a61ca0",
+    "dependencies": [
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-CONTRACT-API-001",
+      "BLUTO-DOM-REVIEW-001",
+      "BLUTO-SEC-ARCH-001"
+    ]
+  },
+  "BLUTO-SEC-IR-001": {
+    "document_id": "BLUTO-SEC-IR-001",
+    "artifact_id": "ART-BLUTO-SEC-IR-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/05-security/INCIDENT-RESPONSE.md",
+    "sha256": "362297e708eb397b2a23908ff22a65139c1afa850031613fd4aecef7c770f273",
+    "dependencies": [
+      "BLUTO-ARCH-DEPLOY-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001",
+      "BLUTO-SEC-AUDIT-001"
+    ]
+  },
+  "BLUTO-SEC-RELEASE-001": {
+    "document_id": "BLUTO-SEC-RELEASE-001",
+    "artifact_id": "ART-BLUTO-SEC-RELEASE-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/05-security/STREAM5-RELEASE-CERTIFICATION.md",
+    "sha256": "04ba11ed8d516c05fbe84d384d963fc78a464a1d3b1408d2100af7e3de998d06",
+    "dependencies": [
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001",
+      "BLUTO-SEC-CONSISTENCY-001",
+      "BLUTO-SEC-REVIEW-001"
+    ]
+  },
+  "BLUTO-SEC-REVIEW-001": {
+    "document_id": "BLUTO-SEC-REVIEW-001",
+    "artifact_id": "ART-BLUTO-SEC-REVIEW-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/05-security/SECURITY-REVIEW.md",
+    "sha256": "7ea7e939b836f2d0963ff5519fc07761a5c938a7a9b1538cdc0b0de9bdf860af",
+    "dependencies": [
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-SEC-SDLC-001": {
+    "document_id": "BLUTO-SEC-SDLC-001",
+    "artifact_id": "ART-BLUTO-SEC-SDLC-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/05-security/SECURE-SDLC.md",
+    "sha256": "216399057e84134891e4f21e9f2630fbc37ae493802c0e23b40c476dbb25cfb4",
+    "dependencies": [
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-CONTRACT-COMPAT-001",
+      "BLUTO-DOM-REVIEW-001",
+      "BLUTO-SEC-THREAT-001"
+    ]
+  },
+  "BLUTO-SEC-TENANT-001": {
+    "document_id": "BLUTO-SEC-TENANT-001",
+    "artifact_id": "ART-BLUTO-SEC-TENANT-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/05-security/TENANT-ISOLATION.md",
+    "sha256": "65929af1c75613bf19898e0783560bd2c1fa9e350379455b96fa869f49208e8f",
+    "dependencies": [
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001",
+      "BLUTO-SEC-IAM-001"
+    ]
+  },
+  "BLUTO-SEC-THREAT-001": {
+    "document_id": "BLUTO-SEC-THREAT-001",
+    "artifact_id": "ART-BLUTO-SEC-THREAT-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/05-security/THREAT-MODEL.md",
+    "sha256": "0e50ab509d997fc141f936388a6b5964233a2ee66d5ecc9f687c5c0088205054",
+    "dependencies": [
+      "BLUTO-ARCH-VIEWS-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001",
+      "BLUTO-SEC-ARCH-001"
+    ]
+  },
+  "BLUTO-SEC-TRACE-001": {
+    "document_id": "BLUTO-SEC-TRACE-001",
+    "artifact_id": "ART-BLUTO-SEC-TRACE-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/05-security/SECURITY-TRACEABILITY.md",
+    "sha256": "2c0d2ea93754c2d73d10bd5d5a09b418b55aa0e08988733d644879934aff785f",
+    "dependencies": [
+      "BLUTO-ARCH-TRACE-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-CONTRACT-TRACE-001",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-TEST-ACCEPT-001": {
+    "document_id": "BLUTO-TEST-ACCEPT-001",
+    "artifact_id": "ART-BLUTO-TEST-ACCEPT-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/07-testing/ACCEPTANCE-TESTING.md",
+    "sha256": "76fb6333bc23b76db26df6d07c365603e2e479083354b85d83a8e21683ac1d5e",
+    "dependencies": [
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-CONTRACT-CONSUMER-001",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-TEST-ARCH-001": {
+    "document_id": "BLUTO-TEST-ARCH-001",
+    "artifact_id": "ART-BLUTO-TEST-ARCH-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/07-testing/TEST-ARCHITECTURE.md",
+    "sha256": "5c0a85ac90095e46fbd989a86d5f10cc619510caf91eeeb39016934b19ff4c15",
+    "dependencies": [
+      "BLUTO-ARCH-QAS-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-TEST-CONSISTENCY-001": {
+    "document_id": "BLUTO-TEST-CONSISTENCY-001",
+    "artifact_id": "ART-BLUTO-TEST-CONSISTENCY-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/07-testing/STREAM7-CONSISTENCY-REVIEW.md",
+    "sha256": "293080348435720d5448d9227f594095e4041088b10702e8e882a8c9cb2dde54",
+    "dependencies": [
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-TEST-CONTRACT-001": {
+    "document_id": "BLUTO-TEST-CONTRACT-001",
+    "artifact_id": "ART-BLUTO-TEST-CONTRACT-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/07-testing/CONTRACT-TESTING.md",
+    "sha256": "a526d4e4fad269b2ea177f58c4a7ee57922519e81425a2da42a2eced7545fc5b",
+    "dependencies": [
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-TEST-DOMAIN-001": {
+    "document_id": "BLUTO-TEST-DOMAIN-001",
+    "artifact_id": "ART-BLUTO-TEST-DOMAIN-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/07-testing/DOMAIN-UNIT-TESTING.md",
+    "sha256": "f23a6a74c14cd275df6d129553926034051ee8ad993adb8c366945d81ca83d54",
+    "dependencies": [
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-AGGREGATE-001",
+      "BLUTO-DOM-REVIEW-001",
+      "BLUTO-DOM-STATE-001"
+    ]
+  },
+  "BLUTO-TEST-GATE-001": {
+    "document_id": "BLUTO-TEST-GATE-001",
+    "artifact_id": "ART-BLUTO-TEST-GATE-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/07-testing/COVERAGE-QUALITY-GATES.md",
+    "sha256": "9580290d371a6443e4702b14bcf612cad37ddbde72f832a44d22a3faf8e81cf4",
+    "dependencies": [
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001",
+      "BLUTO-SEC-SDLC-001",
+      "BLUTO-TEST-STRATEGY-001"
+    ]
+  },
+  "BLUTO-TEST-INTEGRATION-001": {
+    "document_id": "BLUTO-TEST-INTEGRATION-001",
+    "artifact_id": "ART-BLUTO-TEST-INTEGRATION-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/07-testing/INTEGRATION-REPOSITORY-TESTING.md",
+    "sha256": "256bde7b6838ffe3e42b11c32f95dc262b1dc63d646b7b8f6692f5ab6cae8fa2",
+    "dependencies": [
+      "BLUTO-ARCH-DATA-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REPOSITORY-001",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-TEST-PERF-001": {
+    "document_id": "BLUTO-TEST-PERF-001",
+    "artifact_id": "ART-BLUTO-TEST-PERF-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/07-testing/PERFORMANCE-RELIABILITY-TESTING.md",
+    "sha256": "f47c025a7a3966dea473226de1952b340cefca61cd62b2f89452284d662fc2cf",
+    "dependencies": [
+      "BLUTO-ARCH-QAS-001",
+      "BLUTO-ARCH-RUNTIME-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-TEST-RELEASE-001": {
+    "document_id": "BLUTO-TEST-RELEASE-001",
+    "artifact_id": "ART-BLUTO-TEST-RELEASE-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/07-testing/STREAM7-RELEASE-CERTIFICATION.md",
+    "sha256": "4f7aedd1456aa446ac5bc77fe75a8e627284cd4761134b572ca947f6bda5e683",
+    "dependencies": [
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001",
+      "BLUTO-TEST-CONSISTENCY-001",
+      "BLUTO-TEST-REVIEW-001"
+    ]
+  },
+  "BLUTO-TEST-REVIEW-001": {
+    "document_id": "BLUTO-TEST-REVIEW-001",
+    "artifact_id": "ART-BLUTO-TEST-REVIEW-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/07-testing/TEST-REVIEW.md",
+    "sha256": "f3e883cc33c09d293c488ca85066f48689a96cd77518adb63a4324f102cf876b",
+    "dependencies": [
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-TEST-SEC-001": {
+    "document_id": "BLUTO-TEST-SEC-001",
+    "artifact_id": "ART-BLUTO-TEST-SEC-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/07-testing/SECURITY-TESTING.md",
+    "sha256": "cd06f203e55af5632c4fcd0b7d1b3b1d60be36ad61ddb5df1aa5cecabd276df9",
+    "dependencies": [
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001"
+    ]
+  },
+  "BLUTO-TEST-STRATEGY-001": {
+    "document_id": "BLUTO-TEST-STRATEGY-001",
+    "artifact_id": "ART-BLUTO-TEST-STRATEGY-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/07-testing/TEST-STRATEGY.md",
+    "sha256": "0b8a3402d00b5d1c5c902091a029affeeffabc28c78d0da7fa563d00b4fea8c7",
+    "dependencies": [
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001",
+      "BLUTO-DOM-TRACE-001",
+      "BLUTO-TEST-ARCH-001"
+    ]
+  },
+  "BLUTO-TEST-TRACE-001": {
+    "document_id": "BLUTO-TEST-TRACE-001",
+    "artifact_id": "ART-BLUTO-TEST-TRACE-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/07-testing/TEST-TRACEABILITY.md",
+    "sha256": "32addff18a7abb20d5af1161c33fb2ca596f0f3d7d9f48343f3c2518d1d84641",
+    "dependencies": [
+      "BLUTO-ARCH-TRACE-001",
+      "BLUTO-BASE-GOV-001",
+      "BLUTO-BASE-GOV-002",
+      "BLUTO-BASE-GOV-004",
+      "BLUTO-BASE-STD-001",
+      "BLUTO-BASE-STD-002",
+      "BLUTO-BASE-STD-003",
+      "BLUTO-BASE-STD-004",
+      "BLUTO-DOM-REVIEW-001",
+      "BLUTO-ENG-TRACE-001",
+      "BLUTO-SEC-TRACE-001"
+    ]
+  },
+  "BLUTO-VISION-001": {
+    "document_id": "BLUTO-VISION-001",
+    "artifact_id": "ART-BLUTO-VISION-001-v1.1.0",
+    "version": "1.1.0",
+    "status": "Baselined",
+    "path": "docs/01-foundation-governance/VISION.md",
+    "sha256": "49877964ccf6f43145de31da30c0c1ce634db42d68a8d9df465102bd2f25fd8f",
+    "dependencies": [
+      "BLUTO-S01-README-001"
     ]
   }
 }

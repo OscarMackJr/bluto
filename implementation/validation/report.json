@@ -1,0 +1,48 @@
+{
+  "exit_code": 0,
+  "gates": [
+    {
+      "gate": "GATE-01",
+      "name": "Metadata Validation",
+      "result": "Pass",
+      "finding_count": 0,
+      "evidence_path": "repository/evidence/rvec/implementation-wp-001-gate-01.json"
+    },
+    {
+      "gate": "GATE-02",
+      "name": "Identity Validation",
+      "result": "Pass",
+      "finding_count": 0,
+      "evidence_path": "repository/evidence/rvec/implementation-wp-001-gate-02.json"
+    },
+    {
+      "gate": "GATE-03",
+      "name": "Cross-Reference Validation",
+      "result": "Pass",
+      "finding_count": 0,
+      "evidence_path": "repository/evidence/rvec/implementation-wp-001-gate-03.json"
+    },
+    {
+      "gate": "GATE-04",
+      "name": "Dependency Validation",
+      "result": "Pass",
+      "finding_count": 0,
+      "evidence_path": "repository/evidence/rvec/implementation-wp-001-gate-04.json"
+    },
+    {
+      "gate": "GATE-05",
+      "name": "Authority Validation",
+      "result": "Pass",
+      "finding_count": 0,
+      "evidence_path": "repository/evidence/rvec/implementation-wp-001-gate-05.json"
+    },
+    {
+      "gate": "GATE-06",
+      "name": "Traceability Validation",
+      "result": "Pass",
+      "finding_count": 0,
+      "evidence_path": "repository/evidence/rvec/implementation-wp-001-gate-06.json"
+    }
+  ],
+  "findings": []
+}

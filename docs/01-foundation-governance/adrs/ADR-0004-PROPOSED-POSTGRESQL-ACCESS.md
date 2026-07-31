@@ -5,7 +5,7 @@
 | Document ID | BLUTO-ADR-0004 |
 | Artifact ID | ART-BLUTO-ADR-0004-v0.1.0 |
 | Version | 0.1.0 |
-| Status |  |
+| Status | Approved |
 | Owner | Enterprise Architecture |
 | Baseline | Implementation ApprovedTechnology Decision Package |
 | Stream | Implementation |
