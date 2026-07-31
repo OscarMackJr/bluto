@@ -34,7 +34,9 @@ public sealed class CiConfigurationTests
         Assert.Contains("aquasecurity/trivy-action@v0.36.0", workflow, StringComparison.Ordinal);
         Assert.Contains("format: 'sarif'", workflow, StringComparison.Ordinal);
         Assert.Contains("format: 'cyclonedx'", workflow, StringComparison.Ordinal);
-        Assert.Contains("actions/upload-artifact@v6", workflow, StringComparison.Ordinal);
+        Assert.Contains("actions/checkout@v7", workflow, StringComparison.Ordinal);
+        Assert.Contains("actions/setup-dotnet@v6", workflow, StringComparison.Ordinal);
+        Assert.Contains("actions/upload-artifact@v7", workflow, StringComparison.Ordinal);
 
         Assert.Contains("GITHUB_SHA", workflow, StringComparison.Ordinal);
         Assert.Contains("GITHUB_RUN_ID", workflow, StringComparison.Ordinal);
