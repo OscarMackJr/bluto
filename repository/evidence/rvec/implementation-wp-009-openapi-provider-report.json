@@ -1,7 +1,7 @@
 {
   "rvec_version": "1.0",
   "validation_standard_id": "BLUTO-BASE-VAL-001",
-  "quality_gate": "GATE-04",
+  "quality_gate": "GATE-09",
   "repository_version": "2.0.0",
   "work_package": "WP-009",
   "base_commit_sha": "c9e96ac2f602de3e5f13105b34bade48771d5dff",
@@ -20,7 +20,7 @@
     "implementation/tests/Api/ResolveCurrentPartyApiTests.cs",
     "implementation/tests/Api/MappingApiRouteContractTests.cs"
   ],
-  "tool": "Codex implementation verification",
+  "tool": "Codex OpenAPI provider verification",
   "tool_version": "implementation-wp-009-2.0",
   "execution_mode": "Automated",
   "start_timestamp": "2026-08-01T00:00:00Z",
@@ -43,6 +43,10 @@
     "npm audit --prefix implementation\\tools\\contracts --audit-level=high (0 vulnerabilities)",
     "git diff --check (exit 0)"
   ],
-  "findings": [],
-  "evidence_digest": "616bd87741029b70b330c25fac6898a929ba708a43cfd004416ca9f37c259764"
+  "observed_results": [
+    "ResolveCurrentParty success body matches WP-004 envelope.",
+    "Absent and degraded outcomes use governed error envelope.",
+    "Route is registered as GET /v1/mappings/{source_system}/{source_key} with authorization metadata."
+  ],
+  "evidence_digest": "86630e17d8eeb84cd87769ac895957abc2d2c8d8cd2462d25cbf52ab0000ea97"
 }

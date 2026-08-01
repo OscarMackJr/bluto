@@ -8,14 +8,15 @@ public sealed record MappingRequestContext(
     bool IsAuthenticated,
     Guid? TenantId,
     IReadOnlySet<Guid> AuthorizedTenantIds,
-    Guid CorrelationId);
+    Guid CorrelationId,
+    Guid RequestId = default);
 
 public sealed record MappingHttpResponse(
     int StatusCode,
     IReadOnlyDictionary<string, string> Headers,
     object? Body);
 
-public sealed record MappingApiResponse(
+public sealed record MappingApiMappingResult(
     [property: JsonPropertyName("party_id")] Guid PartyId,
     [property: JsonPropertyName("tenant_id")] Guid TenantId,
     [property: JsonPropertyName("source_system")] string SourceSystem,
@@ -26,10 +27,33 @@ public sealed record MappingApiResponse(
     [property: JsonPropertyName("rule_version")] string RuleVersion,
     [property: JsonPropertyName("provenance_reference")] string ProvenanceReference);
 
+public sealed record MappingApiResponse(
+    [property: JsonPropertyName("request_id")] Guid RequestId,
+    [property: JsonPropertyName("correlation_id")] Guid CorrelationId,
+    [property: JsonPropertyName("tenant_id")] Guid TenantId,
+    [property: JsonPropertyName("query_type")] string QueryType,
+    [property: JsonPropertyName("schema_version")] string SchemaVersion,
+    [property: JsonPropertyName("data_classification")] string DataClassification,
+    [property: JsonPropertyName("result")] MappingApiMappingResult Result)
+{
+    [JsonIgnore]
+    public string Status => Result.Status;
+}
+public sealed record MappingApiErrorEnvelope(
+    [property: JsonPropertyName("request_id")] Guid RequestId,
+    [property: JsonPropertyName("correlation_id")] Guid CorrelationId,
+    [property: JsonPropertyName("tenant_id")] Guid TenantId,
+    [property: JsonPropertyName("query_type")] string QueryType,
+    [property: JsonPropertyName("schema_version")] string SchemaVersion,
+    [property: JsonPropertyName("data_classification")] string DataClassification,
+    [property: JsonPropertyName("error")] MappingApiError Error);
+
 public sealed record MappingApiError(
     [property: JsonPropertyName("code")] string Code,
+    [property: JsonPropertyName("category")] string Category,
     [property: JsonPropertyName("message")] string Message,
-    [property: JsonPropertyName("correlation_id")] Guid CorrelationId);
+    [property: JsonPropertyName("retryable")] bool Retryable,
+    [property: JsonPropertyName("support_reference")] string SupportReference);
 
 public interface IBlutoAuthorizationPolicy
 {
@@ -40,7 +64,8 @@ public sealed class ClaimsBlutoAuthorizationPolicy : IBlutoAuthorizationPolicy
 {
     public MappingRequestContext CreateRequestContext(HttpContext httpContext, string operation, string resource)
     {
-        var correlationId = ResolveCorrelationId(httpContext);
+        var correlationId = ResolveGuidHeader(httpContext, "x-correlation-id");
+        var requestId = ResolveGuidHeader(httpContext, "x-request-id");
         var tenantClaim = httpContext.User.FindFirst("tenant_id")?.Value;
         var authorizedTenantClaims = httpContext.User.FindAll("tenant_id").Select(claim => claim.Value)
             .Concat(httpContext.User.FindAll("authorized_tenant_id").Select(claim => claim.Value));
@@ -53,11 +78,12 @@ public sealed class ClaimsBlutoAuthorizationPolicy : IBlutoAuthorizationPolicy
             httpContext.User.Identity?.IsAuthenticated == true,
             Guid.TryParse(tenantClaim, out var tenantId) ? tenantId : null,
             authorizedTenantIds,
-            correlationId);
+            correlationId,
+            requestId);
     }
 
-    private static Guid ResolveCorrelationId(HttpContext httpContext) =>
-        httpContext.Request.Headers.TryGetValue("x-correlation-id", out var values)
+    private static Guid ResolveGuidHeader(HttpContext httpContext, string headerName) =>
+        httpContext.Request.Headers.TryGetValue(headerName, out var values)
         && Guid.TryParse(values.FirstOrDefault(), out var parsed)
             ? parsed
             : Guid.NewGuid();
@@ -69,6 +95,7 @@ public static class BlutoMappingApiServiceCollectionExtensions
     {
         services.AddAuthorizationBuilder()
             .AddPolicy("resolve-current-party", policy => policy.RequireAuthenticatedUser());
+        services.AddScoped<CurrentMappingQueryService>();
         services.AddSingleton<IBlutoAuthorizationPolicy, ClaimsBlutoAuthorizationPolicy>();
         return services;
     }
@@ -124,25 +151,26 @@ public static class MappingApi
     {
         var headers = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
         {
-            ["x-correlation-id"] = context.CorrelationId.ToString("D")
+            ["x-correlation-id"] = context.CorrelationId.ToString("D"),
+            ["x-request-id"] = EffectiveRequestId(context).ToString("D")
         };
 
         if (!context.IsAuthenticated)
         {
             log($"resolve_current_party outcome=unauthenticated correlation_id={context.CorrelationId:D}");
-            return Error(401, "unauthenticated", "Authentication is required.", context.CorrelationId, headers);
+            return Error(401, "AUTHENTICATION_REQUIRED", "AUTHENTICATION_REQUIRED", "Authentication is required.", retryable: false, context, headers);
         }
 
         if (context.TenantId is null || context.TenantId == Guid.Empty)
         {
             log($"resolve_current_party outcome=tenant_scope_missing correlation_id={context.CorrelationId:D}");
-            return Error(403, "tenant_scope_forbidden", "Tenant scope is not authorized.", context.CorrelationId, headers);
+            return Error(403, "SCOPE_FORBIDDEN_CONCEALED", "SCOPE_FORBIDDEN", "Tenant scope is not authorized.", retryable: false, context, headers);
         }
 
         if (!context.AuthorizedTenantIds.Contains(context.TenantId.Value))
         {
             log($"resolve_current_party outcome=concealed correlation_id={context.CorrelationId:D}");
-            return Error(404, "mapping_not_found", "Mapping was not found.", context.CorrelationId, headers);
+            return Error(404, "SCOPE_FORBIDDEN_CONCEALED", "SCOPE_FORBIDDEN", "Mapping was not found.", retryable: false, context, headers);
         }
 
         try
@@ -159,30 +187,40 @@ public static class MappingApi
             if (mapping is null)
             {
                 log($"resolve_current_party outcome=not_found correlation_id={context.CorrelationId:D}");
-                return Error(404, "mapping_not_found", "Mapping was not found.", context.CorrelationId, headers);
+                return Error(404, "MAPPING_NOT_FOUND", "RESOURCE_NOT_FOUND", "Mapping was not found.", retryable: false, context, headers);
             }
 
             log($"resolve_current_party outcome=found correlation_id={context.CorrelationId:D}");
-            return new MappingHttpResponse(200, headers, From(mapping));
+            return new MappingHttpResponse(200, headers, Success(EffectiveRequestId(context), context.CorrelationId, mapping));
         }
         catch (UnauthorizedAccessException)
         {
             log($"resolve_current_party outcome=concealed correlation_id={context.CorrelationId:D}");
-            return Error(404, "mapping_not_found", "Mapping was not found.", context.CorrelationId, headers);
+            return Error(404, "SCOPE_FORBIDDEN_CONCEALED", "SCOPE_FORBIDDEN", "Mapping was not found.", retryable: false, context, headers);
         }
         catch (ArgumentException)
         {
             log($"resolve_current_party outcome=invalid_request correlation_id={context.CorrelationId:D}");
-            return Error(400, "invalid_mapping_query", "Current mapping query is invalid.", context.CorrelationId, headers);
+            return Error(400, "REQUEST_INVALID", "REQUEST_INVALID", "Current mapping query is invalid.", retryable: false, context, headers);
         }
         catch (InvalidOperationException)
         {
             log($"resolve_current_party outcome=dependency_degraded correlation_id={context.CorrelationId:D}");
-            return Error(503, "mapping_dependency_degraded", "Mapping dependency is unavailable.", context.CorrelationId, headers);
+            return Error(503, "DEPENDENCY_UNAVAILABLE", "DEPENDENCY_UNAVAILABLE", "Mapping dependency is unavailable.", retryable: true, context, headers);
         }
     }
 
-    private static MappingApiResponse From(CurrentMapping mapping) =>
+    private static MappingApiResponse Success(Guid requestId, Guid correlationId, CurrentMapping mapping) =>
+        new(
+            requestId,
+            correlationId,
+            mapping.TenantId,
+            "ResolveCurrentParty",
+            "1.0.0",
+            "Restricted",
+            From(mapping));
+
+    private static MappingApiMappingResult From(CurrentMapping mapping) =>
         new(
             mapping.PartyId,
             mapping.TenantId,
@@ -194,15 +232,28 @@ public static class MappingApi
             mapping.RuleVersion,
             mapping.ProvenanceReference);
 
+    private static Guid EffectiveRequestId(MappingRequestContext context) =>
+        context.RequestId == Guid.Empty ? context.CorrelationId : context.RequestId;
     private static MappingHttpResponse Error(
         int statusCode,
         string code,
+        string category,
         string message,
-        Guid correlationId,
+        bool retryable,
+        MappingRequestContext context,
         IReadOnlyDictionary<string, string> headers) =>
-        new(statusCode, headers, new MappingApiError(code, message, correlationId));
+        new(
+            statusCode,
+            headers,
+            new MappingApiErrorEnvelope(
+                EffectiveRequestId(context),
+                context.CorrelationId,
+                context.TenantId ?? Guid.Empty,
+                "ResolveCurrentParty",
+                "1.0.0",
+                "Restricted",
+                new MappingApiError(code, category, message, retryable, $"support-{context.CorrelationId:D}")));
 }
-
 
 
 
