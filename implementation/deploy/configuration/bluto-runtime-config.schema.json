@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bluto.local/schemas/wp-012/bluto-runtime-config.schema.json",
+  "title": "BlutoRuntimeConfiguration",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "environment",
+    "region",
+    "tenant_seed",
+    "database",
+    "vault",
+    "telemetry",
+    "api",
+    "worker",
+    "outbox"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0.0" },
+    "environment": { "const": "nonproduction" },
+    "region": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "tenant_seed": {
+      "type": "array",
+      "minItems": 2,
+      "uniqueItems": true,
+      "items": { "type": "string", "format": "uuid" }
+    },
+    "database": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["host_reference", "database_name", "runtime_role", "migration_role", "public_network_access_enabled"],
+      "properties": {
+        "host_reference": { "type": "string", "pattern": "^kvref://[a-z0-9-]+/[a-z0-9-]+$" },
+        "database_name": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+        "runtime_role": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+        "migration_role": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+        "public_network_access_enabled": { "const": false }
+      }
+    },
+    "vault": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "token_key_reference", "connection_reference"],
+      "properties": {
+        "name": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+        "token_key_reference": { "type": "string", "pattern": "^kvref://[a-z0-9-]+/[a-z0-9-]+$" },
+        "connection_reference": { "type": "string", "pattern": "^kvref://[a-z0-9-]+/[a-z0-9-]+$" }
+      }
+    },
+    "telemetry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["otlp_endpoint_reference", "service_namespace", "safe_dimensions"],
+      "properties": {
+        "otlp_endpoint_reference": { "type": "string", "pattern": "^kvref://[a-z0-9-]+/[a-z0-9-]+$" },
+        "service_namespace": { "const": "Bluto" },
+        "safe_dimensions": {
+          "type": "array",
+          "minItems": 4,
+          "uniqueItems": true,
+          "items": {
+            "enum": ["environment", "tenant_scope", "operation", "outcome", "correlation_id", "batch_id", "rule_version"]
+          }
+        }
+      }
+    },
+    "api": { "$ref": "#/$defs/deployable" },
+    "worker": { "$ref": "#/$defs/deployable" },
+    "outbox": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["publisher_enabled", "max_attempts", "broker_mode"],
+      "properties": {
+        "publisher_enabled": { "type": "boolean" },
+        "max_attempts": { "type": "integer", "minimum": 1, "maximum": 10 },
+        "broker_mode": { "enum": ["disabled", "adapter"] }
+      }
+    }
+  },
+  "$defs": {
+    "deployable": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["image_repository", "image_digest", "managed_identity", "minimum_replicas", "maximum_replicas"],
+      "properties": {
+        "image_repository": { "type": "string", "pattern": "^bluto-[a-z0-9-]+$" },
+        "image_digest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+        "managed_identity": { "type": "string", "pattern": "^bluto-[a-z0-9-]+-identity$" },
+        "minimum_replicas": { "type": "integer", "minimum": 0, "maximum": 3 },
+        "maximum_replicas": { "type": "integer", "minimum": 1, "maximum": 10 }
+      }
+    }
+  }
+}

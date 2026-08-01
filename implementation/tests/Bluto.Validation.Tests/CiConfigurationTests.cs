@@ -59,6 +59,23 @@ public sealed class CiConfigurationTests
         Assert.Contains("implementation/tests", codeql, StringComparison.Ordinal);
     }
 
+    [Fact]
+    public void Wp012_workflow_validates_runtime_configuration_without_deployment()
+    {
+        var root = FindRepositoryRoot();
+        var workflow = File.ReadAllText(Path.Combine(root, ".github", "workflows", "wp002-ci.yml"));
+
+        Assert.Contains("WP-012 Runtime Configuration And Smoke", workflow, StringComparison.Ordinal);
+        Assert.Contains("terraform -chdir=implementation/infra/terraform fmt -check", workflow, StringComparison.Ordinal);
+        Assert.Contains("terraform -chdir=implementation/infra/terraform init -backend=false", workflow, StringComparison.Ordinal);
+        Assert.Contains("terraform -chdir=implementation/infra/terraform validate", workflow, StringComparison.Ordinal);
+        Assert.Contains("dotnet test implementation/tests/Smoke/Bluto.Smoke.Tests.csproj --configuration Release --filter Smoke", workflow, StringComparison.Ordinal);
+        Assert.Contains("dotnet publish implementation/src/Bluto.Api/Bluto.Api.csproj --configuration Release --no-restore", workflow, StringComparison.Ordinal);
+        Assert.Contains("dotnet publish implementation/src/Bluto.Worker/Bluto.Worker.csproj --configuration Release --no-restore", workflow, StringComparison.Ordinal);
+        Assert.Contains("wp012-runtime-smoke-evidence-${{ github.sha }}", workflow, StringComparison.Ordinal);
+        Assert.DoesNotContain("terraform apply", workflow, StringComparison.OrdinalIgnoreCase);
+    }
+
     private static string FindRepositoryRoot()
     {
         var current = new DirectoryInfo(AppContext.BaseDirectory);

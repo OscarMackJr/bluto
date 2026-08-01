@@ -1,0 +1,27 @@
+{
+  "document_id": "BLUTO-WP-012-NONPROD-SMOKE-PLAN",
+  "artifact_id": "ART-BLUTO-WP-012-NONPROD-SMOKE-PLAN-v1.0.0",
+  "schema_version": "1.0.0",
+  "environment": "nonproduction",
+  "synthetic_tenants": [
+    "10000000-0000-0000-0000-000000000001",
+    "20000000-0000-0000-0000-000000000002"
+  ],
+  "checks": [
+    { "name": "api_health", "evidence": "http-status-and-correlation" },
+    { "name": "mapping_read", "evidence": "contract-response-no-token-values" },
+    { "name": "worker_dry_run", "evidence": "dry-run-counts-no-authoritative-writes" },
+    { "name": "telemetry_export", "evidence": "query-link-or-artifact" },
+    { "name": "key_vault_reference_failure", "evidence": "structured-503" },
+    { "name": "cross_tenant_negative", "evidence": "concealed-404-zero-link" }
+  ],
+  "rollback_exercise": {
+    "required_steps": [
+      "capture_current_revision",
+      "rollback_previous_revision",
+      "disable_worker_schedule",
+      "verify_mapping_read",
+      "record_forward_recovery_decision"
+    ]
+  }
+}
