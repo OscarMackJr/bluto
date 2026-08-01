@@ -1,0 +1,16 @@
+{
+  "work_package": "WP-010",
+  "base_commit_sha": "6bd304ec7779ff3ba7c72e96a9274f714502b169",
+  "result": "PASS",
+  "timestamp": "2026-08-01T00:00:00Z",
+  "evidence": [
+    "Worker rerun idempotency produced one Party, one active link, and no duplicate outbox facts.",
+    "Duplicate page entries were processed once by idempotency key.",
+    "Source-key processing order is deterministic."
+  ],
+  "tests": [
+    "Worker_rerun_is_idempotent_and_does_not_duplicate_state_or_outbox",
+    "Duplicate_page_entries_are_processed_once_by_idempotency_key",
+    "Worker_processes_synthetic_batch_in_deterministic_source_key_order"
+  ]
+}

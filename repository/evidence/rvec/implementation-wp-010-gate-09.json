@@ -1,29 +1,57 @@
 {
   "rvec_version": "1.0",
-  "validation_standard_id": "BLUTO-BASE-VAL-001",
+  "validation_standard_id": "BLUTO-OPS-OBS-001",
   "quality_gate": "GATE-09",
+  "quality_gate_name": "Operational Validation",
   "repository_version": "2.0.0",
+  "work_package": "WP-010",
+  "base_commit_sha": "6bd304ec7779ff3ba7c72e96a9274f714502b169",
+  "source_state": "Feature branch local source state before WP-010 commit; final commit SHA is supplied by git log and pull request checks.",
   "artifact_ids": [
+    "ART-BLUTO-ADR-0002-v0.1.0",
+    "ART-BLUTO-ADR-0016-v0.1.0",
+    "ART-BLUTO-ADR-0017-v0.1.0",
+    "ART-BLUTO-ARCH-RUNTIME-001-v1.1.0",
+    "ART-BLUTO-ARCH-INTEGRATION-001-v1.1.0",
+    "ART-BLUTO-SEC-CRYPTO-001-v1.1.0",
+    "ART-BLUTO-TEST-PERF-001-v1.1.0",
+    "ART-BLUTO-OPS-RUNBOOK-001-v1.1.0",
     "implementation/src/Bluto.Worker/Resolution/ScheduledResolutionWorker.cs",
     "implementation/tests/Worker/ScheduledResolutionWorkerTests.cs",
     "implementation/testdata/candidate-batch.v1.schema.json",
     "implementation/testdata/synthetic-candidate-batch.valid.json"
   ],
   "tool": "Codex implementation verification",
-  "tool_version": "implementation-finding-remediation-1.0",
+  "tool_version": "implementation-wp-010-2.0",
   "execution_mode": "Automated",
-  "start_timestamp": "2026-07-31T13:52:30Z",
-  "end_timestamp": "2026-07-31T13:52:30Z",
+  "start_timestamp": "2026-08-01T00:00:00Z",
+  "end_timestamp": "2026-08-01T00:00:00Z",
   "result": "PASS",
   "commands": [
-    "dotnet test implementation\\Bluto.Validation.sln (58 passed)",
+    "dotnet test implementation\\tests\\Worker\\Bluto.Worker.Tests.csproj --configuration Release --filter Worker --logger \"console;verbosity=minimal\" (red: cross-source cross-tenant token collision was not deferred)",
+    "dotnet test implementation\\tests\\Worker\\Bluto.Worker.Tests.csproj --configuration Release --filter Worker --logger \"console;verbosity=minimal\" (16 passed)",
+    "dotnet test implementation\\Bluto.Validation.sln --configuration Release --filter Category=Worker --logger \"console;verbosity=minimal\" (16 passed)",
+    "dotnet test implementation\\Bluto.Validation.sln --configuration Release --filter Category=Integration --logger \"console;verbosity=minimal\" (23 passed)",
+    "dotnet test implementation\\Bluto.Validation.sln --configuration Release --filter Category=Security --logger \"console;verbosity=minimal\" (32 passed)",
+    "dotnet test implementation\\Bluto.Validation.sln --configuration Release --filter Category=Contract --logger \"console;verbosity=minimal\" (40 passed)",
+    "dotnet test implementation\\Bluto.Validation.sln --configuration Release --logger \"console;verbosity=minimal\" (109 passed)",
     "dotnet build implementation\\Bluto.Validation.sln --configuration Release (0 warnings, 0 errors)",
     "dotnet format implementation\\Bluto.Validation.sln --verify-no-changes (exit 0)",
+    "dotnet run --project implementation\\src\\Bluto.Validation.Cli --configuration Release -- --root . (exit 0; GATE-01..GATE-06 pass)",
     "dotnet list implementation\\Bluto.Validation.sln package --vulnerable --include-transitive (no vulnerable packages)",
-    "dotnet run --project implementation\\src\\Bluto.Validation.Cli\\Bluto.Validation.Cli.csproj -- --repository-root . --evidence-output repository\\evidence\\rvec (exit 1: pre-existing governance findings)"
+    "npm audit --prefix implementation\\tools\\contracts --audit-level=high (0 vulnerabilities)",
+    "git diff --check (exit 0)"
   ],
-  "findings": [
-    "Worker telemetry source/metric names, operation-scoped idempotency, and cross-tenant token collision deferral verified by tests."
+  "findings": [],
+  "wp_010_controls_verified": [
+    "synthetic tenant-scoped batch processing",
+    "deterministic source-key ordering",
+    "operation-scoped idempotency keys",
+    "same-tenant cross-source identity linking to an existing Party",
+    "cross-tenant synthetic-token collision deferral across source systems",
+    "safe logs and metrics without raw identifier or token values",
+    "approved telemetry source and metric names",
+    "API readback of worker-created mappings"
   ],
-  "evidence_digest": "382d0ba8aa73a53e6d30e5bec61155e0c23bb5251473518c463adfa8169c5550"
+  "evidence_digest": "ccf26117a7514e4d6633a02d04d6279948badcf615dbfac39a52253804ec5025"
 }

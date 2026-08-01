@@ -1,0 +1,15 @@
+{
+  "work_package": "WP-010",
+  "base_commit_sha": "6bd304ec7779ff3ba7c72e96a9274f714502b169",
+  "result": "PASS",
+  "timestamp": "2026-08-01T00:00:00Z",
+  "evidence": [
+    "Worker invokes IdentityResolutionService repository transaction boundary.",
+    "Failure path leaves no Party, source link, or outbox facts.",
+    "Same-tenant cross-source token adds SourceLinkEstablished without creating another Party."
+  ],
+  "tests": [
+    "Failure_leaves_no_partial_authoritative_state_or_outbox",
+    "Same_tenant_cross_source_token_links_to_existing_party_and_api_reads_both_mappings"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "work_package": "WP-010",
+  "base_commit_sha": "6bd304ec7779ff3ba7c72e96a9274f714502b169",
+  "result": "PASS",
+  "timestamp": "2026-08-01T00:00:00Z",
+  "evidence": [
+    "ActivitySource name is Bluto.Worker.Resolution.",
+    "Metric names include candidates, failed partitions, and outbox lag.",
+    "Logs omit synthetic token values and raw identifiers."
+  ],
+  "tests": [
+    "Worker_exposes_approved_telemetry_sources_and_safe_metric_names",
+    "Safe_logs_and_metrics_exclude_raw_or_token_values"
+  ]
+}
