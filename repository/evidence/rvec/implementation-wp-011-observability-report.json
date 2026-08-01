@@ -1,0 +1,13 @@
+{
+  "work_package": "WP-011",
+  "base_commit_sha": "b2e2ce5e7e70d51d9e3f84a2304ed271e78283a3",
+  "result": "PASS",
+  "timestamp": "2026-08-01T00:00:00Z",
+  "evidence": [
+    "Telemetry source is Bluto.Worker.Outbox.",
+    "Metrics include outbox lag, publish attempts, duplicate suppressions, dead letters, and publish latency."
+  ],
+  "tests": [
+    "Publisher_exposes_approved_telemetry_source_and_metric_names"
+  ]
+}

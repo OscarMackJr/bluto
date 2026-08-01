@@ -1,0 +1,14 @@
+{
+  "work_package": "WP-011",
+  "base_commit_sha": "b2e2ce5e7e70d51d9e3f84a2304ed271e78283a3",
+  "result": "BLOCKED_LOCALLY",
+  "timestamp": "2026-08-01T00:00:00Z",
+  "evidence": [
+    "Local Trivy filesystem scan could not complete because native trivy is not installed and Docker-based Trivy DB download timed out after TLS/certificate issues; PR CI Trivy remains required before merge."
+  ],
+  "commands": [
+    "trivy fs .",
+    "docker run --rm -v ${PWD}:/src aquasec/trivy:latest fs /src",
+    "docker run --rm -v ${PWD}:/src aquasec/trivy:latest --insecure fs /src"
+  ]
+}
