@@ -22,6 +22,31 @@ public sealed class MigrationContractTests
     [Fact]
     [Trait("Category", "Migration")]
     [Trait("Category", "Security")]
+    public void Migration_persists_only_non_raw_match_identity_digest()
+    {
+        var sql = MigrationSql();
+
+        Assert.Contains("match_identity_digest text not null", sql);
+        Assert.DoesNotContain("identity_token", sql, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("hmac_token", sql, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Fact]
+    [Trait("Category", "Migration")]
+    [Trait("Category", "Security")]
+    public void Migration_creates_tenant_scoped_review_cases_for_conflicts()
+    {
+        var sql = MigrationSql();
+
+        Assert.Contains("create table if not exists identity_resolution.review_cases", sql);
+        Assert.Contains("reason text not null", sql);
+        Assert.Contains("correlation_id uuid not null", sql);
+        Assert.Matches(@"primary\s+key\s*\(\s*tenant_id\s*,\s*review_case_id\s*\)", sql);
+    }
+
+    [Fact]
+    [Trait("Category", "Migration")]
+    [Trait("Category", "Security")]
     public void Migration_never_persists_raw_strong_identifier_columns()
     {
         var sql = MigrationSql();
