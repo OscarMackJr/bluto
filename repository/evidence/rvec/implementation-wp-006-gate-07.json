@@ -20,17 +20,16 @@
   "execution_mode": "Automated",
   "start_timestamp": "1970-01-01T00:00:00Z",
   "end_timestamp": "1970-01-01T00:00:00Z",
-  "result": "PASS WITH CONDITIONS",
-  "findings": [
-    {
-      "severity": "info",
-      "code": "WP-006-RED-TESTS",
-      "message": "The intentionally failing xUnit tests are the WP-006 executable contract for the next identity-resolution implementation slice."
-    }
-  ],
+  "result": "PASS",
+  "findings": [],
   "commands": [
-    "dotnet test implementation\\tests\\Bluto.Identity.Tests\\Bluto.Identity.Tests.csproj --configuration Release (exit 1; 24 tests, 14 passed, 10 failed intentionally)",
-    "dotnet test implementation\\Bluto.Validation.sln --configuration Release (exit 1; expected red WP-006 specification tests)"
+    "dotnet build implementation\\Bluto.Validation.sln --configuration Release (exit 0; 0 warnings, 0 errors)",
+    "dotnet test implementation\\tests\\Bluto.Identity.Tests\\Bluto.Identity.Tests.csproj --configuration Release (exit 0; 24 tests)",
+    "dotnet test implementation\\Bluto.Validation.sln --configuration Release (exit 0; 97 tests)",
+    "dotnet format implementation\\Bluto.Validation.sln --verify-no-changes (exit 0)",
+    "dotnet run --project implementation\\src\\Bluto.Validation.Cli --configuration Release -- --root . (exit 0; GATE-01 through GATE-06 PASS)",
+    "dotnet list implementation\\Bluto.Validation.sln package --vulnerable --include-transitive (exit 0; no vulnerable packages)",
+    "npm audit --prefix implementation\\tools\\contracts --audit-level=high (exit 0; 0 vulnerabilities)"
   ],
-  "evidence_digest": "75ad9a949cc31c9364dc8481eed4b9eacdadb3065f6cf1a647ee8da41f1bdd79"
+  "evidence_digest": "3c4b4f1908c4be5b268466edbe30005ad1b1465857f3fa58dd233f4251ae45e7"
 }

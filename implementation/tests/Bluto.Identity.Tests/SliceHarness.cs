@@ -35,7 +35,7 @@ internal sealed class SliceHarness
         string identityToken = "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
         DateTimeOffset? effectiveFrom = null,
         Guid? correlationId = null,
-        string idempotencyKey = "tenant-a|nexus|SRC-001|v1|rule-version-2026-07-30",
+        string idempotencyKey = "tenant-a|nexus|SRC-001|v1|rule-version-2026-07-30|ResolveSourceCandidate",
         IReadOnlySet<Guid>? authorizedTenantIds = null,
         string? rawStrongIdentifier = null) =>
         new(

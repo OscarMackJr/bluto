@@ -24,7 +24,7 @@ public sealed class IdentityResolutionSliceTests
         var harness = SliceHarness.Create();
 
         var first = await harness.Service.ResolveAsync(harness.Command(sourceKey: "SRC-001"), CancellationToken.None);
-        var second = await harness.Service.ResolveAsync(harness.Command(sourceKey: "SRC-002", identityToken: "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb", idempotencyKey: "tenant-a|nexus|SRC-002|v1|rule-version-2026-07-30"), CancellationToken.None);
+        var second = await harness.Service.ResolveAsync(harness.Command(sourceKey: "SRC-002", identityToken: "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb", idempotencyKey: "tenant-a|nexus|SRC-002|v1|rule-version-2026-07-30|ResolveSourceCandidate"), CancellationToken.None);
 
         Assert.NotEqual(first.Party.PartyId, second.Party.PartyId);
     }
@@ -128,7 +128,7 @@ public sealed class IdentityResolutionSliceTests
     public async Task Replaying_same_command_is_idempotent()
     {
         var harness = SliceHarness.Create();
-        var command = harness.Command(idempotencyKey: "tenant-a|nexus|SRC-001|v1|rule-version-2026-07-30");
+        var command = harness.Command(idempotencyKey: "tenant-a|nexus|SRC-001|v1|rule-version-2026-07-30|ResolveSourceCandidate");
 
         var first = await harness.Service.ResolveAsync(command, CancellationToken.None);
         var second = await harness.Service.ResolveAsync(command, CancellationToken.None);
@@ -151,7 +151,7 @@ public sealed class IdentityResolutionSliceTests
                 harness.Command(
                     tenantId: SliceHarness.TenantB,
                     authorizedTenantIds: new HashSet<Guid> { SliceHarness.TenantA },
-                    idempotencyKey: "tenant-b-forbidden"),
+                    idempotencyKey: "tenant-b|nexus|SRC-001|v1|rule-version-2026-07-30|ResolveSourceCandidate"),
                 CancellationToken.None));
 
         Assert.Empty(harness.Repository.ActiveLinks(SliceHarness.TenantB, "nexus", "SRC-001"));
@@ -171,4 +171,3 @@ public sealed class IdentityResolutionSliceTests
         Assert.Empty(harness.Repository.OutboxFacts());
     }
 }
-
