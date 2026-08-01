@@ -28,6 +28,13 @@ public sealed record EffectiveInterval(DateTimeOffset EffectiveFrom, DateTimeOff
 
     public bool Contains(DateTimeOffset instant) =>
         instant >= EffectiveFrom && (EffectiveTo is null || instant < EffectiveTo);
+
+    public bool Overlaps(EffectiveInterval other)
+    {
+        var thisTo = EffectiveTo ?? DateTimeOffset.MaxValue;
+        var otherTo = other.EffectiveTo ?? DateTimeOffset.MaxValue;
+        return EffectiveFrom < otherTo && other.EffectiveFrom < thisTo;
+    }
 }
 
 public sealed record LinkProvenance(
@@ -51,7 +58,40 @@ public sealed record PartySourceLink(
     string SourceKey,
     EffectiveInterval EffectiveInterval,
     string Status,
-    LinkProvenance Provenance);
+    LinkProvenance Provenance)
+{
+    public const string Active = "active";
+    public const string Rejected = "rejected";
+    public const string Superseded = "superseded";
+
+    public PartySourceLink Reject() => this with { Status = Rejected };
+
+    public PartySourceLink Supersede() => this with { Status = Superseded };
+}
+
+public sealed class PartyIdentifierRegistry
+{
+    private readonly HashSet<PartyId> issued = [];
+    private readonly HashSet<PartyId> retired = [];
+
+    public void RegisterIssued(PartyId partyId)
+    {
+        if (retired.Contains(partyId) || !issued.Add(partyId))
+        {
+            throw new InvalidOperationException("Party ID reuse is prohibited.");
+        }
+    }
+
+    public void Retire(PartyId partyId)
+    {
+        if (!issued.Contains(partyId))
+        {
+            throw new InvalidOperationException("Only issued Party IDs can be retired.");
+        }
+
+        retired.Add(partyId);
+    }
+}
 
 public sealed class Party
 {
@@ -72,7 +112,7 @@ public sealed class Party
 
     public DateTimeOffset CreatedAt { get; }
 
-    public string Status { get; }
+    public string Status { get; private set; }
 
     public int Version { get; private set; }
 
@@ -99,7 +139,7 @@ public sealed class Party
                 link.TenantId == tenantId
                 && link.SourceSystem.Equals(sourceSystem, StringComparison.Ordinal)
                 && link.SourceKey.Equals(sourceKey, StringComparison.Ordinal)
-                && link.Status.Equals("active", StringComparison.Ordinal)
+                && link.Status.Equals(PartySourceLink.Active, StringComparison.Ordinal)
                 && link.EffectiveInterval.EffectiveTo is null))
         {
             throw new InvalidOperationException("An active source link already exists for this canonical source identity scope.");
@@ -112,10 +152,38 @@ public sealed class Party
             sourceSystem,
             sourceKey,
             effectiveInterval,
-            "active",
+            PartySourceLink.Active,
             provenance);
         sourceLinks.Add(link);
         Version++;
         return link;
+    }
+
+    public void MergeInto(PartyId survivingPartyId)
+    {
+        if (survivingPartyId == PartyId)
+        {
+            throw new InvalidOperationException("A Party cannot be merged into itself.");
+        }
+
+        Status = "merged";
+        Version++;
+    }
+
+    public void Retire()
+    {
+        Status = "retired";
+        Version++;
+    }
+
+    public Party Split(PartyId newPartyId, DateTimeOffset createdAt)
+    {
+        if (newPartyId == PartyId)
+        {
+            throw new InvalidOperationException("Split Party ID must be newly issued.");
+        }
+
+        Version++;
+        return new Party(newPartyId, TenantId, createdAt);
     }
 }
