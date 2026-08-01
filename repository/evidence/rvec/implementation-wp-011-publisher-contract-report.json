@@ -1,0 +1,14 @@
+{
+  "work_package": "WP-011",
+  "base_commit_sha": "b2e2ce5e7e70d51d9e3f84a2304ed271e78283a3",
+  "result": "PASS",
+  "timestamp": "2026-08-01T00:00:00Z",
+  "evidence": [
+    "Outbox publisher validates event type/version and rejects prohibited sensitive terms before transport publication.",
+    "Broker-disabled mode marks governed facts as published without requiring external broker."
+  ],
+  "tests": [
+    "Broker_disabled_publisher_drains_pending_facts_without_external_transport",
+    "Publisher_validates_contract_before_transport_and_dead_letters_invalid_payloads"
+  ]
+}
