@@ -53,6 +53,18 @@ public sealed class PostgresPartyRepository : IPartyRepository
         return row is null ? null : new Party(new PartyId(row.PartyId), row.TenantId, new DateTimeOffset(DateTime.SpecifyKind(row.CreatedAt, DateTimeKind.Utc)));
     }
 
+    public Task<Party?> FindActivePartyByIdentityTokenAsync(Guid tenantId, string identityToken, CancellationToken cancellationToken)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        return Task.FromResult<Party?>(null);
+    }
+
+    public Task<bool> HasCrossTenantIdentityTokenAsync(Guid tenantId, string identityToken, CancellationToken cancellationToken)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        return Task.FromResult(false);
+    }
+
     public async Task RecordIdempotencyAsync(string idempotencyKey, PartyId partyId, CancellationToken cancellationToken)
     {
         await using var connection = await dataSource.OpenConnectionAsync(cancellationToken);
@@ -68,7 +80,7 @@ public sealed class PostgresPartyRepository : IPartyRepository
             cancellationToken: cancellationToken));
     }
 
-    public async Task CommitNewPartyWithLinkAndOutboxAsync(Party party, string idempotencyKey, IReadOnlyList<OutboxFact> facts, CancellationToken cancellationToken)
+    public async Task CommitNewPartyWithLinkAndOutboxAsync(Party party, string identityToken, string idempotencyKey, IReadOnlyList<OutboxFact> facts, CancellationToken cancellationToken)
     {
         var link = party.SourceLinks.Single();
         var partyCreated = facts.Single(fact => fact.EventType.Equals("PartyCreated", StringComparison.Ordinal));
@@ -122,6 +134,18 @@ public sealed class PostgresPartyRepository : IPartyRepository
         }
 
         await transaction.CommitAsync(cancellationToken);
+    }
+
+    public Task RecordReviewCaseAsync(ReviewCase reviewCase, CancellationToken cancellationToken)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        return Task.CompletedTask;
+    }
+
+    public Task CommitSourceLinkWithOutboxAsync(Party party, string identityToken, string idempotencyKey, IReadOnlyList<OutboxFact> facts, CancellationToken cancellationToken)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        throw new NotSupportedException("PostgreSQL existing-party source-link commits are outside the WP-006 minimal adapter path.");
     }
 
     private sealed class PartyRow
@@ -280,4 +304,3 @@ public static class PostgresIdentityResolutionSql
             + (select count(*) from inserted_source_link_established_outbox)
         """;
 }
-

@@ -25,15 +25,32 @@ public sealed record ResolveSourceCandidateCommand(
 
 public sealed record IdentityResolutionResult(Party Party, bool Created);
 
+public sealed record ReviewCase(
+    Guid TenantId,
+    string SourceSystem,
+    string SourceKey,
+    string IdentityToken,
+    string Reason,
+    Guid CorrelationId,
+    DateTimeOffset RecordedAt);
+
 public interface IPartyRepository
 {
     Task<Party?> FindIdempotentResultAsync(string idempotencyKey, CancellationToken cancellationToken);
 
     Task<Party?> FindActivePartyAsync(Guid tenantId, string sourceSystem, string sourceKey, CancellationToken cancellationToken);
 
+    Task<Party?> FindActivePartyByIdentityTokenAsync(Guid tenantId, string identityToken, CancellationToken cancellationToken);
+
+    Task<bool> HasCrossTenantIdentityTokenAsync(Guid tenantId, string identityToken, CancellationToken cancellationToken);
+
     Task RecordIdempotencyAsync(string idempotencyKey, PartyId partyId, CancellationToken cancellationToken);
 
-    Task CommitNewPartyWithLinkAndOutboxAsync(Party party, string idempotencyKey, IReadOnlyList<OutboxFact> facts, CancellationToken cancellationToken);
+    Task RecordReviewCaseAsync(ReviewCase reviewCase, CancellationToken cancellationToken);
+
+    Task CommitNewPartyWithLinkAndOutboxAsync(Party party, string identityToken, string idempotencyKey, IReadOnlyList<OutboxFact> facts, CancellationToken cancellationToken);
+
+    Task CommitSourceLinkWithOutboxAsync(Party party, string identityToken, string idempotencyKey, IReadOnlyList<OutboxFact> facts, CancellationToken cancellationToken);
 }
 
 public sealed class IdentityResolutionService
@@ -50,6 +67,12 @@ public sealed class IdentityResolutionService
     public async Task<IdentityResolutionResult> ResolveAsync(ResolveSourceCandidateCommand command, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
+        if (!string.IsNullOrWhiteSpace(command.RawStrongIdentifier))
+        {
+            log($"identity_resolution_rejected outcome=raw_strong_identifier_rejected correlation_id={command.CorrelationId:D}");
+            throw new ArgumentException("raw strong identifier rejected; provide only approved canonical tokens.");
+        }
+
         Validate(command);
 
         if (!command.AuthorizedTenantIds.Contains(command.TenantId))
@@ -72,36 +95,78 @@ public sealed class IdentityResolutionService
             return new IdentityResolutionResult(existing, Created: false);
         }
 
+        if (await repository.HasCrossTenantIdentityTokenAsync(command.TenantId, command.IdentityToken, cancellationToken))
+        {
+            await RecordReviewCaseAsync(command, "cross_tenant_collision", cancellationToken);
+            log($"identity_resolution_rejected outcome=cross_tenant_collision tenant_id={command.TenantId:D} correlation_id={command.CorrelationId:D}");
+            return new IdentityResolutionResult(new Party(PartyId.New(), command.TenantId, command.RequestedAt), Created: false);
+        }
+
+        var tokenMatch = await repository.FindActivePartyByIdentityTokenAsync(command.TenantId, command.IdentityToken, cancellationToken);
+        if (tokenMatch is not null)
+        {
+            if (tokenMatch.SourceLinks.Any(link =>
+                    link.TenantId == command.TenantId
+                    && link.SourceSystem.Equals(command.SourceSystem, StringComparison.Ordinal)
+                    && !link.SourceKey.Equals(command.SourceKey, StringComparison.Ordinal)
+                    && link.Status.Equals(PartySourceLink.Active, StringComparison.Ordinal)
+                    && link.EffectiveInterval.EffectiveTo is null))
+            {
+                await RecordReviewCaseAsync(command, "same_source_identity_conflict", cancellationToken);
+                log($"identity_resolution_deferred outcome=same_source_identity_conflict tenant_id={command.TenantId:D} correlation_id={command.CorrelationId:D}");
+                return new IdentityResolutionResult(tokenMatch, Created: false);
+            }
+
+            var link = EstablishLink(tokenMatch, command);
+            var facts = new[] { OutboxFact.SourceLinkEstablished(tokenMatch, link, command) };
+            await repository.CommitSourceLinkWithOutboxAsync(tokenMatch, command.IdentityToken, command.IdempotencyKey, facts, cancellationToken);
+            log("identity_resolution_completed outcome=linked_existing_party");
+            return new IdentityResolutionResult(tokenMatch, Created: false);
+        }
+
         var party = new Party(PartyId.New(), command.TenantId, command.RequestedAt);
-        var provenance = new LinkProvenance(
-            command.MatchRuleId,
-            command.RuleVersionId,
-            command.RulesetVersion,
-            "deterministic_exact_token",
-            "1.0",
-            command.SourceVersion,
-            command.EvidenceReference,
-            command.CorrelationId,
-            command.CausationId,
-            command.ActorId,
-            command.RequestedAt);
-        var link = party.EstablishSourceLink(
+        var newLink = EstablishLink(party, command);
+        var newFacts = new[]
+        {
+            OutboxFact.PartyCreated(party, command),
+            OutboxFact.SourceLinkEstablished(party, newLink, command)
+        };
+
+        await repository.CommitNewPartyWithLinkAndOutboxAsync(party, command.IdentityToken, command.IdempotencyKey, newFacts, cancellationToken);
+        log("identity_resolution_completed outcome=created");
+        return new IdentityResolutionResult(party, Created: true);
+    }
+
+    private static PartySourceLink EstablishLink(Party party, ResolveSourceCandidateCommand command) =>
+        party.EstablishSourceLink(
             command.TenantId,
             command.SourceSystem,
             command.SourceKey,
             EffectiveInterval.HalfOpen(command.EffectiveFrom, effectiveTo: null),
-            provenance);
+            new LinkProvenance(
+                command.MatchRuleId,
+                command.RuleVersionId,
+                command.RulesetVersion,
+                "deterministic_exact_token",
+                "1.0",
+                command.SourceVersion,
+                command.EvidenceReference,
+                command.CorrelationId,
+                command.CausationId,
+                command.ActorId,
+                command.RequestedAt));
 
-        var facts = new[]
-        {
-            OutboxFact.PartyCreated(party, command),
-            OutboxFact.SourceLinkEstablished(party, link, command)
-        };
-
-        await repository.CommitNewPartyWithLinkAndOutboxAsync(party, command.IdempotencyKey, facts, cancellationToken);
-        log("identity_resolution_completed outcome=created");
-        return new IdentityResolutionResult(party, Created: true);
-    }
+    private async Task RecordReviewCaseAsync(ResolveSourceCandidateCommand command, string reason, CancellationToken cancellationToken) =>
+        await repository.RecordReviewCaseAsync(
+            new ReviewCase(
+                command.TenantId,
+                command.SourceSystem,
+                command.SourceKey,
+                command.IdentityToken,
+                reason,
+                command.CorrelationId,
+                command.RequestedAt),
+            cancellationToken);
 
     private static void Validate(ResolveSourceCandidateCommand command)
     {
@@ -112,7 +177,7 @@ public sealed class IdentityResolutionService
 
         if (!string.IsNullOrWhiteSpace(command.RawStrongIdentifier))
         {
-            throw new ArgumentException("Raw strong identifiers are prohibited; provide only approved canonical tokens.");
+            throw new ArgumentException("raw strong identifier rejected; provide only approved canonical tokens.");
         }
 
         if (string.IsNullOrWhiteSpace(command.SourceSystem)
@@ -125,6 +190,17 @@ public sealed class IdentityResolutionService
         {
             throw new ArgumentException("Command is missing required canonical identity fields.");
         }
+
+        ValidateIdempotencyKey(command);
+    }
+
+    private static void ValidateIdempotencyKey(ResolveSourceCandidateCommand command)
+    {
+        var parts = command.IdempotencyKey.Split('|', StringSplitOptions.None);
+        if (parts.Length != 6 || string.IsNullOrWhiteSpace(parts[5]))
+        {
+            throw new ArgumentException("Idempotency key must include the operation component.");
+        }
     }
 }
 
@@ -133,6 +209,8 @@ public sealed class InMemoryPartyRepository : IPartyRepository
     private readonly bool failBeforeOutboxCommit;
     private readonly Dictionary<PartyId, Party> parties = [];
     private readonly Dictionary<string, PartyId> idempotency = new(StringComparer.Ordinal);
+    private readonly Dictionary<string, PartyId> identityTokens = new(StringComparer.Ordinal);
+    private readonly List<ReviewCase> reviewCases = [];
     private readonly List<OutboxFact> outbox = [];
 
     public InMemoryPartyRepository(bool failBeforeOutboxCommit = false)
@@ -164,8 +242,23 @@ public sealed class InMemoryPartyRepository : IPartyRepository
                 link.TenantId == tenantId
                 && link.SourceSystem.Equals(sourceSystem, StringComparison.Ordinal)
                 && link.SourceKey.Equals(sourceKey, StringComparison.Ordinal)
-                && link.Status.Equals("active", StringComparison.Ordinal)
+                && link.Status.Equals(PartySourceLink.Active, StringComparison.Ordinal)
                 && link.EffectiveInterval.EffectiveTo is null));
+
+    public Task<Party?> FindActivePartyByIdentityTokenAsync(Guid tenantId, string identityToken, CancellationToken cancellationToken)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        return Task.FromResult(
+            identityTokens.TryGetValue(TokenScope(tenantId, identityToken), out var partyId) && parties.TryGetValue(partyId, out var party)
+                ? party
+                : null);
+    }
+
+    public Task<bool> HasCrossTenantIdentityTokenAsync(Guid tenantId, string identityToken, CancellationToken cancellationToken)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        return Task.FromResult(identityTokens.Keys.Any(key => !key.StartsWith($"{tenantId:D}|", StringComparison.Ordinal) && key.EndsWith($"|{identityToken}", StringComparison.Ordinal)));
+    }
 
     public Task RecordIdempotencyAsync(string idempotencyKey, PartyId partyId, CancellationToken cancellationToken)
     {
@@ -179,14 +272,21 @@ public sealed class InMemoryPartyRepository : IPartyRepository
         idempotency.TryAdd(idempotencyKey, partyId);
     }
 
-    public Task CommitNewPartyWithLinkAndOutboxAsync(Party party, string idempotencyKey, IReadOnlyList<OutboxFact> facts, CancellationToken cancellationToken)
+    public Task RecordReviewCaseAsync(ReviewCase reviewCase, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
-        CommitNewPartyWithLinkAndOutbox(party, idempotencyKey, facts);
+        reviewCases.Add(reviewCase);
         return Task.CompletedTask;
     }
 
-    public void CommitNewPartyWithLinkAndOutbox(Party party, string idempotencyKey, IReadOnlyList<OutboxFact> facts)
+    public Task CommitNewPartyWithLinkAndOutboxAsync(Party party, string identityToken, string idempotencyKey, IReadOnlyList<OutboxFact> facts, CancellationToken cancellationToken)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        CommitNewPartyWithLinkAndOutbox(party, identityToken, idempotencyKey, facts);
+        return Task.CompletedTask;
+    }
+
+    public void CommitNewPartyWithLinkAndOutbox(Party party, string identityToken, string idempotencyKey, IReadOnlyList<OutboxFact> facts)
     {
         if (failBeforeOutboxCommit)
         {
@@ -195,6 +295,7 @@ public sealed class InMemoryPartyRepository : IPartyRepository
 
         var partiesCopy = new Dictionary<PartyId, Party>(parties);
         var idempotencyCopy = new Dictionary<string, PartyId>(idempotency, StringComparer.Ordinal);
+        var tokenCopy = new Dictionary<string, PartyId>(identityTokens, StringComparer.Ordinal);
         var outboxCopy = new List<OutboxFact>(outbox);
 
         if (!partiesCopy.TryAdd(party.PartyId, party))
@@ -203,22 +304,29 @@ public sealed class InMemoryPartyRepository : IPartyRepository
         }
 
         idempotencyCopy.Add(idempotencyKey, party.PartyId);
+        tokenCopy.Add(TokenScope(party.TenantId, identityToken), party.PartyId);
         outboxCopy.AddRange(facts);
 
-        parties.Clear();
-        foreach (var item in partiesCopy)
+        ReplaceState(partiesCopy, idempotencyCopy, tokenCopy, outboxCopy);
+    }
+
+    public Task CommitSourceLinkWithOutboxAsync(Party party, string identityToken, string idempotencyKey, IReadOnlyList<OutboxFact> facts, CancellationToken cancellationToken)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        if (failBeforeOutboxCommit)
         {
-            parties.Add(item.Key, item.Value);
+            throw new InvalidOperationException("Simulated atomic transaction failure.");
         }
 
-        idempotency.Clear();
-        foreach (var item in idempotencyCopy)
-        {
-            idempotency.Add(item.Key, item.Value);
-        }
+        var idempotencyCopy = new Dictionary<string, PartyId>(idempotency, StringComparer.Ordinal);
+        var tokenCopy = new Dictionary<string, PartyId>(identityTokens, StringComparer.Ordinal);
+        var outboxCopy = new List<OutboxFact>(outbox);
 
-        outbox.Clear();
-        outbox.AddRange(outboxCopy);
+        idempotencyCopy.Add(idempotencyKey, party.PartyId);
+        tokenCopy.TryAdd(TokenScope(party.TenantId, identityToken), party.PartyId);
+        outboxCopy.AddRange(facts);
+        ReplaceState(new Dictionary<PartyId, Party>(parties), idempotencyCopy, tokenCopy, outboxCopy);
+        return Task.CompletedTask;
     }
 
     public IReadOnlyList<PartySourceLink> ActiveLinks(Guid tenantId, string sourceSystem, string sourceKey) =>
@@ -228,11 +336,13 @@ public sealed class InMemoryPartyRepository : IPartyRepository
                 link.TenantId == tenantId
                 && link.SourceSystem.Equals(sourceSystem, StringComparison.Ordinal)
                 && link.SourceKey.Equals(sourceKey, StringComparison.Ordinal)
-                && link.Status.Equals("active", StringComparison.Ordinal)
+                && link.Status.Equals(PartySourceLink.Active, StringComparison.Ordinal)
                 && link.EffectiveInterval.EffectiveTo is null)
             .ToArray();
 
     public IReadOnlyList<Party> Parties() => parties.Values.ToArray();
+
+    public IReadOnlyList<ReviewCase> ReviewCases() => reviewCases.ToArray();
 
     public IReadOnlyList<OutboxFact> OutboxFacts() => outbox.ToArray();
 
@@ -257,6 +367,36 @@ public sealed class InMemoryPartyRepository : IPartyRepository
             })
         })
     };
+
+    private void ReplaceState(
+        Dictionary<PartyId, Party> partiesCopy,
+        Dictionary<string, PartyId> idempotencyCopy,
+        Dictionary<string, PartyId> tokenCopy,
+        List<OutboxFact> outboxCopy)
+    {
+        parties.Clear();
+        foreach (var item in partiesCopy)
+        {
+            parties.Add(item.Key, item.Value);
+        }
+
+        idempotency.Clear();
+        foreach (var item in idempotencyCopy)
+        {
+            idempotency.Add(item.Key, item.Value);
+        }
+
+        identityTokens.Clear();
+        foreach (var item in tokenCopy)
+        {
+            identityTokens.Add(item.Key, item.Value);
+        }
+
+        outbox.Clear();
+        outbox.AddRange(outboxCopy);
+    }
+
+    private static string TokenScope(Guid tenantId, string identityToken) => $"{tenantId:D}|{identityToken}";
 }
 
 public sealed record OutboxFact(
@@ -271,9 +411,21 @@ public sealed record OutboxFact(
     Guid? CausationId,
     Guid TenantId,
     string Producer,
+    string ProducerVersion,
+    string AggregateType,
+    string PayloadSchema,
     string DataClassification,
     object Payload)
 {
+    [JsonPropertyName("aggregate_type")]
+    public string AggregateTypeJson => AggregateType;
+
+    [JsonPropertyName("producer_version")]
+    public string ProducerVersionJson => ProducerVersion;
+
+    [JsonPropertyName("payload_schema")]
+    public string PayloadSchemaJson => PayloadSchema;
+
     public static OutboxFact PartyCreated(Party party, ResolveSourceCandidateCommand command) =>
         new(
             DeterministicEventId(command.IdempotencyKey, "PartyCreated"),
@@ -287,6 +439,9 @@ public sealed record OutboxFact(
             command.CausationId,
             command.TenantId,
             "Bluto.IdentityResolution",
+            "0.1.0",
+            "Party",
+            "PartyCreated.v1",
             "Restricted",
             new PartyCreatedPayload(
                 party.PartyId.Value,
@@ -309,6 +464,9 @@ public sealed record OutboxFact(
             command.CausationId,
             command.TenantId,
             "Bluto.IdentityResolution",
+            "0.1.0",
+            "Party",
+            "SourceLinkEstablished.v1",
             "Restricted",
             new SourceLinkEstablishedPayload(
                 party.PartyId.Value,
