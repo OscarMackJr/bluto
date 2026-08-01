@@ -2,6 +2,11 @@
   <PropertyGroup>
     <RootNamespace>Bluto.Api</RootNamespace>
     <NoWarn>$(NoWarn);CS1591</NoWarn>
+    <EnableSdkContainerSupport>true</EnableSdkContainerSupport>
+    <ContainerRepository>bluto-api</ContainerRepository>
+    <ContainerImageTags>latest;$(Version)</ContainerImageTags>
+    <ContainerUser>64198</ContainerUser>
+    <ContainerBaseImage>mcr.microsoft.com/dotnet/aspnet:10.0-noble-chiseled-extra</ContainerBaseImage>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="OpenTelemetry.Api" />
@@ -10,4 +15,3 @@
     <ProjectReference Include="..\Bluto.Application\Bluto.Application.csproj" />
   </ItemGroup>
 </Project>
-

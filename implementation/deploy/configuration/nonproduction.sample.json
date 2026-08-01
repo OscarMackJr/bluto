@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0.0",
+  "environment": "nonproduction",
+  "region": "eastus2",
+  "tenant_seed": [
+    "10000000-0000-0000-0000-000000000001",
+    "20000000-0000-0000-0000-000000000002"
+  ],
+  "database": {
+    "host_reference": "kvref://bluto-nonprod-vault/postgres-host",
+    "database_name": "bluto_identity",
+    "runtime_role": "bluto_runtime",
+    "migration_role": "bluto_migration",
+    "public_network_access_enabled": false
+  },
+  "vault": {
+    "name": "bluto-nonprod-vault",
+    "token_key_reference": "kvref://bluto-nonprod-vault/token-key-version",
+    "connection_reference": "kvref://bluto-nonprod-vault/postgres-connection"
+  },
+  "telemetry": {
+    "otlp_endpoint_reference": "kvref://bluto-nonprod-vault/otlp-endpoint",
+    "service_namespace": "Bluto",
+    "safe_dimensions": [
+      "environment",
+      "tenant_scope",
+      "operation",
+      "outcome",
+      "correlation_id",
+      "batch_id",
+      "rule_version"
+    ]
+  },
+  "api": {
+    "image_repository": "bluto-api",
+    "image_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "managed_identity": "bluto-api-identity",
+    "minimum_replicas": 1,
+    "maximum_replicas": 3
+  },
+  "worker": {
+    "image_repository": "bluto-worker",
+    "image_digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "managed_identity": "bluto-worker-identity",
+    "minimum_replicas": 0,
+    "maximum_replicas": 1
+  },
+  "outbox": {
+    "publisher_enabled": true,
+    "max_attempts": 3,
+    "broker_mode": "disabled"
+  }
+}

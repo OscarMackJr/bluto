@@ -1,0 +1,61 @@
+{
+  "document_id": "BLUTO-WP-012-OPERATIONAL-HEALTH-CONTRACT",
+  "artifact_id": "ART-BLUTO-WP-012-OPERATIONAL-HEALTH-CONTRACT-v1.0.0",
+  "schema_version": "1.0.0",
+  "governing_document_ids": [
+    "BLUTO-ADR-0012",
+    "BLUTO-ADR-0014",
+    "BLUTO-ADR-0015",
+    "BLUTO-ADR-0016",
+    "BLUTO-OPS-INFRA-001",
+    "BLUTO-OPS-RELEASE-001",
+    "BLUTO-OPS-OBS-001",
+    "BLUTO-OPS-DR-001",
+    "BLUTO-SEC-IAM-001",
+    "BLUTO-SEC-CRYPTO-001"
+  ],
+  "checks": [
+    {
+      "name": "api_health",
+      "method": "GET",
+      "path": "/healthz",
+      "expected_status": 200,
+      "safe_observability_fields": ["environment", "operation", "outcome", "correlation_id"]
+    },
+    {
+      "name": "mapping_read",
+      "method": "GET",
+      "path": "/v1/sources/{source_system}/source-keys/{source_key}/current-party",
+      "expected_status": 200,
+      "requires_authorized_tenant": true
+    },
+    {
+      "name": "worker_dry_run",
+      "method": "JOB",
+      "path": "scheduled-resolution:dry-run",
+      "expected_status": 0,
+      "requires_authorized_tenant": true
+    },
+    {
+      "name": "telemetry_export",
+      "method": "QUERY",
+      "path": "otel:service.name",
+      "expected_status": 200,
+      "safe_observability_fields": ["environment", "operation", "outcome", "batch_id"]
+    },
+    {
+      "name": "key_vault_reference_failure",
+      "method": "FAULT",
+      "path": "vault-reference-unavailable",
+      "expected_status": 503,
+      "must_not_disable_auth": true
+    },
+    {
+      "name": "cross_tenant_negative",
+      "method": "GET",
+      "path": "/v1/sources/{source_system}/source-keys/{source_key}/current-party",
+      "expected_status": 404,
+      "concealed_existence": true
+    }
+  ]
+}

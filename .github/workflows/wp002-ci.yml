@@ -183,3 +183,67 @@ jobs:
             implementation/validation/sbom.cdx.json
           if-no-files-found: error
           retention-days: 30
+  runtime-smoke:
+    name: WP-012 Runtime Configuration And Smoke
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v4.0.1
+        with:
+          terraform_version: 1.14.6
+          terraform_wrapper: false
+
+      - name: Restore
+        run: dotnet restore implementation/Bluto.Validation.sln
+
+      - name: Terraform format
+        run: terraform -chdir=implementation/infra/terraform fmt -check
+
+      - name: Terraform init without backend
+        run: terraform -chdir=implementation/infra/terraform init -backend=false
+
+      - name: Terraform validate
+        run: terraform -chdir=implementation/infra/terraform validate
+
+      - name: Runtime smoke tests
+        run: dotnet test implementation/tests/Smoke/Bluto.Smoke.Tests.csproj --configuration Release --filter Smoke --logger "trx;LogFileName=wp012-smoke.trx" --results-directory implementation/validation/test-results
+
+      - name: Publish API artifact
+        run: dotnet publish implementation/src/Bluto.Api/Bluto.Api.csproj --configuration Release --no-restore
+
+      - name: Publish worker artifact
+        run: dotnet publish implementation/src/Bluto.Worker/Bluto.Worker.csproj --configuration Release --no-restore
+
+      - name: Validate deployment JSON artifacts
+        run: |
+          python -m json.tool implementation/deploy/configuration/bluto-runtime-config.schema.json >/dev/null
+          python -m json.tool implementation/deploy/configuration/nonproduction.sample.json >/dev/null
+          python -m json.tool implementation/deploy/contracts/operational-health.contract.json >/dev/null
+          python -m json.tool implementation/deploy/smoke/nonproduction-smoke-plan.json >/dev/null
+
+      - name: Upload WP-012 evidence
+        uses: actions/upload-artifact@v7
+        with:
+          name: wp012-runtime-smoke-evidence-${{ github.sha }}
+          path: |
+            implementation/deploy/**
+            implementation/infra/terraform/**
+            implementation/runbooks/wp-012-operational-smoke.md
+            implementation/validation/test-results/wp012-smoke.trx
+            implementation/src/Bluto.Api/bin/Release/net10.0/publish/**
+            implementation/src/Bluto.Worker/bin/Release/net10.0/publish/**
+          if-no-files-found: error
+          retention-days: 30
