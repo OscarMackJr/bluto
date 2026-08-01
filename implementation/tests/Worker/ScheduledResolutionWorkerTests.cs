@@ -179,6 +179,45 @@ public sealed class ScheduledResolutionWorkerTests
 
     [Fact]
     [Trait("Category", "Worker")]
+    [Trait("Category", "Integration")]
+    public async Task Same_tenant_cross_source_token_links_to_existing_party_and_api_reads_both_mappings()
+    {
+        var harness = WorkerHarness.Create();
+        var token = "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+
+        var first = await harness.Worker.ProcessAsync(Batch([Candidate("SRC-001", token)], sourceSystem: "nexus"), CancellationToken.None);
+        var second = await harness.Worker.ProcessAsync(Batch([Candidate("LEDGER-001", token, sourceSystem: "ledger")], sourceSystem: "ledger"), CancellationToken.None);
+
+        Assert.Equal(1, first.CreatedCount);
+        Assert.Equal(0, second.CreatedCount);
+        Assert.Equal(1, second.ReplayedCount);
+        Assert.Single(harness.Repository.Parties());
+        Assert.Single(harness.Repository.ActiveLinks(TenantA, "nexus", "SRC-001"));
+        Assert.Single(harness.Repository.ActiveLinks(TenantA, "ledger", "LEDGER-001"));
+
+        var query = new CurrentMappingQueryService(new InMemoryCurrentMappingRepository(harness.Repository));
+        var nexus = await MappingApi.ResolveCurrentPartyAsync(
+            "nexus",
+            "SRC-001",
+            new MappingRequestContext(true, TenantA, new HashSet<Guid> { TenantA }, CorrelationId),
+            query,
+            _ => { },
+            CancellationToken.None);
+        var ledger = await MappingApi.ResolveCurrentPartyAsync(
+            "ledger",
+            "LEDGER-001",
+            new MappingRequestContext(true, TenantA, new HashSet<Guid> { TenantA }, CorrelationId),
+            query,
+            _ => { },
+            CancellationToken.None);
+
+        var nexusBody = Assert.IsType<MappingApiResponse>(nexus.Body);
+        var ledgerBody = Assert.IsType<MappingApiResponse>(ledger.Body);
+        Assert.Equal(nexusBody.Result.PartyId, ledgerBody.Result.PartyId);
+    }
+
+    [Fact]
+    [Trait("Category", "Worker")]
     [Trait("Category", "Security")]
     public async Task Cross_tenant_candidate_collision_is_deferred_without_link()
     {
@@ -213,6 +252,24 @@ public sealed class ScheduledResolutionWorkerTests
 
     [Fact]
     [Trait("Category", "Worker")]
+    [Trait("Category", "Security")]
+    public async Task Same_token_in_different_authorized_tenant_batches_across_source_systems_is_deferred_without_link()
+    {
+        var harness = WorkerHarness.Create(new HashSet<Guid> { TenantA, TenantB });
+        var token = "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+
+        await harness.Worker.ProcessAsync(Batch([Candidate("SRC-001", token)], tenantId: TenantA, sourceSystem: "nexus"), CancellationToken.None);
+
+        var result = await harness.Worker.ProcessAsync(
+            Batch([Candidate("LEDGER-999", token, tenantId: TenantB, sourceSystem: "ledger")], tenantId: TenantB, sourceSystem: "ledger"),
+            CancellationToken.None);
+
+        Assert.Equal(1, result.DeferredCount);
+        Assert.Empty(harness.Repository.ActiveLinks(TenantB, "ledger", "LEDGER-999"));
+        Assert.Contains(harness.Logs, log => log.Contains("outcome=cross_tenant_token_collision", StringComparison.Ordinal));
+    }
+    [Fact]
+    [Trait("Category", "Worker")]
     [Trait("Category", "Integration")]
     public async Task Idempotency_key_requires_operation_component()
     {
@@ -237,11 +294,11 @@ public sealed class ScheduledResolutionWorkerTests
         Assert.Contains("bluto.identity_resolution.failed_partitions", ScheduledResolutionWorker.Telemetry.MetricNames);
         Assert.Contains("bluto.identity_resolution.outbox_lag_ms", ScheduledResolutionWorker.Telemetry.MetricNames);
     }
-    private static SyntheticCandidateBatch Batch(IReadOnlyList<SyntheticSourceCandidate> candidates, Guid? tenantId = null) =>
+    private static SyntheticCandidateBatch Batch(IReadOnlyList<SyntheticSourceCandidate> candidates, Guid? tenantId = null, string sourceSystem = "nexus") =>
         new(
             "batch-2026-07-30-001",
             tenantId ?? TenantA,
-            "nexus",
+            sourceSystem,
             CorrelationId,
             "ruleset-1.0.0",
             candidates);
@@ -251,7 +308,7 @@ public sealed class ScheduledResolutionWorkerTests
         string token = "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
         string outcome = "deterministic_no_match",
         Guid? tenantId = null,
-        string? idempotencyKey = null) =>
+        string? idempotencyKey = null, string sourceSystem = "nexus") =>
         new(
             tenantId,
             sourceKey,
@@ -261,7 +318,7 @@ public sealed class ScheduledResolutionWorkerTests
             "rule-exact-token",
             "rule-version-2026-07-30",
             outcome,
-            idempotencyKey ?? $"{tenantId ?? TenantA}|nexus|{sourceKey}|source-page-v1|rule-version-2026-07-30|create_party_with_initial_link");
+            idempotencyKey ?? $"{tenantId ?? TenantA}|{sourceSystem}|{sourceKey}|source-page-v1|rule-version-2026-07-30|create_party_with_initial_link");
 
     private static string TestDataPath(string fileName)
     {
@@ -302,7 +359,3 @@ public sealed class ScheduledResolutionWorkerTests
     }
 
 }
-
-
-
-

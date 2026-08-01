@@ -1,36 +1,57 @@
 {
   "rvec_version": "1.0",
-  "validation_standard_id": "BLUTO-BASE-VAL-001",
+  "validation_standard_id": "BLUTO-BASE-VAL-002",
   "quality_gate": "GATE-02",
+  "quality_gate_name": "Identity Validation",
   "repository_version": "2.0.0",
+  "work_package": "WP-010",
+  "base_commit_sha": "6bd304ec7779ff3ba7c72e96a9274f714502b169",
+  "source_state": "Feature branch local source state before WP-010 commit; final commit SHA is supplied by git log and pull request checks.",
   "artifact_ids": [
-    "implementation/testdata/candidate-batch.v1.schema.json",
-    "implementation/testdata/synthetic-candidate-batch.valid.json",
+    "ART-BLUTO-ADR-0002-v0.1.0",
+    "ART-BLUTO-ADR-0016-v0.1.0",
+    "ART-BLUTO-ADR-0017-v0.1.0",
+    "ART-BLUTO-ARCH-RUNTIME-001-v1.1.0",
+    "ART-BLUTO-ARCH-INTEGRATION-001-v1.1.0",
+    "ART-BLUTO-SEC-CRYPTO-001-v1.1.0",
+    "ART-BLUTO-TEST-PERF-001-v1.1.0",
+    "ART-BLUTO-OPS-RUNBOOK-001-v1.1.0",
     "implementation/src/Bluto.Worker/Resolution/ScheduledResolutionWorker.cs",
-    "implementation/src/Bluto.Application/Identity/InMemoryCurrentMappingRepository.cs",
-    "implementation/tests/Worker/ScheduledResolutionWorkerTests.cs"
+    "implementation/tests/Worker/ScheduledResolutionWorkerTests.cs",
+    "implementation/testdata/candidate-batch.v1.schema.json",
+    "implementation/testdata/synthetic-candidate-batch.valid.json"
   ],
   "tool": "Codex implementation verification",
-  "tool_version": "implementation-wp-010-1.0",
+  "tool_version": "implementation-wp-010-2.0",
   "execution_mode": "Automated",
-  "start_timestamp": "1970-01-01T00:00:00Z",
-  "end_timestamp": "1970-01-01T00:00:00Z",
-  "result": "PASS WITH CONDITIONS",
+  "start_timestamp": "2026-08-01T00:00:00Z",
+  "end_timestamp": "2026-08-01T00:00:00Z",
+  "result": "PASS",
   "commands": [
-    "dotnet test implementation\\tests\\Worker\\Bluto.Worker.Tests.csproj (initial red: missing Bluto.Worker and worker types)",
-    "dotnet test implementation\\tests\\Worker\\Bluto.Worker.Tests.csproj (11 passed)",
-    "dotnet test implementation\\Bluto.Validation.sln --filter Category=Worker (11 passed)",
-    "dotnet test implementation\\Bluto.Validation.sln --filter Category=Integration (13 passed)",
-    "dotnet test implementation\\Bluto.Validation.sln --filter Category=Security (17 passed)",
-    "dotnet test implementation\\Bluto.Validation.sln --filter Category=Contract (8 passed)",
-    "dotnet test implementation\\Bluto.Validation.sln (49 passed)",
+    "dotnet test implementation\\tests\\Worker\\Bluto.Worker.Tests.csproj --configuration Release --filter Worker --logger \"console;verbosity=minimal\" (red: cross-source cross-tenant token collision was not deferred)",
+    "dotnet test implementation\\tests\\Worker\\Bluto.Worker.Tests.csproj --configuration Release --filter Worker --logger \"console;verbosity=minimal\" (16 passed)",
+    "dotnet test implementation\\Bluto.Validation.sln --configuration Release --filter Category=Worker --logger \"console;verbosity=minimal\" (16 passed)",
+    "dotnet test implementation\\Bluto.Validation.sln --configuration Release --filter Category=Integration --logger \"console;verbosity=minimal\" (23 passed)",
+    "dotnet test implementation\\Bluto.Validation.sln --configuration Release --filter Category=Security --logger \"console;verbosity=minimal\" (32 passed)",
+    "dotnet test implementation\\Bluto.Validation.sln --configuration Release --filter Category=Contract --logger \"console;verbosity=minimal\" (40 passed)",
+    "dotnet test implementation\\Bluto.Validation.sln --configuration Release --logger \"console;verbosity=minimal\" (109 passed)",
     "dotnet build implementation\\Bluto.Validation.sln --configuration Release (0 warnings, 0 errors)",
     "dotnet format implementation\\Bluto.Validation.sln --verify-no-changes (exit 0)",
-    "dotnet run --project implementation\\src\\Bluto.Validation.Cli\\Bluto.Validation.Cli.csproj -- --repository-root . --evidence-output repository\\evidence\\rvec (exit 1: pre-existing governance findings)"
+    "dotnet run --project implementation\\src\\Bluto.Validation.Cli --configuration Release -- --root . (exit 0; GATE-01..GATE-06 pass)",
+    "dotnet list implementation\\Bluto.Validation.sln package --vulnerable --include-transitive (no vulnerable packages)",
+    "npm audit --prefix implementation\\tools\\contracts --audit-level=high (0 vulnerabilities)",
+    "git diff --check (exit 0)"
   ],
-  "findings": [
-    "Repository validation reports pre-existing mandatory governance findings in controlled documents; no baselined documents were modified or auto-fixed.",
-    "Worker is an in-process deterministic orchestration slice over synthetic fixtures only; no live scheduler, source adapter, Key Vault integration, external broker, or database runtime was introduced."
+  "findings": [],
+  "wp_010_controls_verified": [
+    "synthetic tenant-scoped batch processing",
+    "deterministic source-key ordering",
+    "operation-scoped idempotency keys",
+    "same-tenant cross-source identity linking to an existing Party",
+    "cross-tenant synthetic-token collision deferral across source systems",
+    "safe logs and metrics without raw identifier or token values",
+    "approved telemetry source and metric names",
+    "API readback of worker-created mappings"
   ],
-  "evidence_digest": "6a6c86d09bed5e5162181463824a87cab0cdbe9c08534ab25217360866712f2a"
+  "evidence_digest": "1de4477c2b667c5425f34fecab1705dee078a63cd90d14bb716e6bb93664b22d"
 }

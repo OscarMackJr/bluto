@@ -46,17 +46,17 @@ public interface ISourceTokenCollisionRegistry
 
 public sealed class InMemorySourceTokenCollisionRegistry : ISourceTokenCollisionRegistry
 {
-    private readonly Dictionary<string, (Guid TenantId, string SourceKey)> tokens = new(StringComparer.Ordinal);
+    private readonly Dictionary<string, Guid> tokens = new(StringComparer.Ordinal);
 
     public bool TryRegister(Guid tenantId, string sourceSystem, string syntheticIdentityToken, string sourceKey)
     {
-        var digest = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes($"{sourceSystem}|{syntheticIdentityToken}")));
+        var digest = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(syntheticIdentityToken)));
         if (tokens.TryGetValue(digest, out var existing))
         {
-            return existing.TenantId == tenantId && existing.SourceKey.Equals(sourceKey, StringComparison.Ordinal);
+            return existing == tenantId;
         }
 
-        tokens.Add(digest, (tenantId, sourceKey));
+        tokens.Add(digest, tenantId);
         return true;
     }
 }
