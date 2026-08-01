@@ -3,28 +3,46 @@
   "validation_standard_id": "BLUTO-BASE-VAL-001",
   "quality_gate": "GATE-09",
   "repository_version": "2.0.0",
+  "work_package": "WP-009",
+  "base_commit_sha": "c9e96ac2f602de3e5f13105b34bade48771d5dff",
+  "source_state": "Committed by Git after local verification; final commit SHA is supplied by git log and pull request checks.",
   "artifact_ids": [
-    "implementation/src/Bluto.Api/Program.cs",
+    "ART-BLUTO-ADR-0002-v0.1.0",
+    "ART-BLUTO-ADR-0003-v0.1.0",
+    "ART-BLUTO-ADR-0006-v0.1.0",
+    "ART-BLUTO-CONTRACT-API-001-v1.1.0",
+    "ART-BLUTO-CONTRACT-CQ-001-v1.1.0",
+    "ART-BLUTO-CONTRACT-ERROR-001-v1.1.0",
+    "ART-BLUTO-SEC-IAM-001-v1.1.0",
+    "ART-BLUTO-SEC-TENANT-001-v1.1.0",
+    "ART-BLUTO-OPS-OBS-001-v1.1.0",
     "implementation/src/Bluto.Api/MappingApi.cs",
-    "implementation/tests/Api/MappingApiRouteContractTests.cs",
     "implementation/tests/Api/ResolveCurrentPartyApiTests.cs",
-    "docs/04-contracts/schemas/bluto-v1.openapi.yaml"
+    "implementation/tests/Api/MappingApiRouteContractTests.cs"
   ],
   "tool": "Codex implementation verification",
-  "tool_version": "implementation-finding-remediation-1.0",
+  "tool_version": "implementation-wp-009-2.0",
   "execution_mode": "Automated",
-  "start_timestamp": "2026-07-31T13:52:30Z",
-  "end_timestamp": "2026-07-31T13:52:30Z",
-  "result": "PASS WITH CONDITIONS",
+  "start_timestamp": "2026-08-01T00:00:00Z",
+  "end_timestamp": "2026-08-01T00:00:00Z",
+  "result": "PASS",
   "commands": [
-    "dotnet test implementation\\Bluto.Validation.sln (58 passed)",
+    "dotnet test implementation\\tests\\Api\\Bluto.Api.Tests.csproj --configuration Release --filter Api --logger \"console;verbosity=minimal\" (red: success envelope missing)",
+    "dotnet test implementation\\tests\\Api\\Bluto.Api.Tests.csproj --configuration Release --filter Api --logger \"console;verbosity=minimal\" (red: error envelope missing)",
+    "dotnet test implementation\\tests\\Api\\Bluto.Api.Tests.csproj --configuration Release --filter Api --logger \"console;verbosity=minimal\" (red: CurrentMappingQueryService not registered)",
+    "dotnet test implementation\\tests\\Api\\Bluto.Api.Tests.csproj --configuration Release --filter Api --logger \"console;verbosity=minimal\" (red: RequestId missing from MappingRequestContext)",
+    "dotnet test implementation\\tests\\Api\\Bluto.Api.Tests.csproj --configuration Release --logger \"console;verbosity=minimal\" (14 passed)",
+    "dotnet test implementation\\Bluto.Validation.sln --configuration Release --filter Category=Contract --logger \"console;verbosity=minimal\" (40 passed)",
+    "dotnet test implementation\\Bluto.Validation.sln --configuration Release --filter Category=Security --logger \"console;verbosity=minimal\" (31 passed)",
+    "dotnet test implementation\\Bluto.Validation.sln --configuration Release --filter Category=Integration --logger \"console;verbosity=minimal\" (22 passed)",
+    "dotnet test implementation\\Bluto.Validation.sln --configuration Release --logger \"console;verbosity=minimal\" (107 passed)",
     "dotnet build implementation\\Bluto.Validation.sln --configuration Release (0 warnings, 0 errors)",
     "dotnet format implementation\\Bluto.Validation.sln --verify-no-changes (exit 0)",
+    "dotnet run --project implementation\\src\\Bluto.Validation.Cli --configuration Release -- --root . (exit 0; GATE-01..GATE-06 pass)",
     "dotnet list implementation\\Bluto.Validation.sln package --vulnerable --include-transitive (no vulnerable packages)",
-    "dotnet run --project implementation\\src\\Bluto.Validation.Cli\\Bluto.Validation.Cli.csproj -- --repository-root . --evidence-output repository\\evidence\\rvec (exit 1: pre-existing governance findings)"
+    "npm audit --prefix implementation\\tools\\contracts --audit-level=high (0 vulnerabilities)",
+    "git diff --check (exit 0)"
   ],
-  "findings": [
-    "Executable ASP.NET Core route and auth metadata verified; non-vulnerable OpenAPI generation package was unavailable because Microsoft.AspNetCore.OpenApi 10.0.0 resolves vulnerable Microsoft.OpenApi 2.0.0."
-  ],
-  "evidence_digest": "3ea327ffc97f810f37a0d29a8ebf83b9d690da141537c121664b55bbe6fa69b5"
+  "findings": [],
+  "evidence_digest": "a97db69ec0ad2b3c1da0f347d0a9f05b89e9dfcf6f78207e30a7fa0f1d655b33"
 }
