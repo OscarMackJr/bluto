@@ -375,6 +375,36 @@ Baseline repository gates are `GATE-01` Metadata Validation, `GATE-02` Identity 
 
 **Rollback strategy:** Roll back container app revisions, disable worker schedule, restore prior Terraform state through reviewed plan, and preserve database history. Database forward recovery follows WP-008 migration rules.
 
+### WP-014 - Post-Remediation Review Closure And POC Readiness Certification
+
+**Objective:** Verify the WP-013 remediation against `releases/BLUTO_IMPLEMENTATION_REVIEW_v0.1.md`, close or explicitly defer remaining non-POC-blocking findings S2 through S4, and produce deterministic POC readiness evidence without starting new feature work.
+
+**Governing Document IDs:** `BLUTO_IDENTITY_SPINE_v0.1`, `BLUTO-IMPL-MASTER-PLAN-001`, `BLUTO-SEC-CRYPTO-001`, `BLUTO-SEC-DATA-001`, `BLUTO-SEC-TENANT-001`, `BLUTO-ARCH-RUNTIME-001`, `BLUTO-ARCH-QAS-001`, `BLUTO-DOM-AGGREGATE-001`, `BLUTO-DOM-STATE-001`, `BLUTO-DOM-CANONICAL-001`, `BLUTO-DOM-REPOSITORY-001`, `BLUTO-CONTRACT-API-001`, `BLUTO-CONTRACT-EVENT-001`, `BLUTO-CONTRACT-SCHEMA-001`, `BLUTO-ENG-DATA-001`, `BLUTO-ENG-OBS-001`, `BLUTO-ENG-ERROR-001`, `BLUTO-TEST-INTEGRATION-001`, `BLUTO-TEST-SEC-001`, `BLUTO-TEST-CONTRACT-001`, `BLUTO-TEST-GATE-001`, `BLUTO-BASE-VAL-001`.
+
+**Source inputs:** `releases/BLUTO_IMPLEMENTATION_REVIEW_v0.1.md`; WP-013 RVEC evidence `implementation-wp-013-gate-01.json` through `implementation-wp-013-gate-10.json`; the current implementation branch after PR #16.
+
+**Files allowed to change:** `implementation/plan/**`, `implementation/reviews/**`, `implementation/src/Bluto.Domain/**`, `implementation/src/Bluto.Application/**`, `implementation/src/Bluto.Infrastructure.Postgres/**`, `implementation/tests/Bluto.Identity.Tests/**`, `implementation/tests/Bluto.Persistence.Tests/**`, `implementation/tests/Contracts/**`, `implementation/db/migrations/**`, `implementation/testdata/**`, `repository/evidence/rvec/**`, `releases/BLUTO_IMPLEMENTATION_REVIEW_v0.1.md`.
+
+**Prohibited changes:** No new end-user features, new API endpoints, probabilistic matching, raw strong identifier persistence or logging, direct cross-context persistence access, direct hometown writes, disabled audit/security/validation/tenant controls, baselined document modification, production deployment, or hard-coded secrets.
+
+**Contract artifacts required first:** A residual review closure matrix; a POC readiness evidence plan; and explicit defer records with owner, rationale, and trigger conditions for any S2 through S4 item not closed in this package.
+
+**Tests required before production code:** Tests or explicit defer records for S2 optimistic concurrency and aggregate version semantics; S3 persisted-state hydration without command replay side effects; S4 persisted `match_method` and `confidence` or deferral; regression tests for WP-013 B1 through B4 controls; raw-identifier leakage negatives; tenant RLS omitted-predicate negatives; contract-example consistency tests.
+
+**Security controls:** Fail-closed token-shape validation; no raw identifier surfaces; tenant-scoped idempotency; forced PostgreSQL RLS; concealed cross-tenant probes; no key material in repository or configuration; deterministic evidence output.
+
+**Tenant-isolation obligations:** Prove RLS blocks omitted application predicates; prove same idempotency key across tenants does not replay or leak; prove cross-tenant collision results remain concealed.
+
+**Observability requirements:** Review closure evidence must be safe to publish internally, contain no sensitive test output, and trace command results to commit SHA and work-package ID.
+
+**Acceptance criteria:** Review B1 through B4 remain closed by executable tests; findings S2 through S4 are closed or explicitly deferred with owner and risk rationale; full local and CI parity suites pass; Flyway migrate and validate pass on PostgreSQL 16; repository validator and RVEC validation pass; a POC readiness report records a go/no-go result; no new feature work is started.
+
+**Quality Gates and validation commands:** `dotnet build implementation/Bluto.Validation.sln --configuration Release --no-restore`; `dotnet test implementation/Bluto.Validation.sln --configuration Release --no-build`; `dotnet format implementation/Bluto.Validation.sln --verify-no-changes`; `dotnet list implementation/Bluto.Validation.sln package --vulnerable --include-transitive`; `npm exec --prefix implementation/tools/contracts -- spectral lint docs/04-contracts/schemas/bluto-v1.openapi.yaml --ruleset implementation/tools/contracts/.spectral.yaml`; `npm exec --prefix implementation/tools/contracts -- ajv validate --spec=draft2020 -c ajv-formats -s implementation/contracts/schemas/party-created.v1.schema.json -d implementation/contracts/examples/party-created.v1.example.json`; `npm exec --prefix implementation/tools/contracts -- ajv validate --spec=draft2020 -c ajv-formats -s implementation/contracts/schemas/source-link-established.v1.schema.json -d implementation/contracts/examples/source-link-established.v1.example.json`; `flyway migrate`; `flyway validate`; `terraform -chdir=implementation/infra/terraform fmt -check`; `terraform -chdir=implementation/infra/terraform init -backend=false`; `terraform -chdir=implementation/infra/terraform validate`; `dotnet run --project implementation/src/Bluto.Validation.Cli --configuration Release -- --root .`; `gh pr checks <wp-014-pr>`; repository gates `GATE-01` through `GATE-10`.
+
+**Expected RVEC evidence:** `implementation-wp-014-gate-01.json` through `implementation-wp-014-gate-10.json`, residual review closure matrix, POC readiness report, migration checksum evidence if a migration is added, local command transcript references, and PR CI check references.
+
+**Rollback strategy:** Revert WP-014 closure artifacts and any forward-only migration added for remaining review closure. Do not mutate existing identity history; use forward recovery only.
 ## Reader-Test Notes
 
 A cold reader should start at WP-001 unless repository tooling already exists and evidence proves it. The first package that permits production behavior is WP-007, and it is blocked by contract and failing-test packages. The first externally callable behavior is WP-009. The first scheduled resolution behavior is WP-010. Production rollout is outside this plan until nonproduction evidence and release approval exist.
+

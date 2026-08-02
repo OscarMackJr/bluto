@@ -972,3 +972,142 @@ work_packages:
       - implementation-wp-012-gate-09.json
       - implementation-wp-012-gate-10.json
     rollback_strategy: Roll back container app revisions, disable worker schedule, restore prior Terraform state through reviewed plan, and use approved database forward recovery.
+  - id: WP-014
+    title: Post-Remediation Review Closure And POC Readiness Certification
+    phase: poc-readiness
+    depends_on:
+      - WP-013
+    objective: Verify the WP-013 remediation against the implementation review, close or explicitly defer remaining non-POC-blocking findings S2 through S4, and produce deterministic POC readiness evidence without starting new feature work.
+    governing_document_ids:
+      - BLUTO_IDENTITY_SPINE_v0.1
+      - BLUTO-IMPL-MASTER-PLAN-001
+      - BLUTO-SEC-CRYPTO-001
+      - BLUTO-SEC-DATA-001
+      - BLUTO-SEC-TENANT-001
+      - BLUTO-ARCH-RUNTIME-001
+      - BLUTO-ARCH-QAS-001
+      - BLUTO-DOM-AGGREGATE-001
+      - BLUTO-DOM-STATE-001
+      - BLUTO-DOM-CANONICAL-001
+      - BLUTO-DOM-REPOSITORY-001
+      - BLUTO-CONTRACT-API-001
+      - BLUTO-CONTRACT-EVENT-001
+      - BLUTO-CONTRACT-SCHEMA-001
+      - BLUTO-ENG-DATA-001
+      - BLUTO-ENG-OBS-001
+      - BLUTO-ENG-ERROR-001
+      - BLUTO-TEST-INTEGRATION-001
+      - BLUTO-TEST-SEC-001
+      - BLUTO-TEST-CONTRACT-001
+      - BLUTO-TEST-GATE-001
+      - BLUTO-BASE-VAL-001
+    source_inputs:
+      - releases/BLUTO_IMPLEMENTATION_REVIEW_v0.1.md
+      - repository/evidence/rvec/implementation-wp-013-gate-01.json
+      - repository/evidence/rvec/implementation-wp-013-gate-02.json
+      - repository/evidence/rvec/implementation-wp-013-gate-03.json
+      - repository/evidence/rvec/implementation-wp-013-gate-04.json
+      - repository/evidence/rvec/implementation-wp-013-gate-05.json
+      - repository/evidence/rvec/implementation-wp-013-gate-06.json
+      - repository/evidence/rvec/implementation-wp-013-gate-07.json
+      - repository/evidence/rvec/implementation-wp-013-gate-08.json
+      - repository/evidence/rvec/implementation-wp-013-gate-09.json
+      - repository/evidence/rvec/implementation-wp-013-gate-10.json
+    allowed_files:
+      - implementation/plan/**
+      - implementation/reviews/**
+      - implementation/src/Bluto.Domain/**
+      - implementation/src/Bluto.Application/**
+      - implementation/src/Bluto.Infrastructure.Postgres/**
+      - implementation/tests/Bluto.Identity.Tests/**
+      - implementation/tests/Bluto.Persistence.Tests/**
+      - implementation/tests/Contracts/**
+      - implementation/db/migrations/**
+      - implementation/testdata/**
+      - repository/evidence/rvec/**
+      - releases/BLUTO_IMPLEMENTATION_REVIEW_v0.1.md
+    prohibited_changes:
+      - new-end-user-features
+      - new-api-endpoints
+      - probabilistic-matching
+      - raw-strong-identifier-persistence-or-logging
+      - direct-cross-context-persistence-access
+      - direct-hometown-writes
+      - disabled-audit-security-validation-or-tenant-controls
+      - baselined-document-modification
+      - production-deployment
+      - hard-coded-secrets
+    contract_artifacts_required_first:
+      - residual-review-closure-matrix
+      - poc-readiness-evidence-plan
+      - explicit-defer-records-for-any-s2-through-s4-item-not-closed
+    tests_required_before_production_code:
+      - optimistic-concurrency-or-explicit-deferral-tests-for-s2
+      - persisted-hydration-state-tests-for-s3
+      - match-method-confidence-persistence-or-explicit-deferral-tests-for-s4
+      - regression-tests-for-wp-013-b1-through-b4-controls
+      - raw-identifier-leakage-negative-tests
+      - tenant-rls-negative-tests
+      - contract-example-consistency-tests
+    security_controls:
+      - fail-closed-token-shape-validation
+      - no-raw-identifier-surfaces
+      - tenant-scoped-idempotency
+      - forced-postgresql-rls
+      - concealed-cross-tenant-probes
+      - no-key-material-in-repository-or-configuration
+    tenant_isolation_obligations:
+      - prove-rls-blocks-omitted-application-predicates
+      - prove-same-idempotency-key-across-tenants-does-not-replay-or-leak
+      - prove-cross-tenant-collision-results-remain-concealed
+    observability_requirements:
+      - safe-review-closure-evidence
+      - no-sensitive-test-output
+      - command-results-traceable-to-commit-sha-and-work-package
+    acceptance_criteria:
+      - review-b1-through-b4-remain-closed-by-executable-tests
+      - findings-s2-through-s4-are-closed-or-explicitly-deferred-with-risk-owner
+      - complete-local-and-ci-parity-suite-passes
+      - flyway-migrate-and-validate-pass-on-postgresql-16
+      - repository-validator-and-rvec-validation-pass
+      - poc-readiness-report-records-go-or-no-go-result
+      - no-new-feature-work-is-started
+    validation_commands:
+      - dotnet build implementation/Bluto.Validation.sln --configuration Release --no-restore
+      - dotnet test implementation/Bluto.Validation.sln --configuration Release --no-build
+      - dotnet format implementation/Bluto.Validation.sln --verify-no-changes
+      - dotnet list implementation/Bluto.Validation.sln package --vulnerable --include-transitive
+      - npm exec --prefix implementation/tools/contracts -- spectral lint docs/04-contracts/schemas/bluto-v1.openapi.yaml --ruleset implementation/tools/contracts/.spectral.yaml
+      - npm exec --prefix implementation/tools/contracts -- ajv validate --spec=draft2020 -c ajv-formats -s implementation/contracts/schemas/party-created.v1.schema.json -d implementation/contracts/examples/party-created.v1.example.json
+      - npm exec --prefix implementation/tools/contracts -- ajv validate --spec=draft2020 -c ajv-formats -s implementation/contracts/schemas/source-link-established.v1.schema.json -d implementation/contracts/examples/source-link-established.v1.example.json
+      - flyway migrate
+      - flyway validate
+      - terraform -chdir=implementation/infra/terraform fmt -check
+      - terraform -chdir=implementation/infra/terraform init -backend=false
+      - terraform -chdir=implementation/infra/terraform validate
+      - dotnet run --project implementation/src/Bluto.Validation.Cli --configuration Release -- --root .
+      - gh pr checks <wp-014-pr>
+    gates:
+      - GATE-01
+      - GATE-02
+      - GATE-03
+      - GATE-04
+      - GATE-05
+      - GATE-06
+      - GATE-07
+      - GATE-08
+      - GATE-09
+      - GATE-10
+    expected_rvec:
+      - implementation-wp-014-gate-01.json
+      - implementation-wp-014-gate-02.json
+      - implementation-wp-014-gate-03.json
+      - implementation-wp-014-gate-04.json
+      - implementation-wp-014-gate-05.json
+      - implementation-wp-014-gate-06.json
+      - implementation-wp-014-gate-07.json
+      - implementation-wp-014-gate-08.json
+      - implementation-wp-014-gate-09.json
+      - implementation-wp-014-gate-10.json
+    rollback_strategy: Revert WP-014 closure artifacts and any forward-only migration added for remaining review closure. Do not mutate existing identity history; use forward recovery only.
+
