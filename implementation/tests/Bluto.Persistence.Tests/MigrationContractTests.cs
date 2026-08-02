@@ -88,6 +88,50 @@ public sealed class MigrationContractTests
     }
 
     [Fact]
+    [Trait("Category", "Migration")]
+    [Trait("Category", "Security")]
+    public void Tenant_scoped_tables_enable_and_force_row_level_security()
+    {
+        var sql = MigrationSql();
+
+        foreach (var table in new[] { "parties", "party_source_links", "review_cases", "idempotency_records" })
+        {
+            Assert.Contains($"alter table identity_resolution.{table} enable row level security", sql);
+            Assert.Contains($"alter table identity_resolution.{table} force row level security", sql);
+            Assert.Contains("create policy", sql);
+            Assert.Contains($"on identity_resolution.{table}", sql);
+        }
+
+        Assert.Contains("current_setting('bluto.tenant_id'", sql);
+    }
+
+    [Fact]
+    [Trait("Category", "Migration")]
+    [Trait("Category", "Security")]
+    public void Cross_tenant_identity_probe_is_boolean_security_definer_exception()
+    {
+        var sql = MigrationSql();
+
+        Assert.Contains("create or replace function identity_resolution.has_cross_tenant_identity_digest", sql);
+        Assert.Contains("returns boolean", sql);
+        Assert.Contains("security definer", sql);
+        Assert.DoesNotContain("returns table", sql);
+    }
+
+    [Fact]
+    [Trait("Category", "Migration")]
+    [Trait("Category", "Domain")]
+    public void Party_lifecycle_state_is_persisted_with_contract_fields()
+    {
+        var sql = MigrationSql();
+
+        Assert.Contains("status text not null default 'active'", sql);
+        Assert.Contains("party_type text not null default 'person'", sql);
+        Assert.Contains("merged_into_party_id uuid null", sql);
+        Assert.Contains("check (status in ('active', 'merged', 'retired'))", sql);
+        Assert.Contains("foreign key (tenant_id, merged_into_party_id)", sql);
+    }
+    [Fact]
     [Trait("Category", "Contract")]
     [Trait("Category", "Outbox")]
     public void Outbox_fact_schema_is_executable_and_closed()
@@ -109,7 +153,7 @@ public sealed class MigrationContractTests
     }
 
     private static string MigrationSql() => Regex.Replace(
-        File.ReadAllText(Path.Combine(RepositoryRoot(), "implementation", "db", "migrations", "V001__identity_resolution_minimal_slice.sql")).ToLowerInvariant(),
+        string.Join(Environment.NewLine, Directory.GetFiles(Path.Combine(RepositoryRoot(), "implementation", "db", "migrations"), "V*.sql").Order(StringComparer.Ordinal).Select(File.ReadAllText)).ToLowerInvariant(),
         @"\s+",
         " ");
 

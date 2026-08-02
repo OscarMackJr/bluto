@@ -56,6 +56,51 @@ public sealed class PostgresRepositoryContractTests
     [Fact]
     [Trait("Category", "Integration")]
     [Trait("Category", "Security")]
+    public void Repository_sql_uses_keyed_or_prekeyed_identity_digest_not_unkeyed_token_hashing()
+    {
+        var source = File.ReadAllText(Path.Combine(RepositoryRoot(), "implementation", "src", "Bluto.Infrastructure.Postgres", "Identity", "PostgresIdentityResolutionSql.cs"));
+
+        Assert.DoesNotContain("SHA256.HashData(Encoding.UTF8.GetBytes(identityToken))", source, StringComparison.Ordinal);
+        Assert.DoesNotContain("SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(identityToken))", source, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    [Trait("Category", "Integration")]
+    [Trait("Category", "Security")]
+    public void Idempotency_lookup_sql_is_tenant_scoped()
+    {
+        var source = File.ReadAllText(Path.Combine(RepositoryRoot(), "implementation", "src", "Bluto.Infrastructure.Postgres", "Identity", "PostgresIdentityResolutionSql.cs"));
+
+        Assert.Matches(@"where\s+i\.tenant_id\s*=\s*@tenantId\s+and\s+i\.idempotency_key\s*=\s*@idempotencyKey", source);
+        Assert.Matches(@"where\s+tenant_id\s*=\s*@tenantId\s+and\s+party_id\s*=\s*@partyId", source);
+    }
+
+    [Fact]
+    [Trait("Category", "Integration")]
+    [Trait("Category", "Domain")]
+    public void Hydration_query_reads_persisted_party_lifecycle_state()
+    {
+        var source = File.ReadAllText(Path.Combine(RepositoryRoot(), "implementation", "src", "Bluto.Infrastructure.Postgres", "Identity", "PostgresIdentityResolutionSql.cs"));
+
+        Assert.Contains("status as Status", source, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("party_type as PartyType", source, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("merged_into_party_id as MergedIntoPartyId", source, StringComparison.OrdinalIgnoreCase);
+    }
+    [Fact]
+    [Trait("Category", "Integration")]
+    [Trait("Category", "Security")]
+    public void Cross_tenant_identity_probe_uses_concealed_boolean_database_function()
+    {
+        var source = File.ReadAllText(Path.Combine(RepositoryRoot(), "implementation", "src", "Bluto.Infrastructure.Postgres", "Identity", "PostgresIdentityResolutionSql.cs"));
+        var method = Regex.Match(source, @"public async Task<bool> HasCrossTenantIdentityTokenAsync[\s\S]*?\n    }").Value;
+
+        Assert.Contains("identity_resolution.has_cross_tenant_identity_digest", method, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("tenant_id <> @tenantId", method, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Fact]
+    [Trait("Category", "Integration")]
+    [Trait("Category", "Security")]
     public void Insert_script_never_references_raw_strong_identifiers()
     {
         var combined = string.Join(Environment.NewLine, PostgresIdentityResolutionSql.CreatePartyWithInitialLinkAndOutboxFacts().Statements);

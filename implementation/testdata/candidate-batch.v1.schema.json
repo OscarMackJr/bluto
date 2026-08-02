@@ -55,7 +55,7 @@
           },
           "synthetic_identity_token": {
             "type": "string",
-            "pattern": "^sha256:[a-f0-9]{64}$"
+            "pattern": "^v1\\.[A-Za-z0-9_-]{43}$"
           },
           "effective_from": {
             "type": "string",

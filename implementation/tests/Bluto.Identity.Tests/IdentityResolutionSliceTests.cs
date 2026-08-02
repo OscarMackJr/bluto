@@ -24,7 +24,7 @@ public sealed class IdentityResolutionSliceTests
         var harness = SliceHarness.Create();
 
         var first = await harness.Service.ResolveAsync(harness.Command(sourceKey: "SRC-001"), CancellationToken.None);
-        var second = await harness.Service.ResolveAsync(harness.Command(sourceKey: "SRC-002", identityToken: "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb", idempotencyKey: "tenant-a|nexus|SRC-002|v1|rule-version-2026-07-30|ResolveSourceCandidate"), CancellationToken.None);
+        var second = await harness.Service.ResolveAsync(harness.Command(sourceKey: "SRC-002", identityToken: "v1.BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB", idempotencyKey: "tenant-a|nexus|SRC-002|v1|rule-version-2026-07-30|ResolveSourceCandidate"), CancellationToken.None);
 
         Assert.NotEqual(first.Party.PartyId, second.Party.PartyId);
     }
@@ -92,6 +92,28 @@ public sealed class IdentityResolutionSliceTests
         Assert.Empty(harness.Repository.OutboxFacts());
     }
 
+    [Theory]
+    [InlineData("123456789")]
+    [InlineData("123-45-6789")]
+    [Trait("Category", "Security")]
+    [Trait("Category", "Application")]
+    public async Task Raw_looking_identity_tokens_fail_closed_without_persistence_logs_or_events(string rawLookingToken)
+    {
+        var harness = SliceHarness.Create();
+
+        var error = await Assert.ThrowsAsync<ArgumentException>(() =>
+            harness.Service.ResolveAsync(harness.Command(identityToken: rawLookingToken), CancellationToken.None));
+        var persisted = JsonSerializer.Serialize(harness.Repository.Snapshot());
+        var logs = string.Join(Environment.NewLine, harness.Logs);
+        var outbox = JsonSerializer.Serialize(harness.Repository.OutboxFacts());
+
+        Assert.DoesNotContain(rawLookingToken, error.Message);
+        Assert.DoesNotContain(rawLookingToken, persisted);
+        Assert.DoesNotContain(rawLookingToken, logs);
+        Assert.DoesNotContain(rawLookingToken, outbox);
+        Assert.Empty(harness.Repository.Parties());
+        Assert.Empty(harness.Repository.OutboxFacts());
+    }
     [Fact]
     [Trait("Category", "Domain")]
     [Trait("Category", "Application")]
@@ -157,6 +179,26 @@ public sealed class IdentityResolutionSliceTests
         Assert.Empty(harness.Repository.ActiveLinks(SliceHarness.TenantB, "nexus", "SRC-001"));
     }
 
+    [Fact]
+    [Trait("Category", "Security")]
+    [Trait("Category", "Application")]
+    public async Task Cross_tenant_collision_returns_deferred_result_without_phantom_party()
+    {
+        var harness = SliceHarness.Create();
+        await harness.Service.ResolveAsync(harness.Command(tenantId: SliceHarness.TenantA), CancellationToken.None);
+
+        var result = await harness.Service.ResolveAsync(
+            harness.Command(
+                tenantId: SliceHarness.TenantB,
+                sourceKey: "SRC-999",
+                authorizedTenantIds: new HashSet<Guid> { SliceHarness.TenantB },
+                idempotencyKey: "tenant-b|nexus|SRC-999|v1|rule-version-2026-07-30|ResolveSourceCandidate"),
+            CancellationToken.None);
+
+        Assert.False(result.Created);
+        Assert.Null(result.ResolvedParty);
+        Assert.DoesNotContain(harness.Repository.Parties(), party => party.TenantId == SliceHarness.TenantB);
+    }
     [Fact]
     [Trait("Category", "Integration")]
     [Trait("Category", "Acceptance")]
