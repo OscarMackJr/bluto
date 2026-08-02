@@ -79,6 +79,70 @@ public sealed class PostgresPartyRepositoryLiveTests : IAsyncLifetime
     [Fact]
     [Trait("Category", "Integration")]
     [Trait("Category", "Security")]
+    public async Task Same_idempotency_key_in_two_tenants_replays_only_within_requested_tenant()
+    {
+        await using var dataSource = NpgsqlDataSource.Create(postgres.GetConnectionString());
+        var service = new IdentityResolutionService(new PostgresPartyRepository(dataSource), _ => { });
+        const string sharedIdempotencyKey = "shared|nexus|SRC-001|source-page-v1|rule-version-2026-07-30|create_party_with_initial_link";
+
+        var tenantA = await service.ResolveAsync(
+            ResolveCommand(idempotencyKey: sharedIdempotencyKey),
+            TestContext.Current.CancellationToken);
+        var tenantB = await service.ResolveAsync(
+            ResolveCommand(
+                tenantId: Guid.Parse("20000000-0000-0000-0000-000000000002"),
+                sourceKey: "SRC-002",
+                idempotencyKey: sharedIdempotencyKey,
+                identityToken: "v1.BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB"),
+            TestContext.Current.CancellationToken);
+
+        Assert.True(tenantA.Created);
+        Assert.True(tenantB.Created);
+        Assert.NotEqual(tenantA.Party?.PartyId, tenantB.Party?.PartyId);
+        Assert.Equal(Guid.Parse("20000000-0000-0000-0000-000000000002"), tenantB.Party?.TenantId);
+    }
+    [Fact]
+    [Trait("Category", "Integration")]
+    [Trait("Category", "Security")]
+    public async Task Row_level_security_blocks_cross_tenant_reads_when_application_predicate_is_omitted()
+    {
+        await using var adminDataSource = NpgsqlDataSource.Create(postgres.GetConnectionString());
+        var service = new IdentityResolutionService(new PostgresPartyRepository(adminDataSource), _ => { });
+
+        var tenantA = await service.ResolveAsync(ResolveCommand(), TestContext.Current.CancellationToken);
+        var tenantB = await service.ResolveAsync(
+            ResolveCommand(
+                tenantId: Guid.Parse("20000000-0000-0000-0000-000000000002"),
+                sourceKey: "SRC-002",
+                idempotencyKey: "20000000-0000-0000-0000-000000000002|nexus|SRC-002|source-page-v1|rule-version-2026-07-30|create_party_with_initial_link",
+                identityToken: "v1.BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB"),
+            TestContext.Current.CancellationToken);
+
+        await using (var adminConnection = await adminDataSource.OpenConnectionAsync(TestContext.Current.CancellationToken))
+        {
+            await ExecuteAsync(adminConnection, "create role bluto_rls_app login password 'postgres' nosuperuser nocreatedb nocreaterole noinherit", TestContext.Current.CancellationToken);
+            await ExecuteAsync(adminConnection, "grant usage on schema identity_resolution to bluto_rls_app", TestContext.Current.CancellationToken);
+            await ExecuteAsync(adminConnection, "grant select on all tables in schema identity_resolution to bluto_rls_app", TestContext.Current.CancellationToken);
+        }
+
+        var builder = new NpgsqlConnectionStringBuilder(postgres.GetConnectionString())
+        {
+            Username = "bluto_rls_app",
+            Password = "postgres"
+        };
+        await using var appConnection = new NpgsqlConnection(builder.ConnectionString);
+        await appConnection.OpenAsync(TestContext.Current.CancellationToken);
+
+        Assert.Equal(0L, await ScalarAsync(appConnection, "select count(*) from identity_resolution.parties", TestContext.Current.CancellationToken));
+        await ExecuteAsync(appConnection, "select set_config('bluto.tenant_id', '10000000-0000-0000-0000-000000000001', false)", TestContext.Current.CancellationToken);
+
+        Assert.Equal(1L, await ScalarAsync(appConnection, "select count(*) from identity_resolution.parties", TestContext.Current.CancellationToken));
+        Assert.Equal(tenantA.Party?.PartyId.Value, await GuidScalarAsync(appConnection, "select party_id from identity_resolution.parties", TestContext.Current.CancellationToken));
+        Assert.NotEqual(tenantB.Party?.PartyId.Value, await GuidScalarAsync(appConnection, "select party_id from identity_resolution.parties", TestContext.Current.CancellationToken));
+    }
+    [Fact]
+    [Trait("Category", "Integration")]
+    [Trait("Category", "Security")]
     public async Task Repository_records_same_source_conflict_review_case_without_link()
     {
         await using var dataSource = NpgsqlDataSource.Create(postgres.GetConnectionString());
@@ -123,15 +187,26 @@ public sealed class PostgresPartyRepositoryLiveTests : IAsyncLifetime
         await using var command = new NpgsqlCommand(sql, connection);
         return (long)(await command.ExecuteScalarAsync(cancellationToken) ?? throw new InvalidOperationException("No scalar result."));
     }
+    private static async Task ExecuteAsync(NpgsqlConnection connection, string sql, CancellationToken cancellationToken)
+    {
+        await using var command = new NpgsqlCommand(sql, connection);
+        await command.ExecuteNonQueryAsync(cancellationToken);
+    }
 
-    private static ResolveSourceCandidateCommand ResolveCommand(Guid? tenantId = null, string sourceSystem = "nexus", string sourceKey = "SRC-001", string idempotencyKey = "10000000-0000-0000-0000-000000000001|nexus|SRC-001|source-page-v1|rule-version-2026-07-30|create_party_with_initial_link") =>
+    private static async Task<Guid> GuidScalarAsync(NpgsqlConnection connection, string sql, CancellationToken cancellationToken)
+    {
+        await using var command = new NpgsqlCommand(sql, connection);
+        return (Guid)(await command.ExecuteScalarAsync(cancellationToken) ?? throw new InvalidOperationException("No scalar result."));
+    }
+
+    private static ResolveSourceCandidateCommand ResolveCommand(Guid? tenantId = null, string sourceSystem = "nexus", string sourceKey = "SRC-001", string idempotencyKey = "10000000-0000-0000-0000-000000000001|nexus|SRC-001|source-page-v1|rule-version-2026-07-30|create_party_with_initial_link", string identityToken = "v1.AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA") =>
         new(
             Guid.Parse("33333333-3333-3333-3333-333333333333"),
             tenantId ?? Guid.Parse("10000000-0000-0000-0000-000000000001"),
             new HashSet<Guid> { tenantId ?? Guid.Parse("10000000-0000-0000-0000-000000000001") },
             sourceSystem,
             sourceKey,
-            "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            identityToken,
             new DateTimeOffset(2026, 7, 30, 12, 0, 0, TimeSpan.Zero),
             new DateTimeOffset(2026, 7, 30, 12, 0, 0, TimeSpan.Zero),
             idempotencyKey,
@@ -145,7 +220,7 @@ public sealed class PostgresPartyRepositoryLiveTests : IAsyncLifetime
             "evidence://synthetic/batch-2026-07-30-001/SRC-001",
             RawStrongIdentifier: null);
 
-    private static string MigrationSql() => File.ReadAllText(Path.Combine(RepositoryRoot(), "implementation", "db", "migrations", "V001__identity_resolution_minimal_slice.sql"));
+    private static string MigrationSql() => string.Join(Environment.NewLine, Directory.GetFiles(Path.Combine(RepositoryRoot(), "implementation", "db", "migrations"), "V*.sql").Order(StringComparer.Ordinal).Select(File.ReadAllText));
 
     private static string RepositoryRoot()
     {

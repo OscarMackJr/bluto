@@ -26,7 +26,7 @@ public sealed class ScheduledResolutionWorkerTests
         var serialized = File.ReadAllText(TestDataPath("candidate-batch.v1.schema.json"));
         Assert.Contains("synthetic_identity_token", serialized);
         Assert.Contains("tenant_id", serialized);
-        Assert.Contains("^sha256:[a-f0-9]{64}$", serialized);
+        Assert.Contains("^v1\\\\.[A-Za-z0-9_-]{43}$", serialized);
         Assert.DoesNotContain("ssn", serialized, StringComparison.OrdinalIgnoreCase);
         Assert.DoesNotContain("tax_id", serialized, StringComparison.OrdinalIgnoreCase);
         Assert.DoesNotContain("raw_identifier", serialized, StringComparison.OrdinalIgnoreCase);
@@ -38,8 +38,8 @@ public sealed class ScheduledResolutionWorkerTests
     {
         var harness = WorkerHarness.Create();
         var batch = Batch([
-            Candidate("SRC-002", "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"),
-            Candidate("SRC-001", "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+            Candidate("SRC-002", "v1.BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB"),
+            Candidate("SRC-001", "v1.AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
         ]);
 
         var result = await harness.Worker.ProcessAsync(batch, CancellationToken.None);
@@ -141,7 +141,7 @@ public sealed class ScheduledResolutionWorkerTests
     public async Task Safe_logs_and_metrics_exclude_raw_or_token_values()
     {
         var harness = WorkerHarness.Create();
-        const string token = "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+        const string token = "v1.AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
 
         var result = await harness.Worker.ProcessAsync(Batch([Candidate("SRC-001", token)]), CancellationToken.None);
         var logs = string.Join(Environment.NewLine, harness.Logs);
@@ -183,7 +183,7 @@ public sealed class ScheduledResolutionWorkerTests
     public async Task Same_tenant_cross_source_token_links_to_existing_party_and_api_reads_both_mappings()
     {
         var harness = WorkerHarness.Create();
-        var token = "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+        var token = "v1.AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
 
         var first = await harness.Worker.ProcessAsync(Batch([Candidate("SRC-001", token)], sourceSystem: "nexus"), CancellationToken.None);
         var second = await harness.Worker.ProcessAsync(Batch([Candidate("LEDGER-001", token, sourceSystem: "ledger")], sourceSystem: "ledger"), CancellationToken.None);
@@ -226,7 +226,7 @@ public sealed class ScheduledResolutionWorkerTests
         var result = await harness.Worker.ProcessAsync(
             Batch([
                 Candidate("SRC-001"),
-                Candidate("SRC-001", "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb", tenantId: TenantB)
+                Candidate("SRC-001", "v1.BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB", tenantId: TenantB)
             ]),
             CancellationToken.None);
 
@@ -256,7 +256,7 @@ public sealed class ScheduledResolutionWorkerTests
     public async Task Same_token_in_different_authorized_tenant_batches_across_source_systems_is_deferred_without_link()
     {
         var harness = WorkerHarness.Create(new HashSet<Guid> { TenantA, TenantB });
-        var token = "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+        var token = "v1.AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
 
         await harness.Worker.ProcessAsync(Batch([Candidate("SRC-001", token)], tenantId: TenantA, sourceSystem: "nexus"), CancellationToken.None);
 
@@ -305,7 +305,7 @@ public sealed class ScheduledResolutionWorkerTests
 
     private static SyntheticSourceCandidate Candidate(
         string sourceKey,
-        string token = "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        string token = "v1.AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         string outcome = "deterministic_no_match",
         Guid? tenantId = null,
         string? idempotencyKey = null, string sourceSystem = "nexus") =>

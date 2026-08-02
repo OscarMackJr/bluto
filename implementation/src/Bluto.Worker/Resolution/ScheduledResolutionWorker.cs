@@ -81,7 +81,7 @@ public sealed class ScheduledResolutionWorker
     }
 
     private const string CreatePartyOperation = "create_party_with_initial_link";
-    private static readonly Regex SyntheticTokenPattern = new("^sha256:[a-f0-9]{64}$", RegexOptions.Compiled | RegexOptions.CultureInvariant);
+    private static readonly Regex SyntheticTokenPattern = new("^v1\\.[A-Za-z0-9_-]{43}$", RegexOptions.Compiled | RegexOptions.CultureInvariant);
     private readonly IdentityResolutionService resolutionService;
     private readonly ScheduledResolutionWorkerOptions options;
     private readonly Action<string> log;

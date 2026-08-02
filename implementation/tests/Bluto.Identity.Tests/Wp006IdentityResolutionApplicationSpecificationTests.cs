@@ -34,7 +34,7 @@ public sealed class Wp006IdentityResolutionApplicationSpecificationTests
 
         var ambiguous = harness.Command(
             sourceKey: "SRC-AMBIGUOUS",
-            identityToken: "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            identityToken: "v1.AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
             idempotencyKey: "tenant-a|nexus|SRC-AMBIGUOUS|v1|rule-version-2026-07-30|ResolveSourceCandidate");
 
         var result = await harness.Service.ResolveAsync(ambiguous, CancellationToken.None);

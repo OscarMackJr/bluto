@@ -103,9 +103,42 @@ public sealed class Party
         TenantId = tenantId;
         CreatedAt = createdAt;
         Status = "active";
+        PartyType = "person";
         Version = 1;
     }
 
+    public static Party Rehydrate(
+        PartyId partyId,
+        Guid tenantId,
+        DateTimeOffset createdAt,
+        string status,
+        string partyType,
+        PartyId? mergedIntoPartyId,
+        int version)
+    {
+        if (string.IsNullOrWhiteSpace(status) || status is not ("active" or "merged" or "retired"))
+        {
+            throw new ArgumentException("Persisted Party status is invalid.");
+        }
+
+        if (string.IsNullOrWhiteSpace(partyType) || partyType is not ("person" or "organization"))
+        {
+            throw new ArgumentException("Persisted Party type is invalid.");
+        }
+
+        if (version <= 0)
+        {
+            throw new ArgumentException("Persisted Party version must be positive.");
+        }
+
+        return new Party(partyId, tenantId, createdAt)
+        {
+            Status = status,
+            PartyType = partyType,
+            MergedIntoPartyId = mergedIntoPartyId,
+            Version = version
+        };
+    }
     public PartyId PartyId { get; }
 
     public Guid TenantId { get; }
@@ -114,6 +147,10 @@ public sealed class Party
 
     public string Status { get; private set; }
 
+
+    public string PartyType { get; private set; }
+
+    public PartyId? MergedIntoPartyId { get; private set; }
     public int Version { get; private set; }
 
     public IReadOnlyList<PartySourceLink> SourceLinks => sourceLinks;
@@ -159,6 +196,23 @@ public sealed class Party
         return link;
     }
 
+    public void LoadSourceLink(
+        Guid tenantId,
+        string sourceSystem,
+        string sourceKey,
+        EffectiveInterval effectiveInterval,
+        LinkProvenance provenance)
+    {
+        sourceLinks.Add(new PartySourceLink(
+            SourceLinkId.New(),
+            PartyId,
+            tenantId,
+            sourceSystem,
+            sourceKey,
+            effectiveInterval,
+            PartySourceLink.Active,
+            provenance));
+    }
     public void MergeInto(PartyId survivingPartyId)
     {
         if (survivingPartyId == PartyId)
@@ -167,6 +221,7 @@ public sealed class Party
         }
 
         Status = "merged";
+        MergedIntoPartyId = survivingPartyId;
         Version++;
     }
 

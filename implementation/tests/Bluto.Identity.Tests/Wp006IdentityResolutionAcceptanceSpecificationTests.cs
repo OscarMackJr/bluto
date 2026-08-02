@@ -32,7 +32,7 @@ public sealed class Wp006IdentityResolutionAcceptanceSpecificationTests
         await harness.Service.ResolveAsync(
             harness.Command(
                 tenantId: SliceHarness.TenantB,
-                identityToken: "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                identityToken: "v1.AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 idempotencyKey: "tenant-b|nexus|SRC-001|v1|rule-version-2026-07-30|ResolveSourceCandidate"),
             CancellationToken.None);
 

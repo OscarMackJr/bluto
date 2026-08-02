@@ -20,18 +20,20 @@ public sealed class PostgresPartyRepository : IPartyRepository
         this.dataSource = dataSource;
     }
 
-    public async Task<Party?> FindIdempotentResultAsync(string idempotencyKey, CancellationToken cancellationToken)
+    public async Task<Party?> FindIdempotentResultAsync(Guid tenantId, string idempotencyKey, CancellationToken cancellationToken)
     {
         await using var connection = await dataSource.OpenConnectionAsync(cancellationToken);
+        await SetTenantContextAsync(connection, tenantId, cancellationToken);
         var row = await connection.QuerySingleOrDefaultAsync<PartyRow>(new CommandDefinition(
             """
             select p.tenant_id as TenantId, p.party_id as PartyId, p.created_at as CreatedAt
             from identity_resolution.idempotency_records i
             join identity_resolution.parties p on p.tenant_id = i.tenant_id and p.party_id = i.party_id
-            where i.idempotency_key = @idempotencyKey
+            where i.tenant_id = @tenantId
+              and i.idempotency_key = @idempotencyKey
             limit 1
             """,
-            new { idempotencyKey },
+            new { tenantId, idempotencyKey },
             cancellationToken: cancellationToken));
         return row is null ? null : await HydratePartyAsync(connection, row.TenantId, row.PartyId, cancellationToken);
     }
@@ -39,6 +41,7 @@ public sealed class PostgresPartyRepository : IPartyRepository
     public async Task<Party?> FindActivePartyAsync(Guid tenantId, string sourceSystem, string sourceKey, CancellationToken cancellationToken)
     {
         await using var connection = await dataSource.OpenConnectionAsync(cancellationToken);
+        await SetTenantContextAsync(connection, tenantId, cancellationToken);
         var row = await connection.QuerySingleOrDefaultAsync<PartyRow>(new CommandDefinition(
             """
             select p.tenant_id as TenantId, p.party_id as PartyId, p.created_at as CreatedAt
@@ -59,6 +62,7 @@ public sealed class PostgresPartyRepository : IPartyRepository
     public async Task<Party?> FindActivePartyByIdentityTokenAsync(Guid tenantId, string identityToken, CancellationToken cancellationToken)
     {
         await using var connection = await dataSource.OpenConnectionAsync(cancellationToken);
+        await SetTenantContextAsync(connection, tenantId, cancellationToken);
         var digest = MatchIdentityDigest(identityToken);
         var row = await connection.QuerySingleOrDefaultAsync<PartyRow>(new CommandDefinition(
             """
@@ -80,39 +84,36 @@ public sealed class PostgresPartyRepository : IPartyRepository
     public async Task<bool> HasCrossTenantIdentityTokenAsync(Guid tenantId, string identityToken, CancellationToken cancellationToken)
     {
         await using var connection = await dataSource.OpenConnectionAsync(cancellationToken);
+        await SetTenantContextAsync(connection, tenantId, cancellationToken);
         var digest = MatchIdentityDigest(identityToken);
         return await connection.ExecuteScalarAsync<bool>(new CommandDefinition(
             """
-            select exists (
-                select 1
-                from identity_resolution.party_source_links
-                where tenant_id <> @tenantId
-                  and match_identity_digest = @digest
-                  and status = 'active'
-                  and effective_to is null)
+            select identity_resolution.has_cross_tenant_identity_digest(@tenantId, @digest)
             """,
             new { tenantId, digest },
             cancellationToken: cancellationToken));
     }
 
-    public async Task RecordIdempotencyAsync(string idempotencyKey, PartyId partyId, CancellationToken cancellationToken)
+    public async Task RecordIdempotencyAsync(Guid tenantId, string idempotencyKey, PartyId partyId, CancellationToken cancellationToken)
     {
         await using var connection = await dataSource.OpenConnectionAsync(cancellationToken);
+        await SetTenantContextAsync(connection, tenantId, cancellationToken);
         await connection.ExecuteAsync(new CommandDefinition(
             """
             insert into identity_resolution.idempotency_records (tenant_id, idempotency_key, party_id, created_at)
             select tenant_id, @idempotencyKey, party_id, now()
             from identity_resolution.parties
-            where party_id = @partyId
+            where tenant_id = @tenantId and party_id = @partyId
             on conflict (tenant_id, idempotency_key) do nothing
             """,
-            new { idempotencyKey, partyId = partyId.Value },
+            new { tenantId, idempotencyKey, partyId = partyId.Value },
             cancellationToken: cancellationToken));
     }
 
     public async Task RecordReviewCaseAsync(ReviewCase reviewCase, CancellationToken cancellationToken)
     {
         await using var connection = await dataSource.OpenConnectionAsync(cancellationToken);
+        await SetTenantContextAsync(connection, reviewCase.TenantId, cancellationToken);
         await connection.ExecuteAsync(new CommandDefinition(
             """
             insert into identity_resolution.review_cases (
@@ -157,6 +158,7 @@ public sealed class PostgresPartyRepository : IPartyRepository
 
         await using var connection = await dataSource.OpenConnectionAsync(cancellationToken);
         await using var transaction = await connection.BeginTransactionAsync(IsolationLevel.Serializable, cancellationToken);
+        await SetTenantContextAsync(connection, party.TenantId, cancellationToken, transaction);
 
         var insertedFacts = await connection.ExecuteScalarAsync<int>(new CommandDefinition(
             PostgresIdentityResolutionSql.AtomicCreatePartyWithInitialLinkAndOutboxFacts,
@@ -180,6 +182,7 @@ public sealed class PostgresPartyRepository : IPartyRepository
 
         await using var connection = await dataSource.OpenConnectionAsync(cancellationToken);
         await using var transaction = await connection.BeginTransactionAsync(IsolationLevel.Serializable, cancellationToken);
+        await SetTenantContextAsync(connection, party.TenantId, cancellationToken, transaction);
 
         var insertedFacts = await connection.ExecuteScalarAsync<int>(new CommandDefinition(
             PostgresIdentityResolutionSql.AtomicCreateSourceLinkForExistingPartyWithOutboxFact,
@@ -196,6 +199,12 @@ public sealed class PostgresPartyRepository : IPartyRepository
         await transaction.CommitAsync(cancellationToken);
     }
 
+    private static async Task SetTenantContextAsync(NpgsqlConnection connection, Guid tenantId, CancellationToken cancellationToken, NpgsqlTransaction? transaction = null) =>
+        await connection.ExecuteAsync(new CommandDefinition(
+            "select set_config('bluto.tenant_id', @tenantId, false)",
+            new { tenantId = tenantId.ToString("D") },
+            transaction,
+            cancellationToken: cancellationToken));
     private static object NewPartyParameters(Party party, PartySourceLink link, string identityToken, string idempotencyKey, OutboxFact partyCreated, OutboxFact sourceLinkEstablished) =>
         new
         {
@@ -205,6 +214,9 @@ public sealed class PostgresPartyRepository : IPartyRepository
             created_by = link.Provenance.AssertedBy,
             correlation_id = link.Provenance.CorrelationId,
             version = party.Version,
+            party_status = party.Status,
+            party_type = party.PartyType,
+            merged_into_party_id = party.MergedIntoPartyId?.Value,
             source_link_id = link.LinkId.Value,
             source_system = link.SourceSystem,
             source_key = link.SourceKey,
@@ -267,7 +279,7 @@ public sealed class PostgresPartyRepository : IPartyRepository
     {
         var partyRow = await connection.QuerySingleOrDefaultAsync<PartyRow>(new CommandDefinition(
             """
-            select tenant_id as TenantId, party_id as PartyId, created_at as CreatedAt
+            select tenant_id as TenantId, party_id as PartyId, created_at as CreatedAt, status as Status, party_type as PartyType, merged_into_party_id as MergedIntoPartyId, version as Version
             from identity_resolution.parties
             where tenant_id = @tenantId and party_id = @partyId
             """,
@@ -278,7 +290,14 @@ public sealed class PostgresPartyRepository : IPartyRepository
             return null;
         }
 
-        var party = new Party(new PartyId(partyRow.PartyId), partyRow.TenantId, new DateTimeOffset(DateTime.SpecifyKind(partyRow.CreatedAt, DateTimeKind.Utc)));
+        var party = Party.Rehydrate(
+            new PartyId(partyRow.PartyId),
+            partyRow.TenantId,
+            new DateTimeOffset(DateTime.SpecifyKind(partyRow.CreatedAt, DateTimeKind.Utc)),
+            partyRow.Status,
+            partyRow.PartyType,
+            partyRow.MergedIntoPartyId is null ? null : new PartyId(partyRow.MergedIntoPartyId.Value),
+            partyRow.Version);
         var links = await connection.QueryAsync<LinkRow>(new CommandDefinition(
             """
             select
@@ -306,7 +325,7 @@ public sealed class PostgresPartyRepository : IPartyRepository
 
         foreach (var link in links)
         {
-            party.EstablishSourceLink(
+            party.LoadSourceLink(
                 link.TenantId,
                 link.SourceSystem,
                 link.SourceKey,
@@ -328,8 +347,7 @@ public sealed class PostgresPartyRepository : IPartyRepository
         return party;
     }
 
-    private static string MatchIdentityDigest(string identityToken) =>
-        Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(identityToken))).ToLowerInvariant();
+    private static string MatchIdentityDigest(string identityToken) => identityToken;
 
     private static Guid DeterministicGuid(string value)
     {
@@ -344,6 +362,14 @@ public sealed class PostgresPartyRepository : IPartyRepository
         public Guid PartyId { get; set; }
 
         public DateTime CreatedAt { get; set; }
+
+        public string Status { get; set; } = string.Empty;
+
+        public string PartyType { get; set; } = string.Empty;
+
+        public Guid? MergedIntoPartyId { get; set; }
+
+        public int Version { get; set; }
     }
 
     private sealed class LinkRow
@@ -400,14 +426,20 @@ public static class PostgresIdentityResolutionSql
                 created_at,
                 created_by,
                 correlation_id,
-                version)
+                version,
+                status,
+                party_type,
+                merged_into_party_id)
             values (
                 @tenant_id,
                 @party_id,
                 @created_at,
                 @created_by,
                 @correlation_id,
-                @version)
+                @version,
+                @party_status,
+                @party_type,
+                @merged_into_party_id)
             on conflict (tenant_id, correlation_id) do nothing
             returning tenant_id, party_id
         ), inserted_idempotency as (

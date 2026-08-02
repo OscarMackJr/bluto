@@ -32,7 +32,7 @@ internal sealed class SliceHarness
         Guid? tenantId = null,
         string sourceSystem = "nexus",
         string sourceKey = "SRC-001",
-        string identityToken = "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        string identityToken = "v1.AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         DateTimeOffset? effectiveFrom = null,
         Guid? correlationId = null,
         string idempotencyKey = "tenant-a|nexus|SRC-001|v1|rule-version-2026-07-30|ResolveSourceCandidate",

@@ -23,7 +23,10 @@ public sealed record ResolveSourceCandidateCommand(
     string EvidenceReference,
     string? RawStrongIdentifier);
 
-public sealed record IdentityResolutionResult(Party Party, bool Created);
+public sealed record IdentityResolutionResult(Party? ResolvedParty, bool Created, string Outcome)
+{
+    public Party Party => ResolvedParty ?? throw new InvalidOperationException("No Party is available for this identity-resolution outcome.");
+}
 
 public sealed record ReviewCase(
     Guid TenantId,
@@ -36,7 +39,7 @@ public sealed record ReviewCase(
 
 public interface IPartyRepository
 {
-    Task<Party?> FindIdempotentResultAsync(string idempotencyKey, CancellationToken cancellationToken);
+    Task<Party?> FindIdempotentResultAsync(Guid tenantId, string idempotencyKey, CancellationToken cancellationToken);
 
     Task<Party?> FindActivePartyAsync(Guid tenantId, string sourceSystem, string sourceKey, CancellationToken cancellationToken);
 
@@ -44,7 +47,7 @@ public interface IPartyRepository
 
     Task<bool> HasCrossTenantIdentityTokenAsync(Guid tenantId, string identityToken, CancellationToken cancellationToken);
 
-    Task RecordIdempotencyAsync(string idempotencyKey, PartyId partyId, CancellationToken cancellationToken);
+    Task RecordIdempotencyAsync(Guid tenantId, string idempotencyKey, PartyId partyId, CancellationToken cancellationToken);
 
     Task RecordReviewCaseAsync(ReviewCase reviewCase, CancellationToken cancellationToken);
 
@@ -55,6 +58,7 @@ public interface IPartyRepository
 
 public sealed class IdentityResolutionService
 {
+    private static readonly System.Text.RegularExpressions.Regex ApprovedIdentityTokenPattern = new("^v1\\.[A-Za-z0-9_-]{43}$", System.Text.RegularExpressions.RegexOptions.Compiled | System.Text.RegularExpressions.RegexOptions.CultureInvariant);
     private readonly IPartyRepository repository;
     private readonly Action<string> log;
 
@@ -81,25 +85,25 @@ public sealed class IdentityResolutionService
             throw new UnauthorizedAccessException("Tenant scope is not authorized.");
         }
 
-        var replay = await repository.FindIdempotentResultAsync(command.IdempotencyKey, cancellationToken);
+        var replay = await repository.FindIdempotentResultAsync(command.TenantId, command.IdempotencyKey, cancellationToken);
         if (replay is not null)
         {
             log("identity_resolution_replayed outcome=idempotent");
-            return new IdentityResolutionResult(replay, Created: false);
+            return new IdentityResolutionResult(replay, Created: false, Outcome: "idempotent");
         }
 
         var existing = await repository.FindActivePartyAsync(command.TenantId, command.SourceSystem, command.SourceKey, cancellationToken);
         if (existing is not null)
         {
-            await repository.RecordIdempotencyAsync(command.IdempotencyKey, existing.PartyId, cancellationToken);
-            return new IdentityResolutionResult(existing, Created: false);
+            await repository.RecordIdempotencyAsync(command.TenantId, command.IdempotencyKey, existing.PartyId, cancellationToken);
+            return new IdentityResolutionResult(existing, Created: false, Outcome: "active_source_key_match");
         }
 
         if (await repository.HasCrossTenantIdentityTokenAsync(command.TenantId, command.IdentityToken, cancellationToken))
         {
             await RecordReviewCaseAsync(command, "cross_tenant_collision", cancellationToken);
             log($"identity_resolution_rejected outcome=cross_tenant_collision tenant_id={command.TenantId:D} correlation_id={command.CorrelationId:D}");
-            return new IdentityResolutionResult(new Party(PartyId.New(), command.TenantId, command.RequestedAt), Created: false);
+            return new IdentityResolutionResult(null, Created: false, Outcome: "cross_tenant_collision");
         }
 
         var tokenMatch = await repository.FindActivePartyByIdentityTokenAsync(command.TenantId, command.IdentityToken, cancellationToken);
@@ -114,14 +118,14 @@ public sealed class IdentityResolutionService
             {
                 await RecordReviewCaseAsync(command, "same_source_identity_conflict", cancellationToken);
                 log($"identity_resolution_deferred outcome=same_source_identity_conflict tenant_id={command.TenantId:D} correlation_id={command.CorrelationId:D}");
-                return new IdentityResolutionResult(tokenMatch, Created: false);
+                return new IdentityResolutionResult(tokenMatch, Created: false, Outcome: "same_source_identity_conflict");
             }
 
             var link = EstablishLink(tokenMatch, command);
             var facts = new[] { OutboxFact.SourceLinkEstablished(tokenMatch, link, command) };
             await repository.CommitSourceLinkWithOutboxAsync(tokenMatch, command.IdentityToken, command.IdempotencyKey, facts, cancellationToken);
             log("identity_resolution_completed outcome=linked_existing_party");
-            return new IdentityResolutionResult(tokenMatch, Created: false);
+            return new IdentityResolutionResult(tokenMatch, Created: false, Outcome: "linked_existing_party");
         }
 
         var party = new Party(PartyId.New(), command.TenantId, command.RequestedAt);
@@ -134,7 +138,7 @@ public sealed class IdentityResolutionService
 
         await repository.CommitNewPartyWithLinkAndOutboxAsync(party, command.IdentityToken, command.IdempotencyKey, newFacts, cancellationToken);
         log("identity_resolution_completed outcome=created");
-        return new IdentityResolutionResult(party, Created: true);
+        return new IdentityResolutionResult(party, Created: true, Outcome: "created");
     }
 
     private static PartySourceLink EstablishLink(Party party, ResolveSourceCandidateCommand command) =>
@@ -183,12 +187,13 @@ public sealed class IdentityResolutionService
         if (string.IsNullOrWhiteSpace(command.SourceSystem)
             || string.IsNullOrWhiteSpace(command.SourceKey)
             || string.IsNullOrWhiteSpace(command.IdentityToken)
+            || !ApprovedIdentityTokenPattern.IsMatch(command.IdentityToken)
             || string.IsNullOrWhiteSpace(command.IdempotencyKey)
             || string.IsNullOrWhiteSpace(command.MatchRuleId)
             || string.IsNullOrWhiteSpace(command.RuleVersionId)
             || string.IsNullOrWhiteSpace(command.RulesetVersion))
         {
-            throw new ArgumentException("Command is missing required canonical identity fields.");
+            throw new ArgumentException("Command is missing required canonical identity fields or approved identity token shape.");
         }
 
         ValidateIdempotencyKey(command);
@@ -218,14 +223,14 @@ public sealed class InMemoryPartyRepository : IPartyRepository
         this.failBeforeOutboxCommit = failBeforeOutboxCommit;
     }
 
-    public Task<Party?> FindIdempotentResultAsync(string idempotencyKey, CancellationToken cancellationToken)
+    public Task<Party?> FindIdempotentResultAsync(Guid tenantId, string idempotencyKey, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
-        return Task.FromResult(FindIdempotentResult(idempotencyKey));
+        return Task.FromResult(FindIdempotentResult(tenantId, idempotencyKey));
     }
 
-    public Party? FindIdempotentResult(string idempotencyKey) =>
-        idempotency.TryGetValue(idempotencyKey, out var partyId) && parties.TryGetValue(partyId, out var party)
+    public Party? FindIdempotentResult(Guid tenantId, string idempotencyKey) =>
+        idempotency.TryGetValue(IdempotencyScope(tenantId, idempotencyKey), out var partyId) && parties.TryGetValue(partyId, out var party)
             ? party
             : null;
 
@@ -260,16 +265,16 @@ public sealed class InMemoryPartyRepository : IPartyRepository
         return Task.FromResult(identityTokens.Keys.Any(key => !key.StartsWith($"{tenantId:D}|", StringComparison.Ordinal) && key.EndsWith($"|{identityToken}", StringComparison.Ordinal)));
     }
 
-    public Task RecordIdempotencyAsync(string idempotencyKey, PartyId partyId, CancellationToken cancellationToken)
+    public Task RecordIdempotencyAsync(Guid tenantId, string idempotencyKey, PartyId partyId, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
-        RecordIdempotency(idempotencyKey, partyId);
+        RecordIdempotency(tenantId, idempotencyKey, partyId);
         return Task.CompletedTask;
     }
 
-    public void RecordIdempotency(string idempotencyKey, PartyId partyId)
+    public void RecordIdempotency(Guid tenantId, string idempotencyKey, PartyId partyId)
     {
-        idempotency.TryAdd(idempotencyKey, partyId);
+        idempotency.TryAdd(IdempotencyScope(tenantId, idempotencyKey), partyId);
     }
 
     public Task RecordReviewCaseAsync(ReviewCase reviewCase, CancellationToken cancellationToken)
@@ -303,7 +308,7 @@ public sealed class InMemoryPartyRepository : IPartyRepository
             throw new InvalidOperationException("Party ID reuse is prohibited.");
         }
 
-        idempotencyCopy.Add(idempotencyKey, party.PartyId);
+        idempotencyCopy.Add(IdempotencyScope(party.TenantId, idempotencyKey), party.PartyId);
         tokenCopy.Add(TokenScope(party.TenantId, identityToken), party.PartyId);
         outboxCopy.AddRange(facts);
 
@@ -322,7 +327,7 @@ public sealed class InMemoryPartyRepository : IPartyRepository
         var tokenCopy = new Dictionary<string, PartyId>(identityTokens, StringComparer.Ordinal);
         var outboxCopy = new List<OutboxFact>(outbox);
 
-        idempotencyCopy.Add(idempotencyKey, party.PartyId);
+        idempotencyCopy.Add(IdempotencyScope(party.TenantId, idempotencyKey), party.PartyId);
         tokenCopy.TryAdd(TokenScope(party.TenantId, identityToken), party.PartyId);
         outboxCopy.AddRange(facts);
         ReplaceState(new Dictionary<PartyId, Party>(parties), idempotencyCopy, tokenCopy, outboxCopy);
@@ -397,6 +402,8 @@ public sealed class InMemoryPartyRepository : IPartyRepository
     }
 
     private static string TokenScope(Guid tenantId, string identityToken) => $"{tenantId:D}|{identityToken}";
+
+    private static string IdempotencyScope(Guid tenantId, string idempotencyKey) => $"{tenantId:D}|{idempotencyKey}";
 }
 
 public sealed record OutboxFact(
