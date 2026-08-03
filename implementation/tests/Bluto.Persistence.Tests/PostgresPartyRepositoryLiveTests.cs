@@ -93,7 +93,8 @@ public sealed class PostgresPartyRepositoryLiveTests : IAsyncLifetime
                 tenantId: Guid.Parse("20000000-0000-0000-0000-000000000002"),
                 sourceKey: "SRC-002",
                 idempotencyKey: sharedIdempotencyKey,
-                identityToken: "v1.BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB"),
+                identityToken: "v1.BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+                correlationId: Guid.Parse("dddddddd-dddd-dddd-dddd-dddddddddddd")),
             TestContext.Current.CancellationToken);
 
         Assert.True(tenantA.Created);
@@ -115,7 +116,8 @@ public sealed class PostgresPartyRepositoryLiveTests : IAsyncLifetime
                 tenantId: Guid.Parse("20000000-0000-0000-0000-000000000002"),
                 sourceKey: "SRC-002",
                 idempotencyKey: "20000000-0000-0000-0000-000000000002|nexus|SRC-002|source-page-v1|rule-version-2026-07-30|create_party_with_initial_link",
-                identityToken: "v1.BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB"),
+                identityToken: "v1.BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+                correlationId: Guid.Parse("dddddddd-dddd-dddd-dddd-dddddddddddd")),
             TestContext.Current.CancellationToken);
 
         await using (var adminConnection = await adminDataSource.OpenConnectionAsync(TestContext.Current.CancellationToken))
@@ -139,6 +141,97 @@ public sealed class PostgresPartyRepositoryLiveTests : IAsyncLifetime
         Assert.Equal(1L, await ScalarAsync(appConnection, "select count(*) from identity_resolution.parties", TestContext.Current.CancellationToken));
         Assert.Equal(tenantA.Party?.PartyId.Value, await GuidScalarAsync(appConnection, "select party_id from identity_resolution.parties", TestContext.Current.CancellationToken));
         Assert.NotEqual(tenantB.Party?.PartyId.Value, await GuidScalarAsync(appConnection, "select party_id from identity_resolution.parties", TestContext.Current.CancellationToken));
+    }
+    [Fact]
+    [Trait("Category", "Integration")]
+    [Trait("Category", "Domain")]
+    public async Task Point_in_time_resolution_preserves_pre_merge_party_after_current_link_moves_to_survivor()
+    {
+        await using var dataSource = NpgsqlDataSource.Create(postgres.GetConnectionString());
+        var repository = new PostgresPartyRepository(dataSource);
+        var service = new IdentityResolutionService(repository, _ => { });
+        var tenantId = Guid.Parse("10000000-0000-0000-0000-000000000001");
+        var traceTimestamp = new DateTimeOffset(2026, 3, 14, 12, 30, 0, TimeSpan.Zero);
+        var mergeInstant = new DateTimeOffset(2026, 5, 1, 9, 0, 0, TimeSpan.Zero);
+
+        var partyA = await service.ResolveAsync(
+            ResolveCommand(
+                sourceKey: "SRC-A",
+                idempotencyKey: "10000000-0000-0000-0000-000000000001|nexus|SRC-A|source-page-v1|rule-version-2026-07-30|create_party_with_initial_link",
+                effectiveFrom: new DateTimeOffset(2026, 3, 14, 12, 0, 0, TimeSpan.Zero),
+                requestedAt: new DateTimeOffset(2026, 3, 14, 12, 0, 0, TimeSpan.Zero)),
+            TestContext.Current.CancellationToken);
+        var partyB = await service.ResolveAsync(
+            ResolveCommand(
+                sourceSystem: "ledger",
+                sourceKey: "LEDGER-B",
+                idempotencyKey: "10000000-0000-0000-0000-000000000001|ledger|LEDGER-B|source-page-v1|rule-version-2026-07-30|create_party_with_initial_link",
+                identityToken: "v1.BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+                correlationId: Guid.Parse("dddddddd-dddd-dddd-dddd-dddddddddddd")),
+            TestContext.Current.CancellationToken);
+
+        await using var connection = await dataSource.OpenConnectionAsync(TestContext.Current.CancellationToken);
+        // TODO(BLUTO_IDENTITY_SPINE_v0.1 section 7): replace this SQL fixture with the chartered service-level merge path when that workflow is implemented.
+        await ExecuteAsync(
+            connection,
+            """
+            update identity_resolution.parties
+            set status = 'merged', merged_into_party_id = @survivorPartyId, version = version + 1
+            where tenant_id = @tenantId and party_id = @absorbedPartyId;
+
+            update identity_resolution.party_source_links
+            set status = 'superseded', effective_to = @mergeInstant
+            where tenant_id = @tenantId and party_id = @absorbedPartyId and status = 'active' and effective_to is null;
+
+            insert into identity_resolution.party_source_links (
+                tenant_id, source_link_id, party_id, source_system, source_key, match_identity_digest,
+                effective_from, effective_to, status, rule_id, rule_version_id, ruleset_version, source_version,
+                evidence_reference, created_at, created_by, correlation_id, idempotency_key)
+            values (
+                @tenantId, '99999999-9999-4999-8999-999999999999', @survivorPartyId, 'nexus', 'SRC-A', 'v1.AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
+                @mergeInstant, null, 'active', 'rule-exact-token', 'rule-version-2026-07-30', 'ruleset-1.0.0', 'source-page-v1',
+                'evidence://synthetic/merge/SRC-A', @mergeInstant, 'worker:identity-resolution', 'dddddddd-dddd-dddd-dddd-dddddddddddd',
+                '10000000-0000-0000-0000-000000000001|nexus|SRC-A|merge|rule-version-2026-07-30|merge_party_source_link');
+            """,
+            TestContext.Current.CancellationToken,
+            new NpgsqlParameter("tenantId", tenantId),
+            new NpgsqlParameter("absorbedPartyId", partyA.Party.PartyId.Value),
+            new NpgsqlParameter("survivorPartyId", partyB.Party.PartyId.Value),
+            new NpgsqlParameter("mergeInstant", mergeInstant));
+
+        var historicalPartyId = await GuidScalarAsync(
+            connection,
+            """
+            select party_id
+            from identity_resolution.party_source_links
+            where tenant_id = @tenantId
+              and source_system = 'nexus'
+              and source_key = 'SRC-A'
+              and effective_from <= @traceTimestamp
+              and (effective_to is null or effective_to > @traceTimestamp)
+            """,
+            TestContext.Current.CancellationToken,
+            new NpgsqlParameter("tenantId", tenantId),
+            new NpgsqlParameter("traceTimestamp", traceTimestamp));
+        var current = await repository.FindActivePartyAsync(tenantId, "nexus", "SRC-A", TestContext.Current.CancellationToken);
+        var absorbedStatus = await StringScalarAsync(
+            connection,
+            "select status from identity_resolution.parties where tenant_id = @tenantId and party_id = @absorbedPartyId",
+            TestContext.Current.CancellationToken,
+            new NpgsqlParameter("tenantId", tenantId),
+            new NpgsqlParameter("absorbedPartyId", partyA.Party.PartyId.Value));
+        var mergedIntoPartyId = await GuidScalarAsync(
+            connection,
+            "select merged_into_party_id from identity_resolution.parties where tenant_id = @tenantId and party_id = @absorbedPartyId",
+            TestContext.Current.CancellationToken,
+            new NpgsqlParameter("tenantId", tenantId),
+            new NpgsqlParameter("absorbedPartyId", partyA.Party.PartyId.Value));
+
+        Assert.Equal(partyA.Party.PartyId.Value, historicalPartyId);
+        Assert.Equal(partyB.Party.PartyId, current?.PartyId);
+        Assert.Equal("merged", absorbedStatus);
+        Assert.Equal(partyB.Party.PartyId.Value, mergedIntoPartyId);
+        Assert.Equal(1L, await ScalarAsync(connection, "select count(*) from identity_resolution.parties where tenant_id = '10000000-0000-0000-0000-000000000001' and party_id = '" + partyA.Party.PartyId.Value.ToString("D") + "'", TestContext.Current.CancellationToken));
     }
     [Fact]
     [Trait("Category", "Integration")]
@@ -198,8 +291,28 @@ public sealed class PostgresPartyRepositoryLiveTests : IAsyncLifetime
         await using var command = new NpgsqlCommand(sql, connection);
         return (Guid)(await command.ExecuteScalarAsync(cancellationToken) ?? throw new InvalidOperationException("No scalar result."));
     }
+    private static async Task ExecuteAsync(NpgsqlConnection connection, string sql, CancellationToken cancellationToken, params NpgsqlParameter[] parameters)
+    {
+        await using var command = new NpgsqlCommand(sql, connection);
+        command.Parameters.AddRange(parameters);
+        await command.ExecuteNonQueryAsync(cancellationToken);
+    }
 
-    private static ResolveSourceCandidateCommand ResolveCommand(Guid? tenantId = null, string sourceSystem = "nexus", string sourceKey = "SRC-001", string idempotencyKey = "10000000-0000-0000-0000-000000000001|nexus|SRC-001|source-page-v1|rule-version-2026-07-30|create_party_with_initial_link", string identityToken = "v1.AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA") =>
+    private static async Task<Guid> GuidScalarAsync(NpgsqlConnection connection, string sql, CancellationToken cancellationToken, params NpgsqlParameter[] parameters)
+    {
+        await using var command = new NpgsqlCommand(sql, connection);
+        command.Parameters.AddRange(parameters);
+        return (Guid)(await command.ExecuteScalarAsync(cancellationToken) ?? throw new InvalidOperationException("No scalar result."));
+    }
+
+    private static async Task<string> StringScalarAsync(NpgsqlConnection connection, string sql, CancellationToken cancellationToken, params NpgsqlParameter[] parameters)
+    {
+        await using var command = new NpgsqlCommand(sql, connection);
+        command.Parameters.AddRange(parameters);
+        return (string)(await command.ExecuteScalarAsync(cancellationToken) ?? throw new InvalidOperationException("No scalar result."));
+    }
+
+    private static ResolveSourceCandidateCommand ResolveCommand(Guid? tenantId = null, string sourceSystem = "nexus", string sourceKey = "SRC-001", string idempotencyKey = "10000000-0000-0000-0000-000000000001|nexus|SRC-001|source-page-v1|rule-version-2026-07-30|create_party_with_initial_link", string identityToken = "v1.AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", Guid? correlationId = null, DateTimeOffset? effectiveFrom = null, DateTimeOffset? requestedAt = null) =>
         new(
             Guid.Parse("33333333-3333-3333-3333-333333333333"),
             tenantId ?? Guid.Parse("10000000-0000-0000-0000-000000000001"),
@@ -207,10 +320,10 @@ public sealed class PostgresPartyRepositoryLiveTests : IAsyncLifetime
             sourceSystem,
             sourceKey,
             identityToken,
-            new DateTimeOffset(2026, 7, 30, 12, 0, 0, TimeSpan.Zero),
-            new DateTimeOffset(2026, 7, 30, 12, 0, 0, TimeSpan.Zero),
+            effectiveFrom ?? new DateTimeOffset(2026, 7, 30, 12, 0, 0, TimeSpan.Zero),
+            requestedAt ?? new DateTimeOffset(2026, 7, 30, 12, 0, 0, TimeSpan.Zero),
             idempotencyKey,
-            Guid.Parse("cccccccc-cccc-cccc-cccc-cccccccccccc"),
+            correlationId ?? Guid.Parse("cccccccc-cccc-cccc-cccc-cccccccccccc"),
             null,
             "worker:identity-resolution",
             "rule-exact-token",

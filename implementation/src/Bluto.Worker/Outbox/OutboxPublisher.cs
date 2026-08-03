@@ -220,8 +220,6 @@ public sealed class OutboxContractValidator : IOutboxContractValidator
     [
         "raw_identifier",
         "rawStrongIdentifier",
-        "hmac_token",
-        "hmacToken",
         "identity_token",
         "identityToken",
         "ssn",
@@ -274,4 +272,3 @@ public sealed class OutboxTransport : IOutboxTransport
         return Task.FromResult(new OutboxPublishAck(fact.EventId));
     }
 }
-
