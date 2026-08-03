@@ -152,3 +152,13 @@ A reviewer sees candidate pairs with the evidence that produced them and records
 - Data stewardship ownership — who adjudicates the review queue. This is a business role, not an engineering one, and it needs a name before v1.1.
 - Whether ledger and CRM already carry usable referential keys to each other. This determines v1 coverage and should be answered by inspection **this week**, since it may make v1 substantially cheaper than assumed.
 - ATE v0.2 fields for `party_id` and ruleset version (two-team contract change).
+## 14. Tokenization Key Ownership and Rotation
+
+1. **Owner.** OWNER: ______ — assign before v1.1; candidates: hometown source-integration layer or a dedicated tokenization utility.
+2. **Key custody.** The key is a Tier-0 secret in the platform Key Vault, readable by the owning component's managed identity only and by nothing else, explicitly never by Bluto.
+3. **Normalization.** Pre-hash normalization rules are versioned with the token prefix so changes to case, whitespace, or format stripping create a new token version.
+4. **Rotation.** Rotation uses a `v2.` prefix, a recompute campaign, a dual-accept window in Bluto's pattern `^v[12]\.`, and retirement of the old prefix after migration.
+
+## 15. Changelog
+
+- v0.3: Added Tokenization Key Ownership and Rotation section for REQ-ID-10 while leaving OWNER unassigned pending human decision.

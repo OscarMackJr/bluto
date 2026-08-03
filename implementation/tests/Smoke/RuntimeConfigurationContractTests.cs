@@ -35,6 +35,7 @@ public sealed class RuntimeConfigurationContractTests
         Assert.Contains("<ContainerUser>64198</ContainerUser>", worker, StringComparison.Ordinal);
     }
 
+    // REQ-ID-11: Bluto configuration must not contain the tokenization key; see BLUTO_IDENTITY_SPINE_v0.1 section 14, Tokenization Key Ownership and Rotation.
     private static void AssertNoProhibitedTerms(string value)
     {
         var prohibited = new[] { "password", "secret", "client_secret", "raw_identifier", "hmac", "ssn", "tax_id" };
