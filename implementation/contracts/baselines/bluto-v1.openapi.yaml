@@ -199,34 +199,23 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MappingResponse'
-  /v1/review-cases/{review_case_id}/decisions:
-    post:
-      operationId: recordReviewDecision
+  /v1/review-evidence/{candidate_id}:
+    get:
+      operationId: getReviewEvidence
       security:
       - bearerAuth: []
       parameters:
       - $ref: '#/components/parameters/CorrelationId'
-      - name: review_case_id
+      - name: candidate_id
         in: path
         required: true
         schema:
           type: string
           format: uuid
-      - name: Idempotency-Key
-        in: header
-        required: true
-        schema:
-          type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ReviewDecision'
       responses:
-        '204':
-          description: Recorded
-        '409':
-          description: Conflict
-        '422':
-          description: Invalid transition
+        '200':
+          description: Reference-only review evidence.
+        '403':
+          description: Forbidden tenant scope; existence is concealed.
+        '404':
+          description: No candidate or concealed unauthorized candidate.

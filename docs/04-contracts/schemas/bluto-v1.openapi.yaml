@@ -12,7 +12,7 @@ tags:
   - name: Mappings
     description: Tenant-scoped mapping query contracts.
   - name: Stewardship
-    description: Stewardship command contracts.
+    description: Tenant-scoped review evidence for Olive-owned identity review.
 components:
   securitySchemes:
     bearerAuth:
@@ -223,25 +223,51 @@ components:
               reason:
                 type: string
                 minLength: 1
-    ReviewDecision:
+    ReviewEvidenceResponse:
       type: object
       additionalProperties: false
       required:
-        - outcome
+        - candidate_id
+        - tenant_id
+        - left_source_system
+        - left_source_key
+        - right_source_system
+        - right_source_key
         - reason
+        - rules_considered
+        - ruleset_version
+        - prior_review_item_ids
       properties:
-        outcome:
+        candidate_id:
           type: string
-          enum:
-            - accepted
-            - rejected
-            - deferred
+          format: uuid
+        tenant_id:
+          type: string
+          format: uuid
+        left_source_system:
+          type: string
+        left_source_key:
+          type: string
+        right_source_system:
+          type: string
+        right_source_key:
+          type: string
         reason:
           type: string
-          minLength: 1
-        expected_version:
-          type: integer
-          minimum: 0
+          enum:
+            - no_deterministic_match
+            - conflicting_matches
+        rules_considered:
+          type: array
+          items:
+            type: string
+        ruleset_version:
+          type: string
+        prior_review_item_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
 paths:
   /v1/mappings/{source_system}/{source_key}:
     get:
@@ -374,39 +400,32 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResolveCurrentPartySuccess'
-  /v1/review-cases/{review_case_id}/decisions:
-    post:
+  /v1/review-evidence/{candidate_id}:
+    get:
       tags:
         - Stewardship
-      operationId: recordReviewDecision
-      description: Placeholder review decision command contract.
+      operationId: getReviewEvidence
+      description: Returns reference-only evidence for an Olive IR-1 identity-review item. Bluto records no review decisions.
       security:
         - bearerAuth: []
       parameters:
         - $ref: '#/components/parameters/CorrelationId'
         - $ref: '#/components/parameters/RequestId'
         - $ref: '#/components/parameters/TenantScope'
-        - name: review_case_id
+        - name: candidate_id
           in: path
           required: true
           schema:
             type: string
             format: uuid
-        - name: Idempotency-Key
-          in: header
-          required: true
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ReviewDecision'
       responses:
-        '204':
-          description: Recorded
-        '409':
-          description: Conflict
-        '422':
-          description: Invalid transition
+        '200':
+          description: Reference-only review evidence.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewEvidenceResponse'
+        '403':
+          description: Forbidden tenant scope; existence is concealed.
+        '404':
+          description: No candidate or concealed unauthorized candidate.

@@ -42,7 +42,9 @@ Commands are intent, may fail, and are never treated as completed facts.
 
 ## 2. Command catalogue
 
-`RunIncrementalResolution`, `TriggerResolution`, `RecordReviewDecision`, `MergeParties`, `SplitParty`, `RetireParty`, `PublishRuleVersion`, `ActivateRuleVersion`, and `RetireRuleVersion`.
+`RunIncrementalResolution`, `TriggerResolution`, `MergeParties`, `SplitParty`, `RetireParty`, `PublishRuleVersion`, `ActivateRuleVersion`, and `RetireRuleVersion`.
+
+Review decisions are commands owned and recorded by Olive under IR-1. Bluto polls those decisions and applies valid outcomes internally; it exposes no review-decision command.
 
 Each command maps to one application service and one primary aggregate boundary. Cross-aggregate orchestration is explicit and auditable.
 
@@ -52,7 +54,9 @@ Queries contain query type, schema version, correlation identifier, tenant scope
 
 ## 4. Query catalogue
 
-`ResolveCurrentParty`, `ResolvePartyAtTime`, `GetPartyLinks`, `ListLinkChanges`, `GetReviewCase`, `ListReviewQueue`, `GetRuleVersion`, `GetBatchRun`, and `GetAuditEvidence`.
+`ResolveCurrentParty`, `ResolvePartyAtTime`, `GetPartyLinks`, `ListLinkChanges`, `GetReviewEvidence`, `GetRuleVersion`, `GetBatchRun`, and `GetAuditEvidence`.
+
+`GetReviewEvidence` is a tenant-scoped, read-only evidence query for an Olive IR-1 item. Queue listing and review-case reads are owned by Olive.
 
 ## 5. Response rules
 

@@ -56,7 +56,7 @@ Dependencies point inward. Domain modules do not depend on frameworks, transport
 | Rule Management | Rule lifecycle, version validation, activation | Shared Kernel |
 | Identity Resolution | Candidate evaluation, Party/link commands, deferral | Rule Management public port; Shared Kernel |
 | Identity Lifecycle | Merge, split, retirement, point-in-time semantics | Party public port; Shared Kernel |
-| Stewardship | Review queue, evidence, reviewer decisions | Resolution command port; Shared Kernel |
+| Stewardship | Review-candidate evidence and application of Olive review decisions | Resolution command port; Shared Kernel |
 | Identity Governance | Audit evidence, policy signals, metrics projections | Published facts only |
 | Source Adapters | Read source candidate data and normalize source contracts | Application ingestion ports |
 | Hometown Adapter | Serve governed mapping queries | Query ports |
@@ -69,8 +69,8 @@ Application services orchestrate use cases but do not contain domain invariants:
 - `RunIncrementalResolution`
 - `TriggerResolution`
 - `CreateOrLinkParty`
-- `OpenReviewCase`
-- `RecordReviewDecision`
+- `SubmitReviewCandidate`
+- `ApplyOliveReviewDecision`
 - `MergeParties`
 - `SplitParty`
 - `RetireParty`
