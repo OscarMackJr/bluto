@@ -122,12 +122,48 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
+| REVW-01 | Phase 1 | Pending |
+| REVW-02 | Phase 1 | Pending |
+| CLOS-01 | Phase 1 | Pending |
+| CLOS-02 | Phase 1 | Pending |
+| CLOS-03 | Phase 1 | Pending |
+| FIND-01 | Phase 2 | Pending |
+| FIND-02 | Phase 2 | Pending |
+| FIND-03 | Phase 2 | Pending |
+| REGR-01 | Phase 3 | Pending |
+| REGR-02 | Phase 3 | Pending |
+| REGR-03 | Phase 3 | Pending |
+| REGR-04 | Phase 3 | Pending |
+| REGR-05 | Phase 3 | Pending |
+| SEC-01 | Phase 3 | Pending |
+| SEC-02 | Phase 3 | Pending |
+| SEC-03 | Phase 3 | Pending |
+| GATE-A | Phase 4 | Pending |
+| GATE-B | Phase 4 | Pending |
+| GATE-C | Phase 4 | Pending |
+| GATE-D | Phase 4 | Pending |
+| WP15-01 | Phase 5 | Pending |
+| STACK-02 | Phase 6 | Pending |
+| STACK-03 | Phase 6 | Pending |
+| API-01 | Phase 6 | Pending |
+| API-02 | Phase 6 | Pending |
+| API-03 | Phase 6 | Pending |
+| SEC-04 | Phase 6 | Pending |
+| SEC-05 | Phase 6 | Pending |
+| WORK-01 | Phase 7 | Pending |
+| WORK-02 | Phase 7 | Pending |
+| WORK-03 | Phase 7 | Pending |
+| EVT-01 | Phase 7 | Pending |
+| EVT-02 | Phase 7 | Pending |
+| EVT-03 | Phase 7 | Pending |
+| STACK-01 | Phase 8 | Pending |
+| EVT-04 | Phase 8 | Pending |
 
 **Coverage:**
 - v1 requirements: 36 total
-- Mapped to phases: 0
-- Unmapped: 36 ⚠️
+- Mapped to phases: 36
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-10-25*
-*Last updated: 2026-10-25 after initial definition*
+*Last updated: 2026-10-25 after roadmap creation*
