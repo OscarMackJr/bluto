@@ -1,0 +1,40 @@
+{
+  "version": "1.0",
+  "timestamp": "2026-10-25T15:34:54.100Z",
+  "phase": "1",
+  "phase_name": "Review Reconstruction and Closure Contracts",
+  "phase_dir": ".planning/phases/01-review-reconstruction-and-closure-contracts (not yet created)",
+  "plan": null,
+  "task": null,
+  "total_tasks": null,
+  "status": "paused",
+  "completed_tasks": [
+    {"id": 1, "name": "Map codebase (.planning/codebase/, 7 docs)", "status": "done", "commit": "c0745c7"},
+    {"id": 2, "name": "Write PROJECT.md", "status": "done", "commit": "1a314b8"},
+    {"id": 3, "name": "Write config.json (interactive, standard, branch-per-phase)", "status": "done", "commit": "1c0f25a"},
+    {"id": 4, "name": "Write REQUIREMENTS.md (36 v1 requirements)", "status": "done", "commit": "142aaf6"},
+    {"id": 5, "name": "Create ROADMAP.md (8 phases), STATE.md, CLAUDE.md", "status": "done", "commit": "9e497cd"}
+  ],
+  "remaining_tasks": [
+    {"id": 6, "name": "Phase 1: discuss (/gsd-discuss-phase 1)", "status": "not_started"},
+    {"id": 7, "name": "Phase 1: plan and execute", "status": "not_started"},
+    {"id": 8, "name": "Phases 2-8", "status": "not_started"}
+  ],
+  "blockers": [
+    {"description": "releases/BLUTO_IMPLEMENTATION_REVIEW_v0.1.md (WP-014 source input) does not exist in the repo, the root kit, any sibling repo (nono, olive, hometown, liam, fiskroad), or git history", "type": "external", "workaround": "User approved reconstruction: rebuild it in Phase 1 (REVW-01/02), marked as reconstructed, using the hometown review format"}
+  ],
+  "human_actions_pending": [
+    {"action": "Decide how the 4 unpushed setup commits (1a314b8..9e497cd) reach origin: push directly as was done for c0745c7, or include them in the Phase 1 PR branch", "context": "implementation/bootstrap has a PR rule; the c0745c7 push bypassed it", "blocking": false}
+  ],
+  "decisions": [
+    {"decision": "Run WP-014 exactly as defined, then define a new WP-015 for runnability", "rationale": "WP-014 allowed_files exclude Bluto.Api/Bluto.Worker/.github and it prohibits new features", "phase": "all"},
+    {"decision": "Reconstruct the missing implementation review", "rationale": "No copy exists anywhere", "phase": "1"},
+    {"decision": "POC = docker compose stack + JWT (local issuer) API on Postgres + hosted worker batch + events delivered to a local HTTP consumer container", "rationale": "User's chosen bar for runnable", "phase": "6-8"},
+    {"decision": "SEC fixes in v1: revoke PUBLIC on SECURITY DEFINER fn, outbox RLS, transaction-scoped tenant ctx (WP-014); gating CI scans and CI on branch (WP-015)", "rationale": "User selected all four; .github changes fall outside WP-014", "phase": "3, 6"},
+    {"decision": "Fix governance drift only where it blocks gates", "rationale": "User choice; CODEOWNERS and duplicate contracts deferred to v2", "phase": "4"},
+    {"decision": "Skip project research; horizontal structure; branch per phase (gsd/phase-NN-slug)", "rationale": "Scope and stack are fixed by the work-package definitions", "phase": "all"}
+  ],
+  "uncommitted_files": [],
+  "next_action": "/clear, then /gsd-discuss-phase 1 from C:\\Users\\OMack\\bluto\\publish-bluto",
+  "context_notes": "Repo root is publish-bluto/ (remote OscarMackJr/bluto, branch implementation/bootstrap). The parent C:\\Users\\OMack\\bluto is an older, un-versioned docs-only kit; do not edit it. Reference template for the reconstructed review: ~/hometown/specs/HOMETOWN_IMPLEMENTATION_REVIEW_v0.1.md. Known facts for reconstruction: master plan WP-014 section (S2 optimistic concurrency, S3 hydration without replay, S4 match_method/confidence), WP-013 commit d59dc9b and repository/evidence/rvec/implementation-wp-013-gate-*.json, .planning/codebase/CONCERNS.md."
+}
